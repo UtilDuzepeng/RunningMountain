@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/sports_dialog_new_bg"
+    android:gravity="center"
+    android:minWidth="130dip"
+    android:minHeight="130dip"
+    android:orientation="vertical">
+
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_msg"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/progressbar"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="请稍后..."
+        android:textColor="@color/white" />
+
+
+</LinearLayout>
