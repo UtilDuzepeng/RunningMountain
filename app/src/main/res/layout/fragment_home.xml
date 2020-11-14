@@ -123,7 +123,6 @@
             android:id="@+id/business_tablayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/D9D9D9"
             app:tabIndicatorColor="#FF5404"
             app:tabIndicatorFullWidth="false"
             android:layout_marginRight="@dimen/dp_18"

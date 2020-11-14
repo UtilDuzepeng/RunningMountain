@@ -2,6 +2,7 @@ package com.miaofen.xiaoying.fragment
 
 
 import android.view.View
+import androidx.fragment.app.Fragment
 import com.google.android.material.appbar.AppBarLayout
 import com.miaofen.xiaoying.R
 import com.miaofen.xiaoying.base.BaseFragment
@@ -20,6 +21,7 @@ class HomeFragment : BaseFragment() {
     override fun initView() {
         super.initView()
         setTitleToCollapsingToolbarLayout()
+        setItem()
     }
     /**
      * 使用CollapsingToolbarLayout必须把title设置到CollapsingToolbarLayout上，
@@ -33,6 +35,13 @@ class HomeFragment : BaseFragment() {
                 toolbar.visibility = View.INVISIBLE
             }
         })
+    }
+
+    private fun setItem() {
+        val list = listOf<String>("最新", "热门","附近")
+        business_tablayout.getTabAt(0)?.text = list[0]
+        business_tablayout.getTabAt(1)?.text = list[1]
+        business_tablayout.getTabAt(2)?.text = list[3]
     }
 
 
