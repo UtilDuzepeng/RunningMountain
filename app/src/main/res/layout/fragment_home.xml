@@ -121,17 +121,25 @@
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/business_tablayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:tabIndicatorColor="#FF5404"
-            app:tabIndicatorFullWidth="false"
-            android:layout_marginRight="@dimen/dp_18"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
             android:layout_marginLeft="@dimen/dp_18"
-            android:layout_marginTop="@dimen/dp_10"
+            android:layout_alignParentTop="true"
+            app:tabGravity="fill"
+            app:tabMinWidth="@dimen/dp_50"
+            app:tabPaddingEnd="10dp"
+            app:tabPaddingStart="10dp"
+            app:tabIndicatorColor="@color/A2A82FA"
+            app:tabMode="fixed"
             app:tabIndicatorHeight="@dimen/dp_3"
-            app:tabSelectedTextColor="#FF5404"
-            app:tabTextAppearance="@style/TabLayoutTextSize"
-            app:tabTextColor="#FF5404" />
+            app:tabIndicatorFullWidth="false"
+            app:tabTextColor="#000000" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:background="@color/D9D9D9"/>
+
 
     </com.google.android.material.appbar.AppBarLayout>
 

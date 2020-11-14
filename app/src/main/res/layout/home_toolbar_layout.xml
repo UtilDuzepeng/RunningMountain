@@ -54,16 +54,24 @@
         </LinearLayout>
 
 
-        <ImageView
-            android:id="@+id/main_backdrop"
+<!--        <ImageView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginLeft="@dimen/dp_18"-->
+<!--            android:layout_marginRight="@dimen/dp_18"-->
+<!--            android:scaleType="fitXY"-->
+<!--            android:layout_below="@+id/linear_search"-->
+<!--            android:layout_marginTop="@dimen/dp_13"-->
+<!--            android:src="@drawable/seize_seat_icon"/>-->
+
+        <com.youth.banner.Banner
+            android:id="@+id/banner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dp_118"
+            android:layout_marginTop="@dimen/dp_13"
             android:layout_marginLeft="@dimen/dp_18"
             android:layout_marginRight="@dimen/dp_18"
-            android:scaleType="fitXY"
-            android:layout_below="@+id/linear_search"
-            android:layout_marginTop="@dimen/dp_13"
-            android:src="@drawable/seize_seat_icon"/>
+            android:layout_below="@+id/linear_search"/>
 
 
     </RelativeLayout>
