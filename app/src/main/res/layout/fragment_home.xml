@@ -61,7 +61,7 @@
                 android:layout_height="@dimen/dp_51"
                 android:layout_marginTop="@dimen/dp_21"
                 app:layout_collapseMode="pin"
-                android:visibility="invisible"
+                android:visibility="visible"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
@@ -100,17 +100,39 @@
                             android:background="@color/D9D9D9" />
 
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/dp_45"
-                            android:drawableLeft="@drawable/search_icon"
-                            android:drawablePadding="@dimen/dp_6"
-                            android:gravity="center"
-                            android:text="晋阳湖公园"
-                            android:textColor="@color/A959CA7"
-                            android:textSize="@dimen/sp_14" />
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginLeft="@dimen/dp_45"-->
+<!--                            android:drawableLeft="@drawable/search_icon"-->
+<!--                            android:drawablePadding="@dimen/dp_6"-->
+<!--                            android:gravity="center"-->
+<!--                            android:text="晋阳湖公园"-->
+<!--                            android:textColor="@color/A959CA7"-->
+<!--                            android:textSize="@dimen/sp_14" />-->
 
+                        <ViewFlipper
+                            android:id="@+id/view_flipper"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_centerInParent="true"
+                            android:autoStart="true"
+                            android:flipInterval="3000"
+                            android:inAnimation="@anim/slide_in_bottom"
+                            android:outAnimation="@anim/slide_out_top">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="@dimen/dp_45"
+                                android:drawableLeft="@drawable/search_icon"
+                                android:drawablePadding="@dimen/dp_6"
+                                android:gravity="center"
+                                android:text="晋阳湖公园"
+                                android:textColor="@color/A959CA7"
+                                android:textSize="@dimen/sp_14" />
+
+                        </ViewFlipper>
                     </LinearLayout>
 
                 </RelativeLayout>

@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/dp_8"
     android:background="@color/white"
     android:orientation="vertical"
-    android:layout_marginBottom="@dimen/dp_8"
     android:paddingLeft="@dimen/dp_10"
     android:paddingTop="@dimen/dp_10"
     android:paddingRight="@dimen/dp_10">
@@ -105,6 +105,19 @@
             android:textColor="@color/A212A3D"
             android:textSize="@dimen/sp_13"
             android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:text="距离 2.1km"
+            android:paddingTop="@dimen/dp_2"
+            android:paddingBottom="@dimen/dp_2"
+            android:paddingLeft="@dimen/dp_6"
+            android:paddingRight="@dimen/dp_6"
+            android:background="@drawable/blue_border"
+            android:textColor="@color/A2A82FA"
+            android:textSize="@dimen/sp_9" />
 
     </LinearLayout>
 

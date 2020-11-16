@@ -24,7 +24,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
  * 修改备注：
  */
 
-public class RefreshLayout  extends LinearLayout implements OnRefreshLoadMoreListener{
+public class RefreshLayout extends LinearLayout implements OnRefreshLoadMoreListener{
 
     private int page = 1;//加载页数
 

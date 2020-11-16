@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:button="@null"
-                android:drawableTop="@drawable/release_page"
+                android:drawableTop="@drawable/news_pager"
                 android:gravity="center"
                 android:text="消息"
                 android:textColor="@color/A686E7A"

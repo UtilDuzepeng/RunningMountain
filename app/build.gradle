@@ -121,5 +121,4 @@ dependencies {
     implementation deps.GSYVideoPlayer
     implementation 'com.youth.banner:banner:2.1.0'
 
-
 }
