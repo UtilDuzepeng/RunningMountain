@@ -91,5 +91,4 @@ public class RefreshLayout extends LinearLayout implements OnRefreshLoadMoreList
         this.setOnRefresh = setOnRefresh;
     }
 
-
 }

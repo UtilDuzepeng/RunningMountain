@@ -2,9 +2,9 @@ package com.miaofen.xiaoying
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.KeyEvent
+import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.miaofen.xiaoying.base.BaseActivity
@@ -12,10 +12,13 @@ import com.miaofen.xiaoying.fragment.HomeFragment
 import com.miaofen.xiaoying.fragment.NewsFragment
 import com.miaofen.xiaoying.fragment.ReleaseFragment
 import com.miaofen.xiaoying.fragment.UserFragment
+import com.miaofen.xiaoying.utils.SoftKeyBoardListener
+import com.miaofen.xiaoying.utils.SoftKeyBoardListener.OnSoftKeyBoardChangeListener
 import com.miaofen.xiaoying.utils.showToast
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : BaseActivity() {
+
+public class MainActivity : BaseActivity() {
     private var mExitTime: Long = 0 //延时事件
 
     var toast: Toast? = null //提示
@@ -23,13 +26,15 @@ class MainActivity : BaseActivity() {
     private var curTabIndex = -1
 
     private val rbIds =
-        intArrayOf(R.id.rb_home, R.id.rb_release,  R.id.rb_news,  R.id.rb_mine)
+        intArrayOf(R.id.rb_home, R.id.rb_release, R.id.rb_news, R.id.rb_mine)
 
     override fun returnLayoutId() = R.layout.activity_main
 
     override fun initFragment(savedInstanceState: Bundle?) {
 
         val index: Int = savedInstanceState?.getInt(STATE_CURRENT_TAB_INDEX) ?: DEFAULT_INDEX
+
+        setSoftKeyBoardListener()
 
         showTab(index)
         rg_root.check(rbIds[index])
@@ -45,6 +50,11 @@ class MainActivity : BaseActivity() {
             changeFragment(index, curTabIndex)
             curTabIndex = index
         }
+
+//        if (index == 1) {
+//            rg_root.visibility = View.GONE
+//        }
+
     }
 
     private fun changeFragment(newTabIndex: Int, oldTabIndex: Int) {
@@ -69,7 +79,6 @@ class MainActivity : BaseActivity() {
         } else {
             transaction.show(targetFragment)
         }
-
         transaction.commit()
     }
 
@@ -104,7 +113,6 @@ class MainActivity : BaseActivity() {
     }
 
 
-
     companion object {
         const val STATE_CURRENT_TAB_INDEX = "StateCurrentTabIndex"
         private const val FRAGMENT_TAG_PREFIX = "MainActivityFragment_"
@@ -114,6 +122,25 @@ class MainActivity : BaseActivity() {
             val intent = Intent(context, MainActivity::class.java)
             context?.startActivity(intent)
         }
+    }
+
+    /**
+     * 添加软键盘监听
+     */
+    private fun setSoftKeyBoardListener() {
+       var softKeyBoardListener = SoftKeyBoardListener(this)
+        //软键盘状态监听
+        softKeyBoardListener.setListener(object : OnSoftKeyBoardChangeListener {
+            override fun keyBoardShow(height: Int) {
+                //软键盘已经显示，做逻辑
+                rg_root.visibility = View.GONE
+            }
+
+            override fun keyBoardHide(height: Int) {
+                //软键盘已经隐藏,做逻辑
+                rg_root.visibility = View.VISIBLE
+            }
+        })
     }
 
 }
