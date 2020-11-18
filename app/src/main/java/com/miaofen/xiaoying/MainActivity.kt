@@ -50,11 +50,6 @@ public class MainActivity : BaseActivity() {
             changeFragment(index, curTabIndex)
             curTabIndex = index
         }
-
-//        if (index == 1) {
-//            rg_root.visibility = View.GONE
-//        }
-
     }
 
     private fun changeFragment(newTabIndex: Int, oldTabIndex: Int) {

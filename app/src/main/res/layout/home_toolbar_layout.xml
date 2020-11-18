@@ -52,7 +52,7 @@
 <!--                android:textSize="@dimen/sp_14" />-->
 
             <ViewFlipper
-                android:id="@+id/view_flipper"
+                android:id="@+id/view_search"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"

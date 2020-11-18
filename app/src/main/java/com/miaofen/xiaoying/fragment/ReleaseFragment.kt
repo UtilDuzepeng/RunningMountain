@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.miaofen.xiaoying.R
 import com.miaofen.xiaoying.base.BaseFragment
 import com.miaofen.xiaoying.comm.Constant
-import com.miaofen.xiaoying.fragment.releasepage.ReleaseRecyclerViewAdapter
+import com.miaofen.xiaoying.fragment.haircloth.ReleaseRecyclerViewAdapter
 import com.miaofen.xiaoying.utils.ToastUtils
 import kotlinx.android.synthetic.main.fragment_release.*
 import kotlinx.android.synthetic.main.toobar_layout.*

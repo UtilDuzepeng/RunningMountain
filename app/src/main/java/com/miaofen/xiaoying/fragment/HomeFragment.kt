@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayout
 import com.miaofen.xiaoying.R
+import com.miaofen.xiaoying.activity.SearchActivity
 import com.miaofen.xiaoying.base.BaseFragment
 import com.miaofen.xiaoying.common.data.bean.response.ImagerDataBean
 import com.miaofen.xiaoying.fragment.hot.HotFragment
@@ -39,6 +40,11 @@ class HomeFragment : BaseFragment(), TabLayout.OnTabSelectedListener {
         setTab()
         setItem()
         setBanner()
+    }
+
+    override fun initData() {
+        super.initData()
+        view_search.setOnClickListener { SearchActivity.start(activity) }
     }
 
     /**
