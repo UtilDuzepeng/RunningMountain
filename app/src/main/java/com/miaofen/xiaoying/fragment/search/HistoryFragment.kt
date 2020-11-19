@@ -4,7 +4,7 @@ import com.miaofen.xiaoying.R
 import com.miaofen.xiaoying.base.BaseFragment
 
 /**
- * 搜索历史
+ * 搜索历史x
  */
 class HistoryFragment : BaseFragment() {
 

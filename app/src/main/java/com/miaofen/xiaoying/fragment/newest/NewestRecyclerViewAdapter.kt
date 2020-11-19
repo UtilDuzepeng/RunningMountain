@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.annotation.Nullable
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
+import com.miaofen.xiaoying.R
+import com.miaofen.xiaoying.activity.ProjectDetailsActivity
 
 /**
  * 项目名称：com.miaofen.xiaoying.fragment.newest
@@ -21,7 +23,9 @@ class NewestRecyclerViewAdapter (
 
     var context: Context? = context
     override fun convert(helper: BaseViewHolder, item: String?) {
-
+        helper.setOnClickListener(R.id.home_recycler_item) {
+            ProjectDetailsActivity.start(context)
+        }
     }
 
 }

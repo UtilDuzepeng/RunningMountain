@@ -2,12 +2,12 @@ package com.miaofen.xiaoying.activity
 
 import android.content.Context
 import android.content.Intent
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import com.miaofen.xiaoying.R
 import com.miaofen.xiaoying.base.BaseActivity
 import com.miaofen.xiaoying.fragment.search.HistoryFragment
 import com.miaofen.xiaoying.fragment.search.ResultFragment
-import com.miaofen.xiaoying.utils.InputLenLimit
 import kotlinx.android.synthetic.main.activity_search.*
 
 class SearchActivity : BaseActivity() {
@@ -25,7 +25,10 @@ class SearchActivity : BaseActivity() {
 
     override fun initData() {
         super.initData()
-        tv_search.setOnClickListener{showTab(1)}
+        tv_search.setOnClickListener{
+            hideKeyboard()
+            showTab(1)
+        }
         image_find.setOnClickListener { finish() }
     }
 
@@ -71,8 +74,23 @@ class SearchActivity : BaseActivity() {
     }
 
 
-    companion object {
+    /**
+     * 关闭软键盘ß
+     */
+    private fun hideKeyboard() {
+        val imm: InputMethodManager =
+            this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        if (imm.isActive() && this.currentFocus != null) {
+            if (this.currentFocus.windowToken != null) {
+                imm.hideSoftInputFromWindow(
+                    this.currentFocus.windowToken,
+                    InputMethodManager.HIDE_NOT_ALWAYS
+                )
+            }
+        }
+    }
 
+    companion object {
         private const val FRAGMENT_TAG_PREFIX = "Fragment_"
         fun start(context: Context?) {
             val intent = Intent(context, SearchActivity::class.java)

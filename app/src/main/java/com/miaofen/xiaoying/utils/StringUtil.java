@@ -518,6 +518,8 @@ public class StringUtil {
         SimpleDateFormat format = new SimpleDateFormat(pattern);
         return format.format(date);
     }
+
+
 }
 
 
