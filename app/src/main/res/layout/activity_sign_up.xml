@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.miaofen.xiaoying.activity.SignUpActivity">
+
+    <include layout="@layout/toobar_layout" />
+
+    <EditText
+        android:id="@+id/et_account"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/sp_18"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginRight="@dimen/sp_18"
+        android:background="@android:color/transparent"
+        android:drawablePadding="@dimen/dp_10"
+        android:gravity="center_vertical"
+        android:hint="填写电话(选填)"
+        android:inputType="number"
+        android:lines="1"
+        android:minHeight="@dimen/dp_50"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        android:textColorHint="#838383"
+        android:textSize="16sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:background="@color/AF4F4F4"
+        android:paddingLeft="@dimen/dp_18"
+        android:paddingRight="@dimen/dp_18" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_18"
+        android:layout_marginTop="@dimen/dp_18"
+        android:layout_marginRight="@dimen/dp_18"
+        android:background="@color/AF4F4F4">
+
+        <EditText
+            android:id="@+id/help_feedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:gravity="top"
+            android:hint="备注说明(选填)"
+            android:lines="5"
+            android:padding="@dimen/dp_10"
+            android:text="" />
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/dp_18"
+        android:layout_marginRight="@dimen/dp_18"
+        android:layout_marginBottom="@dimen/dp_24">
+
+
+        <TextView
+            android:layout_width="@dimen/dp_200"
+            android:layout_height="@dimen/dp_44"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/dp_94"
+            android:background="@drawable/blue_back_circular"
+            android:text="报名"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold"
+            android:layout_above="@+id/linear_official"/>
+
+
+        <LinearLayout
+            android:id="@+id/linear_official"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/tv_remind"
+            android:layout_marginBottom="@dimen/dp_12"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:paddingLeft="@dimen/dp_18"
+                android:layout_height="@dimen/dp_1"
+                android:background="@color/AF4F4F4" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_12"
+                android:layout_marginRight="@dimen/dp_12"
+                android:text="官方提醒"
+                android:textColor="@color/A686E7A"
+                android:textSize="@dimen/sp_16" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:paddingRight="@dimen/dp_18"
+                android:layout_height="@dimen/dp_1"
+                android:background="@color/AF4F4F4" />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_remind"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:lineSpacingExtra="@dimen/dp_3"
+            android:text="为保障您的生命财产安全，请务必在跑山吧微信小程序聊天系统内沟通行程，并通过官方入口报名。请不要贪图便宜和陌生人的利益诱惑，私下通过微信等第三方平台私聊，以免上当受骗，造成其他损失。
+在平台使用过程中，如收到彩票、赌博、酒托、饭托等骚扰信息，请马上举报，系统将做永久封号处理。"
+            android:textColor="@color/A959CA7"
+            android:textSize="@dimen/sp_12" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>

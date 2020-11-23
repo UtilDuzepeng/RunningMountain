@@ -45,6 +45,7 @@ class HomeFragment : BaseFragment(), TabLayout.OnTabSelectedListener {
     override fun initData() {
         super.initData()
         view_search.setOnClickListener { SearchActivity.start(activity) }
+        toolbar.setOnClickListener { SearchActivity.start(activity) }
     }
 
     /**

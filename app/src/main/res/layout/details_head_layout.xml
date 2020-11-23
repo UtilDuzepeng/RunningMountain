@@ -48,6 +48,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/tv_sign_up"
             android:layout_width="@dimen/dp_60"
             android:layout_height="@dimen/dp_30"
             android:background="@drawable/blue_back_circular"
@@ -76,6 +77,7 @@
         android:layout_marginTop="@dimen/dp_8"
         android:paddingLeft="@dimen/dp_18"
         android:paddingRight="@dimen/dp_18"
+        android:lineSpacingExtra="@dimen/dp_3"
         android:text="趁这几天天气好，我想抓住秋天的小尾巴。有没有志同道合的小伙伴一起去晋阳湖公园溜一圈儿？"
         android:textColor="@color/A686E7A"
         android:textSize="@dimen/sp_14" />
