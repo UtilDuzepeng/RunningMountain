@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.miaofen.xiaoying.activity.AboutUsActivity">
+
+    <include layout="@layout/toobar_layout" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/about"
+            android:layout_marginRight="@dimen/dp_43"
+            android:layout_marginLeft="@dimen/dp_43"
+            android:lineSpacingExtra="@dimen/dp_8"
+            android:layout_marginBottom="@dimen/dp_100"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/A686E7A"
+            android:text="“跑山吧”是一款为广大摩托车爱好者提供的高质量社交平台。诸位爱好者可以在平台上自发组队去骑行，在小队里讨论骑行的乐趣，分享自己的动态。\n\n
+跑山吧，让爱好摩托车的你，找到更多志同道合的朋友。" />
+
+        <ImageView
+            android:id="@+id/about"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/about_us_icon" />
+
+    </RelativeLayout>
+
+    <!--    about us icon-->
+
+</LinearLayout>

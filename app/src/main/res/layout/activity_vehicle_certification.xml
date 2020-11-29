@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.miaofen.xiaoying.activity.VehicleCertificationActivity">
+
+    <include layout="@layout/toobar_layout" />
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingLeft="@dimen/dp_18"
+                android:paddingTop="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_18"
+                android:paddingBottom="@dimen/dp_17">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="车牌号"
+                    android:textColor="@color/A212A3D"
+                    android:textSize="@dimen/sp_15" />
+
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:layout_marginRight="@dimen/dp_8"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:gravity="right"
+                    android:hint="填写车牌号"
+                    android:lines="1"
+                    android:padding="@dimen/dp_10"
+                    android:text=""
+                    android:textSize="@dimen/sp_14" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/chevron_right_outline_icon" />
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:layout_marginLeft="@dimen/dp_18"
+                android:layout_marginRight="@dimen/dp_18"
+                android:background="@color/AF4F4F4" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingLeft="@dimen/dp_18"
+                android:paddingTop="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_18"
+                android:paddingBottom="@dimen/dp_17">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="车辆型号"
+                    android:textColor="@color/A212A3D"
+                    android:textSize="@dimen/sp_15" />
+
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:layout_marginRight="@dimen/dp_8"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:gravity="right"
+                    android:hint="填写车辆型号"
+                    android:lines="1"
+                    android:padding="@dimen/dp_10"
+                    android:text=""
+                    android:textSize="@dimen/sp_14" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/chevron_right_outline_icon" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_8"
+                android:background="@color/AF4F4F4" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_18"
+                android:paddingTop="@dimen/dp_18"
+                android:paddingRight="@dimen/dp_18"
+                android:paddingBottom="@dimen/dp_22">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="上传行车证"
+                    android:textColor="@color/A212A3D"
+                    android:textSize="@dimen/sp_15" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="*行车证仅供审核，不对外展示*"
+                    android:textColor="@color/A2A82FA"
+                    android:textSize="@dimen/sp_9" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_18"
+                android:paddingRight="@dimen/dp_18"
+                android:paddingBottom="@dimen/dp_18">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_96"
+                    android:layout_weight="1"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/birth_certificate_icon" />
+
+                <View
+                    android:layout_width="@dimen/dp_7"
+                    android:layout_height="@dimen/dp_1" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_96"
+                    android:layout_weight="1"
+                    android:background="@drawable/photograph_icon">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="@dimen/dp_61"
+                        android:text="拍摄上传"
+                        android:textColor="@color/A686E7A"
+                        android:textSize="@dimen/sp_14" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_8"
+                android:background="@color/AF4F4F4" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_18"
+                android:layout_marginTop="@dimen/dp_18"
+                android:text="上传车辆照片"
+                android:textColor="@color/A212A3D"
+                android:textSize="@dimen/sp_15" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/vehicle_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_76"
+                android:layout_marginTop="@dimen/dp_23"
+                android:layout_marginBottom="@dimen/dp_24"
+                android:paddingLeft="@dimen/dp_18"
+                android:paddingRight="@dimen/dp_18" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_273">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dp_40"
+                    android:background="@drawable/blue_back_circular"
+                    android:paddingLeft="@dimen/dp_37"
+                    android:paddingTop="@dimen/dp_10"
+                    android:paddingRight="@dimen/dp_37"
+                    android:paddingBottom="@dimen/dp_10"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="@dimen/dp_20"
+                    android:layout_centerInParent="true"
+                    android:text="提交认证"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_14" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

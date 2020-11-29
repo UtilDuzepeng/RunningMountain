@@ -1,4 +1,4 @@
-package com.miaofen.xiaoying.fragment
+package com.miaofen.xiaoying.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

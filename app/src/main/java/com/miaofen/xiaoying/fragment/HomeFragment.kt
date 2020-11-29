@@ -10,12 +10,12 @@ import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayout
 import com.miaofen.xiaoying.R
 import com.miaofen.xiaoying.activity.SearchActivity
+import com.miaofen.xiaoying.adapter.MyAdapter
 import com.miaofen.xiaoying.base.BaseFragment
 import com.miaofen.xiaoying.common.data.bean.response.ImagerDataBean
 import com.miaofen.xiaoying.fragment.hot.HotFragment
 import com.miaofen.xiaoying.fragment.nearby.NearbyFragment
 import com.miaofen.xiaoying.fragment.newest.NewestFragment
-import com.youth.banner.config.BannerConfig
 import com.youth.banner.indicator.CircleIndicator
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.home_toolbar_layout.*
@@ -45,7 +45,7 @@ class HomeFragment : BaseFragment(), TabLayout.OnTabSelectedListener {
     override fun initData() {
         super.initData()
         view_search.setOnClickListener { SearchActivity.start(activity) }
-        toolbar.setOnClickListener { SearchActivity.start(activity) }
+        view_flipper.setOnClickListener { SearchActivity.start(activity) }
     }
 
     /**
@@ -103,7 +103,10 @@ class HomeFragment : BaseFragment(), TabLayout.OnTabSelectedListener {
         val tab2: HotFragment = HotFragment()
         val tab3: NearbyFragment = NearbyFragment()
         var list = listOf<Fragment>(tab1, tab2, tab3)
-        viewpager.adapter = MyAdapter(list, fragmentManager) //让tab和viewpager关联起来
+        viewpager.adapter = MyAdapter(
+            list,
+            fragmentManager
+        ) //让tab和viewpager关联起来
         business_tablayout.setupWithViewPager(viewpager)
         business_tablayout.setOnTabSelectedListener(this)
     }

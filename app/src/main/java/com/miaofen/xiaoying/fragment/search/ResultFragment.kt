@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import com.miaofen.xiaoying.R
 import com.miaofen.xiaoying.base.BaseFragment
-import com.miaofen.xiaoying.fragment.MyAdapter
+import com.miaofen.xiaoying.adapter.MyAdapter
 import kotlinx.android.synthetic.main.fragment_result.*
 
 
@@ -31,7 +31,10 @@ class ResultFragment : BaseFragment(), TabLayout.OnTabSelectedListener {
         val tab1: PlanFragment = PlanFragment()
         val tab2: UseFragment = UseFragment()
         var list = listOf<Fragment>(tab1, tab2)
-        result_viewpager.adapter = MyAdapter(list, fragmentManager) //让tab和viewpager关联起来
+        result_viewpager.adapter = MyAdapter(
+            list,
+            fragmentManager
+        ) //让tab和viewpager关联起来
         result_tablayout.setupWithViewPager(result_viewpager)
         result_tablayout.setOnTabSelectedListener(this)
     }

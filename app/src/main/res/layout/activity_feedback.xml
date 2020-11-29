@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.miaofen.xiaoying.activity.FeedbackActivity">
+
+    <include layout="@layout/toobar_layout" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/dp_50"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_48"
+                android:background="@color/DDEBFE"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_18"
+                android:paddingRight="@dimen/dp_18">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:lineSpacingExtra="@dimen/dp_5"
+                    android:paddingRight="@dimen/dp_18"
+                    android:text="产品交流及反馈可直接联系客服人员，我们将第一时间接收您宝贵的意见～"
+                    android:textColor="@color/A2A82FA"
+                    android:textSize="@dimen/sp_11" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/blue_back_circular"
+                    android:paddingLeft="@dimen/dp_8"
+                    android:paddingTop="@dimen/dp_7"
+                    android:paddingRight="@dimen/dp_8"
+                    android:paddingBottom="@dimen/dp_7"
+                    android:text="打开客服会话"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_11" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_18"
+                android:layout_marginTop="@dimen/dp_18"
+                android:text="反馈类型"
+                android:textColor="@color/A686E7A"
+                android:textSize="@dimen/sp_14"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_18"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_18"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/blue_back_circular"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/dp_12"
+                    android:paddingTop="@dimen/dp_7"
+                    android:paddingRight="@dimen/dp_12"
+                    android:paddingBottom="@dimen/dp_7"
+                    android:text="发布问题"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_12" />
+
+                <View
+                    android:layout_width="@dimen/dp_10"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/grey_circular_back"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/dp_12"
+                    android:paddingTop="@dimen/dp_7"
+                    android:paddingRight="@dimen/dp_12"
+                    android:paddingBottom="@dimen/dp_7"
+                    android:text="账号相关"
+                    android:textColor="@color/A686E7A"
+                    android:textSize="@dimen/sp_12" />
+
+                <View
+                    android:layout_width="@dimen/dp_10"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/grey_circular_back"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/dp_12"
+                    android:paddingTop="@dimen/dp_7"
+                    android:paddingRight="@dimen/dp_12"
+                    android:paddingBottom="@dimen/dp_7"
+                    android:text="产品BUG"
+                    android:textColor="@color/A686E7A"
+                    android:textSize="@dimen/sp_12" />
+
+                <View
+                    android:layout_width="@dimen/dp_10"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/grey_circular_back"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/dp_12"
+                    android:paddingTop="@dimen/dp_7"
+                    android:paddingRight="@dimen/dp_12"
+                    android:paddingBottom="@dimen/dp_7"
+                    android:text="投诉"
+                    android:textColor="@color/A686E7A"
+                    android:textSize="@dimen/sp_12" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_18"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_18"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/grey_circular_back"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/dp_12"
+                    android:paddingTop="@dimen/dp_7"
+                    android:paddingRight="@dimen/dp_12"
+                    android:paddingBottom="@dimen/dp_7"
+                    android:text="优化意见"
+                    android:textColor="@color/A686E7A"
+                    android:textSize="@dimen/sp_12" />
+
+                <View
+                    android:layout_width="@dimen/dp_10"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/grey_circular_back"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/dp_12"
+                    android:paddingTop="@dimen/dp_7"
+                    android:paddingRight="@dimen/dp_12"
+                    android:paddingBottom="@dimen/dp_7"
+                    android:text="其他"
+                    android:textColor="@color/A686E7A"
+                    android:textSize="@dimen/sp_12" />
+
+                <View
+                    android:layout_width="@dimen/dp_10"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center" />
+
+                <View
+                    android:layout_width="@dimen/dp_10"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="反馈内容"
+                android:layout_marginLeft="@dimen/dp_18"
+                android:layout_marginTop="@dimen/dp_18"
+                android:textColor="@color/A686E7A"
+                android:textSize="@dimen/sp_14" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/dp_18"
+                android:layout_marginLeft="@dimen/dp_18"
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@drawable/gray_frame">
+
+                <EditText
+                    android:id="@+id/help_feedback"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_125"
+                    android:padding="@dimen/dp_10"
+                    android:gravity="top"
+                    android:background="@android:color/transparent"
+                    android:hint="输入正文"
+                    android:lines="5"
+                    android:textSize="@dimen/sp_14"
+                    android:text="" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="联系方式"
+                android:layout_marginTop="@dimen/dp_18"
+                android:layout_marginLeft="@dimen/dp_18"
+                android:textColor="@color/A686E7A"
+                android:textSize="@dimen/sp_14" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/dp_18"
+                android:layout_marginLeft="@dimen/dp_18"
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@drawable/gray_frame">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_44"
+                    android:padding="@dimen/dp_10"
+                    android:background="@android:color/transparent"
+                    android:hint="填写手机号/邮箱，方便我们联系您"
+                    android:lines="1"
+                    android:textSize="@dimen/sp_14"
+                    android:text="" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="添加截图"
+                android:layout_marginLeft="@dimen/dp_18"
+                android:layout_marginTop="@dimen/dp_18"
+                android:textColor="@color/A686E7A"
+                android:textSize="@dimen/sp_14" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/feedback_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_76"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginBottom="@dimen/dp_24"
+                android:paddingLeft="@dimen/dp_18"
+                android:paddingRight="@dimen/dp_18" />
+
+
+
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</LinearLayout>
