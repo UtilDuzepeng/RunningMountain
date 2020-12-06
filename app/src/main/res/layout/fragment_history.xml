@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:paddingLeft="@dimen/dp_18"
     android:paddingRight="@dimen/dp_18"
-    tools:context="com.miaofen.xiaoying.fragment.search.HistoryFragment">
+    tools:context=".fragment.home.search.HistoryFragment">
 
 
     <RelativeLayout

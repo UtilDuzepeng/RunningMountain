@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.miaofen.xiaoying.fragment.UserFragment">
+    tools:context="com.miaofen.xiaoying.fragment.user.UserFragment">
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/mRefreshLayout"

@@ -1,21 +1,26 @@
-package com.miaofen.xiaoying.fragment
+package com.miaofen.xiaoying.fragment.home
 
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayout
 import com.miaofen.xiaoying.R
-import com.miaofen.xiaoying.activity.SearchActivity
+import com.miaofen.xiaoying.activity.ProjectDetailsActivity
 import com.miaofen.xiaoying.adapter.MyAdapter
-import com.miaofen.xiaoying.base.BaseFragment
+import com.miaofen.xiaoying.base.mvp.BaseMvpFragment
 import com.miaofen.xiaoying.common.data.bean.response.ImagerDataBean
-import com.miaofen.xiaoying.fragment.hot.HotFragment
-import com.miaofen.xiaoying.fragment.nearby.NearbyFragment
-import com.miaofen.xiaoying.fragment.newest.NewestFragment
+import com.miaofen.xiaoying.fragment.ImageAdapter
+import com.miaofen.xiaoying.fragment.home.hot.HotFragment
+import com.miaofen.xiaoying.fragment.home.hottest.NewestFragment
+import com.miaofen.xiaoying.fragment.home.nearby.NearbyFragment
+import com.miaofen.xiaoying.utils.ToastUtils
 import com.youth.banner.indicator.CircleIndicator
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.home_toolbar_layout.*
@@ -24,19 +29,19 @@ import kotlinx.android.synthetic.main.home_toolbar_layout.*
 /**
  * 首页
  */
-class HomeFragment : BaseFragment(), TabLayout.OnTabSelectedListener {
-
+class HomeFragment : BaseMvpFragment<RotationChartContract.Presenter>(), RotationChartContract.View,
+    TabLayout.OnTabSelectedListener {
 
     val list = listOf<String>("最新", "热门", "附近")
 
-    var list_path = ArrayList<ImagerDataBean>()
-
+    private var list_path = ArrayList<ImagerDataBean>()
 
     override fun getLayoutResources() = R.layout.fragment_home
 
     override fun initView() {
         super.initView()
-        setTitleToCollapsingToolbarLayout()
+        RotationChartPresenter(this)
+        mPresenter?.doRotationChart()
         setTab()
         setItem()
         setBanner()
@@ -44,25 +49,16 @@ class HomeFragment : BaseFragment(), TabLayout.OnTabSelectedListener {
 
     override fun initData() {
         super.initData()
-        view_search.setOnClickListener { SearchActivity.start(activity) }
-        view_flipper.setOnClickListener { SearchActivity.start(activity) }
+        val texts: MutableList<String> = ArrayList()
+        for (i in 0..9) {
+            texts.add("晋阳湖公园$i")
+        }
+        toolbar_search_box.setDataList(context,texts)
+//        toolbar_search_box.linearLayout.setOnClickListener { ToastUtils.showToast(texts.get(toolbar_search_box.marker)) }
+        toolbar_search_box.linearLayout.setOnClickListener { ProjectDetailsActivity.start(activity) }
     }
 
-    /**
-     * 使用CollapsingToolbarLayout必须把title设置到CollapsingToolbarLayout上，
-     * 设置到Toolbar上则不会显示
-     */
-    private fun setTitleToCollapsingToolbarLayout() {
-        app_bar_layout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
-            if (verticalOffset <= -banner.getHeight() / 2) {
-                toolbar.visibility = View.VISIBLE
-            } else {
-                toolbar.visibility = View.INVISIBLE
-            }
-        })
-    }
-
-    private fun setBanner(){
+    private fun setBanner() {
         val imagerDataBean = ImagerDataBean()
         imagerDataBean.url = "http://ww4.sinaimg.cn/large/006uZZy8jw1faic21363tj30ci08ct96.jpg"
         list_path.add(imagerDataBean)
@@ -75,9 +71,7 @@ class HomeFragment : BaseFragment(), TabLayout.OnTabSelectedListener {
         val imagerDataBean3 = ImagerDataBean()
         imagerDataBean3.url = "http://ww4.sinaimg.cn/large/006uZZy8jw1faic2e7vsaj30ci08cglz.jpg"
         list_path.add(imagerDataBean)
-        banner.addBannerLifecycleObserver(this)//添加生命周期观察者
-            .setAdapter(ImageAdapter(list_path))
-            .setIndicator(CircleIndicator(this.context));
+        banner_layout.setFilletBanner(list_path,this.activity)
     }
 
 
@@ -92,7 +86,9 @@ class HomeFragment : BaseFragment(), TabLayout.OnTabSelectedListener {
                 tab.customView = getTabView(i)
             }
         }
-        updateTabTextView(business_tablayout.getTabAt(business_tablayout.getSelectedTabPosition()), true);
+        updateTabTextView(
+            business_tablayout.getTabAt(business_tablayout.selectedTabPosition), true
+        )
         updateTabTextView(business_tablayout.getTabAt(1), false);
         updateTabTextView(business_tablayout.getTabAt(2), false);
     }
@@ -115,7 +111,7 @@ class HomeFragment : BaseFragment(), TabLayout.OnTabSelectedListener {
     private fun getTabView(currentPosition: Int): View? {
         val view: View = LayoutInflater.from(this.context).inflate(R.layout.tab_item, null)
         val textView = view.findViewById<View>(R.id.tab_item_textview) as TextView
-        textView.setText(list.get(currentPosition))
+        textView.text = list.get(currentPosition)
         return view
     }
 
@@ -129,7 +125,6 @@ class HomeFragment : BaseFragment(), TabLayout.OnTabSelectedListener {
 
     override fun onTabSelected(tab: TabLayout.Tab?) {
         //tab被选的时候回调
-//        viewpager.currentItem = tab!!.position
         updateTabTextView(tab, true);
     }
 
@@ -154,6 +149,14 @@ class HomeFragment : BaseFragment(), TabLayout.OnTabSelectedListener {
             tabUnSelect.setTextSize(16f)
             tabUnSelect.text = tab.text
         }
+    }
+
+    override fun onRotationChartSuccess(data: String) {
+
+    }
+
+    override fun onRotationChartError() {
+
     }
 
 

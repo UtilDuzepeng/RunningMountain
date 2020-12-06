@@ -15,7 +15,7 @@ import io.reactivex.disposables.Disposable;
  * 修改备注：
  */
 
-class BasePresenter<V extends IView> implements IPresenter{
+public class BasePresenter<V extends IView> implements IPresenter{
 
     protected WeakReference<V> mRootView;
     private CompositeDisposable mCompositeDisposable;

@@ -1,4 +1,4 @@
-package com.miaofen.xiaoying.fragment
+package com.miaofen.xiaoying.fragment.haircloth
 
 
 import android.Manifest

@@ -12,8 +12,8 @@ import com.google.android.material.tabs.TabLayout
 import com.miaofen.xiaoying.R
 import com.miaofen.xiaoying.base.BaseActivity
 import com.miaofen.xiaoying.adapter.MyAdapter
-import com.miaofen.xiaoying.fragment.hot.HotFragment
-import com.miaofen.xiaoying.fragment.newest.NewestFragment
+import com.miaofen.xiaoying.fragment.home.hot.HotFragment
+import com.miaofen.xiaoying.fragment.home.hottest.NewestFragment
 import kotlinx.android.synthetic.main.activity_personal_hom_pager.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.personal_hander.*
@@ -54,8 +54,10 @@ class PersonalHomPagerActivity : BaseActivity(), TabLayout.OnTabSelectedListener
     }
 
     private fun setTab() {
-        val tab1: NewestFragment = NewestFragment()
-        val tab2: HotFragment = HotFragment()
+        val tab1: NewestFragment =
+            NewestFragment()
+        val tab2: HotFragment =
+            HotFragment()
         var list1 = listOf<Fragment>(tab1, tab2)
         personal_viewpager.adapter = MyAdapter(list1, supportFragmentManager) //让tab和viewpager关联起来
         personal_tablayout.setupWithViewPager(viewpager)

@@ -1,17 +1,12 @@
-package com.miaofen.xiaoying.fragment
+package com.miaofen.xiaoying.fragment.news
 
 
-import android.view.View
 import com.miaofen.xiaoying.R
 import com.miaofen.xiaoying.base.BaseFragment
-import com.miaofen.xiaoying.fragment.newest.NewestRecyclerViewAdapter
 import com.miaofen.xiaoying.fragment.news.NewsRecyclerViewAdapter
 import com.miaofen.xiaoying.view.RefreshLayout
-import kotlinx.android.synthetic.*
-import kotlinx.android.synthetic.main.fragment_newest.*
 import kotlinx.android.synthetic.main.fragment_news.*
 import kotlinx.android.synthetic.main.toobar_layout.*
-import java.util.zip.Inflater
 
 
 /**

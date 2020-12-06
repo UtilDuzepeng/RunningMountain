@@ -1,25 +1,26 @@
-package com.miaofen.xiaoying.fragment.newest
+package com.miaofen.xiaoying.fragment.home.nearby
 
 
 import com.miaofen.xiaoying.R
 import com.miaofen.xiaoying.base.BaseFragment
+import com.miaofen.xiaoying.fragment.home.shareadapter.ShareRecyclerAdapter
 import com.miaofen.xiaoying.view.RefreshLayout
-import kotlinx.android.synthetic.main.fragment_newest.*
+import kotlinx.android.synthetic.main.fragment_nearby.*
 
 /**
- *最新
+ * 附近
  */
-class NewestFragment : BaseFragment(), RefreshLayout.SetOnRefresh{
+class NearbyFragment : BaseFragment(), RefreshLayout.SetOnRefresh {
 
-
-    var mAdapter: NewestRecyclerViewAdapter? = null
+    var mAdapter: ShareRecyclerAdapter? = null
 
     var list = ArrayList<String>()
-    override fun getLayoutResources() = R.layout.fragment_newest
+
+    override fun getLayoutResources() = R.layout.fragment_nearby
 
     override fun initView() {
         super.initView()
-        newest.setSetOnRefresh(this)
+        nearby.setSetOnRefresh(this)
         list.add("1")
         list.add("1")
         list.add("1")
@@ -27,8 +28,8 @@ class NewestFragment : BaseFragment(), RefreshLayout.SetOnRefresh{
         list.add("1")
         list.add("1")
         list.add("1")
-        mAdapter = NewestRecyclerViewAdapter(R.layout.newest_recycler_layout, list, activity)
-        newest.recyclerView.adapter = mAdapter
+        mAdapter = ShareRecyclerAdapter(R.layout.newest_recycler_layout, list, activity)
+        nearby.recyclerView.adapter = mAdapter
     }
 
     override fun loadMore(pager: Int, size: Int) {
@@ -50,5 +51,4 @@ class NewestFragment : BaseFragment(), RefreshLayout.SetOnRefresh{
         list.add("1")
         list.add("1")
     }
-
 }

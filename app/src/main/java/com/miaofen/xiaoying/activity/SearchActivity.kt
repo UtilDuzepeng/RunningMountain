@@ -6,8 +6,8 @@ import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import com.miaofen.xiaoying.R
 import com.miaofen.xiaoying.base.BaseActivity
-import com.miaofen.xiaoying.fragment.search.HistoryFragment
-import com.miaofen.xiaoying.fragment.search.ResultFragment
+import com.miaofen.xiaoying.fragment.home.search.HistoryFragment
+import com.miaofen.xiaoying.fragment.home.search.ResultFragment
 import kotlinx.android.synthetic.main.activity_search.*
 
 class SearchActivity : BaseActivity() {

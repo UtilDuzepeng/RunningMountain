@@ -3,6 +3,8 @@ package com.miaofen.xiaoying;
 import android.app.Application;
 import android.content.Context;
 
+import com.miaofen.xiaoying.comm.CommonAppDelegate;
+
 /**
  * 项目名称：com.miaofen.xiaoying
  * 类描述：
@@ -20,6 +22,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        CommonAppDelegate.init(this);
         mContext = this;
     }
 }

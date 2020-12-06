@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.miaofen.xiaoying.fragment.newest.NewestFragment">
+    tools:context="com.miaofen.xiaoying.fragment.home.hottest.NewestFragment">
 
 
     <com.miaofen.xiaoying.view.RefreshLayout

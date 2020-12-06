@@ -25,11 +25,12 @@ class ParamsInterceptor : Interceptor {
         val builder = request.newBuilder()
             .addHeader("client", "Android")
 
-        val token = Global.getToken()//?.token
-        Logger.e("okhttp token: $token")
-        if (!TextUtils.isEmpty(token)) {
-            builder.addHeader("token", token!!)
-        }
+//        val token = Global.getToken()//?.token
+//        Logger.e("okhttp token: $token")
+//        if (!TextUtils.isEmpty(token)) {
+//            builder.addHeader("token", token!!)
+            builder.addHeader("token", "odGc95I9iiVX78eK6nShycWM3sfw")
+//        }
 
         request = builder.build()
         return chain.proceed(request)

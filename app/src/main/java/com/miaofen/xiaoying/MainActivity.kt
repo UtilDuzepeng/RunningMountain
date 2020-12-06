@@ -8,10 +8,10 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.miaofen.xiaoying.base.BaseActivity
-import com.miaofen.xiaoying.fragment.HomeFragment
-import com.miaofen.xiaoying.fragment.NewsFragment
-import com.miaofen.xiaoying.fragment.ReleaseFragment
-import com.miaofen.xiaoying.fragment.UserFragment
+import com.miaofen.xiaoying.fragment.home.HomeFragment
+import com.miaofen.xiaoying.fragment.news.NewsFragment
+import com.miaofen.xiaoying.fragment.haircloth.ReleaseFragment
+import com.miaofen.xiaoying.fragment.user.UserFragment
 import com.miaofen.xiaoying.utils.SoftKeyBoardListener
 import com.miaofen.xiaoying.utils.SoftKeyBoardListener.OnSoftKeyBoardChangeListener
 import com.miaofen.xiaoying.utils.showToast

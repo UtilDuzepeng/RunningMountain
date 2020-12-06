@@ -1,4 +1,4 @@
-package com.miaofen.xiaoying.fragment.search
+package com.miaofen.xiaoying.fragment.home.search
 
 import android.graphics.Typeface
 import android.view.LayoutInflater

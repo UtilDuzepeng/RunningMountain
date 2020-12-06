@@ -48,16 +48,14 @@ android {
         //开发环境
         flavor_dev {
             buildConfigField("boolean", "LOG_DEBUG", "true")
-            buildConfigField 'String', 'HTML_HOST', '"http://182.92.123.102:8080/"'
-//            buildConfigField 'String', 'HTML_HOST', '"http://45922800c85a.ngrok.io"'
+            buildConfigField 'String', 'HTML_HOST', '"https://betaapi.motortravel.cn/"'
             signingConfig signingConfigs.release
         }
 
         //正式环境
         flavor_release {
-            buildConfigField("boolean", "LOG_DEBUG", "true")
-            buildConfigField 'String', 'HTML_HOST', '"http://182.92.123.102:8080/"'
-//            buildConfigField 'String', 'HTML_HOST', '"http://45922800c85a.ngrok.io"'
+            buildConfigField("boolean", "LOG_DEBUG", "false")
+            buildConfigField 'String', 'HTML_HOST', '"https://betaapi.motortravel.cn/"'
             signingConfig signingConfigs.release
         }
     }

@@ -32,7 +32,7 @@ class ProjectDetailsActivity : BaseActivity() {
 
 
     companion object {
-        fun start(context: Context?) {
+         fun start(context: Context?) {
             val intent = Intent(context, ProjectDetailsActivity::class.java)
             context?.startActivity(intent)
         }

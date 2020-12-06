@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.miaofen.xiaoying.fragment.nearby.NearbyFragment">
+    tools:context="com.miaofen.xiaoying.fragment.home.nearby.NearbyFragment">
 
     <com.miaofen.xiaoying.view.RefreshLayout
         android:id="@+id/nearby"

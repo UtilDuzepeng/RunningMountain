@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.miaofen.xiaoying.fragment.NewsFragment">
+    tools:context="com.miaofen.xiaoying.fragment.news.NewsFragment">
 
     <include layout="@layout/toobar_layout"/>
 

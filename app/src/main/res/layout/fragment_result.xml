@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
-    tools:context="com.miaofen.xiaoying.fragment.search.ResultFragment">
+    tools:context=".fragment.home.search.ResultFragment">
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/result_tablayout"

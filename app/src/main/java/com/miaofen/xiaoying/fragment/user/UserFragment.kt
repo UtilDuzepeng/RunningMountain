@@ -1,4 +1,4 @@
-package com.miaofen.xiaoying.fragment
+package com.miaofen.xiaoying.fragment.user
 
 import com.miaofen.xiaoying.R
 import com.miaofen.xiaoying.activity.*

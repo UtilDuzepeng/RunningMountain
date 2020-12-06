@@ -1,27 +1,25 @@
-package com.miaofen.xiaoying.fragment.hot
-
+package com.miaofen.xiaoying.fragment.home.search
 
 import com.miaofen.xiaoying.R
 import com.miaofen.xiaoying.base.BaseFragment
-import com.miaofen.xiaoying.fragment.newest.NewestRecyclerViewAdapter
 import com.miaofen.xiaoying.view.RefreshLayout
-import kotlinx.android.synthetic.main.fragment_hot.*
+import kotlinx.android.synthetic.main.fragment_plan.*
 
 
 /**
- * 热门
+ * 搜索计划
  */
-class HotFragment : BaseFragment(), RefreshLayout.SetOnRefresh {
+class PlanFragment : BaseFragment() , RefreshLayout.SetOnRefresh {
 
-    var mAdapter: HotRecyclerViewAdapter? = null
+    var mAdapter: PlanRecyclerViewAdapter? = null
 
     var list = ArrayList<String>()
 
-    override fun getLayoutResources() = R.layout.fragment_hot
+    override fun getLayoutResources() = R.layout.fragment_plan
 
     override fun initView() {
         super.initView()
-        hot.setSetOnRefresh(this)
+        plan_recycler.setSetOnRefresh(this)
         list.add("1")
         list.add("1")
         list.add("1")
@@ -29,8 +27,8 @@ class HotFragment : BaseFragment(), RefreshLayout.SetOnRefresh {
         list.add("1")
         list.add("1")
         list.add("1")
-        mAdapter = HotRecyclerViewAdapter(R.layout.newest_recycler_layout, list, activity)
-        hot.recyclerView.adapter = mAdapter
+        mAdapter = PlanRecyclerViewAdapter(R.layout.plan_item_layout, list, activity)
+        plan_recycler.recyclerView.adapter = mAdapter
     }
 
     override fun loadMore(pager: Int, size: Int) {
@@ -41,9 +39,11 @@ class HotFragment : BaseFragment(), RefreshLayout.SetOnRefresh {
         list.add("1")
         list.add("1")
         list.add("1")
+        mAdapter?.notifyDataSetChanged()
     }
 
     override fun refresh(pager: Int, size: Int) {
+        list.clear()
         list.add("1")
         list.add("1")
         list.add("1")
@@ -52,6 +52,5 @@ class HotFragment : BaseFragment(), RefreshLayout.SetOnRefresh {
         list.add("1")
         list.add("1")
     }
-
 
 }

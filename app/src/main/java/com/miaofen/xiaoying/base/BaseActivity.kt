@@ -1,15 +1,14 @@
 package com.miaofen.xiaoying.base
 
-import android.annotation.TargetApi
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.view.WindowInsets
 import android.widget.RadioButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
+import com.miaofen.xiaoying.R
 import com.miaofen.xiaoying.utils.ActivityManager
 
 /**
@@ -38,21 +37,23 @@ abstract class BaseActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             val window = window
             val decorView = window.decorView
-            decorView.setOnApplyWindowInsetsListener(object : View.OnApplyWindowInsetsListener {
-                @TargetApi(Build.VERSION_CODES.KITKAT_WATCH)
-                override fun onApplyWindowInsets(v: View, insets: WindowInsets): WindowInsets {
-                    val defaultInsets = v.onApplyWindowInsets(insets)
-                    return defaultInsets.replaceSystemWindowInsets(
-                        defaultInsets.getSystemWindowInsetLeft(),
-                        0,
-                        defaultInsets.getSystemWindowInsetRight(),
-                        defaultInsets.getSystemWindowInsetBottom()
-                    )
-                }
-            })
+            decorView.setOnApplyWindowInsetsListener { v, insets ->
+                val defaultInsets = v.onApplyWindowInsets(insets)
+                defaultInsets.replaceSystemWindowInsets(
+                    defaultInsets.systemWindowInsetLeft, 0,
+                    defaultInsets.systemWindowInsetRight, defaultInsets.systemWindowInsetBottom
+                )
+            }
             ViewCompat.requestApplyInsets(decorView)
             //将状态栏设成透明，如不想透明可设置其他颜色
-            window.statusBarColor = ContextCompat.getColor(this, android.R.color.transparent)
+//            window.statusBarColor = ContextCompat.getColor(this, android.R.color.transparent)
+//           if (boolean){
+//               window.statusBarColor = ContextCompat.getColor(this, android.R.color.white)
+//           }else{
+               window.statusBarColor = ContextCompat.getColor(this, android.R.color.transparent)
+//           }
+            getWindow().decorView.systemUiVisibility =
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR //实现状态栏图标和文字颜色为暗色
         }
     }
 
