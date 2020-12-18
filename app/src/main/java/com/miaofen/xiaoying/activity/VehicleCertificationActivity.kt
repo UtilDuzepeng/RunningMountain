@@ -9,8 +9,6 @@ import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.provider.MediaStore
 import android.text.TextUtils
 import android.util.Log
@@ -24,9 +22,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.miaofen.xiaoying.R
 import com.miaofen.xiaoying.base.BaseActivity
 import com.miaofen.xiaoying.comm.Constant
-import com.miaofen.xiaoying.fragment.haircloth.ReleaseRecyclerViewAdapter
+import com.miaofen.xiaoying.fragment.hair.ReleaseRecyclerViewAdapter
 import com.miaofen.xiaoying.utils.ToastUtils
-import kotlinx.android.synthetic.main.activity_feedback.*
 import kotlinx.android.synthetic.main.activity_vehicle_certification.*
 import kotlinx.android.synthetic.main.toobar_layout.*
 import java.io.File

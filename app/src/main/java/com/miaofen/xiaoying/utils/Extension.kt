@@ -13,6 +13,8 @@ import android.widget.Toast
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import java.text.SimpleDateFormat
+import java.util.*
 import java.util.regex.Pattern
 
 /**
@@ -58,6 +60,13 @@ fun isTelPhoneNumber(phone: String?): Boolean {
         return matcher.matches()
     }
     return false
+}
+
+fun getCurrentTime(value: Long): String? {
+    val format = SimpleDateFormat("MM-dd HH:mm")
+    val time = format.format(Date(value * 1000L))
+//        Log.d("xxx-------->", "转换后时间: $time")
+    return time
 }
 
 

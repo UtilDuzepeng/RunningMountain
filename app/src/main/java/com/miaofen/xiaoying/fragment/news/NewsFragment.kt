@@ -26,7 +26,7 @@ class NewsFragment : BaseFragment(), RefreshLayout.SetOnRefresh {
         news_recyclerview.setSetOnRefresh(this)
         title_bar_title.text = "消息"
         mAdapter = NewsRecyclerViewAdapter(R.layout.news_list_item, list, activity)
-        val inflate = getLayoutInflater().inflate(R.layout.news_list_item_headl, null)
+        val inflate = layoutInflater.inflate(R.layout.news_list_item_headl, null)
         mAdapter?.addHeaderView(inflate)
         news_recyclerview.recyclerView.adapter = mAdapter
     }

@@ -1,6 +1,7 @@
 package com.miaofen.xiaoying.fragment.home
 
 import com.miaofen.xiaoying.base.mvp.BasePresenter
+import com.miaofen.xiaoying.common.data.bean.response.BannerResponse
 import com.miaofen.xiaoying.common.data.remote.CommonObserver
 import com.miaofen.xiaoying.common.data.remote.RemoteRepository
 import com.miaofen.xiaoying.utils.applySchedulers
@@ -16,18 +17,21 @@ import io.reactivex.disposables.Disposable
  * 修改备注：
  */
 
-class RotationChartPresenter(view:RotationChartContract.View):BasePresenter<RotationChartContract.View>(view),RotationChartContract.Presenter {
+class HomePresenter(view:HomeContract.View):BasePresenter<HomeContract.View>(view),HomeContract.Presenter {
 
+    /**
+     * 轮播图
+     */
     override fun doRotationChart() {
         RemoteRepository
             .rotationChart()
             .applySchedulers()
-            .subscribe(object : CommonObserver<String>() {
+            .subscribe(object : CommonObserver<List<BannerResponse>>() {
                 override fun onSubscribe(d: Disposable?) {
                     addDispose(d)
                 }
 
-                override fun success(data: String?) {
+                override fun success(data: List<BannerResponse>?) {
 
                     if (data == null) {
                         return
@@ -38,6 +42,33 @@ class RotationChartPresenter(view:RotationChartContract.View):BasePresenter<Rota
                 override fun failure(e: Throwable?, errMsg: String?) {
                     super.failure(e, errMsg)
                     mRootView.get()?.onRotationChartError()
+                }
+            })
+    }
+
+    /**
+     * 热门推荐
+     */
+    override fun recommend() {
+        RemoteRepository
+            .recommend()
+            .applySchedulers()
+            .subscribe(object : CommonObserver<ArrayList<String>>() {
+                override fun onSubscribe(d: Disposable?) {
+                    addDispose(d)
+                }
+
+                override fun success(data: ArrayList<String>?) {
+
+                    if (data == null) {
+                        return
+                    }
+                    mRootView.get()?.onRecommendSuccess(data)
+                }
+
+                override fun failure(e: Throwable?, errMsg: String?) {
+                    super.failure(e, errMsg)
+                    mRootView.get()?.onRecommendError()
                 }
             })
     }

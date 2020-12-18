@@ -3,42 +3,55 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/dp_25"
-    android:orientation="vertical">
+    android:layout_marginTop="@dimen/dp_12"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/dp_18"
+    android:paddingRight="@dimen/dp_18">
 
 
     <ImageView
         android:id="@+id/imager_head"
-        android:layout_width="@dimen/dp_40"
-        android:layout_height="@dimen/dp_40"
+        android:layout_width="@dimen/dp_34"
+        android:layout_height="@dimen/dp_34"
         android:background="@drawable/avatar_icon" />
 
     <LinearLayout
         android:id="@+id/linear_name_like"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/imager_head"
         android:layout_marginLeft="@dimen/dp_10"
+        android:layout_toRightOf="@+id/imager_head"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
             android:layout_weight="1"
-            android:lines="1"
+            android:maxLines="1"
             android:text="天剑骑士董超"
             android:textColor="@color/A12488D"
             android:textSize="@dimen/sp_13" />
 
 
+        <ImageView
+            android:id="@+id/image_fabulous"
+            android:layout_width="@dimen/dp_16"
+            android:layout_height="@dimen/dp_14"
+            android:layout_marginRight="@dimen/dp_5"
+            android:src="@drawable/dianzan_line" />
+
         <TextView
+            android:id="@+id/tv_starCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/tv_name"
+            android:gravity="right"
             android:text="34"
             android:textColor="@color/A686E7A"
             android:textSize="@dimen/sp_12" />
+
     </LinearLayout>
 
 
@@ -46,30 +59,53 @@
         android:id="@+id/tv_leaving_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_10"
         android:layout_below="@+id/linear_name_like"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_12"
         android:layout_toRightOf="@id/imager_head"
         android:lineSpacingExtra="3dp"
-        android:layout_marginTop="@dimen/dp_12"
         android:text="趁这几天天气好，我想抓住秋天的小尾巴。有没有志同道合的小伙伴一起去晋阳湖公园溜一圈儿？"
         android:textColor="@color/A212A3D"
         android:textSize="@dimen/sp_14" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_toRightOf="@+id/imager_head"
+        android:layout_below="@+id/tv_leaving_message"
         android:layout_marginLeft="@dimen/dp_10"
         android:layout_marginTop="@dimen/dp_12"
-        android:layout_below="@+id/tv_leaving_message">
+        android:gravity="center"
+        android:layout_toRightOf="@+id/imager_head"
+        android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/tv_createTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="10-17 18:01 · 回复"
+            android:text="10-17 18:01 · "
             android:textColor="@color/A686E7A"
             android:textSize="@dimen/sp_12" />
-    </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_replyCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tv_createTime"
+            android:text="回复"
+            android:paddingRight="@dimen/dp_7"
+            android:paddingLeft="@dimen/dp_7"
+            android:textColor="@color/A686E7A"
+            android:textSize="@dimen/sp_12" />
+
+        <TextView
+            android:id="@+id/tv_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="删除评论"
+            android:textColor="@color/FF6555"
+            android:textSize="@dimen/sp_12" />
+
+    </RelativeLayout>
 
 </RelativeLayout>

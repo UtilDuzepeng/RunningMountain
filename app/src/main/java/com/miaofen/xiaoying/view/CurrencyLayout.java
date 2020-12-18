@@ -9,11 +9,19 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.miaofen.xiaoying.R;
+import com.miaofen.xiaoying.common.data.bean.response.HomeResponse;
+import com.miaofen.xiaoying.fragment.home.shareadapter.ImageViewRecycler;
 import com.miaofen.xiaoying.utils.ToastUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 项目名称：com.miaofen.xiaoying.view
@@ -51,8 +59,14 @@ public class CurrencyLayout extends LinearLayout {
     private LinearLayout collection, comment, forward;
     //详情
     private LinearLayout item_details;
+    //图片
+    private RecyclerView recyclerview_picture;
 
     private ImageView image_collection;
+    //图片适配器
+    private ImageViewRecycler mAdapter;
+    //图片列表数据
+    private List<HomeResponse.ContentBean.ImagesBean> imageList = new ArrayList<>();
 
     private void initView(Context context) {
         LayoutInflater.from(context).inflate(R.layout.item_currency, this);
@@ -73,9 +87,12 @@ public class CurrencyLayout extends LinearLayout {
         forward = (LinearLayout) findViewById(R.id.forward);
         item_details = (LinearLayout) findViewById(R.id.item_details);
         image_collection = (ImageView) findViewById(R.id.image_collection);
-        onClickCollection();
-        onClickComment();
-        onClickForward();
+        recyclerview_picture = (RecyclerView) findViewById(R.id.recyclerview_picture);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 3, GridLayoutManager.VERTICAL, false);
+        gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerview_picture.setLayoutManager(gridLayoutManager);
+        mAdapter = new ImageViewRecycler(R.layout.recycler_iamge_item, imageList, context);
+        recyclerview_picture.setAdapter(mAdapter);
     }
 
     //todo 预留方法 满足特殊需求
@@ -230,5 +247,17 @@ public class CurrencyLayout extends LinearLayout {
         return item_details;
     }
 
+    /**
+     * 图片适配器
+     */
+    public void setRecyclerViewData(List<HomeResponse.ContentBean.ImagesBean> list) {
+        imageList.clear();
+        if (list != null && list.size() > 0) {
+            for (int i = 0; i < list.size(); i++) {
+                imageList.add(list.get(i));
+            }
+        }
+        mAdapter.notifyDataSetChanged();
+    }
 
 }

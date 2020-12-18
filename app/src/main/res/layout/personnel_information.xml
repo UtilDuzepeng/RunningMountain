@@ -1,38 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@color/white"
-    android:orientation="vertical">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/dp_18"
-        android:text="想约的(1男0女）"
-        android:textColor="@color/A212A3D"
-        android:textSize="@dimen/sp_16" />
-
+    android:layout_marginTop="@dimen/dp_12"
+    android:gravity="center"
+    android:orientation="horizontal">
 
     <ImageView
+        android:id="@+id/image_avatarUrl"
         android:layout_width="@dimen/dp_40"
         android:layout_height="@dimen/dp_40"
-        android:layout_marginLeft="@dimen/dp_18"
-        android:layout_marginTop="@dimen/dp_12"
         android:background="@drawable/avatar_icon" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_1"
-        android:layout_marginTop="@dimen/dp_12"
-        android:paddingLeft="@dimen/dp_18"
-        android:paddingRight="@dimen/dp_18"
-        android:background="@color/AF4F4F4"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/dp_18"/>
-
 
 </LinearLayout>

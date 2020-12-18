@@ -1,26 +1,24 @@
 package com.miaofen.xiaoying.fragment.home
 
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
+import android.app.Activity
 import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.google.android.material.appbar.AppBarLayout
+import androidx.lifecycle.LifecycleOwner
 import com.google.android.material.tabs.TabLayout
 import com.miaofen.xiaoying.R
-import com.miaofen.xiaoying.activity.ProjectDetailsActivity
+import com.miaofen.xiaoying.activity.SearchActivity
 import com.miaofen.xiaoying.adapter.MyAdapter
 import com.miaofen.xiaoying.base.mvp.BaseMvpFragment
+import com.miaofen.xiaoying.common.data.bean.response.BannerResponse
 import com.miaofen.xiaoying.common.data.bean.response.ImagerDataBean
 import com.miaofen.xiaoying.fragment.ImageAdapter
 import com.miaofen.xiaoying.fragment.home.hot.HotFragment
 import com.miaofen.xiaoying.fragment.home.hottest.NewestFragment
 import com.miaofen.xiaoying.fragment.home.nearby.NearbyFragment
-import com.miaofen.xiaoying.utils.ToastUtils
 import com.youth.banner.indicator.CircleIndicator
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.home_toolbar_layout.*
@@ -29,36 +27,25 @@ import kotlinx.android.synthetic.main.home_toolbar_layout.*
 /**
  * 首页
  */
-class HomeFragment : BaseMvpFragment<RotationChartContract.Presenter>(), RotationChartContract.View,
+class HomeFragment : BaseMvpFragment<HomeContract.Presenter>(), HomeContract.View,
     TabLayout.OnTabSelectedListener {
 
     val list = listOf<String>("最新", "热门", "附近")
-
     private var list_path = ArrayList<ImagerDataBean>()
 
     override fun getLayoutResources() = R.layout.fragment_home
 
     override fun initView() {
         super.initView()
-        RotationChartPresenter(this)
-        mPresenter?.doRotationChart()
+        HomePresenter(this)
+//        mPresenter?.doRotationChart()
+        mPresenter?.recommend()
         setTab()
         setItem()
-        setBanner()
     }
 
     override fun initData() {
         super.initData()
-        val texts: MutableList<String> = ArrayList()
-        for (i in 0..9) {
-            texts.add("晋阳湖公园$i")
-        }
-        toolbar_search_box.setDataList(context,texts)
-//        toolbar_search_box.linearLayout.setOnClickListener { ToastUtils.showToast(texts.get(toolbar_search_box.marker)) }
-        toolbar_search_box.linearLayout.setOnClickListener { ProjectDetailsActivity.start(activity) }
-    }
-
-    private fun setBanner() {
         val imagerDataBean = ImagerDataBean()
         imagerDataBean.url = "http://ww4.sinaimg.cn/large/006uZZy8jw1faic21363tj30ci08ct96.jpg"
         list_path.add(imagerDataBean)
@@ -71,7 +58,9 @@ class HomeFragment : BaseMvpFragment<RotationChartContract.Presenter>(), Rotatio
         val imagerDataBean3 = ImagerDataBean()
         imagerDataBean3.url = "http://ww4.sinaimg.cn/large/006uZZy8jw1faic2e7vsaj30ci08cglz.jpg"
         list_path.add(imagerDataBean)
-        banner_layout.setFilletBanner(list_path,this.activity)
+        banner_layout.addBannerLifecycleObserver(this) //添加生命周期观察者
+            .setAdapter(ImageAdapter(list_path))
+            .indicator = CircleIndicator(activity)
     }
 
 
@@ -145,17 +134,32 @@ class HomeFragment : BaseMvpFragment<RotationChartContract.Presenter>(), Rotatio
             val tabUnSelect = tab?.customView
                 ?.findViewById<TextView>(R.id.tab_item_textview) as TextView
             tabUnSelect.typeface = Typeface.defaultFromStyle(Typeface.NORMAL)
-            tabUnSelect.setTextColor(getResources().getColor(R.color.A686E7A))
-            tabUnSelect.setTextSize(16f)
+            tabUnSelect.setTextColor(resources.getColor(R.color.A686E7A))
+            tabUnSelect.textSize = 16f
             tabUnSelect.text = tab.text
         }
     }
 
-    override fun onRotationChartSuccess(data: String) {
+    /**---------------------轮播图-----------------------**/
+    override fun onRotationChartSuccess(data: List<BannerResponse>) {
 
     }
 
     override fun onRotationChartError() {
+
+    }
+
+    /**---------------------热门推荐------------------------**/
+
+    override fun onRecommendSuccess(data: ArrayList<String>) {
+        toolbar_search_box.setDataList(context, data)
+        toolbar_search_box.linearLayout.setOnClickListener {
+            toolbar_search_box.getMarker()
+            SearchActivity.start(activity, data, toolbar_search_box.marker)
+        }
+    }
+
+    override fun onRecommendError() {
 
     }
 

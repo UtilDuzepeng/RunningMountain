@@ -4,8 +4,6 @@
     android:layout_height="@dimen/dp_70"
     android:background="@color/white">
 
-
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -50,6 +48,5 @@
             android:visibility="invisible" />
 
     </RelativeLayout>
-
 
 </RelativeLayout>

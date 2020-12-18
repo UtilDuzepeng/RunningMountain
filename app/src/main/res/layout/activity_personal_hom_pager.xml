@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.miaofen.xiaoying.activity.personal.PersonalHomPagerActivity">
+    tools:context="com.miaofen.xiaoying.activity.PersonalHomPagerActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/personal_app_bar_layout"

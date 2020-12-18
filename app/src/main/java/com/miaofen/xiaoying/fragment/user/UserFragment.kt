@@ -2,7 +2,7 @@ package com.miaofen.xiaoying.fragment.user
 
 import com.miaofen.xiaoying.R
 import com.miaofen.xiaoying.activity.*
-import com.miaofen.xiaoying.activity.personal.PersonalHomPagerActivity
+import com.miaofen.xiaoying.activity.PersonalHomPagerActivity
 import com.miaofen.xiaoying.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_user.*
 

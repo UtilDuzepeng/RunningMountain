@@ -18,6 +18,12 @@ android {
             storeFile file('../config/sjb.jks')
             storePassword '199722'
         }
+        debug {
+            storeFile file('../config/sjb.jks')
+            storePassword '199722'
+            keyAlias 'key'
+            keyPassword '199722'
+        }
     }
 
     buildTypes {

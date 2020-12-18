@@ -13,7 +13,7 @@ package com.miaofen.xiaoying.common.data.bean
 class CommonResponse <T> {
 
     var code: Int = 0
-    var msg: String? = null
+    var message: String? = null
     var data: T? = null
 
     fun isSuccessful() = code == RESULT_OK
@@ -23,7 +23,7 @@ class CommonResponse <T> {
     fun <N> newResp(data: N): CommonResponse<N> {
         val ret = CommonResponse<N>()
         ret.code = code
-        ret.msg = msg
+        ret.message = message
         ret.data = data
         return ret
     }

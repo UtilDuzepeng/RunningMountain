@@ -1,4 +1,4 @@
-package com.miaofen.xiaoying.activity.personal
+package com.miaofen.xiaoying.activity
 
 import android.content.Context
 import android.content.Intent

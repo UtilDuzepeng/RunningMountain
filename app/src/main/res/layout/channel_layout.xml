@@ -5,30 +5,25 @@
     android:orientation="vertical">
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="途径地(4)"
-        android:textColor="@color/A212A3D"
-        android:textSize="@dimen/sp_16" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <View
+        <ImageView
+            android:id="@+id/image_name"
             android:layout_width="@dimen/dp_10"
             android:layout_height="@dimen/dp_10"
-            android:layout_marginTop="@dimen/dp_12"
             android:layout_marginLeft="@dimen/dp_2"
-            android:background="@drawable/blue_border" />
+            android:layout_marginTop="@dimen/dp_12"
+            android:background="@drawable/point_icon" />
 
         <TextView
+            android:id="@+id/tv_planTripsName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_8"
             android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_8"
             android:drawableLeft="@drawable/blue_border"
             android:text="二许线"
             android:textColor="@color/A212A3D"
@@ -36,29 +31,30 @@
 
     </LinearLayout>
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <View
-            android:layout_width="@dimen/dp_30"
-            android:background="@drawable/bg_dotted_line"
+        <ImageView
+            android:id="@+id/image_planTripsRemark"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginRight="-10dp"
-            android:layout_marginLeft="-10dp"
+            android:layout_marginLeft="@dimen/dp_6"
+            android:scaleType="fitXY"
+            android:background="@drawable/tujingdi_icon"
             android:layerType="software" />
 
 
-
         <TextView
+            android:id="@+id/tv_planTripsRemark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_14"
-            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginTop="@dimen/dp_5"
             android:layout_marginBottom="@dimen/dp_10"
             android:layout_weight="1"
+            android:maxLines="2"
             android:lineSpacingExtra="3dp"
             android:text="路边有一家上海风味小笼包店，店里的蟹粉小笼包和鸭血粉丝汤味道相当正宗，物美价廉"
             android:textColor="@color/A959CA7" />

@@ -1,4 +1,4 @@
-package com.miaofen.xiaoying.fragment.haircloth
+package com.miaofen.xiaoying.fragment.hair
 
 
 import android.Manifest
@@ -21,7 +21,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.miaofen.xiaoying.R
 import com.miaofen.xiaoying.base.BaseFragment
 import com.miaofen.xiaoying.comm.Constant
-import com.miaofen.xiaoying.fragment.haircloth.ReleaseRecyclerViewAdapter
 import com.miaofen.xiaoying.utils.ToastUtils
 import kotlinx.android.synthetic.main.fragment_release.*
 import kotlinx.android.synthetic.main.toobar_layout.*
@@ -47,7 +46,8 @@ class ReleaseFragment : BaseFragment() {
         title_bar_title.text = "发布"
 //        val upload = BitmapFactory.decodeResource(this.context!!.resources, R.drawable.upload_icon)
 //        bitmapList.add(0, upload)
-        release_recyclerview.layoutManager = LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
+        release_recyclerview.layoutManager =
+            LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
         mAdapter = ReleaseRecyclerViewAdapter(R.layout.release_imager_layout, bitmapList, activity)
         val inflate = layoutInflater.inflate(R.layout.upload_icon_layout, null)
         mAdapter?.addFooterView(inflate)
@@ -71,7 +71,7 @@ class ReleaseFragment : BaseFragment() {
         }
         //打开手机中的相册
         val innerIntent =
-            Intent(Intent.ACTION_GET_CONTENT) //"android.intent.action.GET_CONTENT"
+            Intent(Intent.ACTION_PICK) //"android.intent.action.GET_CONTENT"
         innerIntent.type = "image/*"
         startActivityForResult(innerIntent, REQUEST_CODE_SCAN_GALLERY)
     }
@@ -87,9 +87,9 @@ class ReleaseFragment : BaseFragment() {
                 Log.e("TAG", "文件路径：" + file)
                 val fis = FileInputStream(file)
                 val bitmap = BitmapFactory.decodeStream(fis)
-                if (bitmapList.size >=9){
+                if (bitmapList.size >= 9) {
                     ToastUtils.showToast("最多只能上传9张～")
-                }else{
+                } else {
                     bitmapList.add(bitmap)
                     mAdapter?.notifyDataSetChanged()
                 }
@@ -97,7 +97,7 @@ class ReleaseFragment : BaseFragment() {
         }
     }
 
-    fun getFileFromUri(uri: Uri, context: Context): File? {
+    private fun getFileFromUri(uri: Uri, context: Context): File? {
         return if (uri == null) {
             null
         } else when (uri.scheme) {
@@ -115,7 +115,7 @@ class ReleaseFragment : BaseFragment() {
             return null
         }
         var file: File? = null
-        val filePath: String
+        var filePath: String
         val filePathColumn =
             arrayOf(MediaStore.MediaColumns.DATA)
         val contentResolver = context.contentResolver
@@ -125,11 +125,15 @@ class ReleaseFragment : BaseFragment() {
         )
         if (cursor != null) {
             cursor.moveToFirst()
-            filePath = cursor.getString(cursor.getColumnIndex(filePathColumn[0]))
-            cursor.close()
-            if (!TextUtils.isEmpty(filePath)) {
-                file = File(filePath)
-            }
+           for (item in filePathColumn){
+               Log.e("TAG","图片路径 -》 ：" + item)
+               filePath = cursor.getString(cursor.getColumnIndex(item))
+               cursor.close()
+               if (!TextUtils.isEmpty(filePath)) {
+                   file = File(filePath)
+               }
+           }
+
         }
         return file
     }

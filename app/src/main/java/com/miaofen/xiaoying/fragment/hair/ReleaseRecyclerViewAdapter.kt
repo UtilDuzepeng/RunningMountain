@@ -1,4 +1,4 @@
-package com.miaofen.xiaoying.fragment.haircloth
+package com.miaofen.xiaoying.fragment.hair
 
 import android.content.Context
 import android.graphics.Bitmap

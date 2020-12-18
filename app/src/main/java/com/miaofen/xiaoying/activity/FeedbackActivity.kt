@@ -9,14 +9,11 @@ import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.provider.MediaStore
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
-import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -25,10 +22,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.miaofen.xiaoying.R
 import com.miaofen.xiaoying.base.BaseActivity
 import com.miaofen.xiaoying.comm.Constant
-import com.miaofen.xiaoying.fragment.haircloth.ReleaseRecyclerViewAdapter
+import com.miaofen.xiaoying.fragment.hair.ReleaseRecyclerViewAdapter
 import com.miaofen.xiaoying.utils.ToastUtils
 import kotlinx.android.synthetic.main.activity_feedback.*
-import kotlinx.android.synthetic.main.fragment_release.*
 import kotlinx.android.synthetic.main.toobar_layout.*
 import java.io.File
 import java.io.FileInputStream
@@ -80,7 +76,7 @@ class FeedbackActivity : BaseActivity() {
         }
         //打开手机中的相册
         val innerIntent =
-            Intent(Intent.ACTION_GET_CONTENT) //"android.intent.action.GET_CONTENT"
+            Intent(Intent.ACTION_PICK) //"android.intent.action.GET_CONTENT"
         innerIntent.type = "image/*"
         startActivityForResult(innerIntent, REQUEST_CODE_SCAN_GALLERY)
     }

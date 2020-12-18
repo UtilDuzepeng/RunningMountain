@@ -24,7 +24,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
  * 修改备注：
  */
 
-public class RefreshLayout extends LinearLayout implements OnRefreshLoadMoreListener{
+public class RefreshLayout extends LinearLayout implements OnRefreshLoadMoreListener {
 
     private int page = 1;//加载页数
 
@@ -48,7 +48,7 @@ public class RefreshLayout extends LinearLayout implements OnRefreshLoadMoreList
     }
 
 
-    private void initView(Context context){
+    private void initView(Context context) {
         LayoutInflater.from(context).inflate(R.layout.public_recyclerview_layout, this);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -56,36 +56,49 @@ public class RefreshLayout extends LinearLayout implements OnRefreshLoadMoreList
         refreshLayout.setOnRefreshLoadMoreListener(this);
         refreshLayout.setDisableContentWhenRefresh(true);//是否在刷新的时候禁止列表的操作
         refreshLayout.setDisableContentWhenLoading(true);//是否在加载的时候禁止列表的操作
-        refreshLayout.autoRefresh();//自动刷新
+
     }
 
     //刷新
     @Override
     public void onRefresh(@NonNull com.scwang.smartrefresh.layout.api.RefreshLayout refreshLayout) {
         page = 1;
-        setOnRefresh.refresh(page,2);
-        refreshLayout.setEnableLoadMore(true);//是否启用上拉加载功能
+        setOnRefresh.refresh(page, 2);
         refreshLayout.finishRefresh();
     }
+
     //上拉
     @Override
     public void onLoadMore(@NonNull com.scwang.smartrefresh.layout.api.RefreshLayout refreshLayout) {
         page++;
-        setOnRefresh.loadMore(page,2);
+        setOnRefresh.loadMore(page, 2);
         refreshLayout.finishLoadMore();
     }
 
+    public void autoRefresh() {
+        refreshLayout.autoRefresh();//自动刷新
+    }
 
-    public RecyclerView getRecyclerView(){
+    public void setEnableRefresh(boolean enabled) {
+        refreshLayout.setEnableRefresh(enabled);//是否启用下来刷新
+    }
+
+    public void setEnableLoadMore(boolean enabled) {
+        refreshLayout.setEnableLoadMore(enabled);//是否启用上拉加载功能
+    }
+
+
+    public RecyclerView getRecyclerView() {
         return recyclerView;
     }
 
-    public interface SetOnRefresh{
-        void refresh(int pager,int size);
-        void loadMore(int pager,int size);
+    public interface SetOnRefresh {
+        void refresh(int pager, int size);
+
+        void loadMore(int pager, int size);
     }
 
-    public SetOnRefresh  setOnRefresh;
+    public SetOnRefresh setOnRefresh;
 
     public void setSetOnRefresh(SetOnRefresh setOnRefresh) {
         this.setOnRefresh = setOnRefresh;
