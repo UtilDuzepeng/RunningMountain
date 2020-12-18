@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import androidx.annotation.Nullable
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
+import com.miaofen.xiaoying.R
 
 /**
  * 项目名称：com.miaofen.xiaoying.fragment.haircloth
@@ -22,6 +23,6 @@ class ReleaseRecyclerViewAdapter (
 
     var context: Context? = context
     override fun convert(helper: BaseViewHolder, item: Bitmap?) {
-
+        helper.setImageBitmap(R.id.release_image,item)
     }
 }

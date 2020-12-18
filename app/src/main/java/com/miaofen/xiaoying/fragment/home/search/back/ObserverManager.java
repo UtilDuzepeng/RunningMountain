@@ -1,4 +1,4 @@
-package com.miaofen.xiaoying.fragment.home.search;
+package com.miaofen.xiaoying.fragment.home.search.back;
 
 import java.util.ArrayList;
 import java.util.List;

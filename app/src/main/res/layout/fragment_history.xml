@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/dp_18"
     android:paddingRight="@dimen/dp_18"
-    tools:context=".fragment.home.search.HistoryFragment">
+    tools:context=".fragment.home.search.history.HistoryFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

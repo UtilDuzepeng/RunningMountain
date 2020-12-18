@@ -14,16 +14,6 @@
         android:layout_height="1px"
         android:background="@color/AF4F4F4" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/release_recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_76"
-        android:layout_marginTop="@dimen/dp_10"
-        android:layout_marginBottom="@dimen/dp_24"
-        android:paddingLeft="@dimen/dp_18"
-        android:paddingRight="@dimen/dp_18" />
-
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -34,6 +24,15 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/release_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_76"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginBottom="@dimen/dp_24"
+                android:paddingLeft="@dimen/dp_18"
+                android:paddingRight="@dimen/dp_18" />
+
 
             <EditText
                 android:id="@+id/et_title"
@@ -43,8 +42,8 @@
                 android:layout_marginRight="@dimen/dp_18"
                 android:background="@android:color/transparent"
                 android:drawablePadding="@dimen/dp_10"
-                android:gravity="center_vertical"
                 android:ellipsize="end"
+                android:gravity="center_vertical"
                 android:hint="输入标题"
                 android:maxLines="1"
                 android:minHeight="@dimen/dp_50"
@@ -74,8 +73,8 @@
                     android:layout_marginLeft="@dimen/dp_18"
                     android:layout_marginRight="@dimen/dp_18"
                     android:layout_marginBottom="0dp"
-                    android:ellipsize="end"
                     android:background="@android:color/transparent"
+                    android:ellipsize="end"
                     android:gravity="top"
                     android:hint="输入正文"
                     android:maxLines="5"
@@ -85,8 +84,8 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_1"
-                    android:background="@color/AF4F4F4"
-                    android:layout_below="@+id/release_text"/>
+                    android:layout_below="@+id/release_text"
+                    android:background="@color/AF4F4F4" />
 
                 <LinearLayout
                     android:id="@+id/linear_title"
@@ -94,60 +93,60 @@
                     android:layout_height="@dimen/dp_54"
                     android:layout_alignParentBottom="true"
                     android:gravity="center_vertical"
+                    android:orientation="horizontal"
                     android:paddingLeft="@dimen/dp_18"
-                    android:paddingRight="@dimen/dp_18"
-                    android:orientation="horizontal">
+                    android:paddingRight="@dimen/dp_18">
 
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:drawableLeft="@drawable/black_product_fill_icon"
                         android:drawablePadding="@dimen/dp_4"
                         android:text="详情"
-                        android:layout_weight="1"
                         android:textColor="@color/A212A3D"
                         android:textSize="@dimen/sp_14" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="行程"
+                        android:layout_weight="1"
                         android:drawableLeft="@drawable/black_ditu_icon"
                         android:drawablePadding="@dimen/dp_4"
-                        android:layout_weight="1"
+                        android:text="行程"
                         android:textColor="@color/A212A3D"
                         android:textSize="@dimen/sp_14" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:drawableLeft="@drawable/black_biaoqian_icon"
                         android:drawablePadding="@dimen/dp_4"
                         android:text="标签"
-                        android:layout_weight="1"
                         android:textColor="@color/A212A3D"
                         android:textSize="@dimen/sp_14" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:drawableLeft="@drawable/black_yinsi_icon"
                         android:drawablePadding="@dimen/dp_4"
                         android:text="隐私"
-                        android:layout_weight="1"
                         android:textColor="@color/A212A3D"
                         android:textSize="@dimen/sp_14" />
 
                     <TextView
                         android:layout_width="@dimen/dp_60"
                         android:layout_height="@dimen/dp_30"
-                        android:textSize="@dimen/sp_14"
-                        android:textColor="@color/white"
-                        android:gravity="center"
                         android:background="@drawable/blue_back_circular"
-                        android:textStyle="bold"
-                        android:text="发布"/>
+                        android:gravity="center"
+                        android:text="发布"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/sp_14"
+                        android:textStyle="bold" />
 
 
                 </LinearLayout>

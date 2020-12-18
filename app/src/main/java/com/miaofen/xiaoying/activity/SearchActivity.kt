@@ -7,8 +7,8 @@ import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import com.miaofen.xiaoying.R
 import com.miaofen.xiaoying.base.BaseActivity
-import com.miaofen.xiaoying.fragment.home.search.HistoryFragment
-import com.miaofen.xiaoying.fragment.home.search.ObserverManager
+import com.miaofen.xiaoying.fragment.home.search.history.HistoryFragment
+import com.miaofen.xiaoying.fragment.home.search.back.ObserverManager
 import com.miaofen.xiaoying.fragment.home.search.ResultFragment
 import kotlinx.android.synthetic.main.activity_search.*
 import java.io.Serializable;
@@ -91,9 +91,13 @@ class SearchActivity : BaseActivity() {
     private fun genFragmentTag(index: Int) = FRAGMENT_TAG_PREFIX + index
 
     private fun createFragment(index: Int) = when (index) {
-        0 -> HistoryFragment(arrayList)
+        0 -> HistoryFragment(
+            arrayList
+        )
         1 -> ResultFragment()
-        else -> HistoryFragment(arrayList)
+        else -> HistoryFragment(
+            arrayList
+        )
     }
 
 

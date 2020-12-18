@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragment.home.search.UseFragment">
+    tools:context=".fragment.home.search.use.UseFragment">
 
    <com.miaofen.xiaoying.view.RefreshLayout
        android:id="@+id/use_recycler"

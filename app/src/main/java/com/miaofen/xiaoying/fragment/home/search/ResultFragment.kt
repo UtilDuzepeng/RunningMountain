@@ -9,6 +9,8 @@ import com.google.android.material.tabs.TabLayout
 import com.miaofen.xiaoying.R
 import com.miaofen.xiaoying.base.BaseFragment
 import com.miaofen.xiaoying.adapter.MyAdapter
+import com.miaofen.xiaoying.fragment.home.search.plan.PlanFragment
+import com.miaofen.xiaoying.fragment.home.search.use.UseFragment
 import kotlinx.android.synthetic.main.fragment_result.*
 
 
@@ -28,8 +30,10 @@ class ResultFragment : BaseFragment(), TabLayout.OnTabSelectedListener {
     }
 
     private fun setTab() {
-        val tab1: PlanFragment = PlanFragment()
-        val tab2: UseFragment = UseFragment()
+        val tab1: PlanFragment =
+            PlanFragment()
+        val tab2: UseFragment =
+            UseFragment()
         var list = listOf<Fragment>(tab1, tab2)
         result_viewpager.adapter = MyAdapter(
             list,

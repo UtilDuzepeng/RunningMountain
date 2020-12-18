@@ -1,4 +1,4 @@
-package com.miaofen.xiaoying.fragment.home.search
+package com.miaofen.xiaoying.fragment.home.search.plan
 
 import android.content.Context
 import androidx.annotation.Nullable

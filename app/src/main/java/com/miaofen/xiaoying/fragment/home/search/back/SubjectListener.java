@@ -1,4 +1,6 @@
-package com.miaofen.xiaoying.fragment.home.search;
+package com.miaofen.xiaoying.fragment.home.search.back;
+
+import com.miaofen.xiaoying.fragment.home.search.back.ObserverListener;
 
 /**
  * 项目名称：com.miaofen.xiaoying.fragment.home.search

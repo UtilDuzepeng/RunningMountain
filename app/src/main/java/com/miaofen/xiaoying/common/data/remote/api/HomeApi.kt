@@ -68,4 +68,10 @@ interface HomeApi {
     @POST("weixin/plan/comments")
     fun oneComments(@Body oneCommentsData: OneCommentsData?): Observable<CommonResponse<OneCommentsResponse>>
 
+    /**
+     * 搜索历史
+     */
+    @GET("weixin/user/search/history")
+    fun onHistory(): Observable<CommonResponse<ArrayList<String>>>
+
 }
