@@ -13,12 +13,15 @@ import com.miaofen.xiaoying.R
 import com.miaofen.xiaoying.activity.SearchActivity
 import com.miaofen.xiaoying.adapter.MyAdapter
 import com.miaofen.xiaoying.base.mvp.BaseMvpFragment
+import com.miaofen.xiaoying.comm.Constant
 import com.miaofen.xiaoying.common.data.bean.response.BannerResponse
 import com.miaofen.xiaoying.common.data.bean.response.ImagerDataBean
 import com.miaofen.xiaoying.fragment.ImageAdapter
 import com.miaofen.xiaoying.fragment.home.hot.HotFragment
 import com.miaofen.xiaoying.fragment.home.hottest.NewestFragment
 import com.miaofen.xiaoying.fragment.home.nearby.NearbyFragment
+import com.miaofen.xiaoying.utils.CacheUtils
+import com.miaofen.xiaoying.utils.updateTabTextView
 import com.youth.banner.indicator.CircleIndicator
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.home_toolbar_layout.*
@@ -38,7 +41,7 @@ class HomeFragment : BaseMvpFragment<HomeContract.Presenter>(), HomeContract.Vie
     override fun initView() {
         super.initView()
         HomePresenter(this)
-//        mPresenter?.doRotationChart()
+        mPresenter?.doRotationChart()
         mPresenter?.recommend()
         setTab()
         setItem()
@@ -46,6 +49,10 @@ class HomeFragment : BaseMvpFragment<HomeContract.Presenter>(), HomeContract.Vie
 
     override fun initData() {
         super.initData()
+        //获取定位信息
+        val readJson = CacheUtils.readJson(context, Constant.JSON_ADDRESS)
+        toolbar_search_box.setPositionText(readJson.getString("city"))
+
         val imagerDataBean = ImagerDataBean()
         imagerDataBean.url = "http://ww4.sinaimg.cn/large/006uZZy8jw1faic21363tj30ci08ct96.jpg"
         list_path.add(imagerDataBean)
@@ -61,6 +68,8 @@ class HomeFragment : BaseMvpFragment<HomeContract.Presenter>(), HomeContract.Vie
         banner_layout.addBannerLifecycleObserver(this) //添加生命周期观察者
             .setAdapter(ImageAdapter(list_path))
             .indicator = CircleIndicator(activity)
+        //位置点击事件
+        toolbar_search_box.setOnClickPosition(context)
     }
 
 
@@ -75,11 +84,15 @@ class HomeFragment : BaseMvpFragment<HomeContract.Presenter>(), HomeContract.Vie
                 tab.customView = getTabView(i)
             }
         }
-        updateTabTextView(
-            business_tablayout.getTabAt(business_tablayout.selectedTabPosition), true
-        )
-        updateTabTextView(business_tablayout.getTabAt(1), false);
-        updateTabTextView(business_tablayout.getTabAt(2), false);
+        if (context != null) {
+            updateTabTextView(
+                business_tablayout.getTabAt(business_tablayout.selectedTabPosition), true
+                , context!!
+            )
+            updateTabTextView(business_tablayout.getTabAt(1), false, context!!)
+            updateTabTextView(business_tablayout.getTabAt(2), false, context!!)
+        }
+
     }
 
 
@@ -109,34 +122,15 @@ class HomeFragment : BaseMvpFragment<HomeContract.Presenter>(), HomeContract.Vie
     }
 
     override fun onTabUnselected(tab: TabLayout.Tab?) {
-        updateTabTextView(tab, false);
+        if (context != null) {
+            updateTabTextView(tab, false, context!!)
+        }
     }
 
     override fun onTabSelected(tab: TabLayout.Tab?) {
         //tab被选的时候回调
-        updateTabTextView(tab, true);
-    }
-
-    /**
-     * 选中加粗
-     */
-    private fun updateTabTextView(tab: TabLayout.Tab?, isSelect: Boolean) {
-        if (isSelect) {
-            //选中加粗
-            val tabSelect = tab?.customView
-                ?.findViewById<TextView>(R.id.tab_item_textview) as TextView
-            tabSelect.typeface = Typeface.defaultFromStyle(Typeface.BOLD)
-            tabSelect.setTextColor(getResources().getColor(R.color.A212A3D))
-            tabSelect.setTextSize(18f)
-            tabSelect.text = tab.text
-
-        } else {
-            val tabUnSelect = tab?.customView
-                ?.findViewById<TextView>(R.id.tab_item_textview) as TextView
-            tabUnSelect.typeface = Typeface.defaultFromStyle(Typeface.NORMAL)
-            tabUnSelect.setTextColor(resources.getColor(R.color.A686E7A))
-            tabUnSelect.textSize = 16f
-            tabUnSelect.text = tab.text
+        if (context != null) {
+            updateTabTextView(tab, true, context!!)
         }
     }
 
@@ -154,7 +148,7 @@ class HomeFragment : BaseMvpFragment<HomeContract.Presenter>(), HomeContract.Vie
     override fun onRecommendSuccess(data: ArrayList<String>) {
         toolbar_search_box.setDataList(context, data)
         toolbar_search_box.linearLayout.setOnClickListener {
-            toolbar_search_box.getMarker()
+            toolbar_search_box.marker
             SearchActivity.start(activity, data, toolbar_search_box.marker)
         }
     }

@@ -17,11 +17,19 @@ import com.miaofen.xiaoying.common.data.bean.response.HomeResponse
 interface NewestContract {
 
     interface Presenter : IPresenter {
-        fun doNewest(page: Int,size :Int)
+        fun doNewest(page: Int,size :Int, latitude: Double, longitude: Double)
     }
 
     interface View : IView<Presenter> {
+        //下拉成功 没有数据
+        fun onDownNewestNullSuccess()
+        //下拉成功 有数据
+        fun onDownNewestSuccess(data: HomeResponse?)
+        //上啦加载 有数据
         fun onNewestSuccess(data: HomeResponse?)
+        //上啦加载 没有数据
+        fun onNewestNullSuccess()
+
         fun onNewestError()
     }
 }

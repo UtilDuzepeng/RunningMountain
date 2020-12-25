@@ -23,9 +23,9 @@ class NearbyPresenter(view: NearbyContract.View) : BasePresenter<NearbyContract.
 
     private val homeRequestData = HomeRequestData()
 
-    override fun doNearby(page: Int, size: Int) {
-        homeRequestData.setLatitude(36.2)
-        homeRequestData.setLongitude(116.32)
+    override fun doNearby(page: Int, size: Int, latitude: Double, longitude: Double) {
+        homeRequestData.setLatitude(latitude)
+        homeRequestData.setLongitude(longitude)
         homeRequestData.setPage(page)
         homeRequestData.setSize(size)
 
@@ -38,10 +38,28 @@ class NearbyPresenter(view: NearbyContract.View) : BasePresenter<NearbyContract.
                 }
 
                 override fun success(data: HomeResponse?) {
-//                    if (data == null) {
-//                        return
-//                    }
-                    mRootView.get()?.onNearbySuccess(data)
+                    //下拉刷新 无数据
+                    if (page == 1 && (data?.content == null || data.content.size == 0)) {
+                        mRootView.get()?.onDownNearbytNullSuccess()
+                        return
+                    }
+
+                    //下拉刷新 有数据
+                    if (page == 1 && data?.content != null && data.content.size > 0) {
+                        mRootView.get()?.onDownNearbySuccess(data)
+                        return
+                    }
+
+                    //上拉加载 无数据
+                    if (data?.content == null || data.content.size == 0) {
+                        mRootView.get()?.onNearbyNullSuccess()
+                        return
+                    }
+                    //上拉加载 有数据
+                    if (data?.content != null && data.content.size > 0) {
+                        mRootView.get()?.onNearbySuccess(data)
+                    }
+
                 }
 
                 override fun failure(e: Throwable?, errMsg: String?) {

@@ -1,6 +1,7 @@
 package com.miaofen.xiaoying.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -15,6 +16,7 @@ import android.widget.ViewSwitcher;
 import androidx.annotation.Nullable;
 
 import com.miaofen.xiaoying.R;
+import com.miaofen.xiaoying.activity.location.LocationActivity;
 import com.miaofen.xiaoying.utils.ToastUtils;
 
 import java.util.List;
@@ -111,11 +113,12 @@ public class SearchBoxLayout extends LinearLayout {
     /**
      * 地区点击事件
      */
-    public void setOnClickPosition() {
+    public void setOnClickPosition(Context context) {
         show_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(context, LocationActivity.class);
+                context.startActivity(intent);
             }
         });
     }

@@ -2,4 +2,8 @@
     <string name="app_name">跑山吧</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="cancel">取消</string>
+    <string name="setting">设置</string>
+    <string name="notifyTitle">请求权限</string>
+    <string name="notifyMsg">使用该功能需要获取您的位置</string>
 </resources>

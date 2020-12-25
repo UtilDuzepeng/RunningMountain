@@ -54,7 +54,7 @@ data class DetailsResponse(
 
     data class ButtonInfoBean(
         var buttonName: String?,
-//            var buttonAction: Int?,
+        var buttonAction: Int?,
         var subButtonInfo: List<SubButtonInfoBean>?
     ) {
         data class SubButtonInfoBean(

@@ -23,7 +23,7 @@
             android:id="@+id/image_avatar"
             android:layout_width="@dimen/dp_40"
             android:layout_height="@dimen/dp_40"
-            android:background="@drawable/avatar_icon" />
+            android:background="@null" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -37,7 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:lines="1"
-                android:text="天剑骑士董超"
+                android:text="@null"
                 android:textColor="@color/A212A3D"
                 android:textSize="@dimen/sp_15"
                 android:textStyle="bold" />
@@ -46,7 +46,7 @@
                 android:id="@+id/tv_createTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="10-16 12:35"
+                android:text="@null"
                 android:textColor="@color/A686E7A"
                 android:textSize="@dimen/sp_12" />
 
@@ -60,7 +60,7 @@
             android:gravity="center"
             android:paddingLeft="@dimen/dp_20"
             android:paddingRight="@dimen/dp_20"
-            android:text="报名"
+            android:text="@null"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_14"
             android:textStyle="bold" />
@@ -75,7 +75,7 @@
         android:maxLines="1"
         android:paddingLeft="@dimen/dp_18"
         android:paddingRight="@dimen/dp_18"
-        android:text="晋阳湖公园约起！"
+        android:text="@null"
         android:textColor="@color/A212A3D"
         android:textSize="@dimen/sp_18" />
 
@@ -87,7 +87,7 @@
         android:lineSpacingExtra="@dimen/dp_3"
         android:paddingLeft="@dimen/dp_18"
         android:paddingRight="@dimen/dp_18"
-        android:text="趁这几天天气好，我想抓住秋天的小尾巴。有没有志同道合的小伙伴一起去晋阳湖公园溜一圈儿？"
+        android:text="@null"
         android:textColor="@color/A686E7A"
         android:textSize="@dimen/sp_14" />
 
@@ -134,7 +134,7 @@
                     android:id="@+id/tv_exceptedNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="12"
+                    android:text="@null"
                     android:textColor="@color/A2A82FA"
                     android:textSize="@dimen/sp_28"
                     android:textStyle="bold" />
@@ -178,7 +178,7 @@
                     android:id="@+id/tv_registered"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="12"
+                    android:text="@null"
                     android:textColor="@color/A2A82FA"
                     android:textSize="@dimen/sp_28"
                     android:textStyle="bold" />
@@ -222,7 +222,7 @@
                     android:id="@+id/tv_perCapitaBudget"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="800"
+                    android:text="@null"
                     android:textColor="@color/A2A82FA"
                     android:textSize="@dimen/sp_28"
                     android:textStyle="bold" />
@@ -266,7 +266,7 @@
                     android:id="@+id/tv_costMethod"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="AA"
+                    android:text="@null"
                     android:textColor="@color/A2A82FA"
                     android:textSize="@dimen/sp_28"
                     android:textStyle="bold" />
@@ -309,7 +309,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_10"
-            android:text="黑坨村"
+            android:text="@null"
             android:textColor="@color/A212A3D"
             android:textSize="@dimen/sp_13"
             android:textStyle="bold" />
@@ -324,7 +324,7 @@
             android:paddingTop="@dimen/dp_2"
             android:paddingRight="@dimen/dp_6"
             android:paddingBottom="@dimen/dp_2"
-            android:text="距离 2.1km"
+            android:text="@null"
             android:textColor="@color/A2A82FA"
             android:textSize="@dimen/sp_9" />
 
@@ -352,7 +352,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_10"
-            android:text="晋阳湖湿地公园"
+            android:text="@null"
             android:textColor="@color/A212A3D"
             android:textSize="@dimen/sp_13"
             android:textStyle="bold" />
@@ -382,7 +382,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_10"
-            android:text="10-18 09:00 至 10-18 18:30"
+            android:text="@null"
             android:textColor="@color/A212A3D"
             android:textSize="@dimen/sp_13"
             android:textStyle="bold" />
@@ -401,7 +401,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dp_18"
         android:layout_marginTop="@dimen/dp_12"
-        android:text="途径地(4)"
+        android:text="@null"
         android:textColor="@color/A212A3D"
         android:textSize="@dimen/sp_16" />
 
@@ -415,6 +415,7 @@
         android:layout_marginBottom="@dimen/dp_12" />
 
     <View
+        android:id="@+id/planTrips_view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_8"
         android:background="@color/AF4F4F4" />
@@ -425,7 +426,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_12"
         android:paddingLeft="@dimen/dp_18"
-        android:text="想约的(1男0女）"
+        android:text="@null"
         android:textColor="@color/A212A3D"
         android:textSize="@dimen/sp_16" />
 
@@ -437,6 +438,7 @@
         android:layout_marginRight="@dimen/dp_18" />
 
     <View
+        android:id="@+id/wants_view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_1"
         android:layout_marginTop="@dimen/dp_12"
@@ -450,7 +452,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_12"
         android:paddingLeft="@dimen/dp_18"
-        android:text="6人已报名(2男4女)"
+        android:text="@null"
         android:textColor="@color/A212A3D"
         android:textSize="@dimen/sp_16" />
 
@@ -464,6 +466,7 @@
         android:layout_marginBottom="@dimen/dp_16" />
 
     <View
+        android:id="@+id/joins_view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_8"
         android:background="@color/AF4F4F4" />

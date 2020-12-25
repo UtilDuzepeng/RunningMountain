@@ -5,8 +5,10 @@ import android.util.Log
 import com.miaofen.xiaoying.R
 import com.miaofen.xiaoying.base.BaseFragment
 import com.miaofen.xiaoying.base.mvp.BaseMvpFragment
+import com.miaofen.xiaoying.comm.Constant
 import com.miaofen.xiaoying.common.data.bean.response.HomeResponse
 import com.miaofen.xiaoying.fragment.home.shareadapter.ShareRecyclerAdapter
+import com.miaofen.xiaoying.utils.CacheUtils
 import com.miaofen.xiaoying.view.RefreshLayout
 import kotlinx.android.synthetic.main.fragment_hot.*
 import kotlinx.android.synthetic.main.fragment_nearby.*
@@ -22,44 +24,68 @@ class NearbyFragment : BaseMvpFragment<NearbyContract.Presenter>(), NearbyContra
 
     var list = ArrayList<HomeResponse.ContentBean>()
 
+    //纬度
+    var latitude: Double? = null
+
+    //经度
+    var longitude: Double? = null
+
+
     override fun getLayoutResources() = R.layout.fragment_nearby
 
     override fun initView() {
         super.initView()
+        val readJson = CacheUtils.readJson(context, Constant.JSON_ADDRESS)
+        this.latitude = readJson.getDouble("lat")
+        this.longitude = readJson.getDouble("lon")
         NearbyPresenter(this)
         nearby.setSetOnRefresh(this)
         nearby.setEnableRefresh(true)
         nearby.autoRefresh()
         mAdapter = ShareRecyclerAdapter(R.layout.newest_recycler_layout, list, activity)
+        mAdapter?.openLoadAnimation()
         nearby.recyclerView.adapter = mAdapter
     }
 
     override fun loadMore(pager: Int, size: Int) {
-        mPresenter?.doNearby(pager, size)
+        if (latitude != null && longitude != null) {
+            mPresenter?.doNearby(pager, size, latitude!!, longitude!!)
+        }
     }
 
     override fun refresh(pager: Int, size: Int) {
+        if (latitude != null && longitude != null) {
+            mPresenter?.doNearby(pager, size, latitude!!, longitude!!)
+        }
+    }
+
+    override fun onDownNearbytNullSuccess() {
+        nearby.setEnableLoadMore(false)//设置不能上啦刷新
+    }
+
+    override fun onDownNearbySuccess(data: HomeResponse?) {
         list.clear()
-        mPresenter?.doNearby(pager, size)
+        for (item in data?.content!!) {
+            list.add(item)
+        }
+        nearby.setEnableLoadMore(true)
+        mAdapter?.notifyDataSetChanged()
     }
 
     override fun onNearbySuccess(data: HomeResponse?) {
-        if (data?.content == null) {
-            return
-        }
-        if (data.content.size == 0) {
-            nearby.setEnableLoadMore(false)
-            return
-        } else {
-            nearby.setEnableLoadMore(true)
-        }
-        for (item in data.content) {
+        nearby.setEnableLoadMore(true)
+        for (item in data?.content!!) {
             list.add(item)
         }
         mAdapter?.notifyDataSetChanged()
     }
 
-    override fun onNearbyError() {
-
+    override fun onNearbyNullSuccess() {
+        nearby.setEnableLoadMore(false)
     }
+
+    override fun onNearbyError() {
+        nearby.setEnableLoadMore(false)
+    }
+
 }

@@ -24,10 +24,10 @@ class NewestPresenter(view: NewestContract.View) : BasePresenter<NewestContract.
 
     private val homeRequestData = HomeRequestData()
 
-    override fun doNewest(page: Int, size: Int) {
+    override fun doNewest(page: Int, size: Int, latitude: Double, longitude: Double) {
 
-        homeRequestData.setLatitude(36.2)
-        homeRequestData.setLongitude(116.32)
+        homeRequestData.setLatitude(latitude)
+        homeRequestData.setLongitude(longitude)
         homeRequestData.setPage(page)
         homeRequestData.setSize(size)
 
@@ -40,10 +40,31 @@ class NewestPresenter(view: NewestContract.View) : BasePresenter<NewestContract.
                 }
 
                 override fun success(data: HomeResponse?) {
-//                    if (data == null) {
-//                        return
-//                    }
-                    mRootView.get()?.onNewestSuccess(data)
+
+                    //下拉刷新 无数据
+                    if (page == 1 && (data?.content == null || data.content.size == 0)) {
+                        mRootView.get()?.onDownNewestNullSuccess()
+                        return
+                    }
+
+                    //下拉刷新 有数据
+                    if (page == 1 && data?.content != null && data.content.size > 0) {
+                        mRootView.get()?.onDownNewestSuccess(data)
+                        return
+                    }
+
+                    //上拉加载 无数据
+                    if (data?.content == null || data.content.size == 0) {
+                        mRootView.get()?.onNewestNullSuccess()
+                        return
+                    }
+
+                    //上拉加载 有数据
+                    if (data?.content != null && data.content.size > 0) {
+                        mRootView.get()?.onNewestSuccess(data)
+                    }
+
+
                 }
 
                 override fun failure(e: Throwable?, errMsg: String?) {

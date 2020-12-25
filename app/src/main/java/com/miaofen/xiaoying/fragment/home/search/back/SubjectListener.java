@@ -16,4 +16,5 @@ public interface SubjectListener {
     void add(ObserverListener observerListener);
     void notifyObserver(String content);
     void remove(ObserverListener observerListener);
+
 }

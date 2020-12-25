@@ -23,13 +23,11 @@ class HotPresenter(view: HotContract.View) : BasePresenter<HotContract.View>(vie
 
     private val homeRequestData = HomeRequestData()
 
-    override fun doHot(page: Int, size: Int) {
-
-        homeRequestData.setLatitude(36.2)
-        homeRequestData.setLongitude(116.32)
+    override fun doHot(page: Int, size: Int, latitude: Double, longitude: Double) {
+        homeRequestData.setLatitude(latitude)
+        homeRequestData.setLongitude(longitude)
         homeRequestData.setPage(page)
         homeRequestData.setSize(size)
-
         RemoteRepository
             .hot(homeRequestData)
             .applySchedulers()
@@ -39,10 +37,30 @@ class HotPresenter(view: HotContract.View) : BasePresenter<HotContract.View>(vie
                 }
 
                 override fun success(data: HomeResponse?) {
-//                    if (data == null) {
-//                        return
-//                    }
-                    mRootView.get()?.onHotSuccess(data)
+                    //下拉刷新 无数据
+                    if (page == 1 && (data?.content == null || data.content.size == 0)) {
+                        mRootView.get()?.onDownHotNullSuccess()
+                        return
+                    }
+
+                    //下拉刷新 有数据
+                    if (page == 1 && data?.content != null && data.content.size > 0) {
+                        mRootView.get()?.onDownHotSuccess(data)
+                        return
+                    }
+
+                    //上拉加载 无数据
+                    if (data?.content == null || data.content.size == 0) {
+                        mRootView.get()?.onHotNullSuccess()
+                        return
+                    }
+
+                    //上拉加载 有数据
+                    if (data?.content != null && data.content.size > 0) {
+                        mRootView.get()?.onHotSuccess(data)
+                    }
+
+
                 }
 
                 override fun failure(e: Throwable?, errMsg: String?) {

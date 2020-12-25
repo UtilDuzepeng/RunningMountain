@@ -50,7 +50,7 @@
                 android:ellipsize="end"
                 android:hint="-"
                 android:maxLines="1"
-                android:textColor="@color/A959CA7"
+                android:textColor="@color/A212A3D"
                 android:textSize="@dimen/sp_14" />
 
         </RelativeLayout>

@@ -1,4 +1,4 @@
-package com.miaofen.xiaoying.activity.details
+package com.miaofen.xiaoying.activity.details.adapter
 
 import android.content.Context
 import androidx.annotation.Nullable

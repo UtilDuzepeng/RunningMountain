@@ -3,16 +3,21 @@ package com.miaofen.xiaoying.utils
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Typeface
 import android.net.Uri
 import android.text.TextUtils
 import android.view.Gravity
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
+import com.google.android.material.tabs.TabLayout
+import com.miaofen.xiaoying.R
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.regex.Pattern
@@ -128,7 +133,8 @@ fun isWeixinAvilible(context: Context): Boolean {
  */
 fun showInput(et: EditText, context: Context) {
     et.requestFocus()
-    val imm: InputMethodManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    val imm: InputMethodManager =
+        context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.showSoftInput(et, InputMethodManager.SHOW_IMPLICIT)
 }
 
@@ -136,10 +142,44 @@ fun showInput(et: EditText, context: Context) {
  * 隐藏键盘
  */
 fun hideInput(context: Context, activity: Activity?) {
-    val imm: InputMethodManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    val imm: InputMethodManager =
+        context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     val v: View = activity?.window!!.peekDecorView()
     if (null != v) {
         imm.hideSoftInputFromWindow(v.getWindowToken(), 0)
     }
+}
+
+/**
+ * TabLayout选中加粗
+ */
+ fun updateTabTextView(tab: TabLayout.Tab?, isSelect: Boolean,context: Context) {
+    if (isSelect) {
+        //选中加粗
+        val tabSelect = tab?.customView
+            ?.findViewById<TextView>(R.id.tab_item_textview) as TextView
+        tabSelect.typeface = Typeface.defaultFromStyle(Typeface.BOLD)
+        tabSelect.setTextColor(context.resources.getColor(R.color.A212A3D))
+        tabSelect.setTextSize(18f)
+        tabSelect.text = tab.text
+
+    } else {
+        val tabUnSelect = tab?.customView
+            ?.findViewById<TextView>(R.id.tab_item_textview) as TextView
+        tabUnSelect.typeface = Typeface.defaultFromStyle(Typeface.NORMAL)
+        tabUnSelect.setTextColor(context.resources.getColor(R.color.A686E7A))
+        tabUnSelect.textSize = 16f
+        tabUnSelect.text = tab.text
+    }
+}
+
+
+/**
+ * 保留两位小数
+ */
+fun decimalBalanceFormat(decimalBalance: Double?): String {
+    val decimalFormat =
+        DecimalFormat("0.00") //构造方法的字符格式这里如果小数不足2位,会以0补足.
+    return decimalFormat.format(decimalBalance).toString()
 }
 

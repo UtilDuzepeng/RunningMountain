@@ -55,6 +55,15 @@ class ReleaseFragment : BaseFragment() {
         inflate.findViewById<ImageView>(R.id.image_upload).setOnClickListener { startQrCode() }
     }
 
+    override fun initData() {
+        super.initData()
+        tv_details.setOnClickListener {  }//详情
+        tv_trip.setOnClickListener {  }//行程
+        tv_label.setOnClickListener {  }//标签
+        tv_privacy.setOnClickListener {  }//隐私
+        tv_release.setOnClickListener {  }//发布
+
+    }
 
     private fun startQrCode() {
         // 申请文件读写权限（部分朋友遇到相册选图需要读写权限的情况，这里一并写一下）

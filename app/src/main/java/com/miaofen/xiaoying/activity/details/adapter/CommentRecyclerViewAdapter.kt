@@ -1,4 +1,4 @@
-package com.miaofen.xiaoying.activity.details
+package com.miaofen.xiaoying.activity.details.adapter
 
 import android.content.Context
 import android.os.Build
@@ -48,11 +48,18 @@ class CommentRecyclerViewAdapter(
                     R.id.image_fabulous,
                     context!!.getDrawable(R.drawable.dianzan_icon)
                 )
+                helper.setOnClickListener(R.id.image_fabulous) {
+                    deleteComment?.onUnStar()
+                }
             } else {
                 helper.setImageDrawable(
                     R.id.image_fabulous,
                     context!!.getDrawable(R.drawable.dianzan_line)
                 )
+                //点赞评论
+                helper.setOnClickListener(R.id.image_fabulous) {
+                    deleteComment?.onOnClickFabulous(item.commentId)
+                }
             }
         }
         //评论内容
@@ -81,7 +88,25 @@ class CommentRecyclerViewAdapter(
                 helper.setVisible(R.id.tv_delete, false)
             }
         }
+        //点击删除
+        helper.setOnClickListener(R.id.tv_delete) {
+            deleteComment?.onDelete(item?.commentId)
+        }
 
+
+
+    }
+
+    interface DeleteComment {
+        fun onDelete(commentId: Long?)//删除评论
+        fun onOnClickFabulous(commentId: Long?)//点赞评论
+        fun onUnStar()//取消点赞评论
+    }
+
+    private var deleteComment: DeleteComment? = null
+
+    fun setDeleteComment(deleteComment: DeleteComment?) {
+        this.deleteComment = deleteComment
     }
 
 }

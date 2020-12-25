@@ -1,18 +1,11 @@
 package com.miaofen.xiaoying.common.data.remote.api
 
 import com.miaofen.xiaoying.common.data.bean.CommonResponse
-import com.miaofen.xiaoying.common.data.bean.request.DetailsRequestData
-import com.miaofen.xiaoying.common.data.bean.request.HomeRequestData
-import com.miaofen.xiaoying.common.data.bean.request.OneCommentsData
-import com.miaofen.xiaoying.common.data.bean.response.BannerResponse
-import com.miaofen.xiaoying.common.data.bean.response.DetailsResponse
-import com.miaofen.xiaoying.common.data.bean.response.HomeResponse
-import com.miaofen.xiaoying.common.data.bean.response.OneCommentsResponse
+import com.miaofen.xiaoying.common.data.bean.request.*
+import com.miaofen.xiaoying.common.data.bean.response.*
 import io.reactivex.Observable
 import retrofit2.http.Body
-import retrofit2.http.GET
 import retrofit2.http.POST
-import retrofit2.http.Query
 
 /**
  * 项目名称：com.miaofen.xiaoying.common.data.remote.api
@@ -35,7 +28,7 @@ interface HomeApi {
     /**
      * 轮播图
      */
-    @GET("weixin/index/recommends")
+    @POST("weixin/index/recommends")
     fun rotationChart(): Observable<CommonResponse<List<BannerResponse>>>
 
     /**
@@ -71,7 +64,37 @@ interface HomeApi {
     /**
      * 搜索历史
      */
-    @GET("weixin/user/search/history")
+    @POST("weixin/user/search/history")
     fun onHistory(): Observable<CommonResponse<ArrayList<String>>>
+
+    /**
+     * 搜索计划
+     */
+    @POST("weixin/search/plan")
+    fun onPlan(@Body planRequestData: PlanRequestData): Observable<CommonResponse<PlanResponse>>
+
+    /**
+     * 搜索用户
+     */
+    @POST("weixin/search/user")
+    fun onSearchUser(@Body planRequestData: PlanRequestData): Observable<CommonResponse<SearchUserResponse>>
+
+    /**
+     * 删除评论
+     */
+    @POST("weixin/plan/comment/delete")
+    fun onDeleteComment(@Body deleteCommentRequestData: DeleteCommentRequestData): Observable<CommonResponse<String>>
+
+    /**
+     * 点赞旅行计划评论
+     */
+    @POST("weixin/plan/comment/star")
+    fun onFabulous(@Body fabulousRequestData: FabulousRequestData): Observable<CommonResponse<String>>
+
+    /**
+     * 取消点赞旅行计划评论
+     */
+    @POST("weixin/plan/comment/unStar")
+    fun onUnStar(): Observable<CommonResponse<String>>
 
 }

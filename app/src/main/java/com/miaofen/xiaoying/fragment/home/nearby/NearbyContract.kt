@@ -17,11 +17,23 @@ import com.miaofen.xiaoying.common.data.bean.response.HomeResponse
 interface NearbyContract {
 
     interface Presenter : IPresenter {
-        fun doNearby(page: Int,size :Int)
+        fun doNearby(page: Int, size: Int, latitude: Double, longitude: Double)
     }
 
     interface View : IView<Presenter> {
+        //下拉成功 没有数据
+        fun onDownNearbytNullSuccess()
+
+        //下拉成功 有数据
+        fun onDownNearbySuccess(data: HomeResponse?)
+
+        //上啦加载 有数据
         fun onNearbySuccess(data: HomeResponse?)
+
+        //上啦加载 没有数据
+        fun onNearbyNullSuccess()
+
+        //加载错误
         fun onNearbyError()
     }
 

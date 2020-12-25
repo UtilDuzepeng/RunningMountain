@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.fragment_result.*
 /**
  * 搜索结果页面
  */
-class ResultFragment : BaseFragment(), TabLayout.OnTabSelectedListener {
+class ResultFragment(var data: String) : BaseFragment(), TabLayout.OnTabSelectedListener {
 
     val list = listOf<String>("计划", "用户")
 
@@ -30,15 +30,10 @@ class ResultFragment : BaseFragment(), TabLayout.OnTabSelectedListener {
     }
 
     private fun setTab() {
-        val tab1: PlanFragment =
-            PlanFragment()
-        val tab2: UseFragment =
-            UseFragment()
+        val tab1: PlanFragment = PlanFragment(data)
+        val tab2: UseFragment = UseFragment(data)
         var list = listOf<Fragment>(tab1, tab2)
-        result_viewpager.adapter = MyAdapter(
-            list,
-            fragmentManager
-        ) //让tab和viewpager关联起来
+        result_viewpager.adapter = MyAdapter(list, fragmentManager) //让tab和viewpager关联起来
         result_tablayout.setupWithViewPager(result_viewpager)
         result_tablayout.setOnTabSelectedListener(this)
     }
@@ -53,7 +48,10 @@ class ResultFragment : BaseFragment(), TabLayout.OnTabSelectedListener {
                 tab.customView = getTabView(i)
             }
         }
-        updateTabTextView(result_tablayout.getTabAt(result_tablayout.getSelectedTabPosition()), true)
+        updateTabTextView(
+            result_tablayout.getTabAt(result_tablayout.getSelectedTabPosition()),
+            true
+        )
         updateTabTextView(result_tablayout.getTabAt(1), false)
     }
 
@@ -70,7 +68,8 @@ class ResultFragment : BaseFragment(), TabLayout.OnTabSelectedListener {
     private fun updateTabTextView(tab: TabLayout.Tab?, isSelect: Boolean) {
         if (isSelect) {
             //选中加粗
-            val tabSelect = tab?.customView?.findViewById<TextView>(R.id.tab_item_textview) as TextView
+            val tabSelect =
+                tab?.customView?.findViewById<TextView>(R.id.tab_item_textview) as TextView
             tabSelect.typeface = Typeface.defaultFromStyle(Typeface.BOLD)
             tabSelect.setTextColor(getResources().getColor(R.color.A212A3D))
             tabSelect.setTextSize(18f)

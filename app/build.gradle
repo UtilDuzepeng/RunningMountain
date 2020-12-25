@@ -18,7 +18,7 @@ android {
             storeFile file('../config/sjb.jks')
             storePassword '199722'
         }
-        debug {
+        debugDev {
             storeFile file('../config/sjb.jks')
             storePassword '199722'
             keyAlias 'key'
@@ -39,7 +39,7 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "com.addictive.shooting"
+        applicationId "com.miaofen.xiaoying"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode rootProject.ext.VERSION_CODE
@@ -124,5 +124,7 @@ dependencies {
     implementation deps.SmartRefreshHeader
     implementation deps.GSYVideoPlayer
     implementation 'com.youth.banner:banner:2.1.0'
+    //高德地图定位sdk
+    implementation 'com.amap.api:location:latest.integration'
 
 }

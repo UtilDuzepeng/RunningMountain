@@ -140,12 +140,11 @@ class ShareRecyclerAdapter(
                 )
             }
         }
-
+        /**
+         * 查看列表详情
+         */
         currencyLayout.itemOnClick.setOnClickListener {
-            ProjectDetailsActivity.start(
-                context,
-                item?.id
-            )
+            ProjectDetailsActivity.start(context, item?.id)
         }
 
     }

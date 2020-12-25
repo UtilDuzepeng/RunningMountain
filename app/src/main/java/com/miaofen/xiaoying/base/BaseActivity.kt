@@ -112,5 +112,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     open fun initData() {}//赋值
 
+    open fun onClick(){}//点击事件
+
 
 }

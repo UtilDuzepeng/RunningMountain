@@ -47,24 +47,13 @@ class HistoryFragment(recommend: ArrayList<String>?) : BaseMvpFragment<HistoryCo
         }
     }
 
-    private fun initDatas() {
-//        if (list.size <= 0) return
-//        for (i in list.indices) {
-//            val textView = LayoutInflater.from(activity)
-//                .inflate(R.layout.item_flow, flowlayout, false) as TextView
-//            textView.text = list[i]
-//            textView.setOnClickListener(View.OnClickListener {
-//                // et_search.setText((v as TextView).text)
-//            })
-//            flowlayout.addView(textView)
-//        }
-    }
-
     override fun observerUpData(content: String?) {
-        val textView = LayoutInflater.from(activity)
-            .inflate(R.layout.item_flow, flowlayout, false) as TextView
-        textView.text = content
-        flowlayout.addView(textView)
+        if (activity != null){
+            val textView = LayoutInflater.from(activity)
+                .inflate(R.layout.item_flow, flowlayout, false) as TextView
+            textView.text = content
+            flowlayout.addView(textView)
+        }
     }
 
     /*-----------搜索历史------------*/

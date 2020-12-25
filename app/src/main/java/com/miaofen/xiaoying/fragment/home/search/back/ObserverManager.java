@@ -14,9 +14,11 @@ import java.util.List;
  */
 
 public class ObserverManager implements SubjectListener {
+
     private static ObserverManager observerManager;
     //观察者接口集合
     private List<ObserverListener> list = new ArrayList<>();
+
 
     /**
      * 单例
@@ -50,6 +52,7 @@ public class ObserverManager implements SubjectListener {
         }
     }
 
+
     /**
      * 监听队列中移除
      */
@@ -59,4 +62,6 @@ public class ObserverManager implements SubjectListener {
             list.remove(observerListener);
         }
     }
+
+
 }

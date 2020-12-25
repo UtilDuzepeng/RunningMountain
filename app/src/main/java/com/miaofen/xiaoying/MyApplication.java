@@ -2,8 +2,10 @@ package com.miaofen.xiaoying;
 
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
 
 import com.miaofen.xiaoying.comm.CommonAppDelegate;
+import com.miaofen.xiaoying.utils.JsonTestUtils;
 
 /**
  * 项目名称：com.miaofen.xiaoying
@@ -22,6 +24,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        new JsonTestUtils(this);
         CommonAppDelegate.init(this);
         mContext = this;
     }

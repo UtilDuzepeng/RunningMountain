@@ -99,9 +99,11 @@
 
 
                     <TextView
+                        android:id="@+id/tv_details"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
+                        android:gravity="center_vertical"
                         android:drawableLeft="@drawable/black_product_fill_icon"
                         android:drawablePadding="@dimen/dp_4"
                         android:text="详情"
@@ -109,9 +111,11 @@
                         android:textSize="@dimen/sp_14" />
 
                     <TextView
+                        android:id="@+id/tv_trip"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
+                        android:gravity="center_vertical"
                         android:drawableLeft="@drawable/black_ditu_icon"
                         android:drawablePadding="@dimen/dp_4"
                         android:text="行程"
@@ -119,9 +123,11 @@
                         android:textSize="@dimen/sp_14" />
 
                     <TextView
+                        android:id="@+id/tv_label"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
+                        android:gravity="center_vertical"
                         android:drawableLeft="@drawable/black_biaoqian_icon"
                         android:drawablePadding="@dimen/dp_4"
                         android:text="标签"
@@ -129,9 +135,11 @@
                         android:textSize="@dimen/sp_14" />
 
                     <TextView
+                        android:id="@+id/tv_privacy"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
+                        android:gravity="center_vertical"
                         android:drawableLeft="@drawable/black_yinsi_icon"
                         android:drawablePadding="@dimen/dp_4"
                         android:text="隐私"
@@ -139,6 +147,7 @@
                         android:textSize="@dimen/sp_14" />
 
                     <TextView
+                        android:id="@+id/tv_release"
                         android:layout_width="@dimen/dp_60"
                         android:layout_height="@dimen/dp_30"
                         android:background="@drawable/blue_back_circular"

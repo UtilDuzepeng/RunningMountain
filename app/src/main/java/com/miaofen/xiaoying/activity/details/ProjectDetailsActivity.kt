@@ -2,26 +2,32 @@ package com.miaofen.xiaoying.activity.details
 
 import android.content.Context
 import android.content.Intent
+import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
 import com.miaofen.xiaoying.R
+import com.miaofen.xiaoying.activity.details.adapter.CommentRecyclerViewAdapter
+import com.miaofen.xiaoying.activity.details.adapter.JoinsRecyclerAdapter
+import com.miaofen.xiaoying.activity.details.adapter.PlanTripsRecyclerAdapter
+import com.miaofen.xiaoying.activity.details.adapter.WantsRecyclerViewAdapter
 import com.miaofen.xiaoying.base.mvp.BaseMvpActivity
-import com.miaofen.xiaoying.common.data.bean.request.DetailsRequestData
-import com.miaofen.xiaoying.common.data.bean.request.OneCommentsData
+import com.miaofen.xiaoying.common.data.bean.request.DeleteCommentRequestData
+import com.miaofen.xiaoying.common.data.bean.request.FabulousRequestData
 import com.miaofen.xiaoying.common.data.bean.response.DetailsResponse
-import com.miaofen.xiaoying.common.data.bean.response.HomeResponse
 import com.miaofen.xiaoying.common.data.bean.response.ImagerDataBean
 import com.miaofen.xiaoying.common.data.bean.response.OneCommentsResponse
 import com.miaofen.xiaoying.fragment.ImageAdapter
+import com.miaofen.xiaoying.utils.ToastUtils
 import com.miaofen.xiaoying.utils.getCurrentTime
+import com.miaofen.xiaoying.view.LoadingDialog
+import com.miaofen.xiaoying.view.LoadingView
 import com.miaofen.xiaoying.view.RefreshLayout
 import com.youth.banner.indicator.CircleIndicator
 import kotlinx.android.synthetic.main.activity_project_details.*
 import kotlinx.android.synthetic.main.details_head_layout.*
-import kotlinx.android.synthetic.main.fragment_hot.*
 import kotlinx.android.synthetic.main.toobar_layout.title_bar_back
 
 
@@ -30,40 +36,36 @@ import kotlinx.android.synthetic.main.toobar_layout.title_bar_back
  */
 @Suppress("INACCESSIBLE_TYPE")
 class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>(),
-    ProjectDetailsContract.View, RefreshLayout.SetOnRefresh {
-    //请求计划详情body
-    val detailsRequestData = DetailsRequestData()
-
-    //请求计划详情一级评论body
-    val oneCommentsData = OneCommentsData()
-
-    //轮播图集合
-    private var imagePath = ArrayList<ImagerDataBean>()
-    val imagerDataBean = ImagerDataBean()
+    ProjectDetailsContract.View, RefreshLayout.SetOnRefresh,
+    CommentRecyclerViewAdapter.DeleteComment {
 
     //一级评论列表数据
     var list = ArrayList<OneCommentsResponse.ContentBean>()
 
+    var planId: Int? = -1
+
     var commentRecyclerViewAdapter: CommentRecyclerViewAdapter? = null
+
+    private val loadingDialog: LoadingView by lazy {
+        LoadingView(this).apply {
+            setTipMsg("正在加载")
+        }
+    }
 
     override fun returnLayoutId() = R.layout.activity_project_details
 
     override fun initView() {
         super.initView()
-        ProjectDetailsPresenter(this)
-        //详情请求
-        detailsRequestData.setPlanId(intent.getIntExtra(ID, -1))
-        mPresenter?.doProjectDetails(detailsRequestData)
-        //一级评论请求
+        loadingDialog.showLoading()
         refreshOneComments.setSetOnRefresh(this)
         refreshOneComments.setEnableRefresh(false)
-        oneCommentsData.setPlanId(intent.getIntExtra(ID, -1))
-        oneCommentsData.setPage(1)
-        oneCommentsData.setSize(10)
-        mPresenter?.doOneComments(oneCommentsData)
+        ProjectDetailsPresenter(this)
+        planId = intent.getIntExtra(ID, -1)
+        //一级评论适配器
         commentRecyclerViewAdapter =
             CommentRecyclerViewAdapter(R.layout.comment_item, list, this)
         refreshOneComments.recyclerView.adapter = commentRecyclerViewAdapter
+        commentRecyclerViewAdapter?.setDeleteComment(this)
         //途径地列表
         planTrips_recycler.layoutManager = LinearLayoutManager(this)
         //想约的人员列表
@@ -80,203 +82,182 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
 
     override fun initData() {
         super.initData()
+        //详情请求
+        mPresenter?.doProjectDetails(planId)
+        //一级评论请求
+        mPresenter?.doOneComments(planId, 1, 10)
+    }
+
+    override fun onClick() {
+        super.onClick()
         title_bar_back.setOnClickListener { finish() }
+
     }
 
-    override fun onProjectDetailsSuccess(data: DetailsResponse) {
-        //轮播图集合
-        if (data.planImages != null || data.planImages!!.isNotEmpty()) {
-            for (item in data.planImages!!) {
-                imagerDataBean.url = item.imageUrl
-                imagePath.add(imagerDataBean)
-            }
-        }
+    //轮播图
+    override fun onPlanImages(planImages: ArrayList<ImagerDataBean>?) {
         details_banner.addBannerLifecycleObserver(this) //添加生命周期观察者
-            .setAdapter(ImageAdapter(imagePath))
+            .setAdapter(ImageAdapter(planImages))
             .indicator = CircleIndicator(this)
-        //发布人信息
-        if (data.publisherInfo != null) {
-            //发布人头像
-            Glide.with(this).load(data.publisherInfo?.avatarUrl)
-                .apply(RequestOptions.bitmapTransform(CircleCrop()))
-                .into(image_avatar) //标准圆形图片。
-            //发布人名称
-            tv_nickName.text = data.publisherInfo?.nickName
-        }
-        //计划详情
-        if (data.planDetail != null) {
-            //发布时间
-            if (data.planDetail?.createTime != null) {
-                tv_createTime.text = getCurrentTime(data.planDetail!!.createTime!!)
-            }
-            //按钮状态
-            if (data.planDetail?.planStatus != null) {
-                when (data.planDetail!!.planStatus!!) {
-                    0 -> {
-                        tv_sign_up.text = "无"
-                    }
-                    1 -> {
-                        tv_sign_up.text = "唤醒列表"
-                    }
-                    2 -> {
-                        tv_sign_up.text = "管理"
-                    }
-                    3 -> {
-                        tv_sign_up.text = "小队"
-                    }
-                    4 -> {
-                        tv_sign_up.text = "报名列表"
-                    }
-                    5 -> {
-                        tv_sign_up.text = "编辑"
-                    }
-                    6 -> {
-                        tv_sign_up.text = "解散"
-                    }
-                    7 -> {
-                        tv_sign_up.text = "退出"
-                    }
-                }
-            }
-            //名称
-            tv_title.text = data.planDetail?.title
-            //内容
-            tv_content.text = data.planDetail?.content
-            //希望人数
-            if (data.planDetail?.exceptedNumber != null) {
-                tv_exceptedNumber.text = "${data.planDetail?.exceptedNumber}"
-            }
-            //人均预算
-            if (data.planDetail?.perCapitaBudget != null) {
-                tv_perCapitaBudget.text = "${data.planDetail?.perCapitaBudget}"
-            }
-            //费用方式
-            if (data.planDetail?.costMethod != null) {
-                when (data.planDetail?.costMethod) {
-                    1 -> {
-                        tv_costMethod.text = "AA"
-                    }
-                    2 -> {
-                        tv_costMethod.text = "男A女免"
-                    }
-                    3 -> {
-                        tv_costMethod.text = "免费参加"
-                    }
-                }
-            }
-            //始发地
-            tv_placeOfDeparture.text = data.planDetail?.placeOfDeparture
-            //目的地
-            tv_destination.text = data.planDetail?.destination
+    }
 
-        }
+    //发布人信息
+    override fun onPublisherInfo(publisherInfo: DetailsResponse.PublisherInfoBean?) {
+        //发布人头像
+        Glide.with(this).load(publisherInfo?.avatarUrl)
+            .apply(RequestOptions.bitmapTransform(CircleCrop()))
+            .into(image_avatar) //标准圆形图片。
+        //发布人名称
+        tv_nickName.text = publisherInfo?.nickName
+    }
 
-        //始发地与我相遇距离
-        if (data.userPlanDistance != null) {
-            tv_userPlanDistance.text = "距离 ${data.userPlanDistance} km"
-        } else {
-            tv_userPlanDistance.text = "距离 - km"
+    //计划详情 发布时间
+    override fun onPlanDetailCreateTime(createTime: Long?) {
+        tv_createTime.text = getCurrentTime(createTime!!)
+    }
+
+    //计划详情 按钮状态
+    override fun onPlanDetailButtonInfo(buttonInfo: DetailsResponse.ButtonInfoBean?) {
+        tv_sign_up.text = buttonInfo?.buttonName
+        if (buttonInfo?.buttonAction != null && buttonInfo.buttonAction == 1) {
+            //唤醒列表
         }
-        //评论数量
-        if (data.commentCount != null) {
-            tv_commentCount.text = "评论(${data.commentCount})"
-        } else {
-            tv_commentCount.text = "评论(${0})"
+    }
+
+    //计划详情 标题
+    override fun onPlanDetailTitle(title: String?) {
+        tv_title.text = title
+    }
+
+    //计划详情 内容
+    override fun onPlanDetailContent(content: String?) {
+        tv_content.text = content
+    }
+
+    //计划详情 希望人数
+    override fun onPlanDetailExceptedNumber(exceptedNumber: Int?) {
+        tv_exceptedNumber.text = "$exceptedNumber"
+    }
+
+    //计划详情 人均预算
+    override fun onPlanDetailPerCapitaBudget(perCapitaBudget: Int?) {
+        tv_perCapitaBudget.text = "$perCapitaBudget"
+    }
+
+    //费用方式
+    override fun onPlanDetailCostMethod(costMethod: String?) {
+        tv_costMethod.text = costMethod
+    }
+
+    //始发地
+    override fun onPlanDetailPlaceOfDeparture(placeOfDeparture: String?) {
+        tv_placeOfDeparture.text = placeOfDeparture
+    }
+
+    //目的地
+    override fun onPlanDetailDestination(destination: String?) {
+        tv_destination.text = destination
+    }
+
+    //始发地与我相遇距离
+    override fun onUserPlanDistance(userPlanDistance: String?, type: Boolean) {
+        if (!type) {
+            tv_userPlanDistance.visibility = View.INVISIBLE
         }
-        //起止时间
-        if (data.planDetail?.startTime != null && data.planDetail?.endTime != null) {
-            tv_startEndTime.text =
-                "${getCurrentTime(data.planDetail!!.startTime!!)} 至 ${getCurrentTime(data.planDetail!!.endTime!!)}"
-        }
-        //已报名人数
-        if (data.joins != null) {
-            tv_registered.text = "${data.joins?.size}"
-        } else {
-            tv_registered.text = "${0}"
-        }
-        //途径地数量
-        if (data.planTrips != null) {
-            tv_planTrips.text = "途径地"
-            tv_planTrips.append("(${data.planTrips?.size})")
-        }
-        //途径地名列表
-        val planTripsRecyclerAdapter =
-            PlanTripsRecyclerAdapter(R.layout.channel_layout, data.planTrips, this)
+        tv_userPlanDistance.text = userPlanDistance
+    }
+
+    //评论数量
+    override fun onCommentCount(commentCount: String?) {
+        tv_commentCount.text = commentCount
+    }
+
+    //起止时间
+    override fun onStartTimeEndTime(time: String) {
+        tv_startEndTime.text = time
+    }
+
+    //已报名人数
+    override fun onJoins(joinsSize: String) {
+        tv_registered.text = joinsSize
+    }
+
+    //途径地数量 途径地名列表
+    override fun onPlanTrips(
+        tvPlanTrips: String, dataPlanTrips: List<DetailsResponse.PlanTripsBean>?
+    ) {
+        tv_planTrips.visibility = View.VISIBLE
+        planTrips_recycler.visibility = View.VISIBLE
+        planTrips_view.visibility = View.VISIBLE
+        tv_planTrips.text = tvPlanTrips
+        val planTripsRecyclerAdapter = PlanTripsRecyclerAdapter(
+            R.layout.channel_layout, dataPlanTrips, this
+        )
         planTrips_recycler.adapter = planTripsRecyclerAdapter
-        //想加入的人员信息
-        var wantsMale: Int = 0
-        var wantsFemale: Int = 0
-        var wantsSecrecy: Int = 0
-        if (data.wants != null) {
-            for (item in data.wants!!) {
-                when (item.gender) {
-                    1 -> {
-                        ++wantsMale
-                    }
-                    2 -> {
-                        ++wantsFemale
-                    }
-                    0 -> {
-                        ++wantsSecrecy
-                    }
-                }
-            }
-        }
-        tv_wants.text = "想约的"
-        tv_wants.append("( $wantsMale")
-        tv_wants.append(" 男 ")
-        tv_wants.append("$wantsFemale")
-        tv_wants.append("女 ")
-        tv_wants.append("$wantsSecrecy")
-        tv_wants.append("性别保密)")
-        //头像列表
+    }
+
+    //暂无途径地
+    override fun onHindPlanTrips() {
+        tv_planTrips.visibility = View.GONE
+        planTrips_recycler.visibility = View.GONE
+        planTrips_view.visibility = View.GONE
+    }
+
+    //想加入的人员信息  头像列表
+    override fun onWants(tvWants: String, wants: List<DetailsResponse.WantsBean>?) {
+        tv_wants.visibility = View.VISIBLE
+        wants_recycler.visibility = View.VISIBLE
+        wants_view.visibility = View.VISIBLE
+        tv_wants.text = tvWants
         val wantsRecyclerViewAdapter =
-            WantsRecyclerViewAdapter(R.layout.personnel_information, data.wants, this)
+            WantsRecyclerViewAdapter(R.layout.personnel_information, wants, this)
         wants_recycler.adapter = wantsRecyclerViewAdapter
-        //已报名人数
-        var joinsMale: Int = 0
-        var joinsFemale: Int = 0
-        var joinsSecrecy: Int = 0
-        if (data.joins != null) {
-            tv_joinsName.text = "${data.joins?.size}"
-            tv_joinsName.append("人已报名")
-            for (item in data.joins!!) {
-                when (item.gender) {
-                    1 -> {
-                        ++joinsMale
-                    }
-                    2 -> {
-                        ++joinsFemale
-                    }
-                    0 -> {
-                        ++joinsSecrecy
-                    }
-                }
-            }
-            tv_joinsName.append("( $joinsMale")
-            tv_joinsName.append(" 男 ")
-            tv_joinsName.append("$joinsFemale")
-            tv_joinsName.append("女 ")
-            tv_joinsName.append("$joinsSecrecy")
-            tv_joinsName.append("性别保密)")
-            val joinsRecyclerAdapter =
-                JoinsRecyclerAdapter(R.layout.personnel_information, data.joins, this)
-            joins_Recyclerview.adapter = joinsRecyclerAdapter
-        }
+    }
 
+    //暂无想加入的人员
+    override fun onHindWants() {
+        tv_wants.visibility = View.GONE
+        wants_recycler.visibility = View.GONE
+        wants_view.visibility = View.GONE
+    }
+
+    //已报名人数
+    override fun onJoinsData(tvJoinsName: String, joins: List<DetailsResponse.JoinsBean>?) {
+        tv_joinsName.visibility = View.VISIBLE
+        joins_Recyclerview.visibility = View.VISIBLE
+        joins_view.visibility = View.VISIBLE
+        tv_joinsName.text = tvJoinsName
+        val joinsRecyclerAdapter =
+            JoinsRecyclerAdapter(R.layout.personnel_information, joins, this)
+        joins_Recyclerview.adapter = joinsRecyclerAdapter
+    }
+
+    //暂无报名人数
+    override fun onHindJoinsData() {
+        tv_joinsName.visibility = View.GONE
+        joins_Recyclerview.visibility = View.GONE
+        joins_view.visibility = View.GONE
 
     }
 
+
+    //旅行计划详情  //请求成功
+    override fun onProjectDetailsSuccess(data: DetailsResponse) {
+        loadingDialog.showSuccess()
+        loadingDialog.dismiss()
+    }
+
+    //请求失败
     override fun onProjectDetailsError() {
-
+        loadingDialog.showFail()
+        loadingDialog.dismiss()
     }
+
 
     /*------------一级评论列表-------------*/
 
     override fun loadMore(pager: Int, size: Int) {
-        oneCommentsData.setPage(pager)
-        oneCommentsData.setSize(size)
-        mPresenter?.doOneComments(oneCommentsData)
+        mPresenter?.doOneComments(planId, pager, size)
     }
 
     override fun refresh(pager: Int, size: Int) {
@@ -306,6 +287,7 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
 
     }
 
+
     /*--------------------------------*/
     companion object {
         const val ID = "id"
@@ -316,5 +298,66 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
         }
     }
 
+    /*———————————————————————删除评论—————————————————————————*/
+    private val deleteCommentRequestData = DeleteCommentRequestData()
+
+    override fun onDelete(commentId: Long?) {
+        loadingDialog.showLoading()
+        deleteCommentRequestData.setCommentId(commentId)
+        mPresenter?.doDeleteComment(deleteCommentRequestData)
+    }
+
+
+    override fun onDeleteCommentSuccess(data: String?) {
+        mPresenter?.doOneComments(planId, 1, 10)
+        commentRecyclerViewAdapter?.notifyDataSetChanged()
+        loadingDialog.showSuccess()
+        loadingDialog.dismiss()
+
+    }
+
+    override fun onDeleteCommentError() {
+        loadingDialog.showFail()
+        loadingDialog.dismiss()
+    }
+
+    /*——————————————————点赞评论——————————————————————*/
+    private val fabulousRequestData = FabulousRequestData()
+    override fun onOnClickFabulous(commentId: Long?) {
+        loadingDialog.showLoading()
+        fabulousRequestData.setCommentId(commentId)
+        mPresenter?.doFabulous(fabulousRequestData)
+    }
+
+    override fun onFabulousSuccess(data: String?) {
+        mPresenter?.doOneComments(planId, 1, 10)
+        commentRecyclerViewAdapter?.notifyDataSetChanged()
+        loadingDialog.showSuccess()
+        loadingDialog.dismiss()
+    }
+
+    override fun onFabulousError() {
+        loadingDialog.showFail()
+        loadingDialog.dismiss()
+    }
+
+    /*————————————————————取消点赞———————————————————*/
+
+    override fun onUnStar() {
+        loadingDialog.showLoading()
+        mPresenter?.doUnStar()
+    }
+
+    override fun onUnStarSuccess(data: String?) {
+        mPresenter?.doOneComments(planId, 1, 10)
+        commentRecyclerViewAdapter?.notifyDataSetChanged()
+        loadingDialog.showSuccess()
+        loadingDialog.dismiss()
+    }
+
+    override fun onUnStarError() {
+        loadingDialog.showFail()
+        loadingDialog.dismiss()
+    }
 
 }

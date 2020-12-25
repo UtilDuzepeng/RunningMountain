@@ -17,11 +17,22 @@ import com.miaofen.xiaoying.common.data.bean.response.HomeResponse
 interface HotContract {
 
     interface Presenter : IPresenter {
-        fun doHot(page: Int,size :Int)
+        fun doHot(page: Int, size: Int, latitude: Double, longitude: Double)
     }
 
     interface View : IView<Presenter> {
+        //下拉成功 没有数据
+        fun onDownHotNullSuccess()
+
+        //下拉成功 有数据
+        fun onDownHotSuccess(data: HomeResponse?)
+
+        //上啦加载 有数据
         fun onHotSuccess(data: HomeResponse?)
+
+        //上啦加载 没有数据
+        fun onHotNullSuccess()
+
         fun onHotError()
     }
 }
