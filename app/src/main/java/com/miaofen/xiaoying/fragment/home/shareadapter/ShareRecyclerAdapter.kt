@@ -126,12 +126,13 @@ class ShareRecyclerAdapter(
                 })
                 view.addView(textView)
             }
-        } else {
-            val textView = LayoutInflater.from(context)
-                .inflate(R.layout.label_recyclerview_layout, view, false) as TextView
-            textView.text = "暂无标签"
-            view.addView(textView)
         }
+//        else {
+//            val textView = LayoutInflater.from(context)
+//                .inflate(R.layout.label_recyclerview_layout, view, false) as TextView
+//            textView.text = "暂无标签"
+//            view.addView(textView)
+//        }
 
         //是否收藏 collection
         if (item?.collection != null) {

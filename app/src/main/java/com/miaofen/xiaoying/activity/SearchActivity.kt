@@ -13,6 +13,8 @@ import com.miaofen.xiaoying.fragment.home.search.ResultFragment
 import com.miaofen.xiaoying.fragment.home.search.back.ObserverListener
 import kotlinx.android.synthetic.main.activity_search.*
 import java.io.Serializable;
+import java.lang.Exception
+import java.security.cert.Extension
 
 /**
  * 搜索页面
@@ -91,7 +93,12 @@ class SearchActivity : BaseActivity() , ObserverListener {
         } else {
             transaction.show(targetFragment)
         }
-        transaction.commit()
+        try {
+            transaction.commit()
+        }catch (e : Exception){
+            e.printStackTrace()
+        }
+
     }
 
     private fun genFragmentTag(index: Int) = FRAGMENT_TAG_PREFIX + index

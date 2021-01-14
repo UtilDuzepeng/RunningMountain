@@ -39,7 +39,7 @@ class NewestFragment : BaseMvpFragment<NewestContract.Presenter>(), NewestContra
         newest.setEnableRefresh(true)
         newest.autoRefresh()
         mAdapter = ShareRecyclerAdapter(R.layout.newest_recycler_layout, list, activity)
-        mAdapter?.openLoadAnimation();
+        mAdapter?.openLoadAnimation()
         newest.recyclerView.adapter = mAdapter
     }
 

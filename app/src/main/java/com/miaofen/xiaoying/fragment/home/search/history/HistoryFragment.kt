@@ -52,6 +52,9 @@ class HistoryFragment(recommend: ArrayList<String>?) : BaseMvpFragment<HistoryCo
             val textView = LayoutInflater.from(activity)
                 .inflate(R.layout.item_flow, flowlayout, false) as TextView
             textView.text = content
+            textView.setOnClickListener {
+                ObserverManager.getInstance().notifyObserver(textView.text.toString());
+            }
             flowlayout.addView(textView)
         }
     }

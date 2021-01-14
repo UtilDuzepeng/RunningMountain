@@ -18,6 +18,7 @@ import com.miaofen.xiaoying.fragment.home.hot.HotFragment
 import com.miaofen.xiaoying.fragment.home.hottest.NewestFragment
 import com.miaofen.xiaoying.fragment.home.nearby.NearbyFragment
 import com.miaofen.xiaoying.utils.CacheUtils
+import com.miaofen.xiaoying.utils.ToastUtils
 import com.miaofen.xiaoying.utils.updateTabTextView
 import com.youth.banner.indicator.CircleIndicator
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -49,22 +50,6 @@ class HomeFragment : BaseMvpFragment<HomeContract.Presenter>(), HomeContract.Vie
         //获取定位信息
         val readJson = CacheUtils.readJson(context, Constant.JSON_ADDRESS)
         toolbar_search_box.setPositionText(readJson.getString("city"))
-
-        val imagerDataBean = ImagerDataBean()
-        imagerDataBean.url = "http://ww4.sinaimg.cn/large/006uZZy8jw1faic21363tj30ci08ct96.jpg"
-        list_path.add(imagerDataBean)
-        val imagerDataBean1 = ImagerDataBean()
-        imagerDataBean1.url = "http://ww4.sinaimg.cn/large/006uZZy8jw1faic259ohaj30ci08c74r.jpg"
-        list_path.add(imagerDataBean)
-        val imagerDataBean2 = ImagerDataBean()
-        imagerDataBean2.url = "http://ww4.sinaimg.cn/large/006uZZy8jw1faic2b16zuj30ci08cwf4.jpg"
-        list_path.add(imagerDataBean)
-        val imagerDataBean3 = ImagerDataBean()
-        imagerDataBean3.url = "http://ww4.sinaimg.cn/large/006uZZy8jw1faic2e7vsaj30ci08cglz.jpg"
-        list_path.add(imagerDataBean)
-        banner_layout.addBannerLifecycleObserver(this) //添加生命周期观察者
-            .setAdapter(ImageAdapter(list_path))
-            .indicator = CircleIndicator(activity)
         //位置点击事件
         toolbar_search_box.setOnClickPosition(context)
     }
@@ -131,6 +116,14 @@ class HomeFragment : BaseMvpFragment<HomeContract.Presenter>(), HomeContract.Vie
     /**---------------------轮播图-----------------------**/
     override fun onRotationChartSuccess(data: List<BannerResponse>) {
 
+        for (item in data) {
+            val imagerDataBean = ImagerDataBean()
+            imagerDataBean.url = item.coverImage
+            list_path.add(imagerDataBean)
+        }
+        banner_layout.addBannerLifecycleObserver(this) //添加生命周期观察者
+            .setAdapter(ImageAdapter(list_path))
+            .indicator = CircleIndicator(activity)
     }
 
     override fun onRotationChartError() {

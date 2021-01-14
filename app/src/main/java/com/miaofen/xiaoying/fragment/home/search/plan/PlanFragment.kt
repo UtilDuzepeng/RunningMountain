@@ -30,6 +30,7 @@ class PlanFragment(var data: String) : BaseMvpFragment<PlanContract.Presenter>()
         ObserverManager.getInstance().add(this)
         PlanPresenter(this)
         plan_recycler.setSetOnRefresh(this)
+        plan_recycler.setEnableRefresh(false)
         planRequestData.setKeyword(data)
         planRequestData.setPage(1)
         planRequestData.setSize(10)
@@ -46,7 +47,7 @@ class PlanFragment(var data: String) : BaseMvpFragment<PlanContract.Presenter>()
     }
 
     override fun refresh(pager: Int, size: Int) {
-//        list.clear()
+
     }
 
     override fun onPlanSuccess(data: PlanResponse?) {
@@ -79,10 +80,11 @@ class PlanFragment(var data: String) : BaseMvpFragment<PlanContract.Presenter>()
     }
 
     override fun observerUpData(content: String?) {
+        list.clear()
         planRequestData.setKeyword(content)
-        if (plan_recycler != null) {
-            plan_recycler.autoRefresh()
-        }
+        planRequestData.setPage(1)
+        planRequestData.setSize(10)
+        mPresenter?.doPlan(planRequestData)
     }
 
 }
