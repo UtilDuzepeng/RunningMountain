@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_plan.*
  * 搜索计划
  */
 class PlanFragment(var data: String) : BaseMvpFragment<PlanContract.Presenter>(), PlanContract.View,
-    RefreshLayout.SetOnRefresh ,ObserverListener{
+    RefreshLayout.SetOnRefresh, ObserverListener {
 
     var mAdapter: PlanRecyclerViewAdapter? = null
 
@@ -43,12 +43,14 @@ class PlanFragment(var data: String) : BaseMvpFragment<PlanContract.Presenter>()
 
     override fun loadMore(pager: Int, size: Int) {
         planRequestData.setPage(pager)
-        planRequestData.setSize(size)
+        planRequestData.setSize(10)
         mPresenter?.doPlan(planRequestData)
         mAdapter?.notifyDataSetChanged()
     }
 
     override fun refresh(pager: Int, size: Int) {
+        planRequestData.setPage(pager)
+        planRequestData.setSize(10)
         mPresenter?.doPlan(planRequestData)
         list.clear()
     }
@@ -56,18 +58,18 @@ class PlanFragment(var data: String) : BaseMvpFragment<PlanContract.Presenter>()
     override fun onPlanSuccess(data: PlanResponse?) {
 
         if (data?.content == null) {
-            if (plan_recycler != null){
+            if (plan_recycler != null) {
                 plan_recycler.setEnableLoadMore(false)
             }
             return
         }
         if (data.content?.size == 0) {
-            if (plan_recycler != null){
+            if (plan_recycler != null) {
                 plan_recycler.setEnableLoadMore(false)
             }
             return
         } else {
-            if (plan_recycler != null){
+            if (plan_recycler != null) {
                 plan_recycler.setEnableLoadMore(true)
             }
         }
@@ -84,7 +86,9 @@ class PlanFragment(var data: String) : BaseMvpFragment<PlanContract.Presenter>()
 
     override fun observerUpData(content: String?) {
         planRequestData.setKeyword(content)
-        mPresenter?.doPlan(planRequestData)
+        if (plan_recycler != null) {
+            plan_recycler.autoRefresh()
+        }
     }
 
 }

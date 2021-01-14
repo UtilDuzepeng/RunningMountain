@@ -266,10 +266,28 @@ class ProjectDetailsPresenter(view: ProjectDetailsContract.View) :
                 }
 
                 override fun success(data: OneCommentsResponse?) {
-//                    if (data == null) {
-//                        return
-//                    }
-                    mRootView.get()?.onOneCommentsSuccess(data)
+                    //下拉刷新 无数据
+                    if (page == 1 && (data?.content == null || data.content?.size == 0)) {
+                        mRootView.get()?.onDownOneCommentsNullSuccess()
+                        return
+                    }
+                    //下拉刷新 有数据
+                    if (page == 1 && data?.content != null && data.content?.size!! > 0) {
+                        mRootView.get()?.onDownOneCommentsSuccess(data)
+                        return
+                    }
+
+                    //上拉加载 无数据
+                    if (data?.content == null || data.content?.size == 0) {
+                        mRootView.get()?.onOneCommentsNullSuccess()
+                        return
+                    }
+
+                    //上拉加载 有数据
+                    if (data.content != null && data.content?.size!! > 0) {
+                        mRootView.get()?.onOneCommentsSuccess(data)
+                    }
+
                 }
 
                 override fun failure(e: Throwable?, errMsg: String?) {
@@ -305,9 +323,11 @@ class ProjectDetailsPresenter(view: ProjectDetailsContract.View) :
     }
 
     /*———————————————————————点赞评论—————————————————————————*/
-    override fun doFabulous(fabulousRequestData: FabulousRequestData?) {
+    private val fabulousRequestData = FabulousRequestData()
+    override fun doFabulous(commentId: Long?) {
+        fabulousRequestData.setCommentId(commentId)
         RemoteRepository
-            .onFabulous(fabulousRequestData!!)
+            .onFabulous(fabulousRequestData)
             .applySchedulers()
             .subscribe(object : CommonObserver<String>() {
                 override fun onSubscribe(d: Disposable?) {
@@ -325,9 +345,12 @@ class ProjectDetailsPresenter(view: ProjectDetailsContract.View) :
             })
     }
 
-    override fun doUnStar() {
+    //取消点赞评论
+    private val unStarRequestData = FabulousRequestData()
+    override fun doUnStar(commentId: Long?) {
+        unStarRequestData.setCommentId(commentId)
         RemoteRepository
-            .onUnStar()
+            .onUnStar(unStarRequestData)
             .applySchedulers()
             .subscribe(object : CommonObserver<String>() {
                 override fun onSubscribe(d: Disposable?) {

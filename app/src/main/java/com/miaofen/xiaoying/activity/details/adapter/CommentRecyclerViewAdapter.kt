@@ -13,6 +13,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.miaofen.xiaoying.R
 import com.miaofen.xiaoying.common.data.bean.response.OneCommentsResponse
+import com.miaofen.xiaoying.utils.ToastUtils
 import com.miaofen.xiaoying.utils.getCurrentTime
 
 /**
@@ -49,7 +50,7 @@ class CommentRecyclerViewAdapter(
                     context!!.getDrawable(R.drawable.dianzan_icon)
                 )
                 helper.setOnClickListener(R.id.image_fabulous) {
-                    deleteComment?.onUnStar()
+                    deleteComment?.onUnStar(item.commentId)
                 }
             } else {
                 helper.setImageDrawable(
@@ -80,6 +81,10 @@ class CommentRecyclerViewAdapter(
                 tv_replyCount.setBackgroundResource(R.drawable.search_background)
             }
         }
+
+        helper.setOnClickListener(R.id.tv_replyCount) {
+            deleteComment?.onReply(item?.commentId)
+        }
         //评论是否可以删除
         if (item?.canDelete != null) {
             if (item.canDelete!!) {
@@ -94,13 +99,13 @@ class CommentRecyclerViewAdapter(
         }
 
 
-
     }
 
     interface DeleteComment {
         fun onDelete(commentId: Long?)//删除评论
         fun onOnClickFabulous(commentId: Long?)//点赞评论
-        fun onUnStar()//取消点赞评论
+        fun onUnStar(commentId: Long?)//取消点赞评论
+        fun onReply(commentId :Long?)//点击回复
     }
 
     private var deleteComment: DeleteComment? = null

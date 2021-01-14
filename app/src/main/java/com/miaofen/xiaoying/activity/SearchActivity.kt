@@ -10,13 +10,14 @@ import com.miaofen.xiaoying.base.BaseActivity
 import com.miaofen.xiaoying.fragment.home.search.history.HistoryFragment
 import com.miaofen.xiaoying.fragment.home.search.back.ObserverManager
 import com.miaofen.xiaoying.fragment.home.search.ResultFragment
+import com.miaofen.xiaoying.fragment.home.search.back.ObserverListener
 import kotlinx.android.synthetic.main.activity_search.*
 import java.io.Serializable;
 
 /**
  * 搜索页面
  */
-class SearchActivity : BaseActivity() {
+class SearchActivity : BaseActivity() , ObserverListener {
 
     private var curTabIndex = -1
 
@@ -28,11 +29,11 @@ class SearchActivity : BaseActivity() {
 
     override fun initView() {
         super.initView()
+        ObserverManager.getInstance().add(this)
         arrayList = intent.extras.getSerializable(LIST) as ArrayList<String>
         if (arrayList != null && arrayList!!.size > 0) {
             ed_search.hint = arrayList!![intent.getIntExtra(MARKEY, -1)]
         }
-        //todo 现在输入框内容
         showTab(0)
     }
 
@@ -131,6 +132,13 @@ class SearchActivity : BaseActivity() {
             intent.putExtra(MARKEY, marker)
             context?.startActivity(intent)
         }
+    }
+
+    override fun observerUpData(content: String?) {
+        ed_search.setText(content)
+        ed_search.setSelection(ed_search.length())
+        showTab(1)
+        type = true
     }
 
 

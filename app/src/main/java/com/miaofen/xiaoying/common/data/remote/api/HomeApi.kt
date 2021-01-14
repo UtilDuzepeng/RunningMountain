@@ -95,6 +95,44 @@ interface HomeApi {
      * 取消点赞旅行计划评论
      */
     @POST("weixin/plan/comment/unStar")
-    fun onUnStar(): Observable<CommonResponse<String>>
+    fun onUnStar(@Body fabulousRequestData: FabulousRequestData?): Observable<CommonResponse<String>>
+
+    /**
+     * 发布旅行计划评论
+     */
+    @POST("weixin/plan/comment/publish")
+    fun onPubComment(@Body pubCommentRequestData: PubCommentRequestData): Observable<CommonResponse<String>>
+
+    /**
+     * 查看一级计划回复列表
+     */
+    @POST("weixin/plan/subComments")
+    fun onSubComments(@Body subCommentsRequestData: SubCommentsRequestData): Observable<CommonResponse<String>>
+
+    /**
+     * 审核中列表
+     */
+    @POST("weixin/plan/auditing/users")
+    fun onExamine(@Body examineRequestData: ExamineRequestData): Observable<CommonResponse<List<ExamineResponse>>>
+
+    /**
+     * 拒绝列表
+     */
+    @POST("weixin/plan/refused/users")
+    fun onRefuse(@Body refuseRequestData: RefuseRequestData): Observable<CommonResponse<List<RefuseResponse>>>
+
+
+    /**
+     * 计划发布者通过报名
+     */
+    @POST("weixin/plan/pass")
+    fun onPass(@Body passRequestData: PassRequestData): Observable<CommonResponse<String>>
+
+    /**
+     * 计划发布者拒绝报名
+     */
+    @POST("weixin/plan/refuse")
+    fun onRefuse(@Body cancelRequestData: CancelRequestData): Observable<CommonResponse<String>>
+
 
 }

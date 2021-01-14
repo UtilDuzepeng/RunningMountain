@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/semiprimitive_back_well"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_54"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+
+        <ImageView
+            android:id="@+id/image_close_comments"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/dp_20"
+            android:paddingRight="@dimen/dp_20"
+            android:src="@drawable/guanbi_icon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="写评论"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/A212A3D"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_hairComment"
+            android:layout_width="@dimen/dp_44"
+            android:layout_height="wrap_content"
+            android:background="@drawable/blue_back_circular"
+            android:text="发布"
+            android:layout_marginRight="@dimen/dp_10"
+            android:textColor="@color/white"
+            android:paddingRight="@dimen/dp_10"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingBottom="@dimen/dp_4"
+            android:paddingTop="@dimen/dp_4"
+            android:textSize="@dimen/sp_11" />
+
+    </LinearLayout>
+
+
+    <EditText
+        android:id="@+id/release_text"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_108"
+        android:layout_above="@+id/linear_title"
+        android:layout_marginBottom="0dp"
+        android:background="@android:color/transparent"
+        android:ellipsize="end"
+        android:gravity="top"
+        android:textSize="@dimen/sp_13"
+        android:hint="有爱评论，说点儿好听的～"
+        android:maxLines="5"
+        android:padding="@dimen/dp_10"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        android:text="" />
+
+
+</LinearLayout>

@@ -7,6 +7,7 @@ import com.miaofen.xiaoying.base.mvp.BaseMvpFragment
 import com.miaofen.xiaoying.common.data.bean.request.PlanRequestData
 import com.miaofen.xiaoying.common.data.bean.response.SearchUserResponse
 import com.miaofen.xiaoying.fragment.home.search.back.ObserverListener
+import com.miaofen.xiaoying.fragment.home.search.back.ObserverManager
 import com.miaofen.xiaoying.view.RefreshLayout
 import kotlinx.android.synthetic.main.fragment_plan.*
 import kotlinx.android.synthetic.main.fragment_use.*
@@ -16,7 +17,7 @@ import kotlinx.android.synthetic.main.fragment_use.*
  * 搜索用户界面
  * */
 class UseFragment(var data: String) : BaseMvpFragment<SearchUserContract.Presenter>(),
-    SearchUserContract.View, RefreshLayout.SetOnRefresh , ObserverListener {
+    SearchUserContract.View, RefreshLayout.SetOnRefresh, ObserverListener {
 
     var mAdapter: UseRecyclerViewAdapter? = null
 
@@ -29,6 +30,7 @@ class UseFragment(var data: String) : BaseMvpFragment<SearchUserContract.Present
 
     override fun initView() {
         super.initView()
+        ObserverManager.getInstance().add(this)
         SearchUserPresenter(this)
         planRequestData.setKeyword(data)
         planRequestData.setPage(1)
@@ -41,14 +43,16 @@ class UseFragment(var data: String) : BaseMvpFragment<SearchUserContract.Present
 
     override fun loadMore(pager: Int, size: Int) {
         planRequestData.setPage(pager)
-        planRequestData.setSize(size)
+        planRequestData.setSize(10)
         mPresenter?.doSearchUser(planRequestData)
         mAdapter?.notifyDataSetChanged()
     }
 
     override fun refresh(pager: Int, size: Int) {
-        list.clear()
+        planRequestData.setPage(pager)
+        planRequestData.setSize(10)
         mPresenter?.doSearchUser(planRequestData)
+        list.clear()
     }
 
     override fun onSearchUserSuccess(data: SearchUserResponse?) {
@@ -75,7 +79,9 @@ class UseFragment(var data: String) : BaseMvpFragment<SearchUserContract.Present
 
     override fun observerUpData(content: String?) {
         planRequestData.setKeyword(content)
-        mPresenter?.doSearchUser(planRequestData)
+        if (use_recycler != null) {
+            use_recycler.autoRefresh()
+        }
     }
 
 }

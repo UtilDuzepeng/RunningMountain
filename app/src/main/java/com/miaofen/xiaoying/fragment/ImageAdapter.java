@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.miaofen.xiaoying.R;
 import com.miaofen.xiaoying.common.data.bean.response.ImagerDataBean;
 import com.youth.banner.adapter.BannerAdapter;
 
@@ -48,6 +49,8 @@ public class ImageAdapter extends BannerAdapter<ImagerDataBean, ImageAdapter.Ban
         //图片加载自己实现
         Glide.with(holder.itemView)
                 .load(data.getUrl())
+                .fallback(R.drawable.zhanweitu)
+                .error(R.drawable.error_zhanweitu)
                 .apply(RequestOptions.bitmapTransform(new RoundedCorners(30)))
                 .into(holder.imageView);
 //        holder.imageView.setImageResource(data.getUrl());

@@ -100,11 +100,8 @@ class HomeFragment : BaseMvpFragment<HomeContract.Presenter>(), HomeContract.Vie
         val tab1: NewestFragment = NewestFragment()
         val tab2: HotFragment = HotFragment()
         val tab3: NearbyFragment = NearbyFragment()
-        var list = listOf<Fragment>(tab1, tab2, tab3)
-        viewpager.adapter = MyAdapter(
-            list,
-            fragmentManager
-        ) //让tab和viewpager关联起来
+        val list = listOf<Fragment>(tab1, tab2, tab3)
+        viewpager.adapter = MyAdapter(list, fragmentManager) //让tab和viewpager关联起来
         business_tablayout.setupWithViewPager(viewpager)
         business_tablayout.setOnTabSelectedListener(this)
     }
@@ -113,7 +110,7 @@ class HomeFragment : BaseMvpFragment<HomeContract.Presenter>(), HomeContract.Vie
     private fun getTabView(currentPosition: Int): View? {
         val view: View = LayoutInflater.from(this.context).inflate(R.layout.tab_item, null)
         val textView = view.findViewById<View>(R.id.tab_item_textview) as TextView
-        textView.text = list.get(currentPosition)
+        textView.text = list[currentPosition]
         return view
     }
 

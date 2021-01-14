@@ -1,6 +1,7 @@
 package com.miaofen.xiaoying.fragment.home.search
 
 import android.graphics.Typeface
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
@@ -32,7 +33,7 @@ class ResultFragment(var data: String) : BaseFragment(), TabLayout.OnTabSelected
     private fun setTab() {
         val tab1: PlanFragment = PlanFragment(data)
         val tab2: UseFragment = UseFragment(data)
-        var list = listOf<Fragment>(tab1, tab2)
+        val list = listOf<Fragment>(tab1, tab2)
         result_viewpager.adapter = MyAdapter(list, fragmentManager) //让tab和viewpager关联起来
         result_tablayout.setupWithViewPager(result_viewpager)
         result_tablayout.setOnTabSelectedListener(this)
@@ -42,11 +43,9 @@ class ResultFragment(var data: String) : BaseFragment(), TabLayout.OnTabSelected
         result_tablayout.getTabAt(0)?.text = list[0]
         result_tablayout.getTabAt(1)?.text = list[1]
 
-        for (i in 0 until result_tablayout.getTabCount()) {
+        for (i in 0 until result_tablayout.tabCount) {
             val tab: TabLayout.Tab = result_tablayout.getTabAt(i)!!
-            if (tab != null) {
-                tab.customView = getTabView(i)
-            }
+            tab.customView = getTabView(i)
         }
         updateTabTextView(
             result_tablayout.getTabAt(result_tablayout.getSelectedTabPosition()),
@@ -58,7 +57,7 @@ class ResultFragment(var data: String) : BaseFragment(), TabLayout.OnTabSelected
     private fun getTabView(currentPosition: Int): View? {
         val view: View = LayoutInflater.from(context).inflate(R.layout.tab_item, null)
         val textView = view.findViewById<View>(R.id.tab_item_textview) as TextView
-        textView.setText(list.get(currentPosition))
+        textView.text = list[currentPosition]
         return view
     }
 

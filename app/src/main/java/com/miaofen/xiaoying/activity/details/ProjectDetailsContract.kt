@@ -7,6 +7,7 @@ import com.miaofen.xiaoying.common.data.bean.request.DetailsRequestData
 import com.miaofen.xiaoying.common.data.bean.request.FabulousRequestData
 import com.miaofen.xiaoying.common.data.bean.request.OneCommentsData
 import com.miaofen.xiaoying.common.data.bean.response.DetailsResponse
+import com.miaofen.xiaoying.common.data.bean.response.HomeResponse
 import com.miaofen.xiaoying.common.data.bean.response.ImagerDataBean
 import com.miaofen.xiaoying.common.data.bean.response.OneCommentsResponse
 import mlxy.utils.S
@@ -26,8 +27,8 @@ interface ProjectDetailsContract {
         fun doProjectDetails(planId: Int?)
         fun doOneComments(planId: Int?, page: Int?, size: Int?)
         fun doDeleteComment(deleteCommentRequestData: DeleteCommentRequestData?)//删除评论
-        fun doFabulous(fabulousRequestData: FabulousRequestData?)//点赞评论
-        fun doUnStar()//取消点赞
+        fun doFabulous(commentId: Long?)//点赞评论
+        fun doUnStar(commentId: Long?)//取消点赞
     }
 
     interface View : IView<Presenter> {
@@ -100,8 +101,18 @@ interface ProjectDetailsContract {
         //暂无报名人数
         fun onHindJoinsData()
 
-        //一级评论列表
+        //一级评论列表下拉成功 没有数据
+        fun onDownOneCommentsNullSuccess()
+
+        //一级评论列表下拉成功 有数据
+        fun onDownOneCommentsSuccess(data: OneCommentsResponse?)
+
+        //一级评论列表上啦加载 有数据
         fun onOneCommentsSuccess(data: OneCommentsResponse?)
+
+        //上啦加载 没有数据
+        fun onOneCommentsNullSuccess()
+
         fun onOneCommentsError()
 
         /*——————————————————————————删除评论成功————————————————————————————*/

@@ -7,12 +7,12 @@ import android.graphics.Typeface
 import android.net.Uri
 import android.text.TextUtils
 import android.view.Gravity
-import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import com.google.android.material.tabs.TabLayout
+import com.miaofen.xiaoying.MyApplication
 import com.miaofen.xiaoying.R
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -131,23 +131,23 @@ fun isWeixinAvilible(context: Context): Boolean {
  *
  * @param et 输入焦点
  */
-fun showInput(et: EditText, context: Context) {
-    et.requestFocus()
-    val imm: InputMethodManager =
-        context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-    imm.showSoftInput(et, InputMethodManager.SHOW_IMPLICIT)
+fun showInput(et: EditText) {
+    val imm = MyApplication.mContext
+        .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.showSoftInput(et, InputMethodManager.RESULT_SHOWN)
+    imm.toggleSoftInput(
+        InputMethodManager.SHOW_FORCED,
+        InputMethodManager.HIDE_IMPLICIT_ONLY
+    )
 }
 
 /**
  * 隐藏键盘
  */
-fun hideInput(context: Context, activity: Activity?) {
-    val imm: InputMethodManager =
-        context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-    val v: View = activity?.window!!.peekDecorView()
-    if (null != v) {
-        imm.hideSoftInputFromWindow(v.getWindowToken(), 0)
-    }
+fun hideInput(mEditText: EditText?, mContext: Context?) {
+    val imm =
+        mContext?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.hideSoftInputFromWindow(mEditText?.windowToken, 0)
 }
 
 /**

@@ -76,7 +76,7 @@
             android:layout_marginBottom="@dimen/dp_10"
             android:text="评论(28)"
             android:textColor="@color/A212A3D"
-            android:textSize="@dimen/sp_18"
+            android:textSize="@dimen/sp_15"
             android:textStyle="bold" />
 
         <View
@@ -87,11 +87,64 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <com.miaofen.xiaoying.view.RefreshLayout
-        android:id="@+id/refreshOneComments"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <com.miaofen.xiaoying.view.RefreshLayout
+            android:id="@+id/refreshOneComments"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/dp_60" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:background="@color/AF4F4F4" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_60"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
+            android:paddingBottom="@dimen/dp_10">
+
+            <TextView
+                android:id="@+id/tv_commentContent"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp_40"
+                android:layout_weight="1"
+                android:background="@drawable/search_background"
+                android:drawableLeft="@drawable/bianji_bi_icon"
+                android:drawablePadding="@dimen/dp_8"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/dp_10"
+                android:text="输入评论内容"
+                android:textSize="@dimen/sp_14" />
+
+
+            <ImageView
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/dp_10"
+                android:layout_weight="0.1"
+                android:src="@drawable/shoucang_huang_icon" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:src="@drawable/zhuanfa_icon" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -18,7 +18,6 @@ import androidx.fragment.app.Fragment
 import com.miaofen.xiaoying.base.BaseActivity
 import com.miaofen.xiaoying.fragment.hair.ReleaseFragment
 import com.miaofen.xiaoying.fragment.home.HomeFragment
-import com.miaofen.xiaoying.fragment.home.search.back.ObserverManager
 import com.miaofen.xiaoying.fragment.news.NewsFragment
 import com.miaofen.xiaoying.fragment.user.UserFragment
 import com.miaofen.xiaoying.utils.*

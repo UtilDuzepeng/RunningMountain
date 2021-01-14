@@ -80,6 +80,4 @@ abstract class BaseMvpBottomDialogFragment <P : IPresenter> : DialogFragment(), 
         }
     }
 
-
-
 }

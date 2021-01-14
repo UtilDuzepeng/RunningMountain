@@ -88,11 +88,13 @@ public class CurrencyLayout extends LinearLayout {
         item_details = (LinearLayout) findViewById(R.id.item_details);
         image_collection = (ImageView) findViewById(R.id.image_collection);
         recyclerview_picture = (RecyclerView) findViewById(R.id.recyclerview_picture);
+
         GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 3, GridLayoutManager.VERTICAL, false);
         gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerview_picture.setLayoutManager(gridLayoutManager);
         mAdapter = new ImageViewRecycler(R.layout.recycler_iamge_item, imageList, context);
         recyclerview_picture.setAdapter(mAdapter);
+
     }
 
     //todo 预留方法 满足特殊需求

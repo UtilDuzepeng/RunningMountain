@@ -19,6 +19,7 @@ import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.miaofen.xiaoying.R
+import com.miaofen.xiaoying.activity.ReleaseDetailsActivity
 import com.miaofen.xiaoying.base.BaseFragment
 import com.miaofen.xiaoying.comm.Constant
 import com.miaofen.xiaoying.utils.ToastUtils
@@ -57,7 +58,7 @@ class ReleaseFragment : BaseFragment() {
 
     override fun initData() {
         super.initData()
-        tv_details.setOnClickListener {  }//详情
+        tv_details.setOnClickListener { ReleaseDetailsActivity.start(activity) }//详情
         tv_trip.setOnClickListener {  }//行程
         tv_label.setOnClickListener {  }//标签
         tv_privacy.setOnClickListener {  }//隐私

@@ -69,7 +69,7 @@ data class DetailsResponse(
         var personalSignature: String?,
         var avatarUrl: String?,
         var nickName: String?,
-        var userId: Int?
+        var userId: Long?
     )
 
     data class PlanTagsBean(

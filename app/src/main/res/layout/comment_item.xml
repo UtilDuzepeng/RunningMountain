@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/dp_25"
-    android:layout_marginTop="@dimen/dp_12"
+    android:layout_marginTop="@dimen/dp_8"
+    android:layout_marginBottom="@dimen/dp_10"
     android:orientation="vertical"
     android:paddingLeft="@dimen/dp_18"
     android:paddingRight="@dimen/dp_18">
@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/linear_name_like"
         android:layout_marginLeft="@dimen/dp_10"
-        android:layout_marginTop="@dimen/dp_12"
+        android:layout_marginTop="@dimen/dp_7"
         android:layout_toRightOf="@id/imager_head"
         android:lineSpacingExtra="3dp"
         android:text="趁这几天天气好，我想抓住秋天的小尾巴。有没有志同道合的小伙伴一起去晋阳湖公园溜一圈儿？"
@@ -73,7 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_leaving_message"
         android:layout_marginLeft="@dimen/dp_10"
-        android:layout_marginTop="@dimen/dp_12"
+        android:layout_marginTop="@dimen/dp_7"
         android:gravity="center"
         android:layout_toRightOf="@+id/imager_head"
         android:orientation="horizontal">

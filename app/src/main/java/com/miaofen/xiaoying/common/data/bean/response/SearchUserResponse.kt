@@ -14,6 +14,7 @@ data class SearchUserResponse(
     var pageNumber: Int?,
     var pageSize: Int?,
     var totalElements: Int?,
+    var empty :Boolean?,
     var content: List<ContentBean>?
 
 ) {
@@ -23,7 +24,7 @@ data class SearchUserResponse(
         var avatarUrl: String?,
         var nickName: String?,
         var selfFollowUser: Boolean?,//自己是否已关注该用户
-        var userId: Int?,
+        var userId: Long?,
         var userFollowSelf: Boolean?//用户是否关注自己
     )
 }

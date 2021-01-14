@@ -30,6 +30,7 @@ abstract class BaseActivity : AppCompatActivity() {
         hideStatusBar()//隐藏状态栏
         initView()
         initData()
+        onClick()
         initFragment(savedInstanceState)
     }
 

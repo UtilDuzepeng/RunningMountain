@@ -1,9 +1,7 @@
 package com.miaofen.xiaoying.common.data.remote
 
-import android.text.TextUtils
-import com.miaofen.xiaoying.comm.Global
-import com.orhanobut.logger.Logger
 import okhttp3.Interceptor
+import okhttp3.Request
 import okhttp3.Response
 
 /**
@@ -24,14 +22,14 @@ class ParamsInterceptor : Interceptor {
 
         val builder = request.newBuilder()
             .addHeader("client", "Android")
-
 //        val token = Global.getToken()//?.token
 //        Logger.e("okhttp token: $token")
 //        if (!TextUtils.isEmpty(token)) {
 //            builder.addHeader("token", token!!)
-            builder.addHeader("token", "odGc95I9iiVX78eK6nShycWM3sfw")
+//            .addHeader("token", "odGc95I9iiVX78eK6nShycWM3sfw")
+            .addHeader("token", "odGc95JHalgJS6rASWhneedREqR4")
+            .addHeader("type", "token")
 //        }
-
         request = builder.build()
         return chain.proceed(request)
 

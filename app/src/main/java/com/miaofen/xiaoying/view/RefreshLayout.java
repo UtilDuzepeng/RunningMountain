@@ -63,7 +63,7 @@ public class RefreshLayout extends LinearLayout implements OnRefreshLoadMoreList
     @Override
     public void onRefresh(@NonNull com.scwang.smartrefresh.layout.api.RefreshLayout refreshLayout) {
         page = 1;
-        setOnRefresh.refresh(page, 2);
+        setOnRefresh.refresh(page, 10);
         refreshLayout.finishRefresh();
     }
 
@@ -71,7 +71,7 @@ public class RefreshLayout extends LinearLayout implements OnRefreshLoadMoreList
     @Override
     public void onLoadMore(@NonNull com.scwang.smartrefresh.layout.api.RefreshLayout refreshLayout) {
         page++;
-        setOnRefresh.loadMore(page, 2);
+        setOnRefresh.loadMore(page, 10);
         refreshLayout.finishLoadMore();
     }
 

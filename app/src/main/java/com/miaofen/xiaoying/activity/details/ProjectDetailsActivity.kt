@@ -3,6 +3,7 @@ package com.miaofen.xiaoying.activity.details
 import android.content.Context
 import android.content.Intent
 import android.view.View
+import android.widget.EditText
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -13,31 +14,38 @@ import com.miaofen.xiaoying.activity.details.adapter.CommentRecyclerViewAdapter
 import com.miaofen.xiaoying.activity.details.adapter.JoinsRecyclerAdapter
 import com.miaofen.xiaoying.activity.details.adapter.PlanTripsRecyclerAdapter
 import com.miaofen.xiaoying.activity.details.adapter.WantsRecyclerViewAdapter
+import com.miaofen.xiaoying.activity.details.commdia.CommentDialog
+import com.miaofen.xiaoying.activity.details.replycomm.ReplyDialog
+import com.miaofen.xiaoying.activity.details.tube.AdministrationDialog
+import com.miaofen.xiaoying.activity.signup.SignUpListActivity
 import com.miaofen.xiaoying.base.mvp.BaseMvpActivity
 import com.miaofen.xiaoying.common.data.bean.request.DeleteCommentRequestData
-import com.miaofen.xiaoying.common.data.bean.request.FabulousRequestData
 import com.miaofen.xiaoying.common.data.bean.response.DetailsResponse
 import com.miaofen.xiaoying.common.data.bean.response.ImagerDataBean
 import com.miaofen.xiaoying.common.data.bean.response.OneCommentsResponse
 import com.miaofen.xiaoying.fragment.ImageAdapter
-import com.miaofen.xiaoying.utils.ToastUtils
-import com.miaofen.xiaoying.utils.getCurrentTime
-import com.miaofen.xiaoying.view.LoadingDialog
+import com.miaofen.xiaoying.utils.*
 import com.miaofen.xiaoying.view.LoadingView
 import com.miaofen.xiaoying.view.RefreshLayout
 import com.youth.banner.indicator.CircleIndicator
 import kotlinx.android.synthetic.main.activity_project_details.*
 import kotlinx.android.synthetic.main.details_head_layout.*
-import kotlinx.android.synthetic.main.toobar_layout.title_bar_back
 
 
 /**
- * 旅行计划详情
+ * 旅行计划详情  commentDialog
  */
 @Suppress("INACCESSIBLE_TYPE")
 class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>(),
     ProjectDetailsContract.View, RefreshLayout.SetOnRefresh,
-    CommentRecyclerViewAdapter.DeleteComment {
+    CommentRecyclerViewAdapter.DeleteComment, CommentDialog.ShowInput,
+    AdministrationDialog.AdministrationInput {
+
+    var bottomDialogFr: CommentDialog? = null//评论列表弹窗
+
+    var replyDialog: ReplyDialog? = null//一级回复列表弹窗
+
+    var administrationDialog: AdministrationDialog? = null//列表底部弹窗
 
     //一级评论列表数据
     var list = ArrayList<OneCommentsResponse.ContentBean>()
@@ -56,11 +64,13 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
 
     override fun initView() {
         super.initView()
+        planId = intent.getIntExtra(ID, -1)
         loadingDialog.showLoading()
+        bottomDialogFr = CommentDialog(this, planId)
+        bottomDialogFr?.setShowInput(this)
         refreshOneComments.setSetOnRefresh(this)
         refreshOneComments.setEnableRefresh(false)
         ProjectDetailsPresenter(this)
-        planId = intent.getIntExtra(ID, -1)
         //一级评论适配器
         commentRecyclerViewAdapter =
             CommentRecyclerViewAdapter(R.layout.comment_item, list, this)
@@ -92,6 +102,11 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
         super.onClick()
         title_bar_back.setOnClickListener { finish() }
 
+        //点击评论
+        tv_commentContent.setOnClickListener {
+            bottomDialogFr?.show(supportFragmentManager, "DF")
+        }
+
     }
 
     //轮播图
@@ -119,9 +134,25 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
     //计划详情 按钮状态
     override fun onPlanDetailButtonInfo(buttonInfo: DetailsResponse.ButtonInfoBean?) {
         tv_sign_up.text = buttonInfo?.buttonName
-        if (buttonInfo?.buttonAction != null && buttonInfo.buttonAction == 1) {
-            //唤醒列表
+        if (buttonInfo?.buttonAction != null && buttonInfo.buttonAction == 1) {//报名
+            tv_sign_up.setOnClickListener {
+                ToastUtils.showToast("报名")
+            }
+        } else if (buttonInfo?.buttonAction != null && buttonInfo.buttonAction == 2) {//唤醒列表
+            tv_sign_up.setOnClickListener {
+                if (tv_sign_up.text.toString() == "管理") {
+                    if (administrationDialog == null) {
+                        administrationDialog = AdministrationDialog(buttonInfo.subButtonInfo)
+                        administrationDialog?.setAdministrationInput(this)
+                    }
+                    administrationDialog?.show(supportFragmentManager, "DF")
+                } else if (tv_sign_up.text.toString() == "退出") {
+                    ToastUtils.showToast("退出")
+                }
+
+            }
         }
+
     }
 
     //计划详情 标题
@@ -240,7 +271,6 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
 
     }
 
-
     //旅行计划详情  //请求成功
     override fun onProjectDetailsSuccess(data: DetailsResponse) {
         loadingDialog.showSuccess()
@@ -253,7 +283,6 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
         loadingDialog.dismiss()
     }
 
-
     /*------------一级评论列表-------------*/
 
     override fun loadMore(pager: Int, size: Int) {
@@ -261,28 +290,37 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
     }
 
     override fun refresh(pager: Int, size: Int) {
-
+//        mPresenter?.doOneComments(planId, pager, size)
     }
 
+    //一级评论列表下拉成功 没有数据
+    override fun onDownOneCommentsNullSuccess() {
+        refreshOneComments.setEnableLoadMore(false)
+    }
 
-    override fun onOneCommentsSuccess(data: OneCommentsResponse?) {
-        if (data?.content == null) {
-            refreshOneComments.setEnableLoadMore(false)
-            return
-        }
-        if (data.content!!.size == 0) {
-            refreshOneComments.setEnableLoadMore(false)
-            return
-        } else {
-            refreshOneComments.setEnableLoadMore(true)
-        }
-        for (item in data.content!!) {
+    //一级评论列表下拉成功 有数据
+    override fun onDownOneCommentsSuccess(data: OneCommentsResponse?) {
+        list.clear()
+        for (item in data?.content!!) {
             list.add(item)
         }
         commentRecyclerViewAdapter?.notifyDataSetChanged()
-
     }
 
+    //一级评论列表上啦加载 有数据
+    override fun onOneCommentsSuccess(data: OneCommentsResponse?) {
+        for (item in data?.content!!) {
+            list.add(item)
+        }
+        commentRecyclerViewAdapter?.notifyDataSetChanged()
+    }
+
+    //上啦加载 没有数据
+    override fun onOneCommentsNullSuccess() {
+        refreshOneComments.setEnableLoadMore(false)
+    }
+
+    //加载错误
     override fun onOneCommentsError() {
 
     }
@@ -322,11 +360,9 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
     }
 
     /*——————————————————点赞评论——————————————————————*/
-    private val fabulousRequestData = FabulousRequestData()
     override fun onOnClickFabulous(commentId: Long?) {
         loadingDialog.showLoading()
-        fabulousRequestData.setCommentId(commentId)
-        mPresenter?.doFabulous(fabulousRequestData)
+        mPresenter?.doFabulous(commentId)
     }
 
     override fun onFabulousSuccess(data: String?) {
@@ -343,9 +379,9 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
 
     /*————————————————————取消点赞———————————————————*/
 
-    override fun onUnStar() {
+    override fun onUnStar(commentId: Long?) {
         loadingDialog.showLoading()
-        mPresenter?.doUnStar()
+        mPresenter?.doUnStar(commentId)
     }
 
     override fun onUnStarSuccess(data: String?) {
@@ -359,5 +395,76 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
         loadingDialog.showFail()
         loadingDialog.dismiss()
     }
+
+    //点击回复
+    override fun onReply(commentId: Long?) {
+        if (replyDialog == null) {
+            replyDialog = ReplyDialog(commentId)
+        }
+        replyDialog?.show(supportFragmentManager, "DF")
+    }
+
+
+    //开启软件盘
+    override fun editTextShowInput(editText: EditText?) {
+        showInput(editText!!)
+    }
+
+    //关闭软键盘
+    override fun editTextHintInput() {
+        loadingDialog.setTipMsg("正在加载")
+        loadingDialog.showFail()
+    }
+
+    //发表评论成功 刷新列表
+    override fun loadAnimation(editText: EditText?) {
+        hideInput(editText, this)
+        bottomDialogFr?.dismiss()
+        //详情请求
+        mPresenter?.doProjectDetails(planId)
+        //一级评论请求
+        mPresenter?.doOneComments(planId, 1, 10)
+        loadingDialog.dismiss()
+    }
+
+
+    //发表评论失败toase
+    override fun hideAnimation() {
+        loadingDialog.dismiss()
+    }
+
+    //关闭评论弹窗
+    override fun closeCommentDialog(editText: EditText?) {
+        hideInput(editText, this)
+        bottomDialogFr?.dismiss()
+    }
+
+    /*--------管理弹窗------------*/
+    //管理弹窗关闭
+    override fun closeAdministrationDialog() {
+        administrationDialog?.dismiss()
+    }
+
+    //小队
+    override fun administrationTeam() {
+        ToastUtils.showToast("小队")
+    }
+
+    //报名列表
+    override fun administrationSignUp() {
+        SignUpListActivity.start(this, planId)
+        administrationDialog?.dismiss()
+    }
+
+    //编辑
+    override fun administrationEdit() {
+        ToastUtils.showToast("编辑")
+    }
+
+    //解散
+    override fun administrationDissolution() {
+        ToastUtils.showToast("解散")
+    }
+
 
 }
