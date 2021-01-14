@@ -45,7 +45,8 @@ data class HomeResponse(
         val endTime: Long?,//结束时间
         val images: List<ImagesBean>?,//图片list
         val tags: List<TagsBean>?,//标签list
-        val trips: List<TripsBean>?//途经地list
+        val trips: List<TripsBean>?,//途经地list
+        val pastTime :String?
     ) {
         data class ImagesBean(
             var imageUrl: String?,//封面图

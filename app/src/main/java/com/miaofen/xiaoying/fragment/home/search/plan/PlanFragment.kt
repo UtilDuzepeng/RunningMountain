@@ -1,16 +1,13 @@
 package com.miaofen.xiaoying.fragment.home.search.plan
 
-import android.util.Log
+
 import com.miaofen.xiaoying.R
-import com.miaofen.xiaoying.base.BaseFragment
 import com.miaofen.xiaoying.base.mvp.BaseMvpFragment
 import com.miaofen.xiaoying.common.data.bean.request.PlanRequestData
 import com.miaofen.xiaoying.common.data.bean.response.PlanResponse
 import com.miaofen.xiaoying.fragment.home.search.back.ObserverListener
 import com.miaofen.xiaoying.fragment.home.search.back.ObserverManager
-import com.miaofen.xiaoying.utils.ToastUtils
 import com.miaofen.xiaoying.view.RefreshLayout
-import kotlinx.android.synthetic.main.fragment_hot.*
 import kotlinx.android.synthetic.main.fragment_plan.*
 
 
@@ -33,10 +30,10 @@ class PlanFragment(var data: String) : BaseMvpFragment<PlanContract.Presenter>()
         ObserverManager.getInstance().add(this)
         PlanPresenter(this)
         plan_recycler.setSetOnRefresh(this)
-        plan_recycler.autoRefresh()
         planRequestData.setKeyword(data)
         planRequestData.setPage(1)
         planRequestData.setSize(10)
+        mPresenter?.doPlan(planRequestData)
         mAdapter = PlanRecyclerViewAdapter(R.layout.plan_item_layout, list, activity)
         plan_recycler.recyclerView.adapter = mAdapter
     }
@@ -49,10 +46,7 @@ class PlanFragment(var data: String) : BaseMvpFragment<PlanContract.Presenter>()
     }
 
     override fun refresh(pager: Int, size: Int) {
-        planRequestData.setPage(pager)
-        planRequestData.setSize(10)
-        mPresenter?.doPlan(planRequestData)
-        list.clear()
+//        list.clear()
     }
 
     override fun onPlanSuccess(data: PlanResponse?) {

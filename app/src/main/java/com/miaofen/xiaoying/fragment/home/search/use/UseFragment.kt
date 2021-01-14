@@ -36,7 +36,7 @@ class UseFragment(var data: String) : BaseMvpFragment<SearchUserContract.Present
         planRequestData.setPage(1)
         planRequestData.setSize(10)
         use_recycler.setSetOnRefresh(this)
-        use_recycler.autoRefresh()
+        mPresenter?.doSearchUser(planRequestData)
         mAdapter = UseRecyclerViewAdapter(R.layout.use_item_layout, list, activity)
         use_recycler.recyclerView.adapter = mAdapter
     }
@@ -49,10 +49,9 @@ class UseFragment(var data: String) : BaseMvpFragment<SearchUserContract.Present
     }
 
     override fun refresh(pager: Int, size: Int) {
-        planRequestData.setPage(pager)
-        planRequestData.setSize(10)
-        mPresenter?.doSearchUser(planRequestData)
-        list.clear()
+//        planRequestData.setPage(pager)
+//        planRequestData.setSize(10)
+//        list.clear()
     }
 
     override fun onSearchUserSuccess(data: SearchUserResponse?) {

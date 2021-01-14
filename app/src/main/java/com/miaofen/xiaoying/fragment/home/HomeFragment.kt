@@ -1,13 +1,10 @@
 package com.miaofen.xiaoying.fragment.home
 
 
-import android.app.Activity
-import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LifecycleOwner
 import com.google.android.material.tabs.TabLayout
 import com.miaofen.xiaoying.R
 import com.miaofen.xiaoying.activity.SearchActivity

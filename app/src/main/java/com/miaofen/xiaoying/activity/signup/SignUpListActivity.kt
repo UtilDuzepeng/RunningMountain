@@ -36,7 +36,7 @@ class SignUpListActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
         title_bar_back?.visibility = View.VISIBLE
         title_bar_back?.setOnClickListener { finish() }
         title_bar_title.text = "报名列表"
-        tab_signUpList.tabRippleColor = ColorStateList.valueOf(resources.getColor(R.color.white));
+        tab_signUpList.tabRippleColor = ColorStateList.valueOf(resources.getColor(R.color.transparent))
         setTab()
         setItem()
     }

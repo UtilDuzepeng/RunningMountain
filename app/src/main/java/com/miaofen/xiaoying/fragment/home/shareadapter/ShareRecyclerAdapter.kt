@@ -19,6 +19,7 @@ import com.miaofen.xiaoying.common.data.bean.response.HomeResponse
 import com.miaofen.xiaoying.utils.getCurrentTime
 import com.miaofen.xiaoying.view.CurrencyLayout
 import com.miaofen.xiaoying.view.FlowViewGroup
+import java.math.BigDecimal
 
 
 /**
@@ -52,14 +53,16 @@ class ShareRecyclerAdapter(
         helper.setText(R.id.net_name, item?.nickName)
         //发布人座驾
         if (item?.motorcycle == null) {
-            helper.setText(R.id.motorcycle_type, "暂无认证")
+            helper.setGone(R.id.motorcycle_type, false)
         } else {
+            helper.setGone(R.id.motorcycle_type, true)
             helper.setText(R.id.motorcycle_type, item.motorcycle)
         }
         //发布时间
-        if (item?.createTime != null) {
-            helper.setText(R.id.data_time, getCurrentTime(item.createTime).toString())
-        }
+//        if (item?.createTime != null) {
+//            helper.setText(R.id.data_time, getCurrentTime(item.createTime).toString())
+            helper.setText(R.id.data_time, item?.pastTime)
+//        }
         //发布标题
         helper.setText(R.id.subject, item?.title)
         //发布内容
@@ -68,7 +71,10 @@ class ShareRecyclerAdapter(
         helper.setText(R.id.place_departure, item?.placeOfDeparture)
         //与我相距
         if (item?.userPlanDistance != null) {
-            helper.setText(R.id.distance, "距离 " + item.userPlanDistance.toString() + " km")
+            var bd = BigDecimal(item.userPlanDistance.toString())
+            val scale = bd.setScale(2, BigDecimal.ROUND_HALF_UP)
+
+            helper.setText(R.id.distance, "距离 $scale km")
         }
         //目的地
         helper.setText(R.id.destination, item?.destination)
@@ -81,9 +87,10 @@ class ShareRecyclerAdapter(
 
             }
             tripsName.delete(tripsName.length - 1, tripsName.length)
+            helper.setGone(R.id.linear_by_way_of,true)
             helper.setText(R.id.route, tripsName)
         } else {
-            helper.setText(R.id.route, "暂无途径地")
+            helper.setGone(R.id.linear_by_way_of,false)
         }
 
         //起止时间
@@ -144,8 +151,8 @@ class ShareRecyclerAdapter(
          * 查看列表详情
          */
         currencyLayout.itemOnClick.setOnClickListener {
-//            ProjectDetailsActivity.start(context, item?.id)
-            ProjectDetailsActivity.start(context, 11)
+            ProjectDetailsActivity.start(context, item?.id)
+//            ProjectDetailsActivity.start(context, 11)
         }
 
     }

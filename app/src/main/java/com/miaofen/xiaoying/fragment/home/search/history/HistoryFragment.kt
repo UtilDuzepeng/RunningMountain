@@ -1,17 +1,14 @@
 package com.miaofen.xiaoying.fragment.home.search.history
 
 
-import android.util.Log
+
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import com.miaofen.xiaoying.R
-import com.miaofen.xiaoying.base.BaseFragment
 import com.miaofen.xiaoying.base.mvp.BaseMvpFragment
 import com.miaofen.xiaoying.fragment.home.search.back.ObserverListener
 import com.miaofen.xiaoying.fragment.home.search.back.ObserverManager
-import com.miaofen.xiaoying.utils.ToastUtils
-import kotlinx.android.synthetic.main.activity_search.*
 import kotlinx.android.synthetic.main.fragment_history.*
 import kotlin.collections.ArrayList
 

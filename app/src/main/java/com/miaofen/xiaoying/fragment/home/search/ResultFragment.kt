@@ -1,5 +1,6 @@
 package com.miaofen.xiaoying.fragment.home.search
 
+import android.content.res.ColorStateList
 import android.graphics.Typeface
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import com.miaofen.xiaoying.base.BaseFragment
 import com.miaofen.xiaoying.adapter.MyAdapter
 import com.miaofen.xiaoying.fragment.home.search.plan.PlanFragment
 import com.miaofen.xiaoying.fragment.home.search.use.UseFragment
+import kotlinx.android.synthetic.main.activity_signup_list.*
 import kotlinx.android.synthetic.main.fragment_result.*
 
 
@@ -28,6 +30,7 @@ class ResultFragment(var data: String) : BaseFragment(), TabLayout.OnTabSelected
         super.initView()
         setTab()
         setItem()
+        result_tablayout.tabRippleColor = ColorStateList.valueOf(resources.getColor(R.color.transparent))
     }
 
     private fun setTab() {

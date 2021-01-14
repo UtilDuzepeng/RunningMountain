@@ -29,7 +29,7 @@ class ReplyDialog(var commentId: Long?) :
         ReplyCommPresenter(this)
         mPresenter?.doReplyComm(commentId!!)
         // 去掉默认的标题
-        dialog!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog!!.requestWindowFeature(Window.FEATURE_NO_TITLE)//reply_dialog_layout
         frView = inflater.inflate(R.layout.dialog_comment_fr_bottom, null)
         return frView
     }
