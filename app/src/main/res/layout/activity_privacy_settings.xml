@@ -21,7 +21,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="是否接收消息通知"
+            android:text="@string/receive_message_notification"
             android:layout_centerVertical="true"
             android:textColor="@color/A212A3D"
             android:textSize="@dimen/sp_15" />
@@ -56,7 +56,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="认证车辆是否对外展示"
+            android:text="@string/certified_vehicle_display"
             android:layout_centerVertical="true"
             android:textColor="@color/A212A3D"
             android:textSize="@dimen/sp_15" />

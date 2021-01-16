@@ -24,7 +24,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/dp_100"
             android:layout_toRightOf="@+id/image_Number_Replies"
-            android:text="13条回复"
+            android:text="@string/replies"
             android:gravity="center"
             android:textColor="@color/A212A3D"
             android:textSize="@dimen/sp_16"

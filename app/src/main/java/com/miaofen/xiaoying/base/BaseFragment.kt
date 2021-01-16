@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
+import com.miaofen.xiaoying.R
 
 /**
  * 项目名称：com.miaofen.xiaoying.base
@@ -78,6 +80,9 @@ abstract class BaseFragment : Fragment() {
 
     open fun refresh() {}
 
+    fun getEmptyView(@LayoutRes resource: Int?): View {
+        return LayoutInflater.from(activity).inflate(resource!!, null, false)
+    }
 
 
 }

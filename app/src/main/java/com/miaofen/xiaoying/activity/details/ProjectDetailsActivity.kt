@@ -17,6 +17,7 @@ import com.miaofen.xiaoying.activity.details.adapter.WantsRecyclerViewAdapter
 import com.miaofen.xiaoying.activity.details.commdia.CommentDialog
 import com.miaofen.xiaoying.activity.details.replycomm.ReplyDialog
 import com.miaofen.xiaoying.activity.details.tube.AdministrationDialog
+import com.miaofen.xiaoying.activity.signplan.SignUpPlanActivity
 import com.miaofen.xiaoying.activity.signup.SignUpListActivity
 import com.miaofen.xiaoying.base.mvp.BaseMvpActivity
 import com.miaofen.xiaoying.common.data.bean.request.DeleteCommentRequestData
@@ -75,6 +76,7 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
         commentRecyclerViewAdapter =
             CommentRecyclerViewAdapter(R.layout.comment_item, list, this)
         refreshOneComments.recyclerView.adapter = commentRecyclerViewAdapter
+        commentRecyclerViewAdapter?.emptyView = getEmptyView(R.layout.no_data_available_layout)
         commentRecyclerViewAdapter?.setDeleteComment(this)
         //途径地列表
         planTrips_recycler.layoutManager = LinearLayoutManager(this)
@@ -132,11 +134,14 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
     }
 
     //计划详情 按钮状态
-    override fun onPlanDetailButtonInfo(buttonInfo: DetailsResponse.ButtonInfoBean?) {
+    override fun onPlanDetailButtonInfo(
+        buttonInfo: DetailsResponse.ButtonInfoBean?, planDetailBean: DetailsResponse.PlanDetailBean?
+    ) {
         tv_sign_up.text = buttonInfo?.buttonName
         if (buttonInfo?.buttonAction != null && buttonInfo.buttonAction == 1) {//报名
             tv_sign_up.setOnClickListener {
-                ToastUtils.showToast("报名")
+                //报名
+                SignUpPlanActivity.start(this,planDetailBean?.planId)
             }
         } else if (buttonInfo?.buttonAction != null && buttonInfo.buttonAction == 2) {//唤醒列表
             tv_sign_up.setOnClickListener {

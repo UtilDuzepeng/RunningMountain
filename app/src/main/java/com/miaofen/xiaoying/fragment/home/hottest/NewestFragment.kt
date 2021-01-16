@@ -39,8 +39,9 @@ class NewestFragment : BaseMvpFragment<NewestContract.Presenter>(), NewestContra
         newest.setEnableRefresh(true)
         newest.autoRefresh()
         mAdapter = ShareRecyclerAdapter(R.layout.newest_recycler_layout, list, activity)
-        mAdapter?.openLoadAnimation()
         newest.recyclerView.adapter = mAdapter
+        mAdapter?.openLoadAnimation()
+        mAdapter?.emptyView = getEmptyView(R.layout.no_data_available_layout)
     }
 
     override fun loadMore(pager: Int, size: Int) {

@@ -17,7 +17,7 @@ class AboutUsActivity : BaseActivity() {
     override fun initView() {
         super.initView()
         title_bar_back.visibility = View.VISIBLE
-        title_bar_title.text = "关于我们"
+        title_bar_title.setText(R.string.about_us)
     }
 
     override fun initData() {

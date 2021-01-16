@@ -29,13 +29,13 @@
             android:textColor="@color/A212A3D"
             android:textSize="@dimen/sp_15"
             android:lines="1"
-            android:text="摩友2234"/>
+            android:text="@string/moyou"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:lines="1"
-            android:text="谢谢朋友"
+            android:text="@string/thank_you"
             android:textColor="@color/A686E7A"
             android:textSize="@dimen/sp_13" />
 
@@ -45,7 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_8"
-        android:text="10-16 12:35"
+        android:text="@string/occupancy_time"
         android:textColor="@color/A686E7A"
         android:textSize="@dimen/sp_12" />
 

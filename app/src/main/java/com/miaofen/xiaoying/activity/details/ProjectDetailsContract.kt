@@ -48,7 +48,7 @@ interface ProjectDetailsContract {
         fun onPlanDetailCreateTime(createTime: Long?)
 
         //计划详情 按钮状态
-        fun onPlanDetailButtonInfo(buttonInfo: DetailsResponse.ButtonInfoBean?)
+        fun onPlanDetailButtonInfo(buttonInfo: DetailsResponse.ButtonInfoBean?,planDetailBean :DetailsResponse.PlanDetailBean?)
 
         //计划详情 标题
         fun onPlanDetailTitle(title: String?)

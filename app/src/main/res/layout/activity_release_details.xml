@@ -19,7 +19,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="希望人数"
+            android:text="@string/expected_number"
             android:textColor="@color/A212A3D"
             android:textSize="@dimen/sp_15" />
 
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:background="@null"
             android:gravity="right"
-            android:hint="填写希望人数"
+            android:hint="@string/fill_in_the_expected_number"
             android:textColor="@color/A686E7A"
             android:textSize="@dimen/sp_15" />
 

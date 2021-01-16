@@ -21,7 +21,7 @@
         android:layout_marginTop="@dimen/dp_6"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="小队"
+        android:text="@string/team"
         android:textColor="@color/A212A3D"
         android:textSize="@dimen/sp_13" />
 

@@ -33,7 +33,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="车牌号"
+                    android:text="@string/license_plate_number"
                     android:textColor="@color/A212A3D"
                     android:textSize="@dimen/sp_15" />
 
@@ -47,7 +47,7 @@
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
                     android:gravity="right"
-                    android:hint="填写车牌号"
+                    android:hint="@string/fill_in_the_licenser"
                     android:lines="1"
                     android:padding="@dimen/dp_10"
                     android:text=""
@@ -80,7 +80,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="车辆型号"
+                    android:text="@string/vehicle_model"
                     android:textColor="@color/A212A3D"
                     android:textSize="@dimen/sp_15" />
 
@@ -94,7 +94,7 @@
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
                     android:gravity="right"
-                    android:hint="填写车辆型号"
+                    android:hint="@string/fill_the_vehicle"
                     android:lines="1"
                     android:padding="@dimen/dp_10"
                     android:text=""
@@ -127,7 +127,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="上传行车证"
+                    android:text="@string/upload_vehicle_license"
                     android:textColor="@color/A212A3D"
                     android:textSize="@dimen/sp_15" />
 
@@ -136,7 +136,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="right"
-                    android:text="*行车证仅供审核，不对外展示*"
+                    android:text="@string/vehicle_license_tips"
                     android:textColor="@color/A2A82FA"
                     android:textSize="@dimen/sp_9" />
 
@@ -173,7 +173,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="@dimen/dp_61"
-                        android:text="拍摄上传"
+                        android:text="@string/shoot_and_upload"
                         android:textColor="@color/A686E7A"
                         android:textSize="@dimen/sp_14" />
 
@@ -191,7 +191,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_18"
                 android:layout_marginTop="@dimen/dp_18"
-                android:text="上传车辆照片"
+                android:text="@string/upload_vehicle_photos"
                 android:textColor="@color/A212A3D"
                 android:textSize="@dimen/sp_15" />
 
@@ -221,7 +221,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_marginBottom="@dimen/dp_20"
                     android:layout_centerInParent="true"
-                    android:text="提交认证"
+                    android:text="@string/submit_for_certification"
                     android:textColor="@color/white"
                     android:textSize="@dimen/sp_14" />
 

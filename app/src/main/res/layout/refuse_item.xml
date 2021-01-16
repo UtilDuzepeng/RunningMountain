@@ -37,7 +37,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="周俊杰"
+                        android:text="@string/test_nickname"
                         android:textColor="@color/A212A3D"
                         android:textSize="@dimen/sp_14" />
 
@@ -47,7 +47,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="right"
-                        android:text="10-16 12:35"
+                        android:text="@string/occupancy_time"
                         android:textColor="@color/A686E7A"
                         android:textSize="@dimen/sp_12" />
 
@@ -62,7 +62,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="电话："
+                        android:text="@string/telephone"
                         android:textColor="@color/A686E7A"
                         android:textSize="@dimen/sp_13" />
 
@@ -70,7 +70,7 @@
                         android:id="@+id/tv_telephone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="13754877428"
+                        android:text="@string/phone_number"
                         android:textColor="@color/A686E7A"
                         android:textSize="@dimen/sp_13" />
 
@@ -82,7 +82,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
                     android:maxLines="2"
-                    android:text="这位摩友你好呀！我家就住晋阳湖旁边，可以主动报名担当向导吗？"
+                    android:text="@string/prompt_examples"
                     android:textColor="@color/A959CA7"
                     android:textSize="@dimen/sp_12" />
 
@@ -102,7 +102,7 @@
                         android:gravity="center"
                         android:paddingTop="@dimen/dp_5"
                         android:paddingBottom="@dimen/dp_5"
-                        android:text="通过"
+                        android:text="@string/adopt"
                         android:textColor="@color/white"
                         android:textSize="@dimen/sp_12" />
 
@@ -115,7 +115,7 @@
                         android:gravity="center"
                         android:paddingTop="@dimen/dp_5"
                         android:paddingBottom="@dimen/dp_5"
-                        android:text="拒绝"
+                        android:text="@string/refuse"
                         android:textColor="@color/A212A3D"
                         android:textSize="@dimen/sp_12" />
 

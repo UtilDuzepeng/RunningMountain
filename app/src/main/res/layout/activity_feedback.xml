@@ -34,7 +34,7 @@
                     android:layout_weight="1"
                     android:lineSpacingExtra="@dimen/dp_5"
                     android:paddingRight="@dimen/dp_18"
-                    android:text="产品交流及反馈可直接联系客服人员，我们将第一时间接收您宝贵的意见～"
+                    android:text="@string/customer_service_tips"
                     android:textColor="@color/A2A82FA"
                     android:textSize="@dimen/sp_11" />
 
@@ -46,7 +46,7 @@
                     android:paddingTop="@dimen/dp_7"
                     android:paddingRight="@dimen/dp_8"
                     android:paddingBottom="@dimen/dp_7"
-                    android:text="打开客服会话"
+                    android:text="@string/customer_service"
                     android:textColor="@color/white"
                     android:textSize="@dimen/sp_11" />
 
@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_18"
                 android:layout_marginTop="@dimen/dp_18"
-                android:text="反馈类型"
+                android:text="@string/feedback_type"
                 android:textColor="@color/A686E7A"
                 android:textSize="@dimen/sp_14"
                 android:textStyle="bold" />
@@ -81,7 +81,7 @@
                     android:paddingTop="@dimen/dp_7"
                     android:paddingRight="@dimen/dp_12"
                     android:paddingBottom="@dimen/dp_7"
-                    android:text="发布问题"
+                    android:text="@string/issue_questions"
                     android:textColor="@color/white"
                     android:textSize="@dimen/sp_12" />
 
@@ -99,7 +99,7 @@
                     android:paddingTop="@dimen/dp_7"
                     android:paddingRight="@dimen/dp_12"
                     android:paddingBottom="@dimen/dp_7"
-                    android:text="账号相关"
+                    android:text="@string/account_related"
                     android:textColor="@color/A686E7A"
                     android:textSize="@dimen/sp_12" />
 
@@ -117,7 +117,7 @@
                     android:paddingTop="@dimen/dp_7"
                     android:paddingRight="@dimen/dp_12"
                     android:paddingBottom="@dimen/dp_7"
-                    android:text="产品BUG"
+                    android:text="@string/product_bug"
                     android:textColor="@color/A686E7A"
                     android:textSize="@dimen/sp_12" />
 
@@ -135,7 +135,7 @@
                     android:paddingTop="@dimen/dp_7"
                     android:paddingRight="@dimen/dp_12"
                     android:paddingBottom="@dimen/dp_7"
-                    android:text="投诉"
+                    android:text="@string/complaint"
                     android:textColor="@color/A686E7A"
                     android:textSize="@dimen/sp_12" />
 
@@ -159,7 +159,7 @@
                     android:paddingTop="@dimen/dp_7"
                     android:paddingRight="@dimen/dp_12"
                     android:paddingBottom="@dimen/dp_7"
-                    android:text="优化意见"
+                    android:text="@string/optimization_suggestions"
                     android:textColor="@color/A686E7A"
                     android:textSize="@dimen/sp_12" />
 
@@ -177,7 +177,7 @@
                     android:paddingTop="@dimen/dp_7"
                     android:paddingRight="@dimen/dp_12"
                     android:paddingBottom="@dimen/dp_7"
-                    android:text="其他"
+                    android:text="@string/other"
                     android:textColor="@color/A686E7A"
                     android:textSize="@dimen/sp_12" />
 
@@ -206,69 +206,69 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="反馈内容"
                 android:layout_marginLeft="@dimen/dp_18"
                 android:layout_marginTop="@dimen/dp_18"
+                android:text="@string/feedback_content"
                 android:textColor="@color/A686E7A"
                 android:textSize="@dimen/sp_14" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/dp_18"
                 android:layout_marginLeft="@dimen/dp_18"
                 android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_18"
                 android:background="@drawable/gray_frame">
 
                 <EditText
                     android:id="@+id/help_feedback"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_125"
-                    android:padding="@dimen/dp_10"
-                    android:gravity="top"
                     android:background="@android:color/transparent"
-                    android:hint="输入正文"
+                    android:gravity="top"
+                    android:hint="@string/enter_text"
                     android:lines="5"
-                    android:textSize="@dimen/sp_14"
-                    android:text="" />
+                    android:padding="@dimen/dp_10"
+                    android:text=""
+                    android:textSize="@dimen/sp_14" />
 
             </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="联系方式"
-                android:layout_marginTop="@dimen/dp_18"
                 android:layout_marginLeft="@dimen/dp_18"
+                android:layout_marginTop="@dimen/dp_18"
+                android:text="@string/contact_information"
                 android:textColor="@color/A686E7A"
                 android:textSize="@dimen/sp_14" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/dp_18"
                 android:layout_marginLeft="@dimen/dp_18"
                 android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_18"
                 android:background="@drawable/gray_frame">
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_44"
-                    android:padding="@dimen/dp_10"
                     android:background="@android:color/transparent"
-                    android:hint="填写手机号/邮箱，方便我们联系您"
+                    android:hint="@string/contact_tips"
                     android:lines="1"
-                    android:textSize="@dimen/sp_14"
-                    android:text="" />
+                    android:padding="@dimen/dp_10"
+                    android:text=""
+                    android:textSize="@dimen/sp_14" />
 
             </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="添加截图"
                 android:layout_marginLeft="@dimen/dp_18"
                 android:layout_marginTop="@dimen/dp_18"
+                android:text="@string/add_screenshot"
                 android:textColor="@color/A686E7A"
                 android:textSize="@dimen/sp_14" />
 
@@ -281,7 +281,6 @@
                 android:layout_marginBottom="@dimen/dp_24"
                 android:paddingLeft="@dimen/dp_18"
                 android:paddingRight="@dimen/dp_18" />
-
 
 
         </LinearLayout>

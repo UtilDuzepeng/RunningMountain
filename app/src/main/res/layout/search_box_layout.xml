@@ -23,7 +23,7 @@
             android:gravity="center"
             android:maxLines="1"
             android:enabled="true"
-            android:text="太原"
+            android:text="@string/taiyuan"
             android:textColor="@color/A212A3D"
             android:textSize="@dimen/sp_13" />
         <!--            android:drawableRight="@drawable/down_icon"

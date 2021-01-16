@@ -2,8 +2,10 @@ package com.miaofen.xiaoying.base
 
 import android.os.Build
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.RadioButton
+import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
@@ -114,6 +116,10 @@ abstract class BaseActivity : AppCompatActivity() {
     open fun initData() {}//赋值
 
     open fun onClick(){}//点击事件
+
+    fun getEmptyView(@LayoutRes resource: Int?): View {
+        return LayoutInflater.from(this).inflate(resource!!, null, false)
+    }
 
 
 }

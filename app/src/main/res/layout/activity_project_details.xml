@@ -57,7 +57,7 @@
                     android:layout_centerVertical="true"
                     android:gravity="center"
                     android:paddingRight="@dimen/dp_50"
-                    android:text="旅行计划详情"
+                    android:text="@string/travel_plan_details"
                     android:textColor="@color/A212A3D"
                     android:textSize="@dimen/sp_18" />
 
@@ -74,7 +74,7 @@
             android:layout_marginLeft="@dimen/dp_18"
             android:layout_marginTop="@dimen/dp_10"
             android:layout_marginBottom="@dimen/dp_10"
-            android:text="评论(0)"
+            android:text="@string/comments"
             android:textColor="@color/A212A3D"
             android:textSize="@dimen/sp_15"
             android:textStyle="bold" />
@@ -125,7 +125,7 @@
                 android:drawablePadding="@dimen/dp_8"
                 android:gravity="center_vertical"
                 android:paddingLeft="@dimen/dp_10"
-                android:text="输入评论内容"
+                android:text="@string/enter_comments"
                 android:textSize="@dimen/sp_14" />
 
 

@@ -61,7 +61,7 @@
             android:layout_height="@dimen/dp_25"
             android:background="@drawable/blue_block_backger"
             android:gravity="center"
-            android:text="搜索"
+            android:text="@string/search"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_14"
             android:textStyle="bold" />

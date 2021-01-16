@@ -19,7 +19,7 @@
         android:background="@android:color/transparent"
         android:drawablePadding="@dimen/dp_10"
         android:gravity="center_vertical"
-        android:hint="填写电话(选填)"
+        android:hint="@string/telephone_number"
         android:inputType="number"
         android:lines="1"
         android:minHeight="@dimen/dp_50"
@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:gravity="top"
-            android:hint="备注说明(选填)"
+            android:hint="@string/notes"
             android:lines="5"
             android:padding="@dimen/dp_10"
             android:text="" />
@@ -71,7 +71,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/dp_94"
             android:background="@drawable/blue_back_circular"
-            android:text="报名"
+            android:text="@string/sign_up"
             android:textColor="@color/white"
             android:gravity="center"
             android:textSize="@dimen/sp_16"
@@ -100,7 +100,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_12"
                 android:layout_marginRight="@dimen/dp_12"
-                android:text="官方提醒"
+                android:text="@string/official_reminder"
                 android:textColor="@color/A686E7A"
                 android:textSize="@dimen/sp_16" />
 
@@ -120,8 +120,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:lineSpacingExtra="@dimen/dp_3"
-            android:text="为保障您的生命财产安全，请务必在跑山吧微信小程序聊天系统内沟通行程，并通过官方入口报名。请不要贪图便宜和陌生人的利益诱惑，私下通过微信等第三方平台私聊，以免上当受骗，造成其他损失。
-在平台使用过程中，如收到彩票、赌博、酒托、饭托等骚扰信息，请马上举报，系统将做永久封号处理。"
+            android:text="@string/reminder_content"
             android:textColor="@color/A959CA7"
             android:textSize="@dimen/sp_12" />
 

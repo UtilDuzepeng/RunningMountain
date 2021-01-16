@@ -31,7 +31,7 @@
             android:layout_marginRight="@dimen/dp_10"
             android:layout_weight="1"
             android:maxLines="1"
-            android:text="天剑骑士董超"
+            android:text="@string/swordsman_dong_chao"
             android:textColor="@color/A12488D"
             android:textSize="@dimen/sp_13" />
 
@@ -64,7 +64,7 @@
         android:layout_marginTop="@dimen/dp_7"
         android:layout_toRightOf="@id/imager_head"
         android:lineSpacingExtra="3dp"
-        android:text="趁这几天天气好，我想抓住秋天的小尾巴。有没有志同道合的小伙伴一起去晋阳湖公园溜一圈儿？"
+        android:text="@string/name_autograph"
         android:textColor="@color/A212A3D"
         android:textSize="@dimen/sp_14" />
 
@@ -82,7 +82,7 @@
             android:id="@+id/tv_createTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="10-17 18:01 · "
+            android:text="@string/occupancy_time"
             android:textColor="@color/A686E7A"
             android:textSize="@dimen/sp_12" />
 
@@ -91,7 +91,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/tv_createTime"
-            android:text="回复"
+            android:text="@string/reply"
             android:paddingRight="@dimen/dp_7"
             android:paddingLeft="@dimen/dp_7"
             android:textColor="@color/A686E7A"
@@ -102,7 +102,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="删除评论"
+            android:text="@string/delete_comments"
             android:textColor="@color/FF6555"
             android:textSize="@dimen/sp_12" />
 

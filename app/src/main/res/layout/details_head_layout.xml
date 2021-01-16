@@ -119,7 +119,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="希望人数"
+                android:text="@string/expected_number"
                 android:textColor="@color/A212A3D"
                 android:textSize="@dimen/sp_13" />
 
@@ -143,7 +143,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="人"
+                    android:text="@string/people"
                     android:textColor="@color/FE7405"
                     android:textSize="@dimen/sp_12" />
 
@@ -163,7 +163,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="已报名"
+                android:text="@string/signed_up"
                 android:textColor="@color/A212A3D"
                 android:textSize="@dimen/sp_13" />
 
@@ -187,7 +187,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="人"
+                    android:text="@string/people"
                     android:textColor="@color/FE7405"
                     android:textSize="@dimen/sp_12" />
 
@@ -207,7 +207,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="人均预算"
+                android:text="@string/per_capita_budget"
                 android:textColor="@color/A212A3D"
                 android:textSize="@dimen/sp_13" />
 
@@ -231,7 +231,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="元"
+                    android:text="@string/element"
                     android:textColor="@color/FE7405"
                     android:textSize="@dimen/sp_12" />
 
@@ -251,7 +251,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="费用方式"
+                android:text="@string/cost_method"
                 android:textColor="@color/A212A3D"
                 android:textSize="@dimen/sp_13" />
 
@@ -299,7 +299,7 @@
             android:drawableLeft="@drawable/weizhi_icon"
             android:drawablePadding="@dimen/dp_4"
             android:gravity="center"
-            android:text="始发地"
+            android:text="@string/place_origin"
             android:textColor="@color/A686E7A"
             android:textSize="@dimen/sp_13" />
 
@@ -342,7 +342,7 @@
             android:drawableLeft="@drawable/huodong_icon"
             android:drawablePadding="@dimen/dp_4"
             android:gravity="center"
-            android:text="目的地"
+            android:text="@string/destination"
             android:textColor="@color/A686E7A"
             android:textSize="@dimen/sp_13" />
 
@@ -372,7 +372,7 @@
             android:drawableLeft="@drawable/shijian_icon"
             android:drawablePadding="@dimen/dp_4"
             android:gravity="center"
-            android:text="起止时间"
+            android:text="@string/starting_ending_time"
             android:textColor="@color/A686E7A"
             android:textSize="@dimen/sp_13" />
 

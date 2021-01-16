@@ -4,6 +4,7 @@ import com.miaofen.xiaoying.common.data.bean.CommonResponse
 import com.miaofen.xiaoying.common.data.bean.request.*
 import com.miaofen.xiaoying.common.data.bean.response.*
 import io.reactivex.Observable
+import mlxy.utils.S
 import retrofit2.http.Body
 import retrofit2.http.POST
 
@@ -134,5 +135,10 @@ interface HomeApi {
     @POST("weixin/plan/refuse")
     fun onRefuse(@Body cancelRequestData: CancelRequestData): Observable<CommonResponse<String>>
 
+    /**
+     * 报名旅行计划
+     */
+    @POST("weixin/plan/join")
+    fun onSignUpPlan(@Body signUpPlanRequestData: SignUpPlanRequestData): Observable<CommonResponse<String>>
 
 }

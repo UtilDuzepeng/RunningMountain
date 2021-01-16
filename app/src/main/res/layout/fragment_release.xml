@@ -44,7 +44,7 @@
                 android:drawablePadding="@dimen/dp_10"
                 android:ellipsize="end"
                 android:gravity="center_vertical"
-                android:hint="输入标题"
+                android:hint="@string/enter_the_title"
                 android:maxLines="1"
                 android:minHeight="@dimen/dp_50"
                 android:paddingLeft="@dimen/dp_10"
@@ -76,7 +76,7 @@
                     android:background="@android:color/transparent"
                     android:ellipsize="end"
                     android:gravity="top"
-                    android:hint="输入正文"
+                    android:hint="@string/enter_text"
                     android:maxLines="5"
                     android:padding="@dimen/dp_10"
                     android:text="" />
@@ -106,7 +106,7 @@
                         android:gravity="center_vertical"
                         android:drawableLeft="@drawable/black_product_fill_icon"
                         android:drawablePadding="@dimen/dp_4"
-                        android:text="详情"
+                        android:text="@string/details"
                         android:textColor="@color/A212A3D"
                         android:textSize="@dimen/sp_14" />
 
@@ -118,7 +118,7 @@
                         android:gravity="center_vertical"
                         android:drawableLeft="@drawable/black_ditu_icon"
                         android:drawablePadding="@dimen/dp_4"
-                        android:text="行程"
+                        android:text="@string/trip"
                         android:textColor="@color/A212A3D"
                         android:textSize="@dimen/sp_14" />
 
@@ -130,7 +130,7 @@
                         android:gravity="center_vertical"
                         android:drawableLeft="@drawable/black_biaoqian_icon"
                         android:drawablePadding="@dimen/dp_4"
-                        android:text="标签"
+                        android:text="@string/label"
                         android:textColor="@color/A212A3D"
                         android:textSize="@dimen/sp_14" />
 
@@ -142,7 +142,7 @@
                         android:gravity="center_vertical"
                         android:drawableLeft="@drawable/black_yinsi_icon"
                         android:drawablePadding="@dimen/dp_4"
-                        android:text="隐私"
+                        android:text="@string/privacy"
                         android:textColor="@color/A212A3D"
                         android:textSize="@dimen/sp_14" />
 
@@ -152,7 +152,7 @@
                         android:layout_height="@dimen/dp_30"
                         android:background="@drawable/blue_back_circular"
                         android:gravity="center"
-                        android:text="发布"
+                        android:text="@string/release"
                         android:textColor="@color/white"
                         android:textSize="@dimen/sp_14"
                         android:textStyle="bold" />

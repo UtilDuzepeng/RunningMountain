@@ -41,8 +41,9 @@ class HotFragment : BaseMvpFragment<HotContract.Presenter>(), HotContract.View,
         hot.setEnableRefresh(true)
         hot.autoRefresh()
         mAdapter = ShareRecyclerAdapter(R.layout.newest_recycler_layout, list, activity)
-        mAdapter?.openLoadAnimation();
         hot.recyclerView.adapter = mAdapter
+        mAdapter?.openLoadAnimation()
+        mAdapter?.emptyView = getEmptyView(R.layout.no_data_available_layout)
     }
 
     override fun loadMore(pager: Int, size: Int) {

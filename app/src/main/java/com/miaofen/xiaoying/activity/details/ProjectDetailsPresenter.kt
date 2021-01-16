@@ -89,7 +89,7 @@ class ProjectDetailsPresenter(view: ProjectDetailsContract.View) :
                         }
                         //按钮状态
                         if (data.buttonInfo != null) {
-                            mRootView.get()?.onPlanDetailButtonInfo(data.buttonInfo)
+                            mRootView.get()?.onPlanDetailButtonInfo(data.buttonInfo,data.planDetail)
                         }
                         //计划名称
                         mRootView.get()?.onPlanDetailTitle(data.planDetail?.title)

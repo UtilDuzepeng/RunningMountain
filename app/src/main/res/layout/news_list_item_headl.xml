@@ -36,7 +36,7 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:lines="1"
-            android:text="系统通知"
+            android:text="@string/system_notification"
             android:textColor="@color/A212A3D"
             android:textSize="@dimen/sp_15" />
 
@@ -102,7 +102,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:lines="1"
-                android:text="粉丝"
+                android:text="@string/fans"
                 android:textColor="@color/A212A3D"
                 android:textSize="@dimen/sp_15" />
 
@@ -111,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:lines="1"
-                android:text="旧人随风 关注了你"
+                android:text="@string/old_people_go_with"
                 android:textColor="@color/A686E7A"
                 android:textSize="@dimen/sp_13" />
 
@@ -174,7 +174,7 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:lines="1"
-            android:text="系统通知"
+            android:text="@string/system_notification"
             android:textColor="@color/A212A3D"
             android:textSize="@dimen/sp_15" />
 

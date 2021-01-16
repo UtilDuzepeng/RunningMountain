@@ -17,7 +17,7 @@
         <com.scwang.smartrefresh.layout.footer.ClassicsFooter
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:srlTextLoading="正在刷新" />
+            app:srlTextLoading="@string/refreshing" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -27,7 +27,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingBottom="@dimen/dp_500"
                 android:orientation="vertical">
 
                 <RelativeLayout
@@ -53,7 +52,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="孙娜恩"
+                            android:text="@string/test_nickname"
                             android:textColor="@color/A212A3D"
                             android:textSize="@dimen/sp_24"
                             android:textStyle="bold" />
@@ -62,7 +61,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:drawableRight="@drawable/chevron_right_outline_icon"
-                            android:text="我的个人主页"
+                            android:text="@string/personal_home_page"
                             android:textColor="@color/A686E7A"
                             android:textSize="@dimen/sp_14" />
 
@@ -121,7 +120,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_12"
-                                android:text="粉丝"
+                                android:text="@string/fans"
                                 android:textColor="@color/A686E7A"
                                 android:textSize="@dimen/sp_13" />
 
@@ -146,7 +145,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_12"
-                                android:text="关注"
+                                android:text="@string/follow"
                                 android:textColor="@color/A686E7A"
                                 android:textSize="@dimen/sp_13" />
 
@@ -171,7 +170,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_12"
-                                android:text="收藏"
+                                android:text="@string/collection"
                                 android:textColor="@color/A686E7A"
                                 android:textSize="@dimen/sp_13" />
 
@@ -207,7 +206,7 @@
                         android:layout_marginLeft="@dimen/dp_12"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="旅行计划"
+                        android:text="@string/travel_plan"
                         android:textColor="@color/A212A3D"
                         android:textSize="@dimen/sp_15" />
 
@@ -251,7 +250,7 @@
                         android:layout_marginLeft="@dimen/dp_12"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="车辆认证"
+                        android:text="@string/vehicle_certification"
                         android:textColor="@color/A212A3D"
                         android:textSize="@dimen/sp_15" />
 
@@ -260,7 +259,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginRight="@dimen/dp_8"
                         android:gravity="center_vertical"
-                        android:text="未认证"
+                        android:text="@string/not_certified"
                         android:textColor="@color/A959CA7"
                         android:textSize="@dimen/sp_13" />
 
@@ -305,7 +304,7 @@
                         android:layout_marginLeft="@dimen/dp_12"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="意见反馈"
+                        android:text="@string/feedback"
                         android:textColor="@color/A212A3D"
                         android:textSize="@dimen/sp_15" />
 
@@ -349,7 +348,7 @@
                         android:layout_marginLeft="@dimen/dp_12"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="隐私设置"
+                        android:text="@string/privacy_settings"
                         android:textColor="@color/A212A3D"
                         android:textSize="@dimen/sp_15" />
 
@@ -393,7 +392,7 @@
                         android:layout_marginLeft="@dimen/dp_12"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="关于我们"
+                        android:text="@string/about_us"
                         android:textColor="@color/A212A3D"
                         android:textSize="@dimen/sp_15" />
 

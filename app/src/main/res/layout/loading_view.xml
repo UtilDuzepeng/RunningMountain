@@ -28,7 +28,7 @@
         android:layout_below="@+id/progressbar"
         android:layout_marginTop="5dp"
         android:gravity="center"
-        android:text="请稍后..."
+        android:text="@string/please_wait"
         android:textColor="@color/white" />
 
 

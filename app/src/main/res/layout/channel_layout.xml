@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_10"
             android:drawableLeft="@drawable/blue_border"
-            android:text="二许线"
+            android:text="@string/erxu_line"
             android:textColor="@color/A212A3D"
             android:textSize="@dimen/sp_14" />
 
@@ -56,7 +56,7 @@
             android:maxLines="2"
             android:lineSpacingExtra="3dp"
             android:textSize="@dimen/sp_12"
-            android:text="路边有一家上海风味小笼包店，店里的蟹粉小笼包和鸭血粉丝汤味道相当正宗，物美价廉"
+            android:text="@string/route_tips"
             android:textColor="@color/A959CA7" />
 
 
