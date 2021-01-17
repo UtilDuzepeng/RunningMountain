@@ -44,4 +44,26 @@ class HistoryPresenter(view: HistoryContract.View): BasePresenter<HistoryContrac
 
     }
 
+    override fun onClearRecord() {
+        RemoteRepository
+            .onClearRecord()
+            .applySchedulers()
+            .subscribe(object : CommonObserver<String>() {
+                override fun onSubscribe(d: Disposable?) {
+                    addDispose(d)
+                }
+
+                override fun success(data: String?) {
+
+                    mRootView.get()?.onClearRecordSuccess(data)
+                }
+
+                override fun failure(e: Throwable?, errMsg: String?) {
+                    super.failure(e, errMsg)
+                    mRootView.get()?.onClearRecordError()
+                }
+            })
+
+    }
+
 }

@@ -28,8 +28,10 @@ class SignUpActivity : BaseActivity() {
     }
 
     companion object {
-        fun start(context: Context?) {
+        const val PLANID = "planId"
+        fun start(context: Context?,planId: Int?) {
             val intent = Intent(context, SignUpActivity::class.java)
+            intent.putExtra(PLANID,planId)
             context?.startActivity(intent)
         }
     }

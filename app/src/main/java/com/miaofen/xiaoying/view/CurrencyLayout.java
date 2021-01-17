@@ -206,14 +206,8 @@ public class CurrencyLayout extends LinearLayout {
     /**
      * 收藏
      */
-    public void onClickCollection() {
-        collection.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                ToastUtils.showToast("收藏");
-            }
-        });
+    public LinearLayout getViewCollection() {
+        return  collection;
     }
 
     /**

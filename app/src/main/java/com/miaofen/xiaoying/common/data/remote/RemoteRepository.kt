@@ -3,6 +3,7 @@ package com.miaofen.xiaoying.common.data.remote
 import com.miaofen.xiaoying.MyApplication
 import com.miaofen.xiaoying.common.data.remote.api.HomeApi
 import com.miaofen.xiaoying.common.data.remote.api.LoginApi
+import com.miaofen.xiaoying.common.data.remote.api.UserApi
 
 /**
  * 项目名称：com.miaofen.xiaoying.common.data.remote
@@ -16,4 +17,5 @@ import com.miaofen.xiaoying.common.data.remote.api.LoginApi
 
 object RemoteRepository :
     LoginApi by MRetrofit.getInstance(MyApplication.mContext).create(LoginApi::class.java),
-    HomeApi by MRetrofit.getInstance(MyApplication.mContext).create(HomeApi::class.java)
+    HomeApi by MRetrofit.getInstance(MyApplication.mContext).create(HomeApi::class.java),
+    UserApi by MRetrofit.getInstance(MyApplication.mContext).create(UserApi::class.java)

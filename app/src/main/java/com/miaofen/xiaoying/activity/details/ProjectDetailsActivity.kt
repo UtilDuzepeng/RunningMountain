@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
 import com.miaofen.xiaoying.R
+import com.miaofen.xiaoying.activity.SignUpActivity
 import com.miaofen.xiaoying.activity.details.adapter.CommentRecyclerViewAdapter
 import com.miaofen.xiaoying.activity.details.adapter.JoinsRecyclerAdapter
 import com.miaofen.xiaoying.activity.details.adapter.PlanTripsRecyclerAdapter
@@ -17,7 +18,6 @@ import com.miaofen.xiaoying.activity.details.adapter.WantsRecyclerViewAdapter
 import com.miaofen.xiaoying.activity.details.commdia.CommentDialog
 import com.miaofen.xiaoying.activity.details.replycomm.ReplyDialog
 import com.miaofen.xiaoying.activity.details.tube.AdministrationDialog
-import com.miaofen.xiaoying.activity.signplan.SignUpPlanActivity
 import com.miaofen.xiaoying.activity.signup.SignUpListActivity
 import com.miaofen.xiaoying.base.mvp.BaseMvpActivity
 import com.miaofen.xiaoying.common.data.bean.request.DeleteCommentRequestData
@@ -94,10 +94,10 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
 
     override fun initData() {
         super.initData()
-        //详情请求
-        mPresenter?.doProjectDetails(planId)
-        //一级评论请求
-        mPresenter?.doOneComments(planId, 1, 10)
+//        //详情请求
+//        mPresenter?.doProjectDetails(planId)
+//        //一级评论请求
+//        mPresenter?.doOneComments(planId, 1, 10)
     }
 
     override fun onClick() {
@@ -110,6 +110,16 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
         }
 
     }
+
+    override fun onResume() {
+        super.onResume()
+        //详情请求
+        mPresenter?.doProjectDetails(planId)
+        //一级评论请求
+        mPresenter?.doOneComments(planId, 1, 10)
+        loadingDialog.showLoading()
+    }
+
 
     //轮播图
     override fun onPlanImages(planImages: ArrayList<ImagerDataBean>?) {
@@ -141,7 +151,7 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
         if (buttonInfo?.buttonAction != null && buttonInfo.buttonAction == 1) {//报名
             tv_sign_up.setOnClickListener {
                 //报名
-                SignUpPlanActivity.start(this,planDetailBean?.planId)
+                SignUpActivity.start(this,planDetailBean?.planId)
             }
         } else if (buttonInfo?.buttonAction != null && buttonInfo.buttonAction == 2) {//唤醒列表
             tv_sign_up.setOnClickListener {

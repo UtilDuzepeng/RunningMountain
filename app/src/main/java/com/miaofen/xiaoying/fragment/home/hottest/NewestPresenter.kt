@@ -3,6 +3,7 @@ package com.miaofen.xiaoying.fragment.home.hottest
 
 import com.miaofen.xiaoying.base.mvp.BasePresenter
 import com.miaofen.xiaoying.common.data.bean.request.HomeRequestData
+import com.miaofen.xiaoying.common.data.bean.request.TravelPlanRequestData
 import com.miaofen.xiaoying.common.data.bean.response.HomeResponse
 import com.miaofen.xiaoying.common.data.remote.CommonObserver
 import com.miaofen.xiaoying.common.data.remote.RemoteRepository
@@ -70,6 +71,55 @@ class NewestPresenter(view: NewestContract.View) : BasePresenter<NewestContract.
                 override fun failure(e: Throwable?, errMsg: String?) {
                     super.failure(e, errMsg)
                     mRootView.get()?.onNewestError()
+                }
+            })
+    }
+
+    /**
+     * 收藏
+     */
+    var travelPlanRequestData = TravelPlanRequestData()
+    override fun doCollection(entityId: Int?) {
+        travelPlanRequestData.setEntityId(entityId!!)
+        RemoteRepository
+            .onCollection(travelPlanRequestData)
+            .applySchedulers()
+            .subscribe(object : CommonObserver<String>() {
+                override fun onSubscribe(d: Disposable?) {
+                    addDispose(d)
+                }
+
+                override fun success(data: String?) {
+                    mRootView.get()?.onCollectionSuccess(data)
+                }
+
+                override fun failure(e: Throwable?, errMsg: String?) {
+                    super.failure(e, errMsg)
+                    mRootView.get()?.onCollectionError()
+                }
+            })
+    }
+
+    //取消收藏
+    var cancelCollectionRequestData = TravelPlanRequestData()
+    override fun doCancelCollection(entityId: Int?) {
+
+        cancelCollectionRequestData.setEntityId(entityId!!)
+        RemoteRepository
+            .onCancelCollection(cancelCollectionRequestData)
+            .applySchedulers()
+            .subscribe(object : CommonObserver<String>() {
+                override fun onSubscribe(d: Disposable?) {
+                    addDispose(d)
+                }
+
+                override fun success(data: String?) {
+                    mRootView.get()?.onCancelCollectionSuccess(data)
+                }
+
+                override fun failure(e: Throwable?, errMsg: String?) {
+                    super.failure(e, errMsg)
+                    mRootView.get()?.onCancelCollectionError()
                 }
             })
     }

@@ -49,7 +49,7 @@ class ExaminePresenter(view: ExamineContract.View) :
     var passRequestData = PassRequestData()
     override fun onPass(joinId: Int?, planId: Int?) {
         passRequestData.setJoinId(joinId!!)
-        passRequestData.setJoinId(planId!!)
+        passRequestData.setPlanId(planId!!)
         RemoteRepository
             .onPass(passRequestData)
             .applySchedulers()

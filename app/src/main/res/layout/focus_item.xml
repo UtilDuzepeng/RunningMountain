@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_60"
+    android:layout_marginLeft="@dimen/dp_10"
+    android:paddingRight="@dimen/dp_10"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="@dimen/dp_37"
+            android:layout_height="@dimen/dp_37">
+
+            <ImageView
+                android:id="@+id/focus_avatarUrl"
+                android:layout_width="@dimen/dp_36"
+                android:layout_height="@dimen/dp_36"
+                android:src="@drawable/avatar_icon" />
+
+            <ImageView
+                android:id="@+id/image_gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/circular_back"
+                android:src="@drawable/nan_icon"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/focus_nickName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/place_name"
+                android:textColor="@color/A212A3D"
+                android:textSize="@dimen/sp_14"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/focus_motorcycle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_3"
+                android:drawableLeft="@drawable/renzheng_icon"
+                android:drawablePadding="@dimen/dp_5"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:text="@string/test_motorcycle"
+                android:textColor="@color/A686E7A" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/focus_follow"
+            android:layout_width="@dimen/dp_82"
+            android:layout_height="@dimen/dp_28"
+            android:background="@drawable/grey_circle_back"
+            android:gravity="center"
+            android:text="@string/follow"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_13" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:background="@color/AF4F4F4" />
+
+</LinearLayout>

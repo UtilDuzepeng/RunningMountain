@@ -157,9 +157,6 @@ class FeedbackActivity : BaseActivity() {
         }
     }
 
-
-
-
     companion object {
         fun start(context: Context?) {
             val intent = Intent(context, FeedbackActivity::class.java)

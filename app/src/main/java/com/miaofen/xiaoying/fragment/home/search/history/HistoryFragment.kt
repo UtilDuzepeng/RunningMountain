@@ -9,7 +9,9 @@ import com.miaofen.xiaoying.R
 import com.miaofen.xiaoying.base.mvp.BaseMvpFragment
 import com.miaofen.xiaoying.fragment.home.search.back.ObserverListener
 import com.miaofen.xiaoying.fragment.home.search.back.ObserverManager
+import com.miaofen.xiaoying.view.LoadingView
 import kotlinx.android.synthetic.main.fragment_history.*
+import java.lang.reflect.Array
 import kotlin.collections.ArrayList
 
 /**
@@ -21,6 +23,13 @@ class HistoryFragment(recommend: ArrayList<String>?) : BaseMvpFragment<HistoryCo
     private var listRecommend: ArrayList<String>? = recommend
 
     private var listHistory = ArrayList<String>()
+
+    //加载动画弹窗
+    private val loadingDialog: LoadingView by lazy {
+        LoadingView(activity).apply {
+            setTipMsg("正在加载")
+        }
+    }
 
     override fun getLayoutResources() = R.layout.fragment_history
 
@@ -44,6 +53,11 @@ class HistoryFragment(recommend: ArrayList<String>?) : BaseMvpFragment<HistoryCo
                 ObserverManager.getInstance().notifyObserver(textView.text.toString())
             })
             hot_floeviewgroup.addView(textView)
+        }
+
+        image_clear_search.setOnClickListener {
+            loadingDialog.showSuccess()
+            mPresenter?.onClearRecord()
         }
     }
 
@@ -79,6 +93,16 @@ class HistoryFragment(recommend: ArrayList<String>?) : BaseMvpFragment<HistoryCo
 
     override fun onHistoryError() {
 
+    }
+
+    /*--------清除搜索历史--------*/
+    override fun onClearRecordSuccess(data: String?) {
+        flowlayout.removeAllViews()
+        loadingDialog.dismiss()
+    }
+
+    override fun onClearRecordError() {
+        loadingDialog.dismiss()
     }
 
 }

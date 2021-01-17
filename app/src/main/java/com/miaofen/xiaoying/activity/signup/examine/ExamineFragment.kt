@@ -42,6 +42,7 @@ class ExamineFragment(var planId: Int?) : BaseMvpFragment<ExamineContract.Presen
         examine_recycler.autoRefresh()
         examineRecyclerAdapter = ExamineRecyclerAdapter(R.layout.refuse_item, list, activity)
         examineRecyclerAdapter?.setAdministrationInput(this)
+        examineRecyclerAdapter?.emptyView = getEmptyView(R.layout.no_data_available_layout)
         examine_recycler.recyclerView.adapter = examineRecyclerAdapter
         refuseDialog.setOnClickRefuse(this)
     }

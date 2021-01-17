@@ -17,10 +17,13 @@ import com.miaofen.xiaoying.common.data.bean.response.BannerResponse
 interface HistoryContract {
     interface Presenter : IPresenter {
         fun doHistory()
+        fun onClearRecord()
     }
 
     interface View : IView<Presenter> {
         fun onHistorySuccess(data: List<String>)
         fun onHistoryError()
+        fun onClearRecordSuccess(data: String?)
+        fun onClearRecordError()
     }
 }

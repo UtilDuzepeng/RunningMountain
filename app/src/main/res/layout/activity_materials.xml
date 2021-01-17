@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context="com.miaofen.xiaoying.activity.MaterialsActivity">
+    tools:context="com.miaofen.xiaoying.activity.materia.MaterialsActivity">
 
     <include layout="@layout/toobar_layout" />
 
@@ -30,6 +30,7 @@
 
 
         <ImageView
+            android:id="@+id/mater_avatarUrl"
             android:layout_width="@dimen/dp_64"
             android:layout_height="@dimen/dp_64"
             android:layout_marginRight="@dimen/dp_8"
@@ -63,16 +64,19 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="@string/nickname"
             android:textColor="@color/A212A3D"
             android:textSize="@dimen/sp_15" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/mater_nickName"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:layout_marginRight="@dimen/dp_8"
-            android:text="@string/test_nickname"
+            android:gravity="right"
+            android:maxLines="1"
+            android:text=""
             android:textColor="@color/A686E7A"
             android:textSize="@dimen/sp_15" />
 
@@ -100,16 +104,20 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+
             android:text="@string/birthday"
             android:textColor="@color/A212A3D"
             android:textSize="@dimen/sp_15" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/mater_birthdayTime"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dp_8"
-            android:text="1995-07-07"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:maxLines="1"
+            android:text=""
             android:textColor="@color/A686E7A"
             android:textSize="@dimen/sp_15" />
 
@@ -137,16 +145,19 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="@string/gender"
             android:textColor="@color/A212A3D"
             android:textSize="@dimen/sp_15" />
 
         <TextView
+            android:id="@+id/mater_gender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dp_8"
-            android:text="@string/female"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:maxLines="1"
+            android:text=""
             android:textColor="@color/A686E7A"
             android:textSize="@dimen/sp_15" />
 
@@ -174,16 +185,19 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="@string/region"
             android:textColor="@color/A212A3D"
             android:textSize="@dimen/sp_15" />
 
         <TextView
+            android:id="@+id/mater_province"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dp_8"
-            android:text="山西·太原"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:maxLines="1"
+            android:text=""
             android:textColor="@color/A686E7A"
             android:textSize="@dimen/sp_15" />
 
@@ -211,15 +225,18 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="@string/autograph"
             android:textColor="@color/A212A3D"
             android:textSize="@dimen/sp_15" />
 
         <TextView
+            android:id="@+id/tv_personalSignature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dp_8"
+            android:gravity="right"
+            android:layout_weight="1"
+            android:maxLines="1"
             android:text="@string/signature_tips"
             android:textColor="@color/A686E7A"
             android:textSize="@dimen/sp_15" />

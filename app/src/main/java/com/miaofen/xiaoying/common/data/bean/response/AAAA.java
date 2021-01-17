@@ -16,136 +16,106 @@ import java.util.List;
 
 public class AAAA {
 
+    private DataBean data;
 
-
-    private List<DataBean> data;
-
-
-    public List<DataBean> getData() {
+    public DataBean getData() {
         return data;
     }
 
-    public void setData(List<DataBean> data) {
+    public void setData(DataBean data) {
         this.data = data;
     }
 
     public static class DataBean {
         /**
-         * userInfo : {"motorcycle":null,"gender":0,"personalSignature":null,"avatarUrl":"https://avatar.csdnimg.cn/8/1/7/1_weixin_41590779.jpg","nickName":"das","class":"com.paoshanba.common.dto.UserAvatarInfoVo","userId":2}
-         * createTime : 1609836229000
-         * contactWay : 18611752439
-         * planId : 11
-         * remark : 快点通过我，小垃圾
-         * joinId : 47
-         * class : com.paoshanba.travelplan.dubbo.api.vo.out.TravelPlanJoinListVo
+         * pageNumber : 1
+         * pageSize : 10
+         * content : [{"motorcycle":"Kawasaki Ninja H2 Carbon","personalSignature":"操啊","avatarUrl":"https://thirdwx.qlogo.cn/mmopen/vi_32/YD1RqdHwfuMN748rATaDNnqVUIVONvWQJYicuGR0GxMNetr3SZ20kW3bU4CWjiaIbt00Ria1UYCZY6h27Tf7VQYibg/132","nickName":"机车","selfFollowUser":false,"class":"com.paoshanba.user.dubbo.api.dto.UserListVo","userId":1,"userFollowSelf":true},{"motorcycle":null,"personalSignature":null,"avatarUrl":"https://thirdwx.qlogo.cn/mmopen/vi_32/YD1RqdHwfuMN748rATaDNnqVUIVONvWQJYicuGR0GxMNetr3SZ20kW3bU4CWjiaIbt00Ria1UYCZY6h27Tf7VQYibg/132","nickName":"骑士_8665","selfFollowUser":true,"class":"com.paoshanba.user.dubbo.api.dto.UserListVo","userId":3,"userFollowSelf":true},{"motorcycle":null,"personalSignature":null,"avatarUrl":"https://thirdwx.qlogo.cn/mmopen/vi_32/YD1RqdHwfuMN748rATaDNnqVUIVONvWQJYicuGR0GxMNetr3SZ20kW3bU4CWjiaIbt00Ria1UYCZY6h27Tf7VQYibg/132","nickName":"骑士_1730","selfFollowUser":false,"class":"com.paoshanba.user.dubbo.api.dto.UserListVo","userId":4,"userFollowSelf":true},{"motorcycle":null,"personalSignature":null,"avatarUrl":"https://thirdwx.qlogo.cn/mmopen/vi_32/YD1RqdHwfuMN748rATaDNnqVUIVONvWQJYicuGR0GxMNetr3SZ20kW3bU4CWjiaIbt00Ria1UYCZY6h27Tf7VQYibg/132","nickName":"骑士_5385","selfFollowUser":false,"class":"com.paoshanba.user.dubbo.api.dto.UserListVo","userId":5,"userFollowSelf":true},{"motorcycle":null,"personalSignature":null,"avatarUrl":"https://thirdwx.qlogo.cn/mmopen/vi_32/YD1RqdHwfuMN748rATaDNnqVUIVONvWQJYicuGR0GxMNetr3SZ20kW3bU4CWjiaIbt00Ria1UYCZY6h27Tf7VQYibg/132","nickName":"骑士_3157","selfFollowUser":false,"class":"com.paoshanba.user.dubbo.api.dto.UserListVo","userId":6,"userFollowSelf":true},{"motorcycle":null,"personalSignature":null,"avatarUrl":"https://thirdwx.qlogo.cn/mmopen/vi_32/YD1RqdHwfuMN748rATaDNnqVUIVONvWQJYicuGR0GxMNetr3SZ20kW3bU4CWjiaIbt00Ria1UYCZY6h27Tf7VQYibg/132","nickName":"骑士_8181","selfFollowUser":false,"class":"com.paoshanba.user.dubbo.api.dto.UserListVo","userId":7,"userFollowSelf":true},{"motorcycle":null,"personalSignature":null,"avatarUrl":"https://thirdwx.qlogo.cn/mmopen/vi_32/YD1RqdHwfuMN748rATaDNnqVUIVONvWQJYicuGR0GxMNetr3SZ20kW3bU4CWjiaIbt00Ria1UYCZY6h27Tf7VQYibg/132","nickName":"骑士_7297","selfFollowUser":false,"class":"com.paoshanba.user.dubbo.api.dto.UserListVo","userId":8,"userFollowSelf":true},{"motorcycle":null,"personalSignature":null,"avatarUrl":"https://thirdwx.qlogo.cn/mmopen/vi_32/YD1RqdHwfuMN748rATaDNnqVUIVONvWQJYicuGR0GxMNetr3SZ20kW3bU4CWjiaIbt00Ria1UYCZY6h27Tf7VQYibg/132","nickName":"骑士_270","selfFollowUser":false,"class":"com.paoshanba.user.dubbo.api.dto.UserListVo","userId":9,"userFollowSelf":true},{"motorcycle":null,"personalSignature":null,"avatarUrl":"https://thirdwx.qlogo.cn/mmopen/vi_32/YD1RqdHwfuMN748rATaDNnqVUIVONvWQJYicuGR0GxMNetr3SZ20kW3bU4CWjiaIbt00Ria1UYCZY6h27Tf7VQYibg/132","nickName":"骑士_7982","selfFollowUser":false,"class":"com.paoshanba.user.dubbo.api.dto.UserListVo","userId":10,"userFollowSelf":true},{"motorcycle":null,"personalSignature":null,"avatarUrl":"https://thirdwx.qlogo.cn/mmopen/vi_32/YD1RqdHwfuMN748rATaDNnqVUIVONvWQJYicuGR0GxMNetr3SZ20kW3bU4CWjiaIbt00Ria1UYCZY6h27Tf7VQYibg/132","nickName":"骑士_2332","selfFollowUser":false,"class":"com.paoshanba.user.dubbo.api.dto.UserListVo","userId":11,"userFollowSelf":true}]
+         * totalElements : 12
+         * empty : false
          */
 
-        private UserInfoBean userInfo;
-        private long createTime;
-        private String contactWay;
-        private int planId;
-        private String remark;
-        private int joinId;
-        @SerializedName("class")
-        private String classX;
+        private int pageNumber;
+        private int pageSize;
+        private int totalElements;
+        private boolean empty;
+        private List<ContentBean> content;
 
-        public UserInfoBean getUserInfo() {
-            return userInfo;
+        public int getPageNumber() {
+            return pageNumber;
         }
 
-        public void setUserInfo(UserInfoBean userInfo) {
-            this.userInfo = userInfo;
+        public void setPageNumber(int pageNumber) {
+            this.pageNumber = pageNumber;
         }
 
-        public long getCreateTime() {
-            return createTime;
+        public int getPageSize() {
+            return pageSize;
         }
 
-        public void setCreateTime(long createTime) {
-            this.createTime = createTime;
+        public void setPageSize(int pageSize) {
+            this.pageSize = pageSize;
         }
 
-        public String getContactWay() {
-            return contactWay;
+        public int getTotalElements() {
+            return totalElements;
         }
 
-        public void setContactWay(String contactWay) {
-            this.contactWay = contactWay;
+        public void setTotalElements(int totalElements) {
+            this.totalElements = totalElements;
         }
 
-        public int getPlanId() {
-            return planId;
+        public boolean isEmpty() {
+            return empty;
         }
 
-        public void setPlanId(int planId) {
-            this.planId = planId;
+        public void setEmpty(boolean empty) {
+            this.empty = empty;
         }
 
-        public String getRemark() {
-            return remark;
+        public List<ContentBean> getContent() {
+            return content;
         }
 
-        public void setRemark(String remark) {
-            this.remark = remark;
+        public void setContent(List<ContentBean> content) {
+            this.content = content;
         }
 
-        public int getJoinId() {
-            return joinId;
-        }
-
-        public void setJoinId(int joinId) {
-            this.joinId = joinId;
-        }
-
-        public String getClassX() {
-            return classX;
-        }
-
-        public void setClassX(String classX) {
-            this.classX = classX;
-        }
-
-        public static class UserInfoBean {
+        public static class ContentBean {
             /**
-             * motorcycle : null
-             * gender : 0
-             * personalSignature : null
-             * avatarUrl : https://avatar.csdnimg.cn/8/1/7/1_weixin_41590779.jpg
-             * nickName : das
-             * class : com.paoshanba.common.dto.UserAvatarInfoVo
-             * userId : 2
+             * motorcycle : Kawasaki Ninja H2 Carbon
+             * personalSignature : 操啊
+             * avatarUrl : https://thirdwx.qlogo.cn/mmopen/vi_32/YD1RqdHwfuMN748rATaDNnqVUIVONvWQJYicuGR0GxMNetr3SZ20kW3bU4CWjiaIbt00Ria1UYCZY6h27Tf7VQYibg/132
+             * nickName : 机车
+             * selfFollowUser : false
+             * class : com.paoshanba.user.dubbo.api.dto.UserListVo
+             * userId : 1
+             * userFollowSelf : true
              */
 
-            private Object motorcycle;
-            private int gender;
-            private Object personalSignature;
+            private String motorcycle;
+            private String personalSignature;
             private String avatarUrl;
             private String nickName;
+            private boolean selfFollowUser;
             @SerializedName("class")
             private String classX;
             private int userId;
+            private boolean userFollowSelf;
 
-            public Object getMotorcycle() {
+            public String getMotorcycle() {
                 return motorcycle;
             }
 
-            public void setMotorcycle(Object motorcycle) {
+            public void setMotorcycle(String motorcycle) {
                 this.motorcycle = motorcycle;
             }
 
-            public int getGender() {
-                return gender;
-            }
-
-            public void setGender(int gender) {
-                this.gender = gender;
-            }
-
-            public Object getPersonalSignature() {
+            public String getPersonalSignature() {
                 return personalSignature;
             }
 
-            public void setPersonalSignature(Object personalSignature) {
+            public void setPersonalSignature(String personalSignature) {
                 this.personalSignature = personalSignature;
             }
 
@@ -165,6 +135,14 @@ public class AAAA {
                 this.nickName = nickName;
             }
 
+            public boolean isSelfFollowUser() {
+                return selfFollowUser;
+            }
+
+            public void setSelfFollowUser(boolean selfFollowUser) {
+                this.selfFollowUser = selfFollowUser;
+            }
+
             public String getClassX() {
                 return classX;
             }
@@ -179,6 +157,14 @@ public class AAAA {
 
             public void setUserId(int userId) {
                 this.userId = userId;
+            }
+
+            public boolean isUserFollowSelf() {
+                return userFollowSelf;
+            }
+
+            public void setUserFollowSelf(boolean userFollowSelf) {
+                this.userFollowSelf = userFollowSelf;
             }
         }
     }

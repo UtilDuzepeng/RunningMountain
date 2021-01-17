@@ -34,6 +34,7 @@ class RefuseFragment(var planId: Int?) : BaseMvpFragment<RefuseContract.Presente
         for (item in data!!){
             list.add(item)
         }
+        refuseRecyclerAdapter?.emptyView = getEmptyView(R.layout.no_data_available_layout)
         refuseRecyclerAdapter?.notifyDataSetChanged()
     }
 

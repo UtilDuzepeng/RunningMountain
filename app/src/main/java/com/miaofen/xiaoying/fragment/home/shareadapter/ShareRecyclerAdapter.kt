@@ -61,7 +61,7 @@ class ShareRecyclerAdapter(
         //发布时间
 //        if (item?.createTime != null) {
 //            helper.setText(R.id.data_time, getCurrentTime(item.createTime).toString())
-            helper.setText(R.id.data_time, item?.pastTime)
+        helper.setText(R.id.data_time, item?.pastTime)
 //        }
         //发布标题
         helper.setText(R.id.subject, item?.title)
@@ -87,10 +87,10 @@ class ShareRecyclerAdapter(
 
             }
             tripsName.delete(tripsName.length - 1, tripsName.length)
-            helper.setGone(R.id.linear_by_way_of,true)
+            helper.setGone(R.id.linear_by_way_of, true)
             helper.setText(R.id.route, tripsName)
         } else {
-            helper.setGone(R.id.linear_by_way_of,false)
+            helper.setGone(R.id.linear_by_way_of, false)
         }
 
         //起止时间
@@ -127,12 +127,6 @@ class ShareRecyclerAdapter(
                 view.addView(textView)
             }
         }
-//        else {
-//            val textView = LayoutInflater.from(context)
-//                .inflate(R.layout.label_recyclerview_layout, view, false) as TextView
-//            textView.text = "暂无标签"
-//            view.addView(textView)
-//        }
 
         //是否收藏 collection
         if (item?.collection != null) {
@@ -143,19 +137,43 @@ class ShareRecyclerAdapter(
                 )
             } else {
                 helper.setImageDrawable(
-                    R.id.image_collection,
-                    context?.getDrawable(R.drawable.shoucang_icon)
+                    R.id.image_collection, context?.getDrawable(R.drawable.shoucang_icon)
                 )
             }
         }
+        /**
+         * 收藏
+         */
+        currencyLayout.viewCollection.setOnClickListener {
+            if (item?.collection != null) {
+                if (item.collection) {
+                    //取消收藏
+                    onShareClick?.onCancelCollection(item.id)
+                } else {
+                    //收藏
+                    onShareClick?.onCollection(item.id)
+                }
+            }
+        }
+
         /**
          * 查看列表详情
          */
         currencyLayout.itemOnClick.setOnClickListener {
             ProjectDetailsActivity.start(context, item?.id)
-//            ProjectDetailsActivity.start(context, 11)
         }
 
+    }
+
+    interface OnShareClick {
+        fun onCollection(entityId: Int?)//收藏
+        fun onCancelCollection(entityId: Int?)//取消收藏
+    }
+
+    private var onShareClick: OnShareClick? = null
+
+    fun setOnShareClick(onShareClick: OnShareClick?) {
+        this.onShareClick = onShareClick
     }
 
 }

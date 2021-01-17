@@ -16,6 +16,7 @@
         android:layout_alignParentTop="true"
         android:layout_gravity="center"
         app:tabGravity="fill"
+        android:background="@color/white"
         app:tabIndicatorColor="@color/A2A82FA"
         app:tabIndicatorFullWidth="false"
         app:tabIndicatorHeight="@dimen/dp_3"

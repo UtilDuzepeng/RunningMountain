@@ -36,9 +36,10 @@ class RefuseRecyclerAdapter(
         if (item?.createTime != null) {
             helper.setText(R.id.tv_refuse_date, getCurrentTime(item.createTime!!))//时间
         }
-        if (item?.contactWay != null){
-            helper.setText(R.id.tv_telephone, item.contactWay)//电话
+        if (item?.contactWay.isNullOrEmpty()){
+            helper.setText(R.id.tv_telephone, item?.contactWay)//电话
         }else{
+            helper.setGone(R.id.linear_telephone,false)
             helper.setText(R.id.tv_telephone, "-")
         }
         if (item?.remark != null) {

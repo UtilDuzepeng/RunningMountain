@@ -101,142 +101,144 @@
             android:layout_marginTop="@dimen/dp_10"
             android:background="@color/AF4F4F4" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_8"
-            android:orientation="horizontal">
+        <include layout="@layout/path_display_layout"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/weizhi_icon"
-                android:drawablePadding="@dimen/dp_8"
-                android:gravity="center"
-                android:text="@string/place_origin"
-                android:textColor="@color/A686E7A"
-                android:textSize="@dimen/sp_13" />
+<!--        <LinearLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="@dimen/dp_8"-->
+<!--            android:orientation="horizontal">-->
 
-            <TextView
-                android:id="@+id/place_departure"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_10"
-                android:text="@string/heituo_village"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:textColor="@color/A212A3D"
-                android:textSize="@dimen/sp_13"
-                android:textStyle="bold" />
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:drawableLeft="@drawable/weizhi_icon"-->
+<!--                android:drawablePadding="@dimen/dp_8"-->
+<!--                android:gravity="center"-->
+<!--                android:text="@string/place_origin"-->
+<!--                android:textColor="@color/A686E7A"-->
+<!--                android:textSize="@dimen/sp_13" />-->
 
-            <TextView
-                android:id="@+id/distance"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/dp_10"
-                android:background="@drawable/blue_border"
-                android:paddingLeft="@dimen/dp_6"
-                android:paddingTop="@dimen/dp_2"
-                android:paddingRight="@dimen/dp_6"
-                android:paddingBottom="@dimen/dp_2"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:text="@string/distance"
-                android:textColor="@color/A2A82FA"
-                android:textSize="@dimen/sp_9" />
+<!--            <TextView-->
+<!--                android:id="@+id/place_departure"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="@dimen/dp_10"-->
+<!--                android:text="@string/heituo_village"-->
+<!--                android:maxLines="1"-->
+<!--                android:ellipsize="end"-->
+<!--                android:textColor="@color/A212A3D"-->
+<!--                android:textSize="@dimen/sp_13"-->
+<!--                android:textStyle="bold" />-->
 
-        </LinearLayout>
+<!--            <TextView-->
+<!--                android:id="@+id/distance"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginLeft="@dimen/dp_10"-->
+<!--                android:background="@drawable/blue_border"-->
+<!--                android:paddingLeft="@dimen/dp_6"-->
+<!--                android:paddingTop="@dimen/dp_2"-->
+<!--                android:paddingRight="@dimen/dp_6"-->
+<!--                android:paddingBottom="@dimen/dp_2"-->
+<!--                android:maxLines="1"-->
+<!--                android:ellipsize="end"-->
+<!--                android:text="@string/distance"-->
+<!--                android:textColor="@color/A2A82FA"-->
+<!--                android:textSize="@dimen/sp_9" />-->
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
-            android:orientation="horizontal">
+<!--        </LinearLayout>-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/huodong_icon"
-                android:drawablePadding="@dimen/dp_8"
-                android:gravity="center"
-                android:text="@string/destination"
-                android:textColor="@color/A686E7A"
-                android:textSize="@dimen/sp_13" />
+<!--        <LinearLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="@dimen/dp_10"-->
+<!--            android:orientation="horizontal">-->
 
-            <TextView
-                android:id="@+id/destination"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_10"
-                android:text="@string/place_name"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:textColor="@color/A212A3D"
-                android:textSize="@dimen/sp_13"
-                android:textStyle="bold" />
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:drawableLeft="@drawable/huodong_icon"-->
+<!--                android:drawablePadding="@dimen/dp_8"-->
+<!--                android:gravity="center"-->
+<!--                android:text="@string/destination"-->
+<!--                android:textColor="@color/A686E7A"-->
+<!--                android:textSize="@dimen/sp_13" />-->
 
-        </LinearLayout>
+<!--            <TextView-->
+<!--                android:id="@+id/destination"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="@dimen/dp_10"-->
+<!--                android:text="@string/place_name"-->
+<!--                android:maxLines="1"-->
+<!--                android:ellipsize="end"-->
+<!--                android:textColor="@color/A212A3D"-->
+<!--                android:textSize="@dimen/sp_13"-->
+<!--                android:textStyle="bold" />-->
 
-        <LinearLayout
-            android:id="@+id/linear_by_way_of"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
-            android:orientation="horizontal">
+<!--        </LinearLayout>-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/lianjie_icon"
-                android:drawablePadding="@dimen/dp_8"
-                android:gravity="center"
-                android:text="@string/by_way_of"
-                android:textColor="@color/A686E7A"
-                android:textSize="@dimen/sp_13" />
+<!--        <LinearLayout-->
+<!--            android:id="@+id/linear_by_way_of"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="@dimen/dp_10"-->
+<!--            android:orientation="horizontal">-->
 
-            <TextView
-                android:id="@+id/route"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_10"
-                android:text="@string/route_place_name"
-                android:textColor="@color/A212A3D"
-                android:maxLines="2"
-                android:ellipsize="end"
-                android:textSize="@dimen/sp_13"
-                android:textStyle="bold" />
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:drawableLeft="@drawable/lianjie_icon"-->
+<!--                android:drawablePadding="@dimen/dp_8"-->
+<!--                android:gravity="center"-->
+<!--                android:text="@string/by_way_of"-->
+<!--                android:textColor="@color/A686E7A"-->
+<!--                android:textSize="@dimen/sp_13" />-->
 
-        </LinearLayout>
+<!--            <TextView-->
+<!--                android:id="@+id/route"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="@dimen/dp_10"-->
+<!--                android:text="@string/route_place_name"-->
+<!--                android:textColor="@color/A212A3D"-->
+<!--                android:maxLines="2"-->
+<!--                android:ellipsize="end"-->
+<!--                android:textSize="@dimen/sp_13"-->
+<!--                android:textStyle="bold" />-->
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
-            android:orientation="horizontal">
+<!--        </LinearLayout>-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/shijian_icon"
-                android:drawablePadding="@dimen/dp_8"
-                android:gravity="center"
-                android:text="@string/starting_ending_time"
-                android:textColor="@color/A686E7A"
-                android:textSize="@dimen/sp_13" />
+<!--        <LinearLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="@dimen/dp_10"-->
+<!--            android:orientation="horizontal">-->
 
-            <TextView
-                android:id="@+id/playtime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_10"
-                android:text="@string/start_end"
-                android:textColor="@color/A212A3D"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:textSize="@dimen/sp_13"
-                android:textStyle="bold" />
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:drawableLeft="@drawable/shijian_icon"-->
+<!--                android:drawablePadding="@dimen/dp_8"-->
+<!--                android:gravity="center"-->
+<!--                android:text="@string/starting_ending_time"-->
+<!--                android:textColor="@color/A686E7A"-->
+<!--                android:textSize="@dimen/sp_13" />-->
 
-        </LinearLayout>
+<!--            <TextView-->
+<!--                android:id="@+id/playtime"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="@dimen/dp_10"-->
+<!--                android:text="@string/start_end"-->
+<!--                android:textColor="@color/A212A3D"-->
+<!--                android:maxLines="1"-->
+<!--                android:ellipsize="end"-->
+<!--                android:textSize="@dimen/sp_13"-->
+<!--                android:textStyle="bold" />-->
+
+<!--        </LinearLayout>-->
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_picture"
@@ -254,10 +256,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="@dimen/dp_13"
-        android:paddingBottom="@dimen/dp_12">
+        android:layout_height="@dimen/dp_42"
+        android:orientation="horizontal">
 
 
         <LinearLayout
@@ -271,7 +271,7 @@
             <ImageView
                 android:id="@+id/image_collection"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:src="@drawable/shoucang_icon" />
 
             <View
@@ -280,8 +280,8 @@
 
             <TextView
                 android:id="@+id/tv_collection"
-                android:layout_width="22dp"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="729"
                 android:textColor="@color/A212A3D" />
 

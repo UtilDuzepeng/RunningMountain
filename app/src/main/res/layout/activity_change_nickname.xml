@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".activity.repair.ChangeNicknameActivity">
+
+    <include layout="@layout/toobar_layout" />
+
+
+    <EditText
+        android:id="@+id/enter_a_nickname"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:hint="@string/enter_a_nickname"
+        android:textSize="@dimen/sp_13"
+        android:padding="@dimen/dp_7"
+        android:maxLines="1"
+        android:background="@drawable/gray_frame" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/button_preservation"
+            android:layout_width="@dimen/dp_140"
+            android:layout_height="@dimen/dp_40"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/dp_40"
+            android:text="@string/preservation"
+            android:textSize="@dimen/sp_14"
+            android:textColor="@color/white"
+            android:background="@drawable/blue_back_circular" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>

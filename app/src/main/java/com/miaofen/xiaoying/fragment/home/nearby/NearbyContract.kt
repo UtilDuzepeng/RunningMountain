@@ -18,6 +18,8 @@ interface NearbyContract {
 
     interface Presenter : IPresenter {
         fun doNearby(page: Int, size: Int, latitude: Double, longitude: Double)
+        fun doCollection(entityId :Int?)
+        fun doCancelCollection(entityId :Int?)
     }
 
     interface View : IView<Presenter> {
@@ -35,6 +37,15 @@ interface NearbyContract {
 
         //加载错误
         fun onNearbyError()
+
+
+        fun onCollectionSuccess(data: String?)
+
+        fun onCollectionError()
+
+        fun onCancelCollectionSuccess(data: String?)
+
+        fun onCancelCollectionError()
     }
 
 }

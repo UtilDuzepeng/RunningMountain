@@ -141,4 +141,22 @@ interface HomeApi {
     @POST("weixin/plan/join")
     fun onSignUpPlan(@Body signUpPlanRequestData: SignUpPlanRequestData): Observable<CommonResponse<String>>
 
+    /**
+     * 清除历史记录
+     */
+    @POST("weixin/user/search/history/clear")
+    fun onClearRecord(): Observable<CommonResponse<String>>
+
+    /**
+     * 收藏旅行计划
+     */
+    @POST("weixin/user/collect/plan")
+    fun onCollection(@Body travelPlanRequestData: TravelPlanRequestData): Observable<CommonResponse<String>>
+
+    /**
+     * 取消收藏旅行计划
+     */
+    @POST("weixin/user/cancelCollect/plan")
+    fun onCancelCollection(@Body travelPlanRequestData: TravelPlanRequestData):Observable<CommonResponse<String>>
+
 }

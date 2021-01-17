@@ -18,6 +18,8 @@ interface NewestContract {
 
     interface Presenter : IPresenter {
         fun doNewest(page: Int,size :Int, latitude: Double, longitude: Double)
+        fun doCollection(entityId :Int?)
+        fun doCancelCollection(entityId :Int?)
     }
 
     interface View : IView<Presenter> {
@@ -31,5 +33,13 @@ interface NewestContract {
         fun onNewestNullSuccess()
 
         fun onNewestError()
+
+        fun onCollectionSuccess(data: String?)
+
+        fun onCollectionError()
+
+        fun onCancelCollectionSuccess(data: String?)
+
+        fun onCancelCollectionError()
     }
 }

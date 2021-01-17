@@ -21,8 +21,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.signup.SignUpListActivity" />
-        <activity android:name=".activity.ReleaseDetailsActivity" />
+        <activity android:name=".activity.fans.FansActivity"></activity>
+        <activity android:name=".activity.follow.FocusOnYourselfActivity" />
+        <activity android:name=".activity.collection.CollectionListActivity" />
+        <activity android:name=".activity.signature.SignatureActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,6 +36,22 @@
             android:name="com.amap.api.v2.apikey"
             android:value="3c13582c3a570678ca16089c2a778667" /> <!-- 高德地图定位服务 -->
         <service android:name="com.amap.api.location.APSService" /> <!-- 定位页面 -->
+        <activity
+            android:name=".activity.gender.GenderActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.repair.ChangeNicknameActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.signup.SignUpListActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ReleaseDetailsActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.location.LocationActivity"
             android:launchMode="singleTop"
@@ -55,7 +73,7 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.MaterialsActivity"
+            android:name=".activity.materia.MaterialsActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity

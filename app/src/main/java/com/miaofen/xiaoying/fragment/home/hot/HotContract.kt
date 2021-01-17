@@ -18,6 +18,9 @@ interface HotContract {
 
     interface Presenter : IPresenter {
         fun doHot(page: Int, size: Int, latitude: Double, longitude: Double)
+        fun doCollection(entityId :Int?)
+        fun doCancelCollection(entityId :Int?)
+
     }
 
     interface View : IView<Presenter> {
@@ -34,5 +37,13 @@ interface HotContract {
         fun onHotNullSuccess()
 
         fun onHotError()
+
+        fun onCollectionSuccess(data: String?)
+
+        fun onCollectionError()
+
+        fun onCancelCollectionSuccess(data: String?)
+
+        fun onCancelCollectionError()
     }
 }

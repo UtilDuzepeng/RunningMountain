@@ -30,7 +30,7 @@ class ExamineRecyclerAdapter(
     var context: Context? = context
     override fun convert(helper: BaseViewHolder, item: ExamineResponse?) {
         helper.setVisible(R.id.linear_button, true)
-        helper.setVisible(R.id.image_rejected,false)
+        helper.setVisible(R.id.image_rejected, false)
         //头像
         Glide.with(context!!).load(item?.userInfo?.avatarUrl)
             .apply(RequestOptions.bitmapTransform(CircleCrop()))
@@ -39,8 +39,14 @@ class ExamineRecyclerAdapter(
         if (item?.createTime != null) {
             helper.setText(R.id.tv_refuse_date, getCurrentTime(item.createTime!!))//时间
         }
-        helper.setText(R.id.tv_telephone, item?.contactWay)//电话
-        if (item?.remark != null) {
+        if (item?.contactWay!!.isNotEmpty()) {
+            helper.setText(R.id.tv_telephone, item.contactWay)//电话
+        } else {
+            helper.setGone(R.id.linear_telephone, false)
+
+        }
+
+        if (item.remark!!.isNotEmpty()) {
             helper.setVisible(R.id.tv_autograph, true)
             helper.setText(R.id.tv_autograph, item.remark)//签名
         } else {
@@ -48,16 +54,17 @@ class ExamineRecyclerAdapter(
         }
 
         helper.setOnClickListener(R.id.tv_adopt) {//确认
-            examineRecyclerInput?.onClickAdopt(item?.joinId,item?.planId)
+            ToastUtils.showToast("${item?.planId}")
+            examineRecyclerInput?.onClickAdopt(item?.joinId, item?.planId)
         }
         helper.setOnClickListener(R.id.tv_refuse) {//拒绝
-            examineRecyclerInput?.onClickRefuse(item?.joinId,item?.planId)
+            examineRecyclerInput?.onClickRefuse(item?.joinId, item?.planId)
         }
     }
 
     interface ExamineRecyclerInput {
-        fun onClickAdopt(joinId: Int?,planId: Int?)
-        fun onClickRefuse(joinId: Int?,planId: Int?)
+        fun onClickAdopt(joinId: Int?, planId: Int?)
+        fun onClickRefuse(joinId: Int?, planId: Int?)
     }
 
     private var examineRecyclerInput: ExamineRecyclerInput? = null

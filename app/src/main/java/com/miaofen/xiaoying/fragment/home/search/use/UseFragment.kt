@@ -1,8 +1,6 @@
 package com.miaofen.xiaoying.fragment.home.search.use
 
 
-import android.view.LayoutInflater
-import android.view.View
 import com.miaofen.xiaoying.R
 import com.miaofen.xiaoying.base.mvp.BaseMvpFragment
 import com.miaofen.xiaoying.common.data.bean.request.PlanRequestData

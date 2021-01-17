@@ -7,7 +7,6 @@
     <string name="notifyTitle">请求权限</string>
     <string name="notifyMsg">使用该功能需要获取您的位置</string>
 
-
     <string name="about_us">关于我们</string>
     <string name="about_our_announcement">“跑山吧”是一款为广大摩托车爱好者提供的高质量社交平台。诸位爱好者可以在平台上自发组队去骑行，在小队里讨论骑行的乐趣，分享自己的动态。\n\n
 跑山吧，让爱好摩托车的你，找到更多志同道合的朋友。</string>
@@ -127,9 +126,14 @@
     <string name="keyword_and_search_again">尝试换个关键词再搜索吧</string>
     <string name="title">标题</string>
     <string name="mutual_attention">互相关注</string>
-
-
-
+    <string name="authentication">认证</string>
+    <string name="editing_materials">编辑资料</string>
+    <string name="male">男</string>
+    <string name="secrecy">保密</string>
+    <string name="preservation">保存</string>
+    <string name="enter_a_nickname">输入昵称</string>
+    <string name="change_nickname">修改昵称</string>
+    <string name="modify_signature">修改签名</string>
 
 
 </resources>

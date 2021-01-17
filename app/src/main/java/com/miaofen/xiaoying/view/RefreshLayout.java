@@ -87,6 +87,10 @@ public class RefreshLayout extends LinearLayout implements OnRefreshLoadMoreList
         refreshLayout.setEnableLoadMore(enabled);//是否启用上拉加载功能
     }
 
+    //完成刷新
+    public void finishRefresh(){
+        refreshLayout.finishRefresh();
+    }
 
     public RecyclerView getRecyclerView() {
         return recyclerView;
