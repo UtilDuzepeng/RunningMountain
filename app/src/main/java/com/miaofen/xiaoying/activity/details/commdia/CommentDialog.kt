@@ -49,14 +49,17 @@ class CommentDialog(var activity: Activity,var replyCommentId :Long, var planId:
         showInput?.editTextShowInput(releaseText)
 
         frView?.findViewById<ImageView>(R.id.image_close_comments)?.setOnClickListener {
+            releaseText?.setText("")
+            releaseText?.setHint(R.string.comment_tips)
             showInput?.closeCommentDialog(releaseText)
         }
 
         return frView
     }
 
-
     override fun onCommentSuccess(data: String?) {
+        releaseText?.setText("")
+        releaseText?.setHint(R.string.comment_tips)
         showInput?.loadAnimation(releaseText)
     }
 

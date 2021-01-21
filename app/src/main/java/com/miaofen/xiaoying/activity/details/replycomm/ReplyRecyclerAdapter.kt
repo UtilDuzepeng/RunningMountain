@@ -103,9 +103,7 @@ class ReplyRecyclerAdapter(
             } else {
                 val index = hashMap[item?.parentCommentId]
                 helper.setText(
-
-                    R.id.tv_reply_upper_strata, "@${item?.userInfo?.nickName}:${index?.content}"
-
+                    R.id.tv_reply_upper_strata, "@${index?.userInfo?.nickName}:${index?.content}"
                 )
             }
 

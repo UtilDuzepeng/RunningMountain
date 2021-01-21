@@ -2,6 +2,7 @@ package com.miaofen.xiaoying.activity.details.adapter
 
 import android.content.Context
 import android.os.Build
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.Nullable
@@ -74,13 +75,14 @@ class CommentRecyclerViewAdapter(
 
         val tv_replyCount = helper.getView<TextView>(R.id.tv_replyCount) as TextView
 
+        Log.e("TAG","回复数量 " + item?.replyCount)
         //设置回复
-        if (item?.replyCount != null) {
-            if (item.replyCount!! >= 1) {
-                tv_replyCount.text = "${item.replyCount} 回复"
+            if (item?.replyCount!! > 0) {
+                tv_replyCount.text = "${item?.replyCount} 回复"
                 tv_replyCount.setBackgroundResource(R.drawable.search_background)
+            }else{
+                tv_replyCount.text = "回复"
             }
-        }
 
         helper.setOnClickListener(R.id.tv_replyCount) {
             deleteComment?.onReply(item?.commentId)

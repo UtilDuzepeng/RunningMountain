@@ -135,6 +135,11 @@ class ReplyDialog(var commentId: Long?, var planId: Int?,var activity: Activity?
 
     }
 
+    fun requestData(){
+
+    }
+
+
     //列表请求成功
     override fun onReplyCommSuccess(data: SecondaryReplyResponse?) {
         //this.topCommentId = data?.topPlanComment?.commentId!!

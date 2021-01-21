@@ -2,6 +2,7 @@ package com.miaofen.xiaoying.activity.details
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import androidx.recyclerview.widget.GridLayoutManager
@@ -413,10 +414,12 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
 
     //点击回复
     override fun onReply(commentId: Long?) {
+        Log.e("TAG","评论编号：" + commentId)
         if (replyDialog == null) {
             replyDialog = ReplyDialog(commentId,planId,this)
             replyDialog?.setOnClickReply(this)
         }
+
         replyDialog?.show(supportFragmentManager, "DF")
     }
 
@@ -485,7 +488,7 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
     /*---------查看1级计划评论回复列表--------------*/
     override fun onNumberReplies() {
         replyDialog?.dismiss()
-        replyDialog == null
+        replyDialog = null
     }
 
 
