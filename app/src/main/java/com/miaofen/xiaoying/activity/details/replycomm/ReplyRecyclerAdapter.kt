@@ -34,8 +34,6 @@ class ReplyRecyclerAdapter(
     private var context: Context? = context
     var topCommentId: Long = -1
 
-//    var map = HashMap<Long, SecondaryReplyResponse.SubPlanCommentListBean>()
-
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun convert(
         helper: BaseViewHolder, item: SecondaryReplyResponse.SubPlanCommentListBean?
@@ -68,41 +66,30 @@ class ReplyRecyclerAdapter(
             }
 
 
-        } else {
+        }
+//        else {
+//            //标准圆形图片。
+//            Glide.with(context!!).load(item?.userInfo?.avatarUrl)
+//                .apply(RequestOptions.bitmapTransform(CircleCrop()))
+//                .into(helper.getView(R.id.reply_item_avatarUrl) as ImageView)
+//            helper.setText(R.id.tv_replu_item_con, item?.content)
+//            helper.setText(R.id.tv_reply_item_name, item?.userInfo?.nickName)
+//            helper.setText(R.id.tv_reply_number, "${item?.starCount}")
+//            helper.setText(R.id.tv_reply_time, "${getCurrentTime(item?.createTime!!)}")
 
-            //标准圆形图片。
-            Glide.with(context!!).load(item?.userInfo?.avatarUrl)
-                .apply(RequestOptions.bitmapTransform(CircleCrop()))
-                .into(helper.getView(R.id.reply_item_avatarUrl) as ImageView)
-            helper.setText(R.id.tv_replu_item_con, item?.content)
-            helper.setText(R.id.tv_reply_item_name, item?.userInfo?.nickName)
-            helper.setText(R.id.tv_reply_number, "${item?.starCount}")
-            helper.setText(R.id.tv_reply_time, "${getCurrentTime(item?.createTime!!)}")
-
-
-//            if (item.content == "") {
-//                helper.setText(R.id.tv_reply_upper_strata, "@${item.userInfo?.nickName}:[该内容已经删除]")
-////                helper.setGone(R.id.tv_reply_upper_strata, false)
-//            } else {
-////                helper.setGone(R.id.tv_reply_upper_strata, true)
-//                helper.setText(R.id.tv_reply_upper_strata, "@${item.userInfo?.nickName}:${item.content}")
-//            }
-//
-            if (item.canDelete!!){
+            if (item?.canDelete!!){
                 helper.setVisible(R.id.tv_reply_delete_comments,true)
             }else{
                 helper.setVisible(R.id.tv_reply_delete_comments,false)
             }
 
-//            val subPlanCommentListBean = map[item.commentId]
-
-            if (item.content == "") {
+            if (item?.content == "") {
                 helper.setText(R.id.tv_reply_upper_strata, "[该内容已经删除]")
             } else {
                 helper.setText(R.id.tv_reply_upper_strata, "@${item?.userInfo?.nickName}:${item?.content}")
             }
 
-        }
+//        }
 
 
     }

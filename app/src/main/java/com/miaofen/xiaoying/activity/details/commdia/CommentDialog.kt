@@ -25,7 +25,7 @@ import com.miaofen.xiaoying.utils.ToastUtils
  * 修改备注：
  */
 
-class CommentDialog(var activity: Activity, var planId: Int?) :
+class CommentDialog(var activity: Activity,var replyCommentId :Long, var planId: Int?) :
     BaseMvpBottomDialogFragment<CommentContract.Presenter>(),
     CommentContract.View {
     private var frView: View? = null
@@ -43,7 +43,7 @@ class CommentDialog(var activity: Activity, var planId: Int?) :
         //发布点击事件
         frView?.findViewById<TextView>(R.id.tv_hairComment)
             ?.setOnClickListener {
-                mPresenter?.doCommentDialog(planId!!, releaseText!!.text.toString())
+                mPresenter?.doCommentDialog(replyCommentId,planId!!, releaseText!!.text.toString())
                 showInput?.editTextHintInput()
             }
         showInput?.editTextShowInput(releaseText)

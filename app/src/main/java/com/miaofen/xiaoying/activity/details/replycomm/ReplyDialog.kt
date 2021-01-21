@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
@@ -17,6 +18,9 @@ import com.miaofen.xiaoying.base.mvp.BaseMvpBottomDialogFragment
 import com.miaofen.xiaoying.common.data.bean.response.SecondaryReplyResponse
 import com.miaofen.xiaoying.utils.ToastUtils
 import com.miaofen.xiaoying.utils.getCurrentTime
+import com.miaofen.xiaoying.utils.hideInput
+import com.miaofen.xiaoying.utils.showInput
+import com.miaofen.xiaoying.view.LoadingView
 import com.miaofen.xiaoying.view.RefreshLayout
 
 /**
@@ -29,8 +33,9 @@ import com.miaofen.xiaoying.view.RefreshLayout
  * 修改备注：
  */
 
-class ReplyDialog(var commentId: Long?, var activity: Activity?) :
-    BaseMvpBottomDialogFragment<ReplyCommContract.Presenter>(), ReplyCommContract.View {
+class ReplyDialog(var commentId: Long?, var planId: Int?,var activity: Activity?) :
+    BaseMvpBottomDialogFragment<ReplyCommContract.Presenter>(), ReplyCommContract.View ,
+    CommentDialog.ShowInput {
 
     var list = ArrayList<SecondaryReplyResponse.SubPlanCommentListBean?>()
 
@@ -63,6 +68,12 @@ class ReplyDialog(var commentId: Long?, var activity: Activity?) :
     private var tvReplyFollow: TextView? = null
 
     private var tvReplyCreateTime: TextView? = null
+
+    private val loadingDialog: LoadingView by lazy {
+        LoadingView(activity).apply {
+            setTipMsg("正在加载")
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -106,9 +117,11 @@ class ReplyDialog(var commentId: Long?, var activity: Activity?) :
 
         tv_reply?.setOnClickListener {
             //唤起评论
-//            if (bottomDialogFr == null && activity != null) {
-//                bottomDialogFr  = CommentDialog(activity!!, planId)
-//            }
+            if (bottomDialogFr == null && activity != null) {
+                bottomDialogFr  = CommentDialog(activity!!, commentId!!,planId)
+                bottomDialogFr?.setShowInput(this)
+            }
+            bottomDialogFr?.show(fragmentManager!!, "DF")
         }
 
         image_like?.setOnClickListener {//喜欢/点赞
@@ -155,9 +168,7 @@ class ReplyDialog(var commentId: Long?, var activity: Activity?) :
 
         mAdapter?.setHeaderView(replyHeaderView)
         list.clear()
-//        mAdapter?.map?.clear()
         for (item in data.subPlanCommentList!!) {
-//            mAdapter?.map?.put(item.commentId!!,item)
             list.add(item)
         }
         mAdapter?.notifyDataSetChanged()
@@ -176,6 +187,31 @@ class ReplyDialog(var commentId: Long?, var activity: Activity?) :
 
     fun setOnClickReply(onClickReply: OnClickReply?) {
         this.onClickReply = onClickReply
+    }
+
+    override fun editTextShowInput(editText: EditText?) {
+        showInput(editText!!)
+    }
+
+    override fun editTextHintInput() {
+        loadingDialog.setTipMsg("正在加载")
+        loadingDialog.showFail()
+    }
+
+    override fun loadAnimation(editText: EditText?) {
+        hideInput(editText, activity)
+        bottomDialogFr?.dismiss()
+        mPresenter?.doReplyComm(commentId!!)
+        loadingDialog.dismiss()
+    }
+
+    override fun hideAnimation() {
+        loadingDialog.dismiss()
+    }
+
+    override fun closeCommentDialog(editText: EditText?) {
+        hideInput(editText, activity)
+        bottomDialogFr?.dismiss()
     }
 
 }

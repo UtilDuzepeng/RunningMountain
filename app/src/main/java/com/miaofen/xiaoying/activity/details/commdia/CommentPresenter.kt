@@ -24,12 +24,13 @@ class CommentPresenter (view: CommentContract.View) :
 
 
     var pubCommentRequestData: PubCommentRequestData = PubCommentRequestData()
-    override fun doCommentDialog(planId: Int, content: String) {
+    override fun doCommentDialog(replyCommentId : Long,planId: Int, content: String) {
+
         if (content.isEmpty()){
             ToastUtils.showToast("发布内容为空")
             return
         }
-        pubCommentRequestData.setReplyCommentId(0)
+        pubCommentRequestData.setReplyCommentId(replyCommentId)
         pubCommentRequestData.setPlanId(planId)
         pubCommentRequestData.setContent(content)
         RemoteRepository

@@ -16,7 +16,7 @@ import com.miaofen.xiaoying.base.mvp.IView
 interface CommentContract : IPresenter {
 
     interface Presenter : IPresenter {
-        fun doCommentDialog(planId: Int, content: String)
+        fun doCommentDialog(replyCommentId :Long,planId: Int, content: String)
     }
 
     interface View : IView<Presenter> {

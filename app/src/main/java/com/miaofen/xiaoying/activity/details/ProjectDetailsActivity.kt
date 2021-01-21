@@ -42,7 +42,7 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
     CommentRecyclerViewAdapter.DeleteComment, CommentDialog.ShowInput,
     AdministrationDialog.AdministrationInput, ReplyDialog.OnClickReply {
 
-    var bottomDialogFr: CommentDialog? = null//评论列表弹窗
+    var bottomDialogFr: CommentDialog? = null//评论底部弹窗
 
     var replyDialog: ReplyDialog? = null//一级回复列表弹窗
 
@@ -67,7 +67,7 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
         super.initView()
         planId = intent.getIntExtra(ID, -1)
         loadingDialog.showLoading()
-        bottomDialogFr = CommentDialog(this, planId)
+        bottomDialogFr = CommentDialog(this,0, planId)
         bottomDialogFr?.setShowInput(this)
         refreshOneComments.setSetOnRefresh(this)
         refreshOneComments.setEnableRefresh(false)
@@ -414,7 +414,7 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
     //点击回复
     override fun onReply(commentId: Long?) {
         if (replyDialog == null) {
-            replyDialog = ReplyDialog(commentId,this)
+            replyDialog = ReplyDialog(commentId,planId,this)
             replyDialog?.setOnClickReply(this)
         }
         replyDialog?.show(supportFragmentManager, "DF")
