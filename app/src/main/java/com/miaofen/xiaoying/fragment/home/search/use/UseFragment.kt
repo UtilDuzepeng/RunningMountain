@@ -63,14 +63,14 @@ class UseFragment(var data: String) : BaseMvpFragment<SearchUserContract.Present
 
     override fun onSearchUserSuccess(data: SearchUserResponse?) {
         if (data?.content == null) {
-            use_recycler.setEnableLoadMore(false)
+            use_recycler?.setEnableLoadMore(false)
             return
         }
         if (data.content?.size == 0) {
-            use_recycler.setEnableLoadMore(false)
+            use_recycler?.setEnableLoadMore(false)
             return
         } else {
-            use_recycler.setEnableLoadMore(true)
+            use_recycler?.setEnableLoadMore(true)
         }
         for (item in data.content!!) {
             list.add(item)

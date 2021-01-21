@@ -39,16 +39,16 @@ class ExamineRecyclerAdapter(
         if (item?.createTime != null) {
             helper.setText(R.id.tv_refuse_date, getCurrentTime(item.createTime!!))//时间
         }
-        if (item?.contactWay!!.isNotEmpty()) {
-            helper.setText(R.id.tv_telephone, item.contactWay)//电话
+        if (item?.contactWay != "") {
+            helper.setText(R.id.tv_telephone, item?.contactWay)//电话
         } else {
             helper.setGone(R.id.linear_telephone, false)
 
         }
 
-        if (item.remark!!.isNotEmpty()) {
+        if (item?.remark != "") {
             helper.setVisible(R.id.tv_autograph, true)
-            helper.setText(R.id.tv_autograph, item.remark)//签名
+            helper.setText(R.id.tv_autograph, item?.remark)//签名
         } else {
             helper.setGone(R.id.tv_autograph, false)
         }

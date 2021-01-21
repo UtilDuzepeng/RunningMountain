@@ -2,6 +2,7 @@ package com.miaofen.xiaoying.activity.details.replycomm
 
 import com.miaofen.xiaoying.base.mvp.IPresenter
 import com.miaofen.xiaoying.base.mvp.IView
+import com.miaofen.xiaoying.common.data.bean.response.SecondaryReplyResponse
 
 /**
  * 项目名称：com.miaofen.xiaoying.activity.details.replycomm
@@ -20,7 +21,7 @@ class ReplyCommContract {
     }
 
     interface View : IView<Presenter> {
-        fun onReplyCommSuccess(data: String?)
+        fun onReplyCommSuccess(data: SecondaryReplyResponse?)
         fun onReplyCommError()
     }
 }

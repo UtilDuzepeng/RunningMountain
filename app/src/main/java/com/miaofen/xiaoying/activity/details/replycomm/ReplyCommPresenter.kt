@@ -2,6 +2,7 @@ package com.miaofen.xiaoying.activity.details.replycomm
 
 import com.miaofen.xiaoying.base.mvp.BasePresenter
 import com.miaofen.xiaoying.common.data.bean.request.SubCommentsRequestData
+import com.miaofen.xiaoying.common.data.bean.response.SecondaryReplyResponse
 import com.miaofen.xiaoying.common.data.remote.CommonObserver
 import com.miaofen.xiaoying.common.data.remote.RemoteRepository
 import com.miaofen.xiaoying.utils.applySchedulers
@@ -28,12 +29,12 @@ class ReplyCommPresenter(view: ReplyCommContract.View) :
         RemoteRepository
             .onSubComments(subCommentsRequestData)
             .applySchedulers()
-            .subscribe(object : CommonObserver<String>() {
+            .subscribe(object : CommonObserver<SecondaryReplyResponse>() {
                 override fun onSubscribe(d: Disposable?) {
                     addDispose(d)
                 }
 
-                override fun success(data: String?) {
+                override fun success(data: SecondaryReplyResponse?) {
                     mRootView.get()?.onReplyCommSuccess(data)
                 }
 

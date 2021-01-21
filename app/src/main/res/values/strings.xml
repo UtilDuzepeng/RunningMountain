@@ -134,6 +134,7 @@
     <string name="enter_a_nickname">输入昵称</string>
     <string name="change_nickname">修改昵称</string>
     <string name="modify_signature">修改签名</string>
+    <string name="all_comments">全部评论</string>
 
 
 </resources>

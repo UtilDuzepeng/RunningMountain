@@ -108,7 +108,7 @@ interface HomeApi {
      * 查看一级计划回复列表
      */
     @POST("weixin/plan/subComments")
-    fun onSubComments(@Body subCommentsRequestData: SubCommentsRequestData): Observable<CommonResponse<String>>
+    fun onSubComments(@Body subCommentsRequestData: SubCommentsRequestData): Observable<CommonResponse<SecondaryReplyResponse>>
 
     /**
      * 审核中列表

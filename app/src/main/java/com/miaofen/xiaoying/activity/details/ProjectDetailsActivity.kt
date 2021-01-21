@@ -40,7 +40,7 @@ import kotlinx.android.synthetic.main.details_head_layout.*
 class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>(),
     ProjectDetailsContract.View, RefreshLayout.SetOnRefresh,
     CommentRecyclerViewAdapter.DeleteComment, CommentDialog.ShowInput,
-    AdministrationDialog.AdministrationInput {
+    AdministrationDialog.AdministrationInput, ReplyDialog.OnClickReply {
 
     var bottomDialogFr: CommentDialog? = null//评论列表弹窗
 
@@ -414,7 +414,8 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
     //点击回复
     override fun onReply(commentId: Long?) {
         if (replyDialog == null) {
-            replyDialog = ReplyDialog(commentId)
+            replyDialog = ReplyDialog(commentId,this)
+            replyDialog?.setOnClickReply(this)
         }
         replyDialog?.show(supportFragmentManager, "DF")
     }
@@ -479,6 +480,12 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
     //解散
     override fun administrationDissolution() {
         ToastUtils.showToast("解散")
+    }
+
+    /*---------查看1级计划评论回复列表--------------*/
+    override fun onNumberReplies() {
+        replyDialog?.dismiss()
+        replyDialog == null
     }
 
 
