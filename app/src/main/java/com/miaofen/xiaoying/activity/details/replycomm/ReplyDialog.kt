@@ -155,9 +155,9 @@ class ReplyDialog(var commentId: Long?, var activity: Activity?) :
 
         mAdapter?.setHeaderView(replyHeaderView)
         list.clear()
-        mAdapter?.map?.clear()
+//        mAdapter?.map?.clear()
         for (item in data.subPlanCommentList!!) {
-            mAdapter?.map?.put(item.commentId!!,item)
+//            mAdapter?.map?.put(item.commentId!!,item)
             list.add(item)
         }
         mAdapter?.notifyDataSetChanged()
