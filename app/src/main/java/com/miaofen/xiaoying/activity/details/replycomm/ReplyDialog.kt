@@ -35,7 +35,7 @@ import com.miaofen.xiaoying.view.RefreshLayout
 
 class ReplyDialog(var commentId: Long?, var planId: Int?,var activity: Activity?) :
     BaseMvpBottomDialogFragment<ReplyCommContract.Presenter>(), ReplyCommContract.View ,
-    CommentDialog.ShowInput {
+    CommentDialog.ShowInput, ReplyRecyclerAdapter.SecondaryReply {
 
     var list = ArrayList<SecondaryReplyResponse.SubPlanCommentListBean?>()
 
@@ -107,6 +107,7 @@ class ReplyDialog(var commentId: Long?, var planId: Int?,var activity: Activity?
         refresh_reply?.setEnableRefresh(false)
         refresh_reply?.setEnableLoadMore(false)
         mAdapter = ReplyRecyclerAdapter(R.layout.one_reply_item, list, activity)
+        mAdapter?.setSecondaryReply(this)
         refresh_reply?.recyclerView?.adapter = mAdapter
 //        mAdapter?.emptyView =
 //            LayoutInflater.from(activity).inflate(R.layout.no_data_available_layout, null, false)
@@ -168,8 +169,10 @@ class ReplyDialog(var commentId: Long?, var planId: Int?,var activity: Activity?
 
         mAdapter?.setHeaderView(replyHeaderView)
         list.clear()
+        mAdapter?.hashMap?.clear()
         for (item in data.subPlanCommentList!!) {
             list.add(item)
+            mAdapter?.hashMap?.put(item.commentId!!,item)
         }
         mAdapter?.notifyDataSetChanged()
     }
@@ -212,6 +215,16 @@ class ReplyDialog(var commentId: Long?, var planId: Int?,var activity: Activity?
     override fun closeCommentDialog(editText: EditText?) {
         hideInput(editText, activity)
         bottomDialogFr?.dismiss()
+    }
+
+    //二级回复
+    override fun onReplySecondLevel(commentId: Long) {
+        //唤起评论
+        if (bottomDialogFr == null && activity != null) {
+            bottomDialogFr  = CommentDialog(activity!!, commentId,planId)
+            bottomDialogFr?.setShowInput(this)
+        }
+        bottomDialogFr?.show(fragmentManager!!, "DF")
     }
 
 }
