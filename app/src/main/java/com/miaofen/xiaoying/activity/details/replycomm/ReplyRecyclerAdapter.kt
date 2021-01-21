@@ -11,7 +11,6 @@ import com.bumptech.glide.request.RequestOptions
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.miaofen.xiaoying.R
-import com.miaofen.xiaoying.activity.details.commdia.CommentDialog
 import com.miaofen.xiaoying.common.data.bean.response.SecondaryReplyResponse
 import com.miaofen.xiaoying.utils.getCurrentTime
 
@@ -56,31 +55,27 @@ class ReplyRecyclerAdapter(
                 helper.setImageDrawable(
                     R.id.reply_image_item, context?.getDrawable(R.drawable.dianzan_icon)
                 )
+                //取消点赞点击事件
+                helper.setOnClickListener(R.id.reply_image_item){
+                    secondaryReply?.onClickUnStar(item.commentId)
+                }
+
             } else {
                 helper.setImageDrawable(
                     R.id.reply_image_item, context?.getDrawable(R.drawable.dianzan_line)
                 )
+
+                //点赞点击事件
+                helper.setOnClickListener(R.id.reply_image_item){
+                    secondaryReply?.onClickFabulous(item.commentId)
+                }
+
             }
 
             if (item.canDelete!!) {
                 helper.setVisible(R.id.tv_reply_delete_comments, true)
             } else {
                 helper.setVisible(R.id.tv_reply_delete_comments, false)
-            }
-
-            if (item?.canDelete!!) {
-                helper.setVisible(R.id.tv_reply_delete_comments, true)
-            } else {
-                helper.setVisible(R.id.tv_reply_delete_comments, false)
-            }
-
-            if (item?.content == "") {
-                helper.setText(R.id.tv_reply_upper_strata, "[该内容已经删除]")
-            } else {
-                helper.setText(
-                    R.id.tv_reply_upper_strata,
-                    "@${item?.userInfo?.nickName}:${item?.content}"
-                )
             }
         } else {
             //标准圆形图片。
@@ -92,16 +87,37 @@ class ReplyRecyclerAdapter(
             helper.setText(R.id.tv_reply_number, "${item?.starCount}")
             helper.setText(R.id.tv_reply_time, "${getCurrentTime(item?.createTime!!)}")
 
-            if (item?.canDelete!!) {
+            if (item.canDelete!!) {
                 helper.setVisible(R.id.tv_reply_delete_comments, true)
             } else {
                 helper.setVisible(R.id.tv_reply_delete_comments, false)
             }
 
-            if (item?.content == "") {
+            if (item.star!!) {
+                helper.setImageDrawable(
+                    R.id.reply_image_item, context?.getDrawable(R.drawable.dianzan_icon)
+                )
+                //取消点赞点击事件
+                helper.setOnClickListener(R.id.reply_image_item){
+                    secondaryReply?.onClickUnStar(item?.commentId)
+                }
+
+            } else {
+                helper.setImageDrawable(
+                    R.id.reply_image_item, context?.getDrawable(R.drawable.dianzan_line)
+                )
+
+                //点赞点击事件
+                helper.setOnClickListener(R.id.reply_image_item){
+                    secondaryReply?.onClickFabulous(item?.commentId)
+                }
+
+            }
+
+            if (item.content == "") {
                 helper.setText(R.id.tv_reply_upper_strata, "[该内容已经删除]")
             } else {
-                val index = hashMap[item?.parentCommentId]
+                val index = hashMap[item.parentCommentId]
                 helper.setText(
                     R.id.tv_reply_upper_strata, "@${index?.userInfo?.nickName}:${index?.content}"
                 )
@@ -112,14 +128,23 @@ class ReplyRecyclerAdapter(
 
         //回复点击事件
         helper.setOnClickListener(R.id.tv_reply_second_level) {
-            secondaryReply?.onReplySecondLevel(item?.commentId!!)
+            secondaryReply?.onReplySecondLevel(item.commentId!!)
         }
+
+        //删除点击事件
+        helper.setOnClickListener(R.id.tv_reply_delete_comments){
+            secondaryReply?.onReplyDeleteComments(item.commentId!!)
+        }
+
 
     }
 
 
     interface SecondaryReply {
-        fun onReplySecondLevel(commentId: Long)
+        fun onReplySecondLevel(commentId: Long)//二级回复
+        fun onReplyDeleteComments(commentId: Long)//删除
+        fun onClickFabulous(commentId: Long?)//点赞
+        fun onClickUnStar(commentId: Long?)//取消点赞
     }
 
     private var secondaryReply: SecondaryReply? = null

@@ -26,7 +26,7 @@ interface ProjectDetailsContract {
     interface Presenter : IPresenter {
         fun doProjectDetails(planId: Int?)
         fun doOneComments(planId: Int?, page: Int?, size: Int?)
-        fun doDeleteComment(deleteCommentRequestData: DeleteCommentRequestData?)//删除评论
+        fun doDeleteComment(commentId: Long?)//删除评论
         fun doFabulous(commentId: Long?)//点赞评论
         fun doUnStar(commentId: Long?)//取消点赞
     }

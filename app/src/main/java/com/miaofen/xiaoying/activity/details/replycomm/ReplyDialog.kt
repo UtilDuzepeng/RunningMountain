@@ -1,6 +1,7 @@
 package com.miaofen.xiaoying.activity.details.replycomm
 
 import android.app.Activity
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,8 @@ import android.view.Window
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
@@ -125,42 +128,40 @@ class ReplyDialog(var commentId: Long?, var planId: Int?,var activity: Activity?
             bottomDialogFr?.show(fragmentManager!!, "DF")
         }
 
-        image_like?.setOnClickListener {//喜欢/点赞
-            ToastUtils.showToast("喜欢点赞")
-        }
-
         image_forward?.setOnClickListener { //转发
             ToastUtils.showToast("转发")
         }
 
     }
 
-    fun requestData(){
-
-    }
-
-
     //列表请求成功
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onReplyCommSuccess(data: SecondaryReplyResponse?) {
         //this.topCommentId = data?.topPlanComment?.commentId!!
         mAdapter?.topCommentId = data?.topPlanComment?.commentId!!
 
         tv_Number_Replies?.text = "${data?.subPlanCommentList?.size}条回复"
         //标准圆形图片。
-        Glide.with(context!!).load(data?.topPlanComment?.userInfo?.avatarUrl)
+        Glide.with(context!!).load(data.topPlanComment?.userInfo?.avatarUrl)
             .apply(RequestOptions.bitmapTransform(CircleCrop()))
             .into(imageReplyHeader!!)
         //名称
-        tvReplyName?.text = data?.topPlanComment?.userInfo?.nickName
+        tvReplyName?.text = data.topPlanComment?.userInfo?.nickName
         //内容
-        tvReplyContent?.text = data?.topPlanComment?.content
+        tvReplyContent?.text = data.topPlanComment?.content
         //显示是否关注
-        when (data?.topPlanComment?.follow) {
+        when (data.topPlanComment?.follow) {
             0 -> {//未关注
                 tvReplyFollow?.text = "关注"
+                tvReplyFollow?.setOnClickListener {
+                    ToastUtils.showToast("关注")
+                }
             }
             1 -> {//已关注
                 tvReplyFollow?.text = "已关注"
+                tvReplyFollow?.setOnClickListener {
+                 ToastUtils.showToast("取消关注")
+                }
             }
             2 -> {//自己
                 tvReplyFollow?.visibility = View.INVISIBLE
@@ -168,9 +169,25 @@ class ReplyDialog(var commentId: Long?, var planId: Int?,var activity: Activity?
             //创建时间
         }
         //创建时间
-        if (data?.topPlanComment?.createTime != null) {
+        if (data.topPlanComment?.createTime != null) {
             tvReplyCreateTime?.text = getCurrentTime(data.topPlanComment?.createTime!!)
         }
+
+        //是否点赞
+        if (data.topPlanComment?.star!!){
+            image_like?.setImageDrawable(activity?.getDrawable(R.drawable.dianzan_icon))
+            image_like?.setOnClickListener {
+                loadingDialog.showLoading()
+                mPresenter?.doUnStar(data.topPlanComment?.commentId)
+            }
+        }else{
+            image_like?.setImageDrawable(activity?.getDrawable(R.drawable.dianzan_line))
+            image_like?.setOnClickListener {
+                loadingDialog.showLoading()
+                mPresenter?.doFabulous(data.topPlanComment?.commentId)
+            }
+        }
+
 
         mAdapter?.setHeaderView(replyHeaderView)
         list.clear()
@@ -231,5 +248,66 @@ class ReplyDialog(var commentId: Long?, var planId: Int?,var activity: Activity?
         }
         bottomDialogFr?.show(fragmentManager!!, "DF")
     }
+
+    //删除评论
+    override fun onReplyDeleteComments(commentId: Long) {
+        loadingDialog.showLoading()
+        mPresenter?.doDeleteComment(commentId)
+    }
+
+    //删除评论成功
+    override fun onDeleteCommentSuccess(data: String?) {
+        mPresenter?.doReplyComm(commentId!!)
+        loadingDialog.dismiss()
+    }
+    //删除失败
+    override fun onDeleteCommentError() {
+        loadingDialog.dismiss()
+    }
+
+    //点赞
+    override fun onClickFabulous(commentId: Long?) {
+        loadingDialog.showLoading()
+        mPresenter?.doFabulous(commentId)
+    }
+
+    //点赞成功
+    override fun onFabulousSuccess(data: String?) {
+        mPresenter?.doReplyComm(commentId!!)
+        loadingDialog.dismiss()
+    }
+
+    //点赞失败
+    override fun onFabulousError() {
+        loadingDialog.dismiss()
+    }
+
+    //取消点赞
+    override fun onClickUnStar(commentId: Long?) {
+        loadingDialog.showLoading()
+        mPresenter?.doUnStar(commentId)
+    }
+
+    //取消点赞成功
+    override fun onUnStarSuccess(data: String?) {
+        mPresenter?.doReplyComm(commentId!!)
+        loadingDialog.dismiss()
+    }
+
+    //取消点赞失败
+    override fun onUnStarError() {
+        loadingDialog.dismiss()
+    }
+
+    //取消关注成功
+    override fun onCancelAttentionSuccess(data: String?) {
+
+    }
+
+    //取消关注失败
+    override fun onCancelAttentionError() {
+
+    }
+
 
 }

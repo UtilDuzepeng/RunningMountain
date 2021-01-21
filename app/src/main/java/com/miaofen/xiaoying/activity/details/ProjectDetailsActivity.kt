@@ -353,12 +353,9 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
     }
 
     /*———————————————————————删除评论—————————————————————————*/
-    private val deleteCommentRequestData = DeleteCommentRequestData()
-
     override fun onDelete(commentId: Long?) {
         loadingDialog.showLoading()
-        deleteCommentRequestData.setCommentId(commentId)
-        mPresenter?.doDeleteComment(deleteCommentRequestData)
+        mPresenter?.doDeleteComment(commentId)
     }
 
 

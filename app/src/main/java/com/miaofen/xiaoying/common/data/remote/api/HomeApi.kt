@@ -157,6 +157,13 @@ interface HomeApi {
      * 取消收藏旅行计划
      */
     @POST("weixin/user/cancelCollect/plan")
-    fun onCancelCollection(@Body travelPlanRequestData: TravelPlanRequestData):Observable<CommonResponse<String>>
+    fun onCancelCollection(@Body travelPlanRequestData: TravelPlanRequestData): Observable<CommonResponse<String>>
+
+    /**
+     * 取消关注
+     */
+    @POST("weixin/user/cancelFollow")
+    fun onCancelAttention(@Body cancelAttentionRequestData: CancelAttentionRequestData): Observable<CommonResponse<String>>
+
 
 }

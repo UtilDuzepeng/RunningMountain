@@ -18,10 +18,32 @@ class ReplyCommContract {
 
     interface Presenter : IPresenter {
         fun doReplyComm(commentId: Long)
+        fun doDeleteComment(commentId: Long?)//删除评论
+        fun doFabulous(commentId: Long?)//点赞评论
+        fun doUnStar(commentId: Long?)//取消点赞
+        fun doCancelAttention(cancelFollowId: Int)//取消关注
     }
 
     interface View : IView<Presenter> {
         fun onReplyCommSuccess(data: SecondaryReplyResponse?)
         fun onReplyCommError()
+
+        /*——————————————————————————删除评论成功————————————————————————————*/
+        fun onDeleteCommentSuccess(data: String?)
+        fun onDeleteCommentError()
+
+        /*———————————————————————点赞评论————————————————————————————————*/
+        fun onFabulousSuccess(data: String?)
+        fun onFabulousError()
+
+        /*————————————————————取消评论点赞——————————————————————————*/
+        fun onUnStarSuccess(data: String?)
+        fun onUnStarError()
+
+        /*————————————————————取消关注——————————————————————————*/
+        fun onCancelAttentionSuccess(data: String?)
+        fun onCancelAttentionError()
+
+
     }
 }

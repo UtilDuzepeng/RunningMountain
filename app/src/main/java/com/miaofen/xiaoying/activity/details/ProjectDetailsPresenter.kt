@@ -299,9 +299,12 @@ class ProjectDetailsPresenter(view: ProjectDetailsContract.View) :
 
 
     /*—————————————————————————————删除评论———————————————————————————————*/
-    override fun doDeleteComment(deleteCommentRequestData: DeleteCommentRequestData?) {
+    private val deleteCommentRequestData = DeleteCommentRequestData()
+
+    override fun doDeleteComment(commentId: Long?) {
+        deleteCommentRequestData.setCommentId(commentId)
         RemoteRepository
-            .onDeleteComment(deleteCommentRequestData!!)
+            .onDeleteComment(deleteCommentRequestData)
             .applySchedulers()
             .subscribe(object : CommonObserver<String>() {
                 override fun onSubscribe(d: Disposable?) {
