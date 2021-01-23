@@ -48,11 +48,14 @@ class ImageViewRecycler(
         }
 
         if (spanCount == 2){
-            imageView.layoutParams.width = ((defaultWith)*3)/2
+            imageView.layoutParams.width = (defaultWith*3)/2
             imageView.layoutParams.height = defaultHeight
         }else if (spanCount == 1){
             imageView.layoutParams.width = defaultWith*3
             imageView.layoutParams.height = defaultHeight*2
+        }else if (spanCount == 3){
+            imageView.layoutParams.width = defaultWith
+            imageView.layoutParams.height = defaultHeight
         }
 
         Glide.with(context!!).load(item?.imageUrl)
