@@ -2,6 +2,7 @@ package com.miaofen.xiaoying.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -35,6 +36,8 @@ import java.util.List;
 
 public class CurrencyLayout extends LinearLayout {
 
+    private Context context;
+
     public CurrencyLayout(Context context) {
         super(context);
         initView(context);
@@ -47,9 +50,12 @@ public class CurrencyLayout extends LinearLayout {
 
     public CurrencyLayout(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        this.context = context;
         initView(context);
     }
 
+    //图片默认行数
+    private final  int  IMAGE_SPAN_DEFAULT_VALUE = 3;
     //头像
     private ImageView portrait;
     //名称,摩托车型号,创建时间,小队名称,小队介绍,出发地,距离,目的地,途经地,出发与结束时间,
@@ -88,7 +94,6 @@ public class CurrencyLayout extends LinearLayout {
         item_details = (LinearLayout) findViewById(R.id.item_details);
         image_collection = (ImageView) findViewById(R.id.image_collection);
         recyclerview_picture = (RecyclerView) findViewById(R.id.recyclerview_picture);
-
         GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 3, GridLayoutManager.VERTICAL, false);
         gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerview_picture.setLayoutManager(gridLayoutManager);
@@ -248,11 +253,24 @@ public class CurrencyLayout extends LinearLayout {
      */
     public void setRecyclerViewData(List<HomeResponse.ContentBean.ImagesBean> list) {
         imageList.clear();
+        int imageCount = 0;
+        int span = 0;
+
         if (list != null && list.size() > 0) {
-            for (int i = 0; i < list.size(); i++) {
-                imageList.add(list.get(i));
-            }
+                for (int i = 0; i < list.size(); i++) {
+                    imageList.add(list.get(i));
+                    imageCount++;
+                }
         }
+        if (imageCount > 4 || imageCount == 3){
+            span = 3;
+        }else if (imageCount >= 2){
+            span = 2;
+        }else if (imageCount >= 1){
+            span = 1;
+        }
+        recyclerview_picture.setLayoutManager(new GridLayoutManager(context, span, GridLayoutManager.VERTICAL, false));
+        mAdapter.setSpanCount(span);
         mAdapter.notifyDataSetChanged();
     }
 
