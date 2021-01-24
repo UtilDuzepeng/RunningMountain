@@ -1,6 +1,7 @@
 package com.miaofen.xiaoying.fragment.home.hottest
 
 
+import com.chad.library.adapter.base.BaseQuickAdapter
 import com.miaofen.xiaoying.R
 import com.miaofen.xiaoying.base.mvp.BaseMvpFragment
 import com.miaofen.xiaoying.comm.Constant
@@ -44,9 +45,8 @@ class NewestFragment : BaseMvpFragment<NewestContract.Presenter>(), NewestContra
         newest.setEnableRefresh(true)
         newest.autoRefresh()
         mAdapter = ShareRecyclerAdapter(R.layout.newest_recycler_layout, list, activity)
+        mAdapter?.openLoadAnimation(BaseQuickAdapter.ALPHAIN)
         newest.recyclerView.adapter = mAdapter
-        mAdapter?.openLoadAnimation()
-        mAdapter?.emptyView = getEmptyView(R.layout.no_data_available_layout)
         mAdapter?.setOnShareClick(this)
     }
 
@@ -63,6 +63,8 @@ class NewestFragment : BaseMvpFragment<NewestContract.Presenter>(), NewestContra
     }
 
     override fun onDownNewestNullSuccess() {
+        mAdapter?.emptyView = getEmptyView(R.layout.no_data_available_layout)
+
         newest.setEnableLoadMore(false)//设置不能上啦刷新
     }
 

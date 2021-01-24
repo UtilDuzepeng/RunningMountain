@@ -1,7 +1,9 @@
 package com.miaofen.xiaoying.activity.follow
 
 import com.miaofen.xiaoying.base.mvp.BasePresenter
+import com.miaofen.xiaoying.common.data.bean.request.CancelAttentionRequestData
 import com.miaofen.xiaoying.common.data.bean.request.CollectionRequestData
+import com.miaofen.xiaoying.common.data.bean.request.FocusUsersRequestData
 import com.miaofen.xiaoying.common.data.bean.response.FocusOnResponse
 import com.miaofen.xiaoying.common.data.remote.CommonObserver
 import com.miaofen.xiaoying.common.data.remote.RemoteRepository
@@ -67,5 +69,58 @@ class FocusOnYourselfPresenter(view: FocusOnYourselfContract.View) :
                 }
             })
     }
+
+
+    //关注
+    private val focusUsersRequestData = FocusUsersRequestData()
+    override fun doFocusOnUsers(followId: Long?) {
+        focusUsersRequestData.setFollowId(followId!!)
+        RemoteRepository
+            .onFocusOnUsers(focusUsersRequestData)
+            .applySchedulers()
+            .subscribe(object : CommonObserver<Boolean>() {
+                override fun onSubscribe(d: Disposable?) {
+                    addDispose(d)
+                }
+
+                override fun success(data: Boolean?) {
+
+                    mRootView.get()?.onFocusOnUsersSuccess(data!!)
+
+                }
+
+                override fun failure(e: Throwable?, errMsg: String?) {
+                    super.failure(e, errMsg)
+                    mRootView.get()?.onFocusOnUsersError()
+                }
+            })
+    }
+
+
+    /*-----------取消关注----------*/
+    private val cancelAttentionRequestData =  CancelAttentionRequestData()
+    override fun doCancelAttentio(followId: Long?) {
+        cancelAttentionRequestData.setCancelFollowId(followId!!)
+        RemoteRepository
+            .onCancelAttention(cancelAttentionRequestData)
+            .applySchedulers()
+            .subscribe(object : CommonObserver<Boolean>() {
+                override fun onSubscribe(d: Disposable?) {
+                    addDispose(d)
+                }
+
+                override fun success(data: Boolean?) {
+
+                    mRootView.get()?.onCancelAttentioSuccess(data!!)
+
+                }
+
+                override fun failure(e: Throwable?, errMsg: String?) {
+                    super.failure(e, errMsg)
+                    mRootView.get()?.onCancelAttentioError()
+                }
+            })
+    }
+
 
 }

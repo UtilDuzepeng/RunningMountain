@@ -1,6 +1,7 @@
 package com.miaofen.xiaoying.fragment.home.nearby
 
 
+import com.chad.library.adapter.base.BaseQuickAdapter
 import com.miaofen.xiaoying.R
 import com.miaofen.xiaoying.base.mvp.BaseMvpFragment
 import com.miaofen.xiaoying.comm.Constant
@@ -45,9 +46,8 @@ class NearbyFragment : BaseMvpFragment<NearbyContract.Presenter>(), NearbyContra
         nearby.setEnableRefresh(true)
         nearby.autoRefresh()
         mAdapter = ShareRecyclerAdapter(R.layout.newest_recycler_layout, list, activity)
+        mAdapter?.openLoadAnimation(BaseQuickAdapter.ALPHAIN)
         nearby.recyclerView.adapter = mAdapter
-        mAdapter?.openLoadAnimation()
-        mAdapter?.emptyView = getEmptyView(R.layout.no_data_available_layout)
         mAdapter?.setOnShareClick(this)
     }
 
@@ -64,6 +64,7 @@ class NearbyFragment : BaseMvpFragment<NearbyContract.Presenter>(), NearbyContra
     }
 
     override fun onDownNearbytNullSuccess() {
+        mAdapter?.emptyView = getEmptyView(R.layout.no_data_available_layout)
         nearby.setEnableLoadMore(false)//设置不能上啦刷新
     }
 

@@ -74,7 +74,7 @@ class ResultFragment(var data: String) : BaseFragment(), TabLayout.OnTabSelected
                 tab?.customView?.findViewById<TextView>(R.id.tab_item_textview) as TextView
             tabSelect.typeface = Typeface.defaultFromStyle(Typeface.BOLD)
             tabSelect.setTextColor(getResources().getColor(R.color.A212A3D))
-            tabSelect.setTextSize(18f)
+            tabSelect.textSize = 18f
             tabSelect.text = tab.text
 
         } else {
@@ -82,7 +82,7 @@ class ResultFragment(var data: String) : BaseFragment(), TabLayout.OnTabSelected
                 ?.findViewById<TextView>(R.id.tab_item_textview) as TextView
             tabUnSelect.typeface = Typeface.defaultFromStyle(Typeface.NORMAL)
             tabUnSelect.setTextColor(getResources().getColor(R.color.A686E7A))
-            tabUnSelect.setTextSize(16f)
+            tabUnSelect.textSize = 16f
             tabUnSelect.text = tab.text
         }
     }

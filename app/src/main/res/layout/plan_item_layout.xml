@@ -5,6 +5,7 @@
     android:paddingRight="@dimen/dp_18"
     android:paddingLeft="@dimen/dp_18"
     android:layout_marginTop="@dimen/dp_12"
+    android:id="@+id/plan_item_search"
     android:orientation="vertical">
 
     <LinearLayout
@@ -62,7 +63,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/place_name"
-        android:textColor="@color/FE7405"
+        android:textColor="@color/A212A3D"
         android:layout_marginTop="@dimen/dp_10"
         android:textSize="@dimen/sp_15" />
 

@@ -23,7 +23,7 @@ data class FansResponse(
         var avatarUrl: String?,
         var nickName: String?,
         var selfFollowUser: Boolean?,
-        var userId: Int?,
+        var userId: Long?,
         var userFollowSelf: Boolean?
     )
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_60"
-    android:layout_marginLeft="@dimen/dp_10"
-    android:paddingRight="@dimen/dp_10"
+    android:layout_height="@dimen/dp_80"
+    android:layout_marginLeft="@dimen/dp_15"
+    android:paddingRight="@dimen/dp_15"
     android:gravity="center"
     android:orientation="vertical">
 
@@ -14,13 +14,13 @@
         android:orientation="horizontal">
 
         <RelativeLayout
-            android:layout_width="@dimen/dp_37"
-            android:layout_height="@dimen/dp_37">
+            android:layout_width="@dimen/dp_45"
+            android:layout_height="@dimen/dp_45">
 
             <ImageView
                 android:id="@+id/focus_avatarUrl"
-                android:layout_width="@dimen/dp_36"
-                android:layout_height="@dimen/dp_36"
+                android:layout_width="@dimen/dp_45"
+                android:layout_height="@dimen/dp_45"
                 android:src="@drawable/avatar_icon" />
 
             <ImageView
@@ -30,6 +30,8 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
                 android:background="@drawable/circular_back"
+                android:layout_marginTop="@dimen/dp_3"
+                android:layout_marginLeft="@dimen/dp_5"
                 android:src="@drawable/nan_icon"/>
 
         </RelativeLayout>

@@ -300,7 +300,7 @@ class ReplyDialog(var commentId: Long?, var planId: Int?,var activity: Activity?
     }
 
     //取消关注成功
-    override fun onCancelAttentionSuccess(data: String?) {
+    override fun onCancelAttentionSuccess(data: Boolean?) {
 
     }
 

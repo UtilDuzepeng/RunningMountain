@@ -24,13 +24,13 @@ interface HomeApi {
      * 搜索推荐
      */
     @POST("weixin/search/recommend")
-    fun recommend(): Observable<CommonResponse<ArrayList<String>>>
+    fun recommend(@Body recommendRequestData :RecommendRequestData): Observable<CommonResponse<ArrayList<String>>>
 
     /**
      * 轮播图
      */
     @POST("weixin/index/recommends")
-    fun rotationChart(): Observable<CommonResponse<List<BannerResponse>>>
+    fun rotationChart(@Body rotationChartRequestData :RotationChartRequestData): Observable<CommonResponse<List<BannerResponse>>>
 
     /**
      * 首页最新列表
@@ -66,7 +66,7 @@ interface HomeApi {
      * 搜索历史
      */
     @POST("weixin/user/search/history")
-    fun onHistory(): Observable<CommonResponse<ArrayList<String>>>
+    fun onHistory(@Body historyRequestData :HistoryRequestData): Observable<CommonResponse<ArrayList<String>>>
 
     /**
      * 搜索计划
@@ -145,7 +145,7 @@ interface HomeApi {
      * 清除历史记录
      */
     @POST("weixin/user/search/history/clear")
-    fun onClearRecord(): Observable<CommonResponse<String>>
+    fun onClearRecord(@Body clearRecordRequestData :ClearRecordRequestData): Observable<CommonResponse<String>>
 
     /**
      * 收藏旅行计划
@@ -163,7 +163,12 @@ interface HomeApi {
      * 取消关注
      */
     @POST("weixin/user/cancelFollow")
-    fun onCancelAttention(@Body cancelAttentionRequestData: CancelAttentionRequestData): Observable<CommonResponse<String>>
+    fun onCancelAttention(@Body cancelAttentionRequestData: CancelAttentionRequestData): Observable<CommonResponse<Boolean>>
 
+    /**
+     * 关注用户
+     */
+    @POST("weixin/user/follow")
+    fun onFocusOnUsers(@Body focusUsersRequestData :FocusUsersRequestData): Observable<CommonResponse<Boolean>>
 
 }

@@ -18,10 +18,24 @@ import com.miaofen.xiaoying.common.data.bean.response.SearchUserResponse
 interface SearchUserContract {
     interface Presenter : IPresenter {
         fun doSearchUser(planRequestData: PlanRequestData)
+        //关注列表
+        fun doFocusOnUsers(followId: Long?)
+        //取消关注
+        fun doCancelAttentio(followId: Long?)
     }
 
     interface View : IView<Presenter> {
         fun onSearchUserSuccess(data: SearchUserResponse?)
         fun onSearchUserError()
+
+        /*------------关注---------------*/
+        fun onFocusOnUsersSuccess(data :Boolean)
+
+        fun onFocusOnUsersError()
+
+        /*-------------取消关注---------------*/
+        fun onCancelAttentioSuccess(data :Boolean)
+
+        fun onCancelAttentioError()
     }
 }

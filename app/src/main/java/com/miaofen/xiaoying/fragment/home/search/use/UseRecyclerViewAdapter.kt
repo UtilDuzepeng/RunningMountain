@@ -35,25 +35,56 @@ class UseRecyclerViewAdapter(
         helper.setText(R.id.use_nickName, item?.nickName)
         //摩托车型号
         if (item?.motorcycle != null) {
+            helper.setGone(R.id.use_motorcycle,true)
             helper.setText(R.id.use_motorcycle, item.motorcycle)
         } else {
-            helper.setText(R.id.use_motorcycle, "暂无认证")
+            helper.setGone(R.id.use_motorcycle,false)
         }
 
         if (item!!.selfFollowUser!! && item.userFollowSelf!!) {//互相关注
             helper.setBackgroundRes(R.id.tv_followUser, R.drawable.grey_circle_back)
             helper.setText(R.id.tv_followUser, "互相关注")
+            helper.setOnClickListener(R.id.tv_followUser){
+                onUseOnLisBack?.onUseCancelAttention(item.userId)
+            }//取消关注
         } else if (item.userFollowSelf!!) {//
             helper.setBackgroundRes(R.id.tv_followUser, R.drawable.pink_brack)
             helper.setText(R.id.tv_followUser, "回关")
+            helper.setOnClickListener(R.id.tv_followUser){
+                onUseOnLisBack?.onUseFocusFollow(item.userId)
+            }//关注
         } else if (item.selfFollowUser!!) {//已关注
             helper.setBackgroundRes(R.id.tv_followUser, R.drawable.grey_circle_back)
             helper.setText(R.id.tv_followUser, "已关注")
+            helper.setOnClickListener(R.id.tv_followUser){
+                onUseOnLisBack?.onUseCancelAttention(item.userId)
+            }//取消关注
         } else {  //未关注 pink_brack
             helper.setBackgroundRes(R.id.tv_followUser, R.drawable.pink_brack)
             helper.setText(R.id.tv_followUser, "关注")
+            helper.setOnClickListener(R.id.tv_followUser){
+                onUseOnLisBack?.onUseFocusFollow(item.userId)
+            }//关注
         }
 
+        //查看个人主页
+        helper.setOnClickListener(R.id.search_for_users){
+            onUseOnLisBack?.onUseSearchForUsers()
+        }
 
     }
+
+
+    interface OnUseOnListBack {
+        fun onUseFocusFollow(followId: Long?)//回关
+        fun onUseCancelAttention(followId: Long?)//取消关注
+        fun onUseSearchForUsers()//查看个人详情
+    }
+
+    private var onUseOnLisBack: OnUseOnListBack? = null
+
+    fun setOnFanListBack(onUseOnLisBack: OnUseOnListBack?) {
+        this.onUseOnLisBack = onUseOnLisBack
+    }
+
 }

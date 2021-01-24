@@ -19,6 +19,10 @@ interface FansContract {
 
     interface Presenter : IPresenter {
         fun doFans(page: Int, size: Int)
+        //关注列表
+        fun doFocusOnUsers(followId: Long?)
+        //取消关注
+        fun doCancelAttentio(followId: Long?)
     }
 
     interface View : IView<Presenter> {
@@ -36,5 +40,16 @@ interface FansContract {
         fun onFansOnNullSuccess()
 
         fun onFansOnError()
+
+        /*------------关注---------------*/
+        fun onFocusOnUsersSuccess(data :Boolean)
+
+        fun onFocusOnUsersError()
+
+        /*-------------取消关注---------------*/
+        fun onCancelAttentioSuccess(data :Boolean)
+
+        fun onCancelAttentioError()
+
     }
 }

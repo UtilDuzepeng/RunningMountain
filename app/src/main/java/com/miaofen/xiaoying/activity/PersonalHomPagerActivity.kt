@@ -34,18 +34,13 @@ class PersonalHomPagerActivity : BaseActivity(), TabLayout.OnTabSelectedListener
         setItem()
     }
 
-    override fun initData() {
-        super.initData()
-
-    }
-
     /**
      * 使用CollapsingToolbarLayout必须把title设置到CollapsingToolbarLayout上，
      * 设置到Toolbar上则不会显示
      */
     private fun setTitleToCollapsingToolbarLayout() {
-        personal_app_bar_layout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
-            if (verticalOffset <= -linear_hander.getHeight() / 2) {
+        personal_app_bar_layout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { _, verticalOffset ->
+            if (verticalOffset <= -linear_hander.height / 2) {
                 personal_toolbar.visibility = View.VISIBLE
             } else {
                 personal_toolbar.visibility = View.INVISIBLE
@@ -54,10 +49,8 @@ class PersonalHomPagerActivity : BaseActivity(), TabLayout.OnTabSelectedListener
     }
 
     private fun setTab() {
-        val tab1: NewestFragment =
-            NewestFragment()
-        val tab2: HotFragment =
-            HotFragment()
+        val tab1: NewestFragment = NewestFragment()
+        val tab2: HotFragment = HotFragment()
         var list1 = listOf<Fragment>(tab1, tab2)
         personal_viewpager.adapter = MyAdapter(list1, supportFragmentManager) //让tab和viewpager关联起来
         personal_tablayout.setupWithViewPager(viewpager)
@@ -68,14 +61,14 @@ class PersonalHomPagerActivity : BaseActivity(), TabLayout.OnTabSelectedListener
         personal_tablayout.getTabAt(0)?.text = list[0]
         personal_tablayout.getTabAt(1)?.text = list[1]
 
-        for (i in 0 until personal_tablayout.getTabCount()) {
+        for (i in 0 until personal_tablayout.tabCount) {
             val tab: TabLayout.Tab = personal_tablayout.getTabAt(i)!!
             if (tab != null) {
                 tab.customView = getTabView(i)
             }
         }
-//        updateTabTextView(personal_tablayout.getTabAt(personal_tablayout.getSelectedTabPosition()), true)
-//        updateTabTextView(personal_tablayout.getTabAt(1), false)
+        updateTabTextView(personal_tablayout.getTabAt(personal_tablayout.selectedTabPosition), true)
+        updateTabTextView(personal_tablayout.getTabAt(1), false)
     }
 
 
@@ -121,11 +114,11 @@ class PersonalHomPagerActivity : BaseActivity(), TabLayout.OnTabSelectedListener
     }
 
     override fun onTabUnselected(tab: TabLayout.Tab?) {
-        updateTabTextView(tab, false);
+       // updateTabTextView(tab, false);
     }
 
     override fun onTabSelected(tab: TabLayout.Tab?) {
-        updateTabTextView(tab, true);
+       // updateTabTextView(tab, true);
     }
 
 }

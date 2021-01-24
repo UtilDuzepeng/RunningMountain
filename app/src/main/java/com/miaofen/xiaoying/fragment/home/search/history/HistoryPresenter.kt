@@ -1,6 +1,8 @@
 package com.miaofen.xiaoying.fragment.home.search.history
 
 import com.miaofen.xiaoying.base.mvp.BasePresenter
+import com.miaofen.xiaoying.common.data.bean.request.ClearRecordRequestData
+import com.miaofen.xiaoying.common.data.bean.request.HistoryRequestData
 import com.miaofen.xiaoying.common.data.remote.CommonObserver
 import com.miaofen.xiaoying.common.data.remote.RemoteRepository
 import com.miaofen.xiaoying.utils.applySchedulers
@@ -19,9 +21,10 @@ import io.reactivex.disposables.Disposable
 class HistoryPresenter(view: HistoryContract.View): BasePresenter<HistoryContract.View>(view),
     HistoryContract.Presenter {
     //搜索历史
+   private val historyRequestData  = HistoryRequestData()
     override fun doHistory() {
         RemoteRepository
-            .onHistory()
+            .onHistory(historyRequestData)
             .applySchedulers()
             .subscribe(object : CommonObserver<ArrayList<String>>() {
                 override fun onSubscribe(d: Disposable?) {
@@ -44,9 +47,10 @@ class HistoryPresenter(view: HistoryContract.View): BasePresenter<HistoryContrac
 
     }
 
+    private val clearRecordRequestData = ClearRecordRequestData()
     override fun onClearRecord() {
         RemoteRepository
-            .onClearRecord()
+            .onClearRecord(clearRecordRequestData)
             .applySchedulers()
             .subscribe(object : CommonObserver<String>() {
                 override fun onSubscribe(d: Disposable?) {

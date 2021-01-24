@@ -18,7 +18,6 @@ import com.miaofen.xiaoying.fragment.home.hot.HotFragment
 import com.miaofen.xiaoying.fragment.home.hottest.NewestFragment
 import com.miaofen.xiaoying.fragment.home.nearby.NearbyFragment
 import com.miaofen.xiaoying.utils.CacheUtils
-import com.miaofen.xiaoying.utils.ToastUtils
 import com.miaofen.xiaoying.utils.updateTabTextView
 import com.youth.banner.indicator.CircleIndicator
 import kotlinx.android.synthetic.main.fragment_home.*

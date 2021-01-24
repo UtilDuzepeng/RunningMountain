@@ -3,10 +3,12 @@ package com.miaofen.xiaoying.activity.collection
 import android.content.Context
 import android.content.Intent
 import android.view.View
+import com.chad.library.adapter.base.BaseQuickAdapter
 import com.miaofen.xiaoying.R
 import com.miaofen.xiaoying.base.mvp.BaseMvpActivity
 import com.miaofen.xiaoying.common.data.bean.response.CollectionListResponse
 import com.miaofen.xiaoying.utils.ToastUtils
+import com.miaofen.xiaoying.view.LoadingView
 import com.miaofen.xiaoying.view.RefreshLayout
 import kotlinx.android.synthetic.main.activity_collection_list.*
 import kotlinx.android.synthetic.main.fragment_hot.*
@@ -22,20 +24,29 @@ class CollectionListActivity : BaseMvpActivity<CollectionListContract.Presenter>
 
     var mAdapter : CollectionListRecyclerAdapter? = null
 
+    private val loadingDialog: LoadingView by lazy {
+        LoadingView(this).apply {
+            setTipMsg("正在加载")
+        }
+    }
+
     override fun returnLayoutId() = R.layout.activity_collection_list
 
     override fun initView() {
         super.initView()
+        loadingDialog.showSuccess()
         CollectionListPresnter(this)
+        mPresenter?.doCollectionList(1, 10)
         title_bar_back.visibility = View.VISIBLE
         title_bar_title.setText(R.string.collection)
-        refresh_collection.autoRefresh()
+//        refresh_collection.autoRefresh()
         refresh_collection.setEnableRefresh(true)
         refresh_collection.setEnableLoadMore(true)
         refresh_collection.setSetOnRefresh(this)
         mAdapter = CollectionListRecyclerAdapter(R.layout.collection_list_item, list, this)
+        mAdapter?.openLoadAnimation(BaseQuickAdapter.ALPHAIN)
         refresh_collection.recyclerView.adapter = mAdapter
-        mAdapter?.emptyView = getEmptyView(R.layout.no_data_available_layout)
+
     }
 
     override fun initData() {
@@ -59,7 +70,9 @@ class CollectionListActivity : BaseMvpActivity<CollectionListContract.Presenter>
     }
 
     override fun onCollectionListNullSuccess() {
+        mAdapter?.emptyView = getEmptyView(R.layout.no_data_available_layout)
         refresh_collection.setEnableLoadMore(false)//设置不能上啦刷新
+        loadingDialog.dismiss()
     }
 
     override fun onCollectionListSuccess(data: CollectionListResponse?) {
@@ -69,6 +82,7 @@ class CollectionListActivity : BaseMvpActivity<CollectionListContract.Presenter>
         }
         refresh_collection.setEnableLoadMore(true)
         mAdapter?.notifyDataSetChanged()
+        loadingDialog.dismiss()
     }
 
     override fun onCollectionSuccess(data: CollectionListResponse?) {
@@ -85,6 +99,7 @@ class CollectionListActivity : BaseMvpActivity<CollectionListContract.Presenter>
 
     override fun onCollectionListError() {
         refresh_collection.setEnableLoadMore(false)
+        loadingDialog.dismiss()
     }
 
 }

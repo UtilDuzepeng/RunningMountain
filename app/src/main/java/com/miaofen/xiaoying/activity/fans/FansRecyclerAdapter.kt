@@ -37,6 +37,7 @@ class FansRecyclerAdapter (
         if (item?.motorcycle == null){
             helper.setGone(R.id.focus_motorcycle,false)
         }else{
+            helper.setGone(R.id.focus_motorcycle,true)
             helper.setText(R.id.focus_motorcycle,item.motorcycle)
         }
         helper.setText(R.id.focus_nickName,item?.nickName)
@@ -47,14 +48,37 @@ class FansRecyclerAdapter (
         if (item?.selfFollowUser!! && item.userFollowSelf!!){
             focusFollow.setBackgroundResource(R.drawable.grey_circle_back)
             helper.setText(R.id.focus_follow,"互相关注")
+            helper.setOnClickListener(R.id.focus_follow){//取消关注
+                onFanListBack?.onCancelAttention(item.userId)
+            }
         }else if (item.selfFollowUser!!){
             focusFollow.setBackgroundResource(R.drawable.grey_circle_back)
             helper.setText(R.id.focus_follow,"已关注")
+            helper.setOnClickListener(R.id.focus_follow){//取消关注
+                onFanListBack?.onCancelAttention(item.userId)
+            }
         }else if (item.userFollowSelf!!){
             focusFollow.setBackgroundResource(R.drawable.pink_circle_back)
             helper.setText(R.id.focus_follow,"回关")
+            helper.setOnClickListener(R.id.focus_follow){//点击关注
+                onFanListBack?.onFocusFollow(item.userId)
+            }
         }
+
+
     }
+
+    interface OnFanListBack {
+        fun onFocusFollow(followId: Long?)//回关
+        fun onCancelAttention(followId: Long?)//取消关注
+    }
+
+    private var onFanListBack: OnFanListBack? = null
+
+    fun setOnFanListBack(onFanListBack: OnFanListBack?) {
+        this.onFanListBack = onFanListBack
+    }
+
 
 
 }

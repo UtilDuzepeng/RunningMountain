@@ -12,9 +12,9 @@ package com.miaofen.xiaoying.common.data.bean.request;
 
 public class CancelAttentionRequestData {
 
-    private int cancelFollowId;
+    private Long cancelFollowId;
 
-    public void setCancelFollowId(int cancelFollowId) {
+    public void setCancelFollowId(Long cancelFollowId) {
         this.cancelFollowId = cancelFollowId;
     }
 }

@@ -3,7 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:id="@+id/search_for_users"
     android:layout_marginTop="@dimen/dp_12"
+    android:paddingTop="@dimen/dp_12"
     android:paddingLeft="@dimen/dp_18"
     android:paddingRight="@dimen/dp_18">
 

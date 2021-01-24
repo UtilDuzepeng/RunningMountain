@@ -1,6 +1,7 @@
 package com.miaofen.xiaoying.activity.materia
 
 import com.miaofen.xiaoying.base.mvp.BasePresenter
+import com.miaofen.xiaoying.common.data.bean.request.MaterialsRequestData
 import com.miaofen.xiaoying.common.data.bean.response.MaterialsResponse
 import com.miaofen.xiaoying.common.data.remote.CommonObserver
 import com.miaofen.xiaoying.common.data.remote.RemoteRepository
@@ -9,7 +10,7 @@ import io.reactivex.disposables.Disposable
 
 /**
  * 项目名称：com.miaofen.xiaoying.activity.materia
- * 类描述：
+ * 类描述：用户资料详情
  * 创建人：duzepeng
  * 创建时间：2021/1/16
  * 修改人：
@@ -20,9 +21,10 @@ import io.reactivex.disposables.Disposable
 class MaterialsPresenter (view: MaterialsContract.View) :
     BasePresenter<MaterialsContract.View>(view), MaterialsContract.Presenter{
 
+    private val materialsRequestData =  MaterialsRequestData()
     override fun doMaterials() {
         RemoteRepository
-            .onMaterials()
+            .onMaterials(materialsRequestData)
             .applySchedulers()
             .subscribe(object : CommonObserver<MaterialsResponse>() {
                 override fun onSubscribe(d: Disposable?) {

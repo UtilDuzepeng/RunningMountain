@@ -4,6 +4,7 @@ package com.miaofen.xiaoying.fragment.home.search.plan
 import android.view.LayoutInflater
 import android.view.View
 import com.miaofen.xiaoying.R
+import com.miaofen.xiaoying.activity.details.ProjectDetailsActivity
 import com.miaofen.xiaoying.base.mvp.BaseMvpFragment
 import com.miaofen.xiaoying.common.data.bean.request.PlanRequestData
 import com.miaofen.xiaoying.common.data.bean.response.PlanResponse
@@ -18,7 +19,7 @@ import kotlinx.android.synthetic.main.fragment_plan.*
  * 搜索计划
  */
 class PlanFragment(var data: String) : BaseMvpFragment<PlanContract.Presenter>(), PlanContract.View,
-    RefreshLayout.SetOnRefresh, ObserverListener {
+    RefreshLayout.SetOnRefresh, ObserverListener , PlanRecyclerViewAdapter.OnPlanBack {
 
     var mAdapter: PlanRecyclerViewAdapter? = null
 
@@ -47,6 +48,7 @@ class PlanFragment(var data: String) : BaseMvpFragment<PlanContract.Presenter>()
         planRequestData.setSize(10)
         mPresenter?.doPlan(planRequestData)
         mAdapter = PlanRecyclerViewAdapter(R.layout.plan_item_layout, list, activity)
+        mAdapter?.setOnPlanBack(this)
         plan_recycler.recyclerView.adapter = mAdapter
         mAdapter?.emptyView = getEmptyView(R.layout.search_empty_layout)
     }
@@ -100,6 +102,11 @@ class PlanFragment(var data: String) : BaseMvpFragment<PlanContract.Presenter>()
         planRequestData.setSize(10)
         mPresenter?.doPlan(planRequestData)
         loadingDialog.showSuccess()
+    }
+
+    //点击去详情
+    override fun onProjectDetails(id: Int?) {
+        ProjectDetailsActivity.start(context, id)
     }
 
 }

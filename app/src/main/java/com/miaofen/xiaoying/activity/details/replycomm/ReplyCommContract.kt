@@ -21,7 +21,7 @@ class ReplyCommContract {
         fun doDeleteComment(commentId: Long?)//删除评论
         fun doFabulous(commentId: Long?)//点赞评论
         fun doUnStar(commentId: Long?)//取消点赞
-        fun doCancelAttention(cancelFollowId: Int)//取消关注
+        fun doCancelAttention(cancelFollowId: Long)//取消关注
     }
 
     interface View : IView<Presenter> {
@@ -41,7 +41,7 @@ class ReplyCommContract {
         fun onUnStarError()
 
         /*————————————————————取消关注——————————————————————————*/
-        fun onCancelAttentionSuccess(data: String?)
+        fun onCancelAttentionSuccess(data: Boolean?)
         fun onCancelAttentionError()
 
 

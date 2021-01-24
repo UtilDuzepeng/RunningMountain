@@ -1,6 +1,8 @@
 package com.miaofen.xiaoying.fragment.home
 
 import com.miaofen.xiaoying.base.mvp.BasePresenter
+import com.miaofen.xiaoying.common.data.bean.request.RecommendRequestData
+import com.miaofen.xiaoying.common.data.bean.request.RotationChartRequestData
 import com.miaofen.xiaoying.common.data.bean.response.BannerResponse
 import com.miaofen.xiaoying.common.data.remote.CommonObserver
 import com.miaofen.xiaoying.common.data.remote.RemoteRepository
@@ -22,9 +24,10 @@ class HomePresenter(view:HomeContract.View):BasePresenter<HomeContract.View>(vie
     /**
      * 轮播图
      */
+    private val rotationChartRequestData = RotationChartRequestData()
     override fun doRotationChart() {
         RemoteRepository
-            .rotationChart()
+            .rotationChart(rotationChartRequestData)
             .applySchedulers()
             .subscribe(object : CommonObserver<List<BannerResponse>>() {
                 override fun onSubscribe(d: Disposable?) {
@@ -49,9 +52,10 @@ class HomePresenter(view:HomeContract.View):BasePresenter<HomeContract.View>(vie
     /**
      * 热门推荐
      */
+    private val recommendRequestData = RecommendRequestData()
     override fun recommend() {
         RemoteRepository
-            .recommend()
+            .recommend(recommendRequestData)
             .applySchedulers()
             .subscribe(object : CommonObserver<ArrayList<String>>() {
                 override fun onSubscribe(d: Disposable?) {

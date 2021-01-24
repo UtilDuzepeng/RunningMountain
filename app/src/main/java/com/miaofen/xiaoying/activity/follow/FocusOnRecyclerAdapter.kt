@@ -50,33 +50,52 @@ class FocusOnRecyclerAdapter(
         if (item?.selfFollowUser!! && item.userFollowSelf!!) {
             focusFollow.setBackgroundResource(R.drawable.grey_circle_back)
             helper.setText(R.id.focus_follow, "互相关注")
+            helper.setOnClickListener(R.id.focus_follow){
+                onFanListBack?.onCancelAttention(item.userId)
+            }
         } else if (item.selfFollowUser!!) {
             focusFollow.setBackgroundResource(R.drawable.grey_circle_back)
             helper.setText(R.id.focus_follow, "已关注")
+            helper.setOnClickListener(R.id.focus_follow){
+                onFanListBack?.onCancelAttention(item.userId)
+            }
         } else if (item.userFollowSelf!!) {
             focusFollow.setBackgroundResource(R.drawable.pink_circle_back)
             helper.setText(R.id.focus_follow, "回关")
-        }
-
-        when (item.userId) {
-            0 -> {
-                helper.setGone(R.id.image_gender,false)
-            }
-            1 -> {
-                helper.setGone(R.id.image_gender,true)
-                helper.setImageDrawable(
-                    R.id.image_gender, context!!.getDrawable(R.drawable.nan_icon)
-                )
-
-            }
-            2 -> {
-                helper.setGone(R.id.image_gender,true)
-                helper.setImageDrawable(
-                    R.id.image_gender, context!!.getDrawable(R.drawable.nv_icon)
-                )
-
+            helper.setOnClickListener(R.id.focus_follow){
+                onFanListBack?.onFocusFollow(item.userId)
             }
         }
+
+//        when (item.userId) {
+//            0 -> {
+//                helper.setGone(R.id.image_gender,false)
+//            }
+//            1 -> {
+//                helper.setGone(R.id.image_gender,true)
+//                helper.setImageDrawable(
+//                    R.id.image_gender, context!!.getDrawable(R.drawable.nan_icon)
+//                )
+//            }
+//            2 -> {
+//                helper.setGone(R.id.image_gender,true)
+//                helper.setImageDrawable(
+//                    R.id.image_gender, context!!.getDrawable(R.drawable.nv_icon)
+//                )
+//
+//            }
+//        }
+    }
+
+    interface OnFocusOnListBack {
+        fun onFocusFollow(followId: Long?)//回关
+        fun onCancelAttention(followId: Long?)//取消关注
+    }
+
+    private var onFanListBack: OnFocusOnListBack? = null
+
+    fun setOnFanListBack(onFanListBack: OnFocusOnListBack?) {
+        this.onFanListBack = onFanListBack
     }
 
 }

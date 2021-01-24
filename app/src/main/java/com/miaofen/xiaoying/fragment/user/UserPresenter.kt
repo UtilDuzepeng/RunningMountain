@@ -1,6 +1,7 @@
 package com.miaofen.xiaoying.fragment.user
 
 import com.miaofen.xiaoying.base.mvp.BasePresenter
+import com.miaofen.xiaoying.common.data.bean.request.PersonalCenterRequestData
 import com.miaofen.xiaoying.common.data.bean.response.PersonalResponse
 import com.miaofen.xiaoying.common.data.remote.CommonObserver
 import com.miaofen.xiaoying.common.data.remote.RemoteRepository
@@ -20,9 +21,10 @@ import io.reactivex.disposables.Disposable
 class UserPresenter(view: UserContract.View) : BasePresenter<UserContract.View>(view),
     UserContract.Presenter {
 
+   private val personalCenterRequestData =  PersonalCenterRequestData()
     override fun doPersonalCenter() {
         RemoteRepository
-            .onPersonalCenter()
+            .onPersonalCenter(personalCenterRequestData)
             .applySchedulers()
             .subscribe(object : CommonObserver<PersonalResponse>() {
                 override fun onSubscribe(d: Disposable?) {

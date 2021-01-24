@@ -1,10 +1,7 @@
 package com.miaofen.xiaoying.common.data.remote.api
 
 import com.miaofen.xiaoying.common.data.bean.CommonResponse
-import com.miaofen.xiaoying.common.data.bean.request.ChangeNicknameRequestData
-import com.miaofen.xiaoying.common.data.bean.request.CollectionRequestData
-import com.miaofen.xiaoying.common.data.bean.request.GenderRequestData
-import com.miaofen.xiaoying.common.data.bean.request.SignatureRequestData
+import com.miaofen.xiaoying.common.data.bean.request.*
 import com.miaofen.xiaoying.common.data.bean.response.*
 import io.reactivex.Observable
 import retrofit2.http.Body
@@ -26,13 +23,13 @@ interface UserApi {
      * 个人资料
      */
     @POST("weixin/user/center")
-    fun onPersonalCenter(): Observable<CommonResponse<PersonalResponse>>
+    fun onPersonalCenter(@Body personalCenterRequestData : PersonalCenterRequestData): Observable<CommonResponse<PersonalResponse>>
 
     /**
      * 用户资料详情
      */
     @POST("weixin/user/profile")
-    fun onMaterials(): Observable<CommonResponse<MaterialsResponse>>
+    fun onMaterials(@Body materialsRequestData :MaterialsRequestData): Observable<CommonResponse<MaterialsResponse>>
 
     /**
      * 用户修改昵称

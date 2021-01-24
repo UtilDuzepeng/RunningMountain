@@ -125,17 +125,17 @@ class ReplyCommPresenter(view: ReplyCommContract.View) :
 
     //取消关注
     private var cancelAttentionRequestData = CancelAttentionRequestData()
-    override fun doCancelAttention(cancelFollowId: Int) {
+    override fun doCancelAttention(cancelFollowId: Long) {
         cancelAttentionRequestData.setCancelFollowId(cancelFollowId)
         RemoteRepository
             .onCancelAttention(cancelAttentionRequestData)
             .applySchedulers()
-            .subscribe(object : CommonObserver<String>() {
+            .subscribe(object : CommonObserver<Boolean>() {
                 override fun onSubscribe(d: Disposable?) {
                     addDispose(d)
                 }
 
-                override fun success(data: String?) {
+                override fun success(data: Boolean?) {
                     mRootView.get()?.onCancelAttentionSuccess(data)
                 }
 

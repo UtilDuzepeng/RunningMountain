@@ -1,7 +1,9 @@
 package com.miaofen.xiaoying.fragment.home.search.use
 
 
+import com.chad.library.adapter.base.BaseQuickAdapter
 import com.miaofen.xiaoying.R
+import com.miaofen.xiaoying.activity.PersonalHomPagerActivity
 import com.miaofen.xiaoying.base.mvp.BaseMvpFragment
 import com.miaofen.xiaoying.common.data.bean.request.PlanRequestData
 import com.miaofen.xiaoying.common.data.bean.response.SearchUserResponse
@@ -15,8 +17,9 @@ import kotlinx.android.synthetic.main.fragment_use.*
 /**
  * 搜索用户界面
  * */
-class UseFragment(var data: String) : BaseMvpFragment<SearchUserContract.Presenter>(),
-    SearchUserContract.View, RefreshLayout.SetOnRefresh, ObserverListener {
+class UseFragment(var dataName: String) : BaseMvpFragment<SearchUserContract.Presenter>(),
+    SearchUserContract.View, RefreshLayout.SetOnRefresh, ObserverListener,
+    UseRecyclerViewAdapter.OnUseOnListBack {
 
     var mAdapter: UseRecyclerViewAdapter? = null
 
@@ -38,15 +41,16 @@ class UseFragment(var data: String) : BaseMvpFragment<SearchUserContract.Present
         ObserverManager.getInstance().add(this)
         SearchUserPresenter(this)
         loadingDialog.showSuccess()
-        planRequestData.setKeyword(data)
+        planRequestData.setKeyword(dataName)
         planRequestData.setPage(1)
         planRequestData.setSize(10)
         use_recycler.setSetOnRefresh(this)
         use_recycler.setEnableRefresh(false)
         mPresenter?.doSearchUser(planRequestData)
         mAdapter = UseRecyclerViewAdapter(R.layout.use_item_layout, list, activity)
+        mAdapter?.openLoadAnimation(BaseQuickAdapter.ALPHAIN)
+        mAdapter?.setOnFanListBack(this)
         use_recycler.recyclerView.adapter = mAdapter
-        mAdapter?.emptyView = getEmptyView(R.layout.search_empty_layout)
     }
 
     override fun loadMore(pager: Int, size: Int) {
@@ -63,10 +67,12 @@ class UseFragment(var data: String) : BaseMvpFragment<SearchUserContract.Present
 
     override fun onSearchUserSuccess(data: SearchUserResponse?) {
         if (data?.content == null) {
+            mAdapter?.emptyView = getEmptyView(R.layout.search_empty_layout)
             use_recycler?.setEnableLoadMore(false)
             return
         }
         if (data.content?.size == 0) {
+            mAdapter?.emptyView = getEmptyView(R.layout.search_empty_layout)
             use_recycler?.setEnableLoadMore(false)
             return
         } else {
@@ -83,13 +89,61 @@ class UseFragment(var data: String) : BaseMvpFragment<SearchUserContract.Present
         loadingDialog.dismiss()
     }
 
+
+
     override fun observerUpData(content: String?) {
+        if (content != ""){
+            this.dataName = content!!
+        }
         loadingDialog.showSuccess()
         list.clear()
         planRequestData.setKeyword(content)
         planRequestData.setPage(1)
         planRequestData.setSize(10)
         mPresenter?.doSearchUser(planRequestData)
+    }
+
+    /*--------------关注----------------*/
+    override fun onUseFocusFollow(followId: Long?) {
+        loadingDialog.showSuccess()
+        mPresenter?.doFocusOnUsers(followId)
+    }
+
+    override fun onFocusOnUsersSuccess(data: Boolean) {
+        list.clear()
+        planRequestData.setKeyword(dataName)
+        planRequestData.setPage(1)
+        planRequestData.setSize(10)
+        mPresenter?.doSearchUser(planRequestData)
+        loadingDialog.dismiss()
+    }
+
+    override fun onFocusOnUsersError() {
+        loadingDialog.dismiss()
+    }
+
+    /*--------------取消关注----------------*/
+    override fun onUseCancelAttention(followId: Long?) {
+        loadingDialog.showSuccess()
+        mPresenter?.doCancelAttentio(followId)
+    }
+
+    override fun onCancelAttentioSuccess(data: Boolean) {
+        list.clear()
+        planRequestData.setKeyword(dataName)
+        planRequestData.setPage(1)
+        planRequestData.setSize(10)
+        mPresenter?.doSearchUser(planRequestData)
+        loadingDialog.dismiss()
+    }
+
+    override fun onCancelAttentioError() {
+        loadingDialog.dismiss()
+    }
+
+    /*-------------查看个人详情---------------*/
+    override fun onUseSearchForUsers() {
+        PersonalHomPagerActivity.start(activity)
     }
 
 }

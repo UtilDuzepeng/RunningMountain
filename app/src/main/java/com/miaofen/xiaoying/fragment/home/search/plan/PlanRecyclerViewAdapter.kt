@@ -45,6 +45,20 @@ class PlanRecyclerViewAdapter(
         //计划内容
         helper.setText(R.id.plan_content, item?.content)
 
+        //条目点击事件
+        helper.setOnClickListener(R.id.plan_item_search){
+            onPlanBack?.onProjectDetails(item?.id)
+        }
+    }
+
+    interface OnPlanBack {
+        fun onProjectDetails(id: Int?)
+    }
+
+    private var onPlanBack: OnPlanBack? = null
+
+    fun setOnPlanBack(onPlanBack: OnPlanBack?) {
+        this.onPlanBack = onPlanBack
     }
 
 }
