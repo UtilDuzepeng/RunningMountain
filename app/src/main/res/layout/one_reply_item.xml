@@ -82,43 +82,50 @@
             android:textColor="@color/A212A3D"
             android:textSize="@dimen/sp_14" />
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dp_20"
             android:layout_marginTop="@dimen/dp_10"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tv_reply_time"
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="10-16 12:35"
-                android:textColor="@color/A686E7A"
-                android:textSize="@dimen/sp_12" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" · " />
+                <TextView
+                    android:id="@+id/tv_reply_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10-16 12:35"
+                    android:textColor="@color/A686E7A"
+                    android:textSize="@dimen/sp_12" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" · " />
 
-            <TextView
-                android:id="@+id/tv_reply_second_level"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="回复"
-                android:textColor="@color/A686E7A"
-                android:textSize="@dimen/sp_12" />
+                <TextView
+                    android:id="@+id/tv_reply_second_level"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="回复"
+                    android:textColor="@color/A686E7A"
+                    android:textSize="@dimen/sp_12" />
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/tv_reply_delete_comments"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
                 android:gravity="right"
                 android:textColor="@color/FF6555"
                 android:text="@string/delete_comments"/>
 
-        </LinearLayout>
+        </RelativeLayout>
 
     </LinearLayout>
 

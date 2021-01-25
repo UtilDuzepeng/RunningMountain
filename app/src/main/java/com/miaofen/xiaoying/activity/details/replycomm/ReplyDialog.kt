@@ -36,11 +36,13 @@ import com.miaofen.xiaoying.view.RefreshLayout
  * 修改备注：
  */
 
-class ReplyDialog(var commentId: Long?, var planId: Int?,var activity: Activity?) :
-    BaseMvpBottomDialogFragment<ReplyCommContract.Presenter>(), ReplyCommContract.View ,
+class ReplyDialog(var commentId: Long?, var planId: Int?, var activity: Activity?) :
+    BaseMvpBottomDialogFragment<ReplyCommContract.Presenter>(), ReplyCommContract.View,
     CommentDialog.ShowInput, ReplyRecyclerAdapter.SecondaryReply {
 
     var list = ArrayList<SecondaryReplyResponse.SubPlanCommentListBean?>()
+
+    var hashMap = HashMap<Long, SecondaryReplyResponse.SubPlanCommentListBean?>()
 
     var mAdapter: ReplyRecyclerAdapter? = null
 
@@ -109,7 +111,7 @@ class ReplyDialog(var commentId: Long?, var planId: Int?,var activity: Activity?
         super.initView()
         refresh_reply?.setEnableRefresh(false)
         refresh_reply?.setEnableLoadMore(false)
-        mAdapter = ReplyRecyclerAdapter(R.layout.one_reply_item, list, activity)
+        mAdapter = ReplyRecyclerAdapter(R.layout.one_reply_item, list, activity,hashMap)
         mAdapter?.setSecondaryReply(this)
         refresh_reply?.recyclerView?.adapter = mAdapter
 //        mAdapter?.emptyView =
@@ -122,7 +124,7 @@ class ReplyDialog(var commentId: Long?, var planId: Int?,var activity: Activity?
         tv_reply?.setOnClickListener {
             //唤起评论
             if (bottomDialogFr == null && activity != null) {
-                bottomDialogFr  = CommentDialog(activity!!, commentId!!,planId)
+                bottomDialogFr = CommentDialog(activity!!, commentId!!, planId)
                 bottomDialogFr?.setShowInput(this)
             }
             bottomDialogFr?.show(fragmentManager!!, "DF")
@@ -160,7 +162,7 @@ class ReplyDialog(var commentId: Long?, var planId: Int?,var activity: Activity?
             1 -> {//已关注
                 tvReplyFollow?.text = "已关注"
                 tvReplyFollow?.setOnClickListener {
-                 ToastUtils.showToast("取消关注")
+                    ToastUtils.showToast("取消关注")
                 }
             }
             2 -> {//自己
@@ -174,13 +176,13 @@ class ReplyDialog(var commentId: Long?, var planId: Int?,var activity: Activity?
         }
 
         //是否点赞
-        if (data.topPlanComment?.star!!){
+        if (data.topPlanComment?.star!!) {
             image_like?.setImageDrawable(activity?.getDrawable(R.drawable.dianzan_icon))
             image_like?.setOnClickListener {
                 loadingDialog.showLoading()
                 mPresenter?.doUnStar(data.topPlanComment?.commentId)
             }
-        }else{
+        } else {
             image_like?.setImageDrawable(activity?.getDrawable(R.drawable.dianzan_line))
             image_like?.setOnClickListener {
                 loadingDialog.showLoading()
@@ -191,10 +193,10 @@ class ReplyDialog(var commentId: Long?, var planId: Int?,var activity: Activity?
 
         mAdapter?.setHeaderView(replyHeaderView)
         list.clear()
-        mAdapter?.hashMap?.clear()
+        hashMap.clear()
         for (item in data.subPlanCommentList!!) {
             list.add(item)
-            mAdapter?.hashMap?.put(item.commentId!!,item)
+            hashMap[item.commentId!!] = item
         }
         mAdapter?.notifyDataSetChanged()
     }
@@ -243,7 +245,7 @@ class ReplyDialog(var commentId: Long?, var planId: Int?,var activity: Activity?
     override fun onReplySecondLevel(commentId: Long) {
         //唤起评论
         if (bottomDialogFr == null && activity != null) {
-            bottomDialogFr  = CommentDialog(activity!!, commentId,planId)
+            bottomDialogFr = CommentDialog(activity!!, commentId, planId)
             bottomDialogFr?.setShowInput(this)
         }
         bottomDialogFr?.show(fragmentManager!!, "DF")
@@ -260,6 +262,7 @@ class ReplyDialog(var commentId: Long?, var planId: Int?,var activity: Activity?
         mPresenter?.doReplyComm(commentId!!)
         loadingDialog.dismiss()
     }
+
     //删除失败
     override fun onDeleteCommentError() {
         loadingDialog.dismiss()

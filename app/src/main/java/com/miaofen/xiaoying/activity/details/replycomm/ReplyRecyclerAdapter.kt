@@ -27,14 +27,14 @@ import com.miaofen.xiaoying.utils.getCurrentTime
 class ReplyRecyclerAdapter(
     layoutResId: Int,
     @Nullable data: List<SecondaryReplyResponse.SubPlanCommentListBean?>?,
-    context: Context?
+    context: Context?,hashMap: HashMap<Long, SecondaryReplyResponse.SubPlanCommentListBean?>
 ) : BaseQuickAdapter<SecondaryReplyResponse.SubPlanCommentListBean?, BaseViewHolder>(
     layoutResId, data
 ) {
     private var context: Context? = context
     var topCommentId: Long = -1
 
-    var hashMap = HashMap<Long, SecondaryReplyResponse.SubPlanCommentListBean?>()
+    var hashMap : Map<Long, SecondaryReplyResponse.SubPlanCommentListBean?> =hashMap
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun convert(
@@ -77,7 +77,14 @@ class ReplyRecyclerAdapter(
             } else {
                 helper.setVisible(R.id.tv_reply_delete_comments, false)
             }
+
+            //回复点击事件
+            helper.setOnClickListener(R.id.tv_reply_second_level) {
+                secondaryReply?.onReplySecondLevel(item.commentId!!)
+            }
+
         } else {
+
             //标准圆形图片。
             Glide.with(context!!).load(item?.userInfo?.avatarUrl)
                 .apply(RequestOptions.bitmapTransform(CircleCrop()))
@@ -99,7 +106,7 @@ class ReplyRecyclerAdapter(
                 )
                 //取消点赞点击事件
                 helper.setOnClickListener(R.id.reply_image_item){
-                    secondaryReply?.onClickUnStar(item?.commentId)
+                    secondaryReply?.onClickUnStar(item.commentId)
                 }
 
             } else {
@@ -109,7 +116,7 @@ class ReplyRecyclerAdapter(
 
                 //点赞点击事件
                 helper.setOnClickListener(R.id.reply_image_item){
-                    secondaryReply?.onClickFabulous(item?.commentId)
+                    secondaryReply?.onClickFabulous(item.commentId)
                 }
 
             }
@@ -123,13 +130,15 @@ class ReplyRecyclerAdapter(
                 )
             }
 
+            //回复点击事件
+            helper.setOnClickListener(R.id.tv_reply_second_level) {
+                secondaryReply?.onReplySecondLevel(item.commentId!!)
+            }
+
+
         }
 
 
-        //回复点击事件
-        helper.setOnClickListener(R.id.tv_reply_second_level) {
-            secondaryReply?.onReplySecondLevel(item.commentId!!)
-        }
 
         //删除点击事件
         helper.setOnClickListener(R.id.tv_reply_delete_comments){
