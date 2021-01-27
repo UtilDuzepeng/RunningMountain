@@ -15,7 +15,6 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.miaofen.xiaoying.activity.signup.ImgZoomActivity
 import com.miaofen.xiaoying.base.BaseActivity
 import com.miaofen.xiaoying.fragment.hair.ReleaseFragment
 import com.miaofen.xiaoying.fragment.home.HomeFragment

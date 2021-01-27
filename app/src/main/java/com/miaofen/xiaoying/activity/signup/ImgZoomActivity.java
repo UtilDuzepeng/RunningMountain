@@ -1,31 +1,16 @@
 package com.miaofen.xiaoying.activity.signup;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.util.Log;
-import android.view.MotionEvent;
-import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.miaofen.xiaoying.R;
 import com.miaofen.xiaoying.base.BaseActivity;
-
 import java.util.ArrayList;
-
 import uk.co.senab.photoview.PhotoView;
 
 public class ImgZoomActivity extends BaseActivity implements ViewPager.OnPageChangeListener {
@@ -73,7 +58,6 @@ public class ImgZoomActivity extends BaseActivity implements ViewPager.OnPageCha
 
     private  class ImgPagerAda extends PagerAdapter {
         private ArrayList<String> imgs;
-
         public ImgPagerAda(ArrayList<String> imgs) {
             this.imgs = imgs;
         }
@@ -84,9 +68,15 @@ public class ImgZoomActivity extends BaseActivity implements ViewPager.OnPageCha
         }
 
         @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            container.removeView((View) object);
+        }
+
+        @Override
         public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
             return view == object;
         }
+
         @Override
         public Object instantiateItem(ViewGroup view, int position) {
             PhotoView photoView = new PhotoView(ImgZoomActivity.this);
