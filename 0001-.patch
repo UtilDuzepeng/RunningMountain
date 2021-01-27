@@ -1,0 +1,165 @@
+From acec367f5d4045d67c6b8dcc4fd3594e232f807b Mon Sep 17 00:00:00 2001
+From: yuhui <77268769@qq.com>
+Date: Sat, 23 Jan 2021 13:53:19 +0800
+Subject: [PATCH] =?UTF-8?q?=E5=9B=BE=E7=89=87=E6=8E=92=E5=88=97=E9=97=AE?=
+ =?UTF-8?q?=E9=A2=98?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ .../home/shareadapter/ImageViewRecycler.kt    | 33 ++++++++++++++++---
+ .../miaofen/xiaoying/view/CurrencyLayout.java | 26 ++++++++++++---
+ .../main/res/layout/recycler_iamge_item.xml   |  2 +-
+ 3 files changed, 52 insertions(+), 9 deletions(-)
+
+diff --git a/app/src/main/java/com/miaofen/xiaoying/fragment/home/shareadapter/ImageViewRecycler.kt b/app/src/main/java/com/miaofen/xiaoying/fragment/home/shareadapter/ImageViewRecycler.kt
+index 781a6bb..bb5281e 100644
+--- a/app/src/main/java/com/miaofen/xiaoying/fragment/home/shareadapter/ImageViewRecycler.kt
++++ b/app/src/main/java/com/miaofen/xiaoying/fragment/home/shareadapter/ImageViewRecycler.kt
+@@ -1,8 +1,11 @@
+ package com.miaofen.xiaoying.fragment.home.shareadapter
+ 
+ import android.content.Context
++import android.util.Log
+ import android.widget.ImageView
++import android.widget.Switch
+ import androidx.annotation.Nullable
++import androidx.recyclerview.widget.RecyclerView
+ import com.bumptech.glide.Glide
+ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+ import com.bumptech.glide.request.RequestOptions
+@@ -10,6 +13,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
+ import com.chad.library.adapter.base.BaseViewHolder
+ import com.miaofen.xiaoying.R
+ import com.miaofen.xiaoying.common.data.bean.response.HomeResponse
++import java.util.prefs.PreferencesFactory
+ 
+ /**
+  * 项目名称：com.miaofen.xiaoying.fragment.home.shareadapter
+@@ -26,14 +30,35 @@ class ImageViewRecycler(
+ ) : BaseQuickAdapter<HomeResponse.ContentBean.ImagesBean?, BaseViewHolder>(layoutResId, data)  {
+ 
+     var context: Context? = context
++    var defaultWith: Int = 0
++    var defaultHeight: Int = 0
++    private var spanCount: Int = 0
++
++
++    fun setSpanCount(spanCount: Int) {
++        this.spanCount = spanCount
++    }
+     override fun convert(helper: BaseViewHolder, item: HomeResponse.ContentBean.ImagesBean?) {
+-       //zhanweitu
++
++        var imageView = helper.getView(R.id.image_abbreviation) as ImageView
++
++        if (defaultHeight == 0 || defaultWith == 0){
++            defaultWith = imageView.layoutParams.width
++            defaultHeight = imageView.layoutParams.height
++        }
++
++        if (spanCount == 2){
++            imageView.layoutParams.width = ((defaultWith)*3)/2
++            imageView.layoutParams.height = defaultHeight
++        }else if (spanCount == 1){
++            imageView.layoutParams.width = defaultWith*3
++            imageView.layoutParams.height = defaultHeight*2
++        }
++
+         Glide.with(context!!).load(item?.imageUrl)
+             .apply(RequestOptions.bitmapTransform(RoundedCorners( 20)))
+             .fallback(R.drawable.zhanweitu)
+             .error(R.drawable.error_zhanweitu)
+-            .into(helper.getView(R.id.image_abbreviation) as ImageView) //标准圆形图片。
++            .into(imageView) //标准圆形图片。
+     }
+-
+-
+ }
+\ No newline at end of file
+diff --git a/app/src/main/java/com/miaofen/xiaoying/view/CurrencyLayout.java b/app/src/main/java/com/miaofen/xiaoying/view/CurrencyLayout.java
+index 096f623..477e9af 100644
+--- a/app/src/main/java/com/miaofen/xiaoying/view/CurrencyLayout.java
++++ b/app/src/main/java/com/miaofen/xiaoying/view/CurrencyLayout.java
+@@ -2,6 +2,7 @@ package com.miaofen.xiaoying.view;
+ 
+ import android.content.Context;
+ import android.util.AttributeSet;
++import android.util.Log;
+ import android.view.LayoutInflater;
+ import android.view.View;
+ import android.widget.ImageView;
+@@ -35,6 +36,8 @@ import java.util.List;
+ 
+ public class CurrencyLayout extends LinearLayout {
+ 
++    private Context context;
++
+     public CurrencyLayout(Context context) {
+         super(context);
+         initView(context);
+@@ -47,9 +50,12 @@ public class CurrencyLayout extends LinearLayout {
+ 
+     public CurrencyLayout(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+         super(context, attrs, defStyleAttr);
++        this.context = context;
+         initView(context);
+     }
+ 
++    //图片默认行数
++    private final  int  IMAGE_SPAN_DEFAULT_VALUE = 3;
+     //头像
+     private ImageView portrait;
+     //名称,摩托车型号,创建时间,小队名称,小队介绍,出发地,距离,目的地,途经地,出发与结束时间,
+@@ -88,7 +94,6 @@ public class CurrencyLayout extends LinearLayout {
+         item_details = (LinearLayout) findViewById(R.id.item_details);
+         image_collection = (ImageView) findViewById(R.id.image_collection);
+         recyclerview_picture = (RecyclerView) findViewById(R.id.recyclerview_picture);
+-
+         GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 3, GridLayoutManager.VERTICAL, false);
+         gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+         recyclerview_picture.setLayoutManager(gridLayoutManager);
+@@ -248,11 +253,24 @@ public class CurrencyLayout extends LinearLayout {
+      */
+     public void setRecyclerViewData(List<HomeResponse.ContentBean.ImagesBean> list) {
+         imageList.clear();
++        int imageCount = 0;
++        int span = 0;
++
+         if (list != null && list.size() > 0) {
+-            for (int i = 0; i < list.size(); i++) {
+-                imageList.add(list.get(i));
+-            }
++                for (int i = 0; i < list.size(); i++) {
++                    imageList.add(list.get(i));
++                    imageCount++;
++                }
++        }
++        if (imageCount > 4 || imageCount == 3){
++            span = 3;
++        }else if (imageCount >= 2){
++            span = 2;
++        }else if (imageCount >= 1){
++            span = 1;
+         }
++        recyclerview_picture.setLayoutManager(new GridLayoutManager(context, span, GridLayoutManager.VERTICAL, false));
++        mAdapter.setSpanCount(span);
+         mAdapter.notifyDataSetChanged();
+     }
+ 
+diff --git a/app/src/main/res/layout/recycler_iamge_item.xml b/app/src/main/res/layout/recycler_iamge_item.xml
+index 1f26ea9..3dcfbea 100644
+--- a/app/src/main/res/layout/recycler_iamge_item.xml
++++ b/app/src/main/res/layout/recycler_iamge_item.xml
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-    android:layout_width="match_parent"
++    android:layout_width="wrap_content"
+     android:layout_height="wrap_content">
+ 
+     <ImageView
+-- 
+2.29.2.windows.2
+

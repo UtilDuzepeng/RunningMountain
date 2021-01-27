@@ -110,7 +110,8 @@ ext.deps = [
         //时间选择器
         pickerView                   : 'com.contrarywind:Android-PickerView:4.1.9',
         //视频播放器
-        GSYVideoPlayer               : 'com.shuyu:GSYVideoPlayer:7.1.6'
+        GSYVideoPlayer               : 'com.shuyu:GSYVideoPlayer:7.1.6',
+        photoview                    :'com.github.chrisbanes.photoview:library:+'
 
 
 ]

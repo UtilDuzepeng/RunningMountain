@@ -126,5 +126,6 @@ dependencies {
     implementation 'com.youth.banner:banner:2.1.0'
     //高德地图定位sdk
     implementation 'com.amap.api:location:latest.integration'
+    implementation 'com.github.chrisbanes.photoview:library:+'
 
 }

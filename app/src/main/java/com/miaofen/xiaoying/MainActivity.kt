@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.miaofen.xiaoying.activity.signup.ImgZoomActivity
 import com.miaofen.xiaoying.base.BaseActivity
 import com.miaofen.xiaoying.fragment.hair.ReleaseFragment
 import com.miaofen.xiaoying.fragment.home.HomeFragment
@@ -154,7 +155,7 @@ class MainActivity : BaseActivity() {
         private const val FRAGMENT_TAG_PREFIX = "MainActivityFragment_"
         private const val DEFAULT_INDEX = 0
 
-        fun startLogin(context: Context?) {
+        fun startogin(context: Context?) {
             val intent = Intent(context, MainActivity::class.java)
             context?.startActivity(intent)
         }
@@ -311,5 +312,4 @@ class MainActivity : BaseActivity() {
         super.onDestroy()
         locationUtils?.destory();//销毁定位客户端，同时销毁本地定位服务。
     }
-
 }

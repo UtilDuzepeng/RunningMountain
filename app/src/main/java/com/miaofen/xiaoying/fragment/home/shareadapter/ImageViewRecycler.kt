@@ -1,6 +1,8 @@
 package com.miaofen.xiaoying.fragment.home.shareadapter
 
 import android.content.Context
+import android.content.Intent
+import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
 import android.widget.Switch
@@ -12,6 +14,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.miaofen.xiaoying.R
+import com.miaofen.xiaoying.activity.signup.ImgZoomActivity
 import com.miaofen.xiaoying.common.data.bean.response.HomeResponse
 import java.util.prefs.PreferencesFactory
 
@@ -63,5 +66,18 @@ class ImageViewRecycler(
             .fallback(R.drawable.zhanweitu)
             .error(R.drawable.error_zhanweitu)
             .into(imageView) //标准圆形图片。
+
+        imageView.setOnClickListener {
+            val intent = Intent(context, ImgZoomActivity::class.java)
+            var imageUrls = ArrayList<String>()
+            //todo:跳转传入图片url
+            var bundle = Bundle();
+            for (item in data) {
+                imageUrls.add(item?.imageUrl!!);
+            }
+//            intent.putStringArrayListExtra()
+            intent.putStringArrayListExtra("img",imageUrls)
+            context!!.startActivity(intent)
+        }
     }
 }
