@@ -127,6 +127,10 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
             bottomDialogFr?.show(supportFragmentManager, "DF")
         }
 
+        //点击评论
+        relative_comment.setOnClickListener {
+            bottomDialogFr?.show(supportFragmentManager, "DF")
+        }
     }
 
     override fun onResume() {
@@ -324,11 +328,12 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
 
     //一级评论列表下拉成功 没有数据
     override fun onDownOneCommentsNullSuccess() {
-
+        relative_comment.visibility = View.VISIBLE
     }
 
     //一级评论列表下拉成功 有数据
     override fun onDownOneCommentsSuccess(data: OneCommentsResponse?) {
+        relative_comment.visibility = View.GONE
         list.clear()
         for (item in data?.content!!) {
             list.add(item)

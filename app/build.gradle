@@ -127,5 +127,6 @@ dependencies {
     //高德地图定位sdk
     implementation 'com.amap.api:location:latest.integration'
     implementation 'com.github.chrisbanes.photoview:library:+'
+    implementation 'androidx.viewpager:viewpager:1.0.0'
 
 }

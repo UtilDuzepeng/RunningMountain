@@ -1,0 +1,61 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="com.miaofen.xiaoying.fragment.home.HomeFragment">
+
+    <com.miaofen.xiaoying.view.SearchBoxLayout
+        android:id="@+id/toolbar_search_box"
+        android:layout_width="match_parent"
+        android:paddingTop="@dimen/dp_50"
+        android:layout_height="@dimen/dp_105" />
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/home_toolbar_layout" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/business_tablayout"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="@dimen/dp_18"
+                app:tabGravity="fill"
+                app:tabIndicatorColor="@color/A2A82FA"
+                app:tabIndicatorFullWidth="false"
+                app:tabIndicatorHeight="@dimen/dp_3"
+                app:tabMinWidth="@dimen/dp_60"
+                app:tabMode="fixed"
+                app:tabPaddingEnd="10dp"
+                app:tabPaddingStart="10dp"
+                app:tabTextColor="#000000" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:background="@color/D9D9D9" />
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</LinearLayout>

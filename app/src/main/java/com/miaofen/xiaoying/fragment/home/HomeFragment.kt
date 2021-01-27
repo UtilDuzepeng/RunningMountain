@@ -34,6 +34,7 @@ class HomeFragment : BaseMvpFragment<HomeContract.Presenter>(), HomeContract.Vie
     private var list_path = ArrayList<ImagerDataBean>()
 
     override fun getLayoutResources() = R.layout.fragment_home
+//    override fun getLayoutResources() = R.layout.home
 
     override fun initView() {
         super.initView()

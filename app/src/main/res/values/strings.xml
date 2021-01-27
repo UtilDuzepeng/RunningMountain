@@ -135,6 +135,7 @@
     <string name="change_nickname">修改昵称</string>
     <string name="modify_signature">修改签名</string>
     <string name="all_comments">全部评论</string>
+    <string name="click_strong_sofa_for_no_comment">暂无评论，点击抢沙发</string>
 
     <string name="delete_comments_title">确定删除此评论?</string>
     <string name="confirm">确认</string>

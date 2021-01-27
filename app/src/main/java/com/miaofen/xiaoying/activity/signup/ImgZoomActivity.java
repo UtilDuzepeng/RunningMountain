@@ -6,6 +6,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.miaofen.xiaoying.R;
@@ -14,27 +15,38 @@ import java.util.ArrayList;
 import uk.co.senab.photoview.PhotoView;
 
 public class ImgZoomActivity extends BaseActivity implements ViewPager.OnPageChangeListener {
-    private TextView imageCount;
+    private TextView imageCount,title_bar_title;
     private ViewPager imagePager;
+    private ImageView title_bar_back;
+
     private ArrayList<String> imgs;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_img_zoom);
-        initView();
-        initdate();
-    }
-
-    private void initdate() {
-        imgs = getIntent().getStringArrayListExtra("img");
-        imagePager.setAdapter(new ImgPagerAda(imgs));
-    }
-
     public void initView() {
+        super.initView();
         imageCount = findViewById(R.id.tv_num);
+        title_bar_title = findViewById(R.id.title_bar_title);
+        title_bar_back = findViewById(R.id.title_bar_back);
         imagePager = findViewById(R.id.image_pager);
+        title_bar_back.setVisibility(View.VISIBLE);
         imagePager.setOnPageChangeListener(this);
     }
+
+    @Override
+    public void initData() {
+        super.initData();
+        imgs = getIntent().getStringArrayListExtra("img");
+        imagePager.setAdapter(new ImgPagerAda(imgs));
+        title_bar_title.setText("查看图片");
+        title_bar_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+    }
+
+
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
