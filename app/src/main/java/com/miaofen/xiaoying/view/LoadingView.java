@@ -48,7 +48,7 @@ public class LoadingView extends BaseDialog{
      * 成功
      */
     public void showSuccess() {
-        setTipMsg("加载成功");
+//        setTipMsg("加载成功");
         iv.setImageResource(R.mipmap.load_success);
         iv.setVisibility(View.VISIBLE);
         progressBar.setVisibility(View.GONE);
@@ -58,7 +58,7 @@ public class LoadingView extends BaseDialog{
      *失败
      */
     public void showFail() {
-        setTipMsg("加载失败");
+//        setTipMsg("加载失败");
         iv.setImageResource(R.mipmap.load_fail);
         iv.setVisibility(View.VISIBLE);
         progressBar.setVisibility(View.GONE);

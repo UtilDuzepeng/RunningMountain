@@ -27,100 +27,65 @@ import com.miaofen.xiaoying.utils.getCurrentTime
 class ReplyRecyclerAdapter(
     layoutResId: Int,
     @Nullable data: List<SecondaryReplyResponse.SubPlanCommentListBean?>?,
-    context: Context?,hashMap: HashMap<Long, SecondaryReplyResponse.SubPlanCommentListBean?>
+    context: Context?, hashMap: HashMap<Long, SecondaryReplyResponse.SubPlanCommentListBean?>
 ) : BaseQuickAdapter<SecondaryReplyResponse.SubPlanCommentListBean?, BaseViewHolder>(
     layoutResId, data
 ) {
     private var context: Context? = context
     var topCommentId: Long = -1
 
-    var hashMap : Map<Long, SecondaryReplyResponse.SubPlanCommentListBean?> =hashMap
+    var hashMap: Map<Long, SecondaryReplyResponse.SubPlanCommentListBean?> = hashMap
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun convert(
         helper: BaseViewHolder, item: SecondaryReplyResponse.SubPlanCommentListBean?
     ) {
-        if (item?.parentCommentId == topCommentId) {
-            helper.setGone(R.id.tv_reply_upper_strata, false)
-            //标准圆形图片。
-            Glide.with(context!!).load(item.userInfo?.avatarUrl)
-                .apply(RequestOptions.bitmapTransform(CircleCrop()))
-                .into(helper.getView(R.id.reply_item_avatarUrl) as ImageView)
-            helper.setText(R.id.tv_replu_item_con, item.content)
-            helper.setText(R.id.tv_reply_item_name, item.userInfo?.nickName)
-            helper.setText(R.id.tv_reply_number, "${item.starCount}")
-            helper.setText(R.id.tv_reply_time, "${getCurrentTime(item.createTime!!)}")
+        //标准圆形图片。
+        Glide.with(context!!).load(item?.userInfo?.avatarUrl)
+            .apply(RequestOptions.bitmapTransform(CircleCrop()))
+            .into(helper.getView(R.id.reply_item_avatarUrl) as ImageView)
+        helper.setText(R.id.tv_replu_item_con, item?.content)
+        helper.setText(R.id.tv_reply_item_name, item?.userInfo?.nickName)
+        helper.setText(R.id.tv_reply_number, "${item?.starCount}")
+        helper.setText(R.id.tv_reply_time, "${getCurrentTime(item?.createTime!!)}")
 
-            if (item.star!!) {
-                helper.setImageDrawable(
-                    R.id.reply_image_item, context?.getDrawable(R.drawable.dianzan_icon)
-                )
-                //取消点赞点击事件
-                helper.setOnClickListener(R.id.reply_image_item){
-                    secondaryReply?.onClickUnStar(item.commentId)
-                }
+        //回复点击事件
+        helper.setOnClickListener(R.id.tv_reply_second_level) {
+            secondaryReply?.onReplySecondLevel(item.commentId!!)
+        }
 
-            } else {
-                helper.setImageDrawable(
-                    R.id.reply_image_item, context?.getDrawable(R.drawable.dianzan_line)
-                )
+        //删除点击事件
+        helper.setOnClickListener(R.id.tv_reply_delete_comments) {
+            secondaryReply?.onReplyDeleteComments(item.commentId!!)
+        }
 
-                //点赞点击事件
-                helper.setOnClickListener(R.id.reply_image_item){
-                    secondaryReply?.onClickFabulous(item.commentId)
-                }
-
+        if (item.star!!) {
+            helper.setImageDrawable(
+                R.id.reply_image_item, context?.getDrawable(R.drawable.dianzan_icon)
+            )
+            //取消点赞点击事件
+            helper.setOnClickListener(R.id.reply_image_item) {
+                secondaryReply?.onClickUnStar(item.commentId)
             }
-
-            if (item.canDelete!!) {
-                helper.setVisible(R.id.tv_reply_delete_comments, true)
-            } else {
-                helper.setVisible(R.id.tv_reply_delete_comments, false)
-            }
-
-            //回复点击事件
-            helper.setOnClickListener(R.id.tv_reply_second_level) {
-                secondaryReply?.onReplySecondLevel(item.commentId!!)
-            }
-
         } else {
-
-            //标准圆形图片。
-            Glide.with(context!!).load(item?.userInfo?.avatarUrl)
-                .apply(RequestOptions.bitmapTransform(CircleCrop()))
-                .into(helper.getView(R.id.reply_item_avatarUrl) as ImageView)
-            helper.setText(R.id.tv_replu_item_con, item?.content)
-            helper.setText(R.id.tv_reply_item_name, item?.userInfo?.nickName)
-            helper.setText(R.id.tv_reply_number, "${item?.starCount}")
-            helper.setText(R.id.tv_reply_time, "${getCurrentTime(item?.createTime!!)}")
-
-            if (item.canDelete!!) {
-                helper.setVisible(R.id.tv_reply_delete_comments, true)
-            } else {
-                helper.setVisible(R.id.tv_reply_delete_comments, false)
+            helper.setImageDrawable(
+                R.id.reply_image_item, context?.getDrawable(R.drawable.dianzan_line)
+            )
+            //点赞点击事件
+            helper.setOnClickListener(R.id.reply_image_item) {
+                secondaryReply?.onClickFabulous(item.commentId)
             }
+        }
 
-            if (item.star!!) {
-                helper.setImageDrawable(
-                    R.id.reply_image_item, context?.getDrawable(R.drawable.dianzan_icon)
-                )
-                //取消点赞点击事件
-                helper.setOnClickListener(R.id.reply_image_item){
-                    secondaryReply?.onClickUnStar(item.commentId)
-                }
+        if (item.canDelete!!) {
+            helper.setVisible(R.id.tv_reply_delete_comments, true)
+        } else {
+            helper.setVisible(R.id.tv_reply_delete_comments, false)
+        }
 
-            } else {
-                helper.setImageDrawable(
-                    R.id.reply_image_item, context?.getDrawable(R.drawable.dianzan_line)
-                )
-
-                //点赞点击事件
-                helper.setOnClickListener(R.id.reply_image_item){
-                    secondaryReply?.onClickFabulous(item.commentId)
-                }
-
-            }
-
+        if (item.parentCommentId == topCommentId) {
+            helper.setGone(R.id.tv_reply_upper_strata, false)
+        } else {
             if (item.content == "") {
                 helper.setText(R.id.tv_reply_upper_strata, "[该内容已经删除]")
             } else {
@@ -129,20 +94,6 @@ class ReplyRecyclerAdapter(
                     R.id.tv_reply_upper_strata, "@${index?.userInfo?.nickName}:${index?.content}"
                 )
             }
-
-            //回复点击事件
-            helper.setOnClickListener(R.id.tv_reply_second_level) {
-                secondaryReply?.onReplySecondLevel(item.commentId!!)
-            }
-
-
-        }
-
-
-
-        //删除点击事件
-        helper.setOnClickListener(R.id.tv_reply_delete_comments){
-            secondaryReply?.onReplyDeleteComments(item.commentId!!)
         }
 
 

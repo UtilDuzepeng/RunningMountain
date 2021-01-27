@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_10"
             android:background="@drawable/grey_fillet_back"
-            android:padding="@dimen/dp_10"
+            android:padding="@dimen/dp_8"
             android:text="孙娜恩：趁这几天天气好，我想抓住秋天的小尾巴。一起去吧！"
             android:textColor="@color/A686E7A"
             android:textSize="@dimen/sp_14" />

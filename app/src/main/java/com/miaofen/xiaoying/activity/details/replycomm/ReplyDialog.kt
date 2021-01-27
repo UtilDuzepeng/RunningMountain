@@ -3,6 +3,7 @@ package com.miaofen.xiaoying.activity.details.replycomm
 import android.app.Activity
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +26,7 @@ import com.miaofen.xiaoying.utils.hideInput
 import com.miaofen.xiaoying.utils.showInput
 import com.miaofen.xiaoying.view.LoadingView
 import com.miaofen.xiaoying.view.RefreshLayout
+import com.miaofen.xiaoying.view.WarningTipsDialog
 
 /**
  * 项目名称：com.miaofen.xiaoying.activity.details.replycomm
@@ -38,7 +40,7 @@ import com.miaofen.xiaoying.view.RefreshLayout
 
 class ReplyDialog(var commentId: Long?, var planId: Int?, var activity: Activity?) :
     BaseMvpBottomDialogFragment<ReplyCommContract.Presenter>(), ReplyCommContract.View,
-    CommentDialog.ShowInput, ReplyRecyclerAdapter.SecondaryReply {
+    CommentDialog.ShowInput, ReplyRecyclerAdapter.SecondaryReply, WarningTipsDialog.OnClickButton {
 
     var list = ArrayList<SecondaryReplyResponse.SubPlanCommentListBean?>()
 
@@ -80,6 +82,12 @@ class ReplyDialog(var commentId: Long?, var planId: Int?, var activity: Activity
         }
     }
 
+    private val warningTipsDialog: WarningTipsDialog by lazy {
+        WarningTipsDialog(activity).apply {
+            setTipMsg("确定删除此评论?")
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -111,9 +119,12 @@ class ReplyDialog(var commentId: Long?, var planId: Int?, var activity: Activity
         super.initView()
         refresh_reply?.setEnableRefresh(false)
         refresh_reply?.setEnableLoadMore(false)
-        mAdapter = ReplyRecyclerAdapter(R.layout.one_reply_item, list, activity,hashMap)
+        mAdapter = ReplyRecyclerAdapter(R.layout.one_reply_item, list, activity, hashMap)
         mAdapter?.setSecondaryReply(this)
         refresh_reply?.recyclerView?.adapter = mAdapter
+        //注册点击时间
+        warningTipsDialog.setOnClickButton(this)
+
 //        mAdapter?.emptyView =
 //            LayoutInflater.from(activity).inflate(R.layout.no_data_available_layout, null, false)
 
@@ -139,6 +150,8 @@ class ReplyDialog(var commentId: Long?, var planId: Int?, var activity: Activity
     //列表请求成功
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onReplyCommSuccess(data: SecondaryReplyResponse?) {
+        list.clear()
+        hashMap.clear()
         //this.topCommentId = data?.topPlanComment?.commentId!!
         mAdapter?.topCommentId = data?.topPlanComment?.commentId!!
 
@@ -192,8 +205,6 @@ class ReplyDialog(var commentId: Long?, var planId: Int?, var activity: Activity
 
 
         mAdapter?.setHeaderView(replyHeaderView)
-        list.clear()
-        hashMap.clear()
         for (item in data.subPlanCommentList!!) {
             list.add(item)
             hashMap[item.commentId!!] = item
@@ -222,7 +233,7 @@ class ReplyDialog(var commentId: Long?, var planId: Int?, var activity: Activity
 
     override fun editTextHintInput() {
         loadingDialog.setTipMsg("正在加载")
-        loadingDialog.showFail()
+        loadingDialog.showSuccess()
     }
 
     override fun loadAnimation(editText: EditText?) {
@@ -230,6 +241,7 @@ class ReplyDialog(var commentId: Long?, var planId: Int?, var activity: Activity
         bottomDialogFr?.dismiss()
         mPresenter?.doReplyComm(commentId!!)
         loadingDialog.dismiss()
+        bottomDialogFr = null
     }
 
     override fun hideAnimation() {
@@ -253,9 +265,18 @@ class ReplyDialog(var commentId: Long?, var planId: Int?, var activity: Activity
 
     //删除评论
     override fun onReplyDeleteComments(commentId: Long) {
-        loadingDialog.showLoading()
-        mPresenter?.doDeleteComment(commentId)
+        warningTipsDialog.showLoading(commentId)
     }
+
+    override fun onCancel() {
+        warningTipsDialog.dismiss()
+    }
+
+    override fun onConfirm(commentId: Long) {
+        mPresenter?.doDeleteComment(commentId)
+        warningTipsDialog.dismiss()
+    }
+
 
     //删除评论成功
     override fun onDeleteCommentSuccess(data: String?) {

@@ -7,10 +7,12 @@ import android.view.View
 import android.widget.EditText
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
 import com.miaofen.xiaoying.R
+import com.miaofen.xiaoying.activity.PersonalHomPagerActivity
 import com.miaofen.xiaoying.activity.SignUpActivity
 import com.miaofen.xiaoying.activity.details.adapter.CommentRecyclerViewAdapter
 import com.miaofen.xiaoying.activity.details.adapter.JoinsRecyclerAdapter
@@ -21,16 +23,21 @@ import com.miaofen.xiaoying.activity.details.replycomm.ReplyDialog
 import com.miaofen.xiaoying.activity.details.tube.AdministrationDialog
 import com.miaofen.xiaoying.activity.signup.SignUpListActivity
 import com.miaofen.xiaoying.base.mvp.BaseMvpActivity
-import com.miaofen.xiaoying.common.data.bean.request.DeleteCommentRequestData
 import com.miaofen.xiaoying.common.data.bean.response.DetailsResponse
 import com.miaofen.xiaoying.common.data.bean.response.ImagerDataBean
 import com.miaofen.xiaoying.common.data.bean.response.OneCommentsResponse
 import com.miaofen.xiaoying.fragment.ImageAdapter
-import com.miaofen.xiaoying.utils.*
+import com.miaofen.xiaoying.utils.ToastUtils
+import com.miaofen.xiaoying.utils.getCurrentTime
+import com.miaofen.xiaoying.utils.hideInput
+import com.miaofen.xiaoying.utils.showInput
 import com.miaofen.xiaoying.view.LoadingView
 import com.miaofen.xiaoying.view.RefreshLayout
+import com.miaofen.xiaoying.view.WarningTipsDialog
 import com.youth.banner.indicator.CircleIndicator
 import kotlinx.android.synthetic.main.activity_project_details.*
+import kotlinx.android.synthetic.main.activity_project_details.title_bar_back
+import kotlinx.android.synthetic.main.activity_project_details.tv_commentContent
 import kotlinx.android.synthetic.main.details_head_layout.*
 
 
@@ -39,9 +46,9 @@ import kotlinx.android.synthetic.main.details_head_layout.*
  */
 @Suppress("INACCESSIBLE_TYPE")
 class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>(),
-    ProjectDetailsContract.View, RefreshLayout.SetOnRefresh,
-    CommentRecyclerViewAdapter.DeleteComment, CommentDialog.ShowInput,
-    AdministrationDialog.AdministrationInput, ReplyDialog.OnClickReply {
+    ProjectDetailsContract.View, CommentRecyclerViewAdapter.DeleteComment, CommentDialog.ShowInput,
+    AdministrationDialog.AdministrationInput, ReplyDialog.OnClickReply,
+    WarningTipsDialog.OnClickButton, RefreshLayout.SetOnRefresh {
 
     var bottomDialogFr: CommentDialog? = null//评论底部弹窗
 
@@ -62,49 +69,59 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
         }
     }
 
+    private val warningTipsDialog: WarningTipsDialog by lazy {
+        WarningTipsDialog(this).apply {
+            setTipMsg("确定删除此评论?")
+        }
+    }
+
+    var inflate: View? = null
+    private var planTrips_recycler: RecyclerView? = null
+    private var wants_recycler: RecyclerView? = null
+    private var joins_Recyclerview: RecyclerView? = null
+
     override fun returnLayoutId() = R.layout.activity_project_details
+//    override fun returnLayoutId() = R.layout.a_layout
 
     override fun initView() {
         super.initView()
-        planId = intent.getIntExtra(ID, -1)
-        loadingDialog.showLoading()
-        bottomDialogFr = CommentDialog(this,0, planId)
-        bottomDialogFr?.setShowInput(this)
+        ProjectDetailsPresenter(this)
         refreshOneComments.setSetOnRefresh(this)
         refreshOneComments.setEnableRefresh(false)
-        ProjectDetailsPresenter(this)
-        //一级评论适配器
-        commentRecyclerViewAdapter =
-            CommentRecyclerViewAdapter(R.layout.comment_item, list, this)
-        refreshOneComments.recyclerView.adapter = commentRecyclerViewAdapter
-        commentRecyclerViewAdapter?.emptyView = getEmptyView(R.layout.no_data_available_layout)
-        commentRecyclerViewAdapter?.setDeleteComment(this)
-        //途径地列表
-        planTrips_recycler.layoutManager = LinearLayoutManager(this)
-        //想约的人员列表
-        val gridLayoutManager =
-            GridLayoutManager(this, 7, GridLayoutManager.VERTICAL, false)
-        gridLayoutManager.orientation = LinearLayoutManager.VERTICAL
-        wants_recycler.layoutManager = gridLayoutManager
-        val joinsGridLayoutManager =
-            GridLayoutManager(this, 7, GridLayoutManager.VERTICAL, false)
-        joinsGridLayoutManager.orientation = LinearLayoutManager.VERTICAL
-        //已报名人员列表
-        joins_Recyclerview.layoutManager = joinsGridLayoutManager
+        planId = intent.getIntExtra(ID, -1)
+        loadingDialog.showLoading()
+        warningTipsDialog.setOnClickButton(this)
+        bottomDialogFr = CommentDialog(this, 0, planId)
+        bottomDialogFr?.setShowInput(this)
+        inflate = layoutInflater.inflate(R.layout.details_head_layout, null)
+        planTrips_recycler = inflate?.findViewById<RecyclerView>(R.id.planTrips_recycler)
+        wants_recycler = inflate?.findViewById<RecyclerView>(R.id.wants_recycler)
+        joins_Recyclerview = inflate?.findViewById<RecyclerView>(R.id.joins_Recyclerview)
     }
 
     override fun initData() {
         super.initData()
-//        //详情请求
-//        mPresenter?.doProjectDetails(planId)
-//        //一级评论请求
-//        mPresenter?.doOneComments(planId, 1, 10)
+        //一级评论适配器
+        commentRecyclerViewAdapter = CommentRecyclerViewAdapter(R.layout.comment_item, list, this)
+        commentRecyclerViewAdapter?.setHeaderView(inflate)
+        refreshOneComments.recyclerView.adapter = commentRecyclerViewAdapter
+        commentRecyclerViewAdapter?.setDeleteComment(this)
+        //途径地列表
+        planTrips_recycler?.layoutManager = LinearLayoutManager(this)
+        //想约的人员列表
+        val gridLayoutManager = GridLayoutManager(this, 7, GridLayoutManager.VERTICAL, false)
+        gridLayoutManager.orientation = LinearLayoutManager.VERTICAL
+        wants_recycler?.layoutManager = gridLayoutManager
+        val joinsGridLayoutManager = GridLayoutManager(this, 7, GridLayoutManager.VERTICAL, false)
+        joinsGridLayoutManager.orientation = LinearLayoutManager.VERTICAL
+        //已报名人员列表
+        joins_Recyclerview?.layoutManager = joinsGridLayoutManager
+
     }
 
     override fun onClick() {
         super.onClick()
         title_bar_back.setOnClickListener { finish() }
-
         //点击评论
         tv_commentContent.setOnClickListener {
             bottomDialogFr?.show(supportFragmentManager, "DF")
@@ -120,7 +137,6 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
         mPresenter?.doOneComments(planId, 1, 10)
         loadingDialog.showLoading()
     }
-
 
     //轮播图
     override fun onPlanImages(planImages: ArrayList<ImagerDataBean>?) {
@@ -151,8 +167,7 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
         tv_sign_up.text = buttonInfo?.buttonName
         if (buttonInfo?.buttonAction != null && buttonInfo.buttonAction == 1) {//报名
             tv_sign_up.setOnClickListener {
-                //报名
-                SignUpActivity.start(this,planDetailBean?.planId)
+                SignUpActivity.start(this, planDetailBean?.planId)
             }
         } else if (buttonInfo?.buttonAction != null && buttonInfo.buttonAction == 2) {//唤醒列表
             tv_sign_up.setOnClickListener {
@@ -165,10 +180,8 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
                 } else if (tv_sign_up.text.toString() == "退出") {
                     ToastUtils.showToast("退出")
                 }
-
             }
         }
-
     }
 
     //计划详情 标题
@@ -234,55 +247,54 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
         tvPlanTrips: String, dataPlanTrips: List<DetailsResponse.PlanTripsBean>?
     ) {
         tv_planTrips.visibility = View.VISIBLE
-        planTrips_recycler.visibility = View.VISIBLE
+        planTrips_recycler?.visibility = View.VISIBLE
         planTrips_view.visibility = View.VISIBLE
         tv_planTrips.text = tvPlanTrips
-        val planTripsRecyclerAdapter = PlanTripsRecyclerAdapter(
-            R.layout.channel_layout, dataPlanTrips, this
-        )
-        planTrips_recycler.adapter = planTripsRecyclerAdapter
+        val planTripsRecyclerAdapter =
+            PlanTripsRecyclerAdapter(R.layout.channel_layout, dataPlanTrips, this)
+        planTrips_recycler?.adapter = planTripsRecyclerAdapter
     }
 
     //暂无途径地
     override fun onHindPlanTrips() {
         tv_planTrips.visibility = View.GONE
-        planTrips_recycler.visibility = View.GONE
+        planTrips_recycler?.visibility = View.GONE
         planTrips_view.visibility = View.GONE
     }
 
     //想加入的人员信息  头像列表
     override fun onWants(tvWants: String, wants: List<DetailsResponse.WantsBean>?) {
         tv_wants.visibility = View.VISIBLE
-        wants_recycler.visibility = View.VISIBLE
+        wants_recycler?.visibility = View.VISIBLE
         wants_view.visibility = View.VISIBLE
         tv_wants.text = tvWants
         val wantsRecyclerViewAdapter =
             WantsRecyclerViewAdapter(R.layout.personnel_information, wants, this)
-        wants_recycler.adapter = wantsRecyclerViewAdapter
+        wants_recycler?.adapter = wantsRecyclerViewAdapter
     }
 
     //暂无想加入的人员
     override fun onHindWants() {
         tv_wants.visibility = View.GONE
-        wants_recycler.visibility = View.GONE
+        wants_recycler?.visibility = View.GONE
         wants_view.visibility = View.GONE
     }
 
     //已报名人数
     override fun onJoinsData(tvJoinsName: String, joins: List<DetailsResponse.JoinsBean>?) {
         tv_joinsName.visibility = View.VISIBLE
-        joins_Recyclerview.visibility = View.VISIBLE
+        joins_Recyclerview?.visibility = View.VISIBLE
         joins_view.visibility = View.VISIBLE
         tv_joinsName.text = tvJoinsName
         val joinsRecyclerAdapter =
             JoinsRecyclerAdapter(R.layout.personnel_information, joins, this)
-        joins_Recyclerview.adapter = joinsRecyclerAdapter
+        joins_Recyclerview?.adapter = joinsRecyclerAdapter
     }
 
     //暂无报名人数
     override fun onHindJoinsData() {
         tv_joinsName.visibility = View.GONE
-        joins_Recyclerview.visibility = View.GONE
+        joins_Recyclerview?.visibility = View.GONE
         joins_view.visibility = View.GONE
 
     }
@@ -300,18 +312,19 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
     }
 
     /*------------一级评论列表-------------*/
-
+    private var pager: Int = 1
     override fun loadMore(pager: Int, size: Int) {
         mPresenter?.doOneComments(planId, pager, size)
+        this.pager = pager
     }
 
     override fun refresh(pager: Int, size: Int) {
-//        mPresenter?.doOneComments(planId, pager, size)
+
     }
 
     //一级评论列表下拉成功 没有数据
     override fun onDownOneCommentsNullSuccess() {
-        refreshOneComments.setEnableLoadMore(false)
+
     }
 
     //一级评论列表下拉成功 有数据
@@ -321,6 +334,11 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
             list.add(item)
         }
         commentRecyclerViewAdapter?.notifyDataSetChanged()
+        if (data.totalElements!! <= 10) {
+            refreshOneComments.setEnableLoadMore(false)
+        } else {
+            refreshOneComments.setEnableLoadMore(true)
+        }
     }
 
     //一级评论列表上啦加载 有数据
@@ -338,7 +356,7 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
 
     //加载错误
     override fun onOneCommentsError() {
-
+        refreshOneComments.setEnableLoadMore(false)
     }
 
 
@@ -354,8 +372,17 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
 
     /*———————————————————————删除评论—————————————————————————*/
     override fun onDelete(commentId: Long?) {
-        loadingDialog.showLoading()
+        warningTipsDialog.showLoading(commentId)
+    }
+
+
+    override fun onCancel() {
+        warningTipsDialog.dismiss()
+    }
+
+    override fun onConfirm(commentId: Long?) {
         mPresenter?.doDeleteComment(commentId)
+        warningTipsDialog.dismiss()
     }
 
 
@@ -411,12 +438,11 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
 
     //点击回复
     override fun onReply(commentId: Long?) {
-        Log.e("TAG","评论编号：" + commentId)
+        Log.e("TAG", "评论编号：" + commentId)
         if (replyDialog == null) {
-            replyDialog = ReplyDialog(commentId,planId,this)
+            replyDialog = ReplyDialog(commentId, planId, this)
             replyDialog?.setOnClickReply(this)
         }
-
         replyDialog?.show(supportFragmentManager, "DF")
     }
 
@@ -442,7 +468,6 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
         mPresenter?.doOneComments(planId, 1, 10)
         loadingDialog.dismiss()
     }
-
 
     //发表评论失败toase
     override fun hideAnimation() {
@@ -486,7 +511,16 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
     override fun onNumberReplies() {
         replyDialog?.dismiss()
         replyDialog = null
+        //详情请求
+        mPresenter?.doProjectDetails(planId)
+        //一级评论请求
+        mPresenter?.doOneComments(planId, 1, 10)
+        loadingDialog.showLoading()
     }
 
+    /*-------- 去个人主页----------*/
+    override fun onPersonalHomepage() {
+        PersonalHomPagerActivity.start(this)
+    }
 
 }

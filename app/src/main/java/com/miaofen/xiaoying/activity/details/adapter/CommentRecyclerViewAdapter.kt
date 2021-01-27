@@ -85,10 +85,10 @@ class CommentRecyclerViewAdapter(
             }
 
         helper.setOnClickListener(R.id.tv_replyCount) {
-            deleteComment?.onReply(item?.commentId)
+            deleteComment?.onReply(item.commentId)
         }
         //评论是否可以删除
-        if (item?.canDelete != null) {
+        if (item.canDelete != null) {
             if (item.canDelete!!) {
                 helper.setVisible(R.id.tv_delete, true)
             } else {
@@ -97,7 +97,18 @@ class CommentRecyclerViewAdapter(
         }
         //点击删除
         helper.setOnClickListener(R.id.tv_delete) {
-            deleteComment?.onDelete(item?.commentId)
+            deleteComment?.onDelete(item.commentId)
+        }
+
+
+        //点击回复
+        helper.setOnClickListener(R.id.relative_comment){
+            deleteComment?.onReply(item.commentId)
+        }
+
+        //去个人主页
+        helper.setOnClickListener(R.id.imager_head){
+            deleteComment?.onPersonalHomepage()
         }
 
 
@@ -108,6 +119,7 @@ class CommentRecyclerViewAdapter(
         fun onOnClickFabulous(commentId: Long?)//点赞评论
         fun onUnStar(commentId: Long?)//取消点赞评论
         fun onReply(commentId :Long?)//点击回复
+        fun onPersonalHomepage()//个人主页
     }
 
     private var deleteComment: DeleteComment? = null
