@@ -3,7 +3,7 @@ package com.miaofen.xiaoying.fragment.home.search.use
 
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.miaofen.xiaoying.R
-import com.miaofen.xiaoying.activity.PersonalHomPagerActivity
+import com.miaofen.xiaoying.activity.personal.PersonalHomPagerActivity
 import com.miaofen.xiaoying.base.mvp.BaseMvpFragment
 import com.miaofen.xiaoying.common.data.bean.request.PlanRequestData
 import com.miaofen.xiaoying.common.data.bean.response.SearchUserResponse
@@ -72,7 +72,9 @@ class UseFragment(var dataName: String) : BaseMvpFragment<SearchUserContract.Pre
             return
         }
         if (data.content?.size == 0) {
-            mAdapter?.emptyView = getEmptyView(R.layout.search_empty_layout)
+            if (getEmptyView(R.layout.search_empty_layout)!=null){
+                mAdapter?.emptyView = getEmptyView(R.layout.search_empty_layout)
+            }
             use_recycler?.setEnableLoadMore(false)
             return
         } else {
@@ -142,8 +144,10 @@ class UseFragment(var dataName: String) : BaseMvpFragment<SearchUserContract.Pre
     }
 
     /*-------------查看个人详情---------------*/
-    override fun onUseSearchForUsers() {
-        PersonalHomPagerActivity.start(activity)
+    override fun onUseSearchForUsers(userId: Long?) {
+        if (userId != null){
+            PersonalHomPagerActivity.start(activity,userId)
+        }
     }
 
 }

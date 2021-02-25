@@ -108,7 +108,7 @@ class CommentRecyclerViewAdapter(
 
         //去个人主页
         helper.setOnClickListener(R.id.imager_head){
-            deleteComment?.onPersonalHomepage()
+            deleteComment?.onPersonalHomepage(item.userInfo?.userId)
         }
 
 
@@ -119,7 +119,7 @@ class CommentRecyclerViewAdapter(
         fun onOnClickFabulous(commentId: Long?)//点赞评论
         fun onUnStar(commentId: Long?)//取消点赞评论
         fun onReply(commentId :Long?)//点击回复
-        fun onPersonalHomepage()//个人主页
+        fun onPersonalHomepage(userId: Long?)//个人主页
     }
 
     private var deleteComment: DeleteComment? = null

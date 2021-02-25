@@ -4,7 +4,6 @@ import com.miaofen.xiaoying.common.data.bean.CommonResponse
 import com.miaofen.xiaoying.common.data.bean.request.*
 import com.miaofen.xiaoying.common.data.bean.response.*
 import io.reactivex.Observable
-import mlxy.utils.S
 import retrofit2.http.Body
 import retrofit2.http.POST
 
@@ -170,5 +169,24 @@ interface HomeApi {
      */
     @POST("weixin/user/follow")
     fun onFocusOnUsers(@Body focusUsersRequestData :FocusUsersRequestData): Observable<CommonResponse<Boolean>>
+
+    /**
+     * 解散小队
+     */
+    @POST("weixin/plan/dissolve")
+    fun onDissolution(@Body dissolutionRequestData :DissolutionRequestData): Observable<CommonResponse<String>>
+
+
+    /**
+     * 获取所有的省（code、name、gps、spell信息）
+     */
+    @POST("weixin/region/province")
+    fun onPosition(@Body provinceRequestData :ProvinceRequestData):Observable<CommonResponse<List<PositionResponse>>>
+
+    /**
+     * 获取下级地区信息（市、区、县）（code、name、gps、spell信息）
+     */
+    @POST("weixin/region/sub")
+    fun onAccessArea(@Body accessAreaRequestData : AccessAreaRequestData):Observable<CommonResponse<List<PositionResponse>>>
 
 }

@@ -44,7 +44,7 @@
     <string name="fans">粉丝</string>
     <string name="released_plans">发布的计划</string>
     <string name="receive_message_notification">是否接收消息通知</string>
-    <string name="certified_vehicle_display">认证车辆是否对外展示</string>
+    <string name="certified_vehicle_display">是否展示计划</string>
     <string name="travel_plan_details">旅行计划详情</string>
     <string name="expected_number">希望人数</string>
     <string name="people">人</string>
@@ -139,5 +139,16 @@
 
     <string name="delete_comments_title">确定删除此评论?</string>
     <string name="confirm">确认</string>
+
+    <string name="basic_information">基本资料</string>
+    <string name="gender_two">性别 ：</string>
+    <string name="birthday_two">生日： </string>
+    <string name="registration">注册： </string>
+    <string name="district">地区： </string>
+    <string name="active">活跃：  </string>
+    <string name="certification_ta">TA的认证</string>
+    <string name="the_city_he_visited">TA去过的城市</string>
+    <string name="tas_footprint">TA的足迹</string>
+    <string name="display_information">是否展示资料</string>
 
 </resources>

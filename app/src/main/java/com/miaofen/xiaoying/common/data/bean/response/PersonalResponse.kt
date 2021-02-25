@@ -16,6 +16,6 @@ data class PersonalResponse(
     var fansNumber: Int?,
     var nickName: String?,
     var collectionCount: Int?,
-    var userId: Int?,
+    var userId: Long?,
     var followsNumber: Int?
 )

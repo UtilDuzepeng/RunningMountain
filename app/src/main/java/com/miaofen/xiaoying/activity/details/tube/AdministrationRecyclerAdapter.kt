@@ -21,12 +21,11 @@ import com.miaofen.xiaoying.common.data.bean.response.DetailsResponse
 
 class AdministrationRecyclerAdapter(
     layoutResId: Int,
-    @Nullable data: List<DetailsResponse.ButtonInfoBean.SubButtonInfoBean>?,
-    context: Context?
+    @Nullable data: List<DetailsResponse.ButtonInfoBean.SubButtonInfoBean>?, var context: Context?,
+    var planId: Int?
 ) : BaseQuickAdapter<DetailsResponse.ButtonInfoBean.SubButtonInfoBean?, BaseViewHolder>(
     layoutResId, data
 ) {
-    var context: Context? = context
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun convert(
@@ -46,7 +45,9 @@ class AdministrationRecyclerAdapter(
                     administrationRecyclerInput?.onClickAdministrationEdit()
                 }//编辑
                 6 -> {
-                    administrationRecyclerInput?.onClickAdministrationDissolution()
+                    if (planId != null && planId != -1) {
+                        administrationRecyclerInput?.onClickAdministrationDissolution(planId!!)
+                    }
                 }//解散
             }
         }
@@ -79,7 +80,7 @@ class AdministrationRecyclerAdapter(
         fun onClickAdministrationTeam()
         fun onClickAdministrationSignUp()
         fun onClickAdministrationEdit()
-        fun onClickAdministrationDissolution()
+        fun onClickAdministrationDissolution(planId: Int)
     }
 
     private var administrationRecyclerInput: AdministrationRecyclerInput? = null

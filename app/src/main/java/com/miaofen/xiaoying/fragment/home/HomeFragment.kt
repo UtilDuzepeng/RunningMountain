@@ -18,6 +18,7 @@ import com.miaofen.xiaoying.fragment.home.hot.HotFragment
 import com.miaofen.xiaoying.fragment.home.hottest.NewestFragment
 import com.miaofen.xiaoying.fragment.home.nearby.NearbyFragment
 import com.miaofen.xiaoying.utils.CacheUtils
+import com.miaofen.xiaoying.utils.ToastUtils
 import com.miaofen.xiaoying.utils.updateTabTextView
 import com.youth.banner.indicator.CircleIndicator
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -49,11 +50,21 @@ class HomeFragment : BaseMvpFragment<HomeContract.Presenter>(), HomeContract.Vie
         super.initData()
         //获取定位信息
         val readJson = CacheUtils.readJson(context, Constant.JSON_ADDRESS)
-        toolbar_search_box.setPositionText(readJson.getString("city"))
+        if (readJson != null){
+            toolbar_search_box.setPositionText(readJson.getString("city"))
+        }
         //位置点击事件
         toolbar_search_box.setOnClickPosition(context)
     }
 
+
+    override fun onResume() {
+        super.onResume()
+        val readJson = CacheUtils.readJson(context, Constant.JSON_CHOOSELOCATION)
+        if (readJson != null){
+            toolbar_search_box.setPositionText(readJson.getString("areaName"))
+        }
+    }
 
     private fun setItem() {
         business_tablayout.getTabAt(0)?.text = list[0]

@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
 import com.miaofen.xiaoying.R
-import com.miaofen.xiaoying.activity.PersonalHomPagerActivity
+import com.miaofen.xiaoying.activity.personal.PersonalHomPagerActivity
 import com.miaofen.xiaoying.activity.SignUpActivity
 import com.miaofen.xiaoying.activity.details.adapter.CommentRecyclerViewAdapter
 import com.miaofen.xiaoying.activity.details.adapter.JoinsRecyclerAdapter
@@ -177,7 +177,8 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
             tv_sign_up.setOnClickListener {
                 if (tv_sign_up.text.toString() == "管理") {
                     if (administrationDialog == null) {
-                        administrationDialog = AdministrationDialog(buttonInfo.subButtonInfo)
+                        administrationDialog =
+                            AdministrationDialog(buttonInfo.subButtonInfo, planDetailBean?.planId)
                         administrationDialog?.setAdministrationInput(this)
                     }
                     administrationDialog?.show(supportFragmentManager, "DF")
@@ -508,9 +509,25 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
     }
 
     //解散
-    override fun administrationDissolution() {
-        ToastUtils.showToast("解散")
+    override fun administrationDissolution(planId: Int) {
+        loadingDialog.showSuccess()
+        mPresenter?.doDissolution(planId)
     }
+
+    //解散小队成功
+    override fun onDissolutionSuccess(data: String?) {
+        //详情请求
+        mPresenter?.doProjectDetails(planId)
+        //一级评论请求
+        mPresenter?.doOneComments(planId, 1, 10)
+        loadingDialog.showLoading()
+    }
+
+    //解散小队是吧
+    override fun onDissolutionError() {
+        loadingDialog.dismiss()
+    }
+
 
     /*---------查看1级计划评论回复列表--------------*/
     override fun onNumberReplies() {
@@ -524,8 +541,10 @@ class ProjectDetailsActivity : BaseMvpActivity<ProjectDetailsContract.Presenter>
     }
 
     /*-------- 去个人主页----------*/
-    override fun onPersonalHomepage() {
-        PersonalHomPagerActivity.start(this)
+    override fun onPersonalHomepage(userId: Long?) {
+        if (userId != null){
+            PersonalHomPagerActivity.start(this,userId)
+        }
     }
 
 }

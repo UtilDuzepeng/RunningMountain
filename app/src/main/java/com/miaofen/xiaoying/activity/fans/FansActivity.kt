@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.View
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.miaofen.xiaoying.R
+import com.miaofen.xiaoying.activity.personal.PersonalHomPagerActivity
 import com.miaofen.xiaoying.base.mvp.BaseMvpActivity
 import com.miaofen.xiaoying.common.data.bean.response.FansResponse
 import com.miaofen.xiaoying.view.LoadingView
@@ -46,7 +47,11 @@ class FansActivity : BaseMvpActivity<FansContract.Presenter>(), FansContract.Vie
         mAdapter?.openLoadAnimation(BaseQuickAdapter.ALPHAIN)
         mAdapter?.setOnFanListBack(this)
         refresh_fans.recyclerView.adapter = mAdapter
+    }
 
+    override fun onResume() {
+        super.onResume()
+        mPresenter?.doFans(1,10)
     }
 
     override fun initData() {
@@ -127,6 +132,13 @@ class FansActivity : BaseMvpActivity<FansContract.Presenter>(), FansContract.Vie
     //取消关注成功
     override fun onCancelAttentioError() {
         loadingDialog.dismiss()
+    }
+
+    //对外展示基本资料
+    override fun onBasicInformation(userId: Long?) {
+        if (userId != null) {
+            PersonalHomPagerActivity.start(this,userId)
+        }
     }
 
     companion object {

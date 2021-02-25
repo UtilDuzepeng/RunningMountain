@@ -44,10 +44,11 @@ class VehicleCertificationActivity : BaseActivity() {
 
     override fun initView() {
         super.initView()
-        window.setSoftInputMode( WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
         title_bar_back.visibility = View.VISIBLE
         title_bar_title.text = "车辆认证"
-        vehicle_recyclerview.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+        vehicle_recyclerview.layoutManager =
+            LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
         mAdapter = ReleaseRecyclerViewAdapter(R.layout.release_imager_layout, bitmapList, this)
         val inflate = layoutInflater.inflate(R.layout.upload_icon_layout, null)
         mAdapter?.addFooterView(inflate)
@@ -74,8 +75,7 @@ class VehicleCertificationActivity : BaseActivity() {
             return
         }
         //打开手机中的相册
-        val innerIntent =
-            Intent(Intent.ACTION_GET_CONTENT) //"android.intent.action.GET_CONTENT"
+        val innerIntent = Intent(Intent.ACTION_GET_CONTENT) //"android.intent.action.GET_CONTENT"
         innerIntent.type = "image/*"
         startActivityForResult(innerIntent, REQUEST_CODE_SCAN_GALLERY)
     }
@@ -91,9 +91,9 @@ class VehicleCertificationActivity : BaseActivity() {
                 Log.e("TAG", "文件路径：" + file)
                 val fis = FileInputStream(file)
                 val bitmap = BitmapFactory.decodeStream(fis)
-                if (bitmapList.size >=9){
+                if (bitmapList.size >= 9) {
                     ToastUtils.showToast("最多只能上传9张～")
-                }else{
+                } else {
                     bitmapList.add(bitmap)
                     mAdapter?.notifyDataSetChanged()
                 }
@@ -101,7 +101,7 @@ class VehicleCertificationActivity : BaseActivity() {
         }
     }
 
-    fun getFileFromUri(uri: Uri, context: Context): File? {
+    private fun getFileFromUri(uri: Uri, context: Context): File? {
         return if (uri == null) {
             null
         } else when (uri.scheme) {
@@ -138,7 +138,6 @@ class VehicleCertificationActivity : BaseActivity() {
         return file
     }
 
-
     override fun onRequestPermissionsResult(
         requestCode: Int, permissions: Array<out String>, grantResults: IntArray
     ) {
@@ -155,7 +154,6 @@ class VehicleCertificationActivity : BaseActivity() {
                 }
         }
     }
-
 
 
     companion object {

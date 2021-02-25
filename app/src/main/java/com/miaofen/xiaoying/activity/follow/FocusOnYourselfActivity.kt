@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.View
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.miaofen.xiaoying.R
+import com.miaofen.xiaoying.activity.personal.PersonalHomPagerActivity
 import com.miaofen.xiaoying.base.mvp.BaseMvpActivity
 import com.miaofen.xiaoying.common.data.bean.response.FocusOnResponse
 import com.miaofen.xiaoying.view.LoadingView
@@ -16,9 +17,10 @@ import kotlinx.android.synthetic.main.toobar_layout.*
  * 关注列表
  */
 class FocusOnYourselfActivity : BaseMvpActivity<FocusOnYourselfContract.Presenter>(),
-    FocusOnYourselfContract.View, RefreshLayout.SetOnRefresh, FocusOnRecyclerAdapter.OnFocusOnListBack {
+    FocusOnYourselfContract.View, RefreshLayout.SetOnRefresh,
+    FocusOnRecyclerAdapter.OnFocusOnListBack {
 
-    var mAdapter : FocusOnRecyclerAdapter? = null
+    var mAdapter: FocusOnRecyclerAdapter? = null
 
     var list = ArrayList<FocusOnResponse.ContentBean?>()
 
@@ -35,7 +37,7 @@ class FocusOnYourselfActivity : BaseMvpActivity<FocusOnYourselfContract.Presente
         loadingDialog.showSuccess()
         FocusOnYourselfPresenter(this)
         //第一次网络请求
-        mPresenter?.doFocusOnYourself(1,10)
+        mPresenter?.doFocusOnYourself(1, 10)
         title_bar_back.visibility = View.VISIBLE
         title_bar_title.setText(R.string.follow)
 //        focus_refresh.autoRefresh()
@@ -49,17 +51,22 @@ class FocusOnYourselfActivity : BaseMvpActivity<FocusOnYourselfContract.Presente
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        mPresenter?.doFocusOnYourself(1, 10)
+    }
+
     override fun initData() {
         super.initData()
         title_bar_back.setOnClickListener { finish() }
     }
 
     override fun loadMore(pager: Int, size: Int) {
-        mPresenter?.doFocusOnYourself(pager,size)
+        mPresenter?.doFocusOnYourself(pager, size)
     }
 
     override fun refresh(pager: Int, size: Int) {
-        mPresenter?.doFocusOnYourself(pager,size)
+        mPresenter?.doFocusOnYourself(pager, size)
     }
 
     //下拉成功 没有数据
@@ -68,16 +75,18 @@ class FocusOnYourselfActivity : BaseMvpActivity<FocusOnYourselfContract.Presente
         focus_refresh.setEnableLoadMore(false)//设置不能上啦刷新
         loadingDialog.dismiss()
     }
+
     //下拉成功 有数据
     override fun onFocusOnYourselfSuccess(data: FocusOnResponse?) {
         list.clear()
-        for (item in data?.content!!){
+        for (item in data?.content!!) {
             list.add(item)
         }
         focus_refresh.setEnableLoadMore(true)//设置不能上啦刷新
         mAdapter?.notifyDataSetChanged()
         loadingDialog.dismiss()
     }
+
     //上啦加载 有数据
     override fun onFocusOnSuccess(data: FocusOnResponse?) {
         for (item in data?.content!!) {
@@ -86,6 +95,7 @@ class FocusOnYourselfActivity : BaseMvpActivity<FocusOnYourselfContract.Presente
         focus_refresh.setEnableLoadMore(true)//设置不能上啦刷新
         mAdapter?.notifyDataSetChanged()
     }
+
     //上啦加载 没有数据
     override fun onFocusOnNullSuccess() {
         focus_refresh.setEnableLoadMore(false)//设置不能上啦刷新
@@ -102,7 +112,7 @@ class FocusOnYourselfActivity : BaseMvpActivity<FocusOnYourselfContract.Presente
     }
 
     override fun onFocusOnUsersSuccess(data: Boolean) {
-        mPresenter?.doFocusOnYourself(1,10)
+        mPresenter?.doFocusOnYourself(1, 10)
         loadingDialog.dismiss()
     }
 
@@ -116,8 +126,15 @@ class FocusOnYourselfActivity : BaseMvpActivity<FocusOnYourselfContract.Presente
         mPresenter?.doCancelAttentio(followId)
     }
 
+    /*-------------对外基本资料----------------*/
+    override fun onBasicInformation(userId: Long?) {
+        if (userId != null) {
+            PersonalHomPagerActivity.start(this,userId)
+        }
+    }
+
     override fun onCancelAttentioSuccess(data: Boolean) {
-        mPresenter?.doFocusOnYourself(1,10)
+        mPresenter?.doFocusOnYourself(1, 10)
         loadingDialog.dismiss()
     }
 

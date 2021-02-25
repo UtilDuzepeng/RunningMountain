@@ -30,9 +30,7 @@ class MRetrofit private constructor(context: Context) {
 //        val cookieJar = PersistentCookieJar(SetCookieCache(), SharedPrefsCookiePersistor(context))
         //okhttp创建了
         val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor(
-                getLoggingInterceptor()
-            )//添加网络拦截器
+            .addInterceptor(getLoggingInterceptor())//添加网络拦截器
 //            .addInterceptor(CacheInterceptor(context))//添加拦截器
             .addInterceptor(ParamsInterceptor())//拦截器
 //            .addNetworkInterceptor(

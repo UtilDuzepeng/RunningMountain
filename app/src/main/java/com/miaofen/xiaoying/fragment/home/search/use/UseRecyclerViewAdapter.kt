@@ -69,7 +69,7 @@ class UseRecyclerViewAdapter(
 
         //查看个人主页
         helper.setOnClickListener(R.id.search_for_users){
-            onUseOnLisBack?.onUseSearchForUsers()
+            onUseOnLisBack?.onUseSearchForUsers(item.userId)
         }
 
     }
@@ -78,7 +78,7 @@ class UseRecyclerViewAdapter(
     interface OnUseOnListBack {
         fun onUseFocusFollow(followId: Long?)//回关
         fun onUseCancelAttention(followId: Long?)//取消关注
-        fun onUseSearchForUsers()//查看个人详情
+        fun onUseSearchForUsers(userId: Long?)//查看个人详情
     }
 
     private var onUseOnLisBack: OnUseOnListBack? = null

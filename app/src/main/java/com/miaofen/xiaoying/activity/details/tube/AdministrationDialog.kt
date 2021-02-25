@@ -26,8 +26,9 @@ import kotlinx.android.synthetic.main.fragment_release.*
  * 修改备注：
  */
 class AdministrationDialog(
-    var subButtonInfo: List<DetailsResponse.ButtonInfoBean.SubButtonInfoBean>?
-) : BaseBottomDialogFragment(), AdministrationRecyclerAdapter.AdministrationRecyclerInput{
+    var subButtonInfo: List<DetailsResponse.ButtonInfoBean.SubButtonInfoBean>?,
+    var planId: Int?
+) : BaseBottomDialogFragment(), AdministrationRecyclerAdapter.AdministrationRecyclerInput {
 
     private var frView: View? = null
 
@@ -41,7 +42,9 @@ class AdministrationDialog(
         val recycler = frView?.findViewById<RecyclerView>(R.id.administration_Recycler)
         recycler?.layoutManager =
             LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
-        var mAdapter = AdministrationRecyclerAdapter(R.layout.adminis_recycler_item, subButtonInfo,activity)
+        var mAdapter = AdministrationRecyclerAdapter(
+            R.layout.adminis_recycler_item, subButtonInfo, activity, planId
+        )
         mAdapter.setAdministrationInput(this)
         recycler?.adapter = mAdapter
         frView?.findViewById<ImageView>(R.id.image_administration)?.setOnClickListener {
@@ -55,7 +58,7 @@ class AdministrationDialog(
         fun administrationTeam()
         fun administrationSignUp()
         fun administrationEdit()
-        fun administrationDissolution()
+        fun administrationDissolution(planId: Int)
     }
 
     private var administrationInput: AdministrationInput? = null
@@ -76,8 +79,8 @@ class AdministrationDialog(
         administrationInput?.administrationEdit()
     }
 
-    override fun onClickAdministrationDissolution() {
-        administrationInput?.administrationDissolution()
+    override fun onClickAdministrationDissolution(planId: Int) {
+        administrationInput?.administrationDissolution(planId)
     }
 
 

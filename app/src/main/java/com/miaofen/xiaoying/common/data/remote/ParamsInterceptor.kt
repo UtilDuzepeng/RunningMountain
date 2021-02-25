@@ -27,8 +27,8 @@ class ParamsInterceptor : Interceptor {
 //        if (!TextUtils.isEmpty(token)) {
 //            builder.addHeader("token", token!!)
 //            .addHeader("token", "odGc95I9iiVX78eK6nShycWM3sfw")
-//            .addHeader("token", "odGc95JHalgJS6rASWhneedREqR4")
-            .addHeader("token", "odGc95JHalgJS6rASWhneedREqR4")
+            .addHeader("token", "odGc95L-n2d3uTbUqxJ282ldkCiE")
+//            .addHeader("token", "odGc95L-n2d3uTbUqxJ282ldkCiE")
             .addHeader("type", "token")
 //        }
         request = builder.build()

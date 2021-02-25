@@ -29,6 +29,8 @@ interface ProjectDetailsContract {
         fun doDeleteComment(commentId: Long?)//删除评论
         fun doFabulous(commentId: Long?)//点赞评论
         fun doUnStar(commentId: Long?)//取消点赞
+        fun doDissolution(planId :Int)//解散小队
+
     }
 
     interface View : IView<Presenter> {
@@ -127,6 +129,8 @@ interface ProjectDetailsContract {
         fun onUnStarSuccess(data: String?)
         fun onUnStarError()
 
-
+        /*—————————————————————————解散小队———————————————————————————————*/
+        fun onDissolutionSuccess(data: String?)
+        fun onDissolutionError()
     }
 }

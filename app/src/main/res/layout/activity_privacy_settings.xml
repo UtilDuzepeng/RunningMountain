@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.miaofen.xiaoying.activity.PrivacySettingsActivity">
+    tools:context="com.miaofen.xiaoying.activity.privacy.PrivacySettingsActivity">
 
     <include layout="@layout/toobar_layout" />
 
@@ -63,6 +63,32 @@
 
         <com.miaofen.xiaoying.view.SwitchButton
             android:id="@+id/swit_exhibition"
+            android:layout_width="@dimen/dp_42"
+            android:layout_height="@dimen/dp_22"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="@dimen/dp_18"
+        android:paddingLeft="@dimen/dp_18"
+        android:layout_marginTop="@dimen/dp_13"
+        android:layout_marginBottom="@dimen/dp_22"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/display_information"
+            android:layout_centerVertical="true"
+            android:textColor="@color/A212A3D"
+            android:textSize="@dimen/sp_15" />
+
+        <com.miaofen.xiaoying.view.SwitchButton
+            android:id="@+id/swit_data"
             android:layout_width="@dimen/dp_42"
             android:layout_height="@dimen/dp_22"
             android:layout_centerVertical="true"

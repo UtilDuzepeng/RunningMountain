@@ -26,6 +26,7 @@ data class FocusOnResponse(
         var nickName: String?,
         var selfFollowUser: Boolean?,
         var userId: Long?,
-        var userFollowSelf: Boolean?
+        var userFollowSelf: Boolean?,
+        var gender :Int?
     )
 }

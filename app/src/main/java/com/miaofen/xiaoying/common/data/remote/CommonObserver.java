@@ -55,7 +55,7 @@ public abstract class CommonObserver<T> implements Observer<CommonResponse<T>> {
     public void onError(Throwable e) {
         Log.e("TAG","---------" +e.getMessage());
         Logger.e(e, e.getMessage());
-        failure(e, "网络异常，请稍候重试");
+//        failure(e, "网络异常，请稍候重试");
     }
 
     @Override

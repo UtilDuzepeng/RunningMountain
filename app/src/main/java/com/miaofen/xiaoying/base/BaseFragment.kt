@@ -80,8 +80,11 @@ abstract class BaseFragment : Fragment() {
 
     open fun refresh() {}
 
-    fun getEmptyView(@LayoutRes resource: Int?): View {
-        return LayoutInflater.from(activity).inflate(resource!!, null, false)
+    fun getEmptyView(@LayoutRes resource: Int?): View? {
+        if (activity != null){
+            return LayoutInflater.from(activity).inflate(resource!!, null, false)
+        }
+        return null
     }
 
 

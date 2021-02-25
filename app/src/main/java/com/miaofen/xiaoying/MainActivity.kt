@@ -16,6 +16,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.miaofen.xiaoying.base.BaseActivity
+import com.miaofen.xiaoying.comm.Constant.JSON_ADDRESS
 import com.miaofen.xiaoying.fragment.hair.ReleaseFragment
 import com.miaofen.xiaoying.fragment.home.HomeFragment
 import com.miaofen.xiaoying.fragment.news.NewsFragment
@@ -198,11 +199,11 @@ class MainActivity : BaseActivity() {
             if (amapLocation != null) {
                 if (amapLocation.errorCode == 0) {
                     val toJson = amapLocation.toJson(1)
-                    CacheUtils.writeJson(this, toJson.toString(), "address", false)
-                    Log.e("TAG","我执行拉-《 我是定位 : " +  amapLocation)
+                    CacheUtils.writeJson(this, toJson.toString(), JSON_ADDRESS, false)
+//                    Log.e("TAG","我执行拉-《 我是定位 : " +  amapLocation)
                 } else {
                     //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
-                    ToastUtils.showToast("定位失败${amapLocation.errorInfo}")
+//                    ToastUtils.showToast("定位失败${amapLocation.errorInfo}")
                 }
             }
         }

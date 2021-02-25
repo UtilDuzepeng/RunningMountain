@@ -24,6 +24,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * 地理位置页面
+ */
 public class LocationActivity extends BaseActivity {
 
     /**
@@ -192,9 +195,9 @@ public class LocationActivity extends BaseActivity {
 
                     } else {
                         //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
-                        Log.e("AmapError   ", "location Error, ErrCode:"
-                                + amapLocation.getErrorCode() + ", errInfo:"
-                                + amapLocation.getErrorInfo());
+//                        Log.e("AmapError   ", "location Error, ErrCode:"
+//                                + amapLocation.getErrorCode() + ", errInfo:"
+//                                + amapLocation.getErrorInfo());
                     }
                 }
             }

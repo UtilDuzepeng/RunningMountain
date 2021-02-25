@@ -45,6 +45,7 @@
                         android:id="@+id/personal_pager"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/dp_100"
                         android:layout_marginLeft="@dimen/dp_24"
                         android:layout_marginTop="@dimen/dp_90"
                         android:orientation="vertical">
@@ -54,6 +55,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text=""
+                            android:maxLines="1"
                             android:textColor="@color/A212A3D"
                             android:textSize="@dimen/sp_24"
                             android:textStyle="bold" />
@@ -63,6 +65,7 @@
                             android:layout_height="wrap_content"
                             android:drawableRight="@drawable/chevron_right_outline_icon"
                             android:text="@string/personal_home_page"
+                            android:layout_marginTop="@dimen/dp_8"
                             android:textColor="@color/A686E7A"
                             android:textSize="@dimen/sp_14" />
 
@@ -189,6 +192,7 @@
 
 
                 <LinearLayout
+                    android:id="@+id/line_travel_plan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"

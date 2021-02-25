@@ -17,407 +17,124 @@ import java.util.List;
 public class AAAA {
 
 
-    private DataBean data;
+    /**
+     * code : 200
+     * message : 访问成功!
+     * data : [{"spell":"B","areaCode":110000,"level":0,"areaName":"北京市","parentCode":0,"lon":116.4136103013,"class":"com.paoshanba.common.dto.RegionDto","lat":39.9110666857},{"spell":"T","areaCode":120000,"level":0,"areaName":"天津市","parentCode":0,"lon":117.190182,"class":"com.paoshanba.common.dto.RegionDto","lat":39.125596},{"spell":"H","areaCode":130000,"level":0,"areaName":"河北省","parentCode":0,"lon":114.4698103761,"class":"com.paoshanba.common.dto.RegionDto","lat":38.0360054744},{"spell":"S","areaCode":140000,"level":0,"areaName":"山西省","parentCode":0,"lon":112.549248,"class":"com.paoshanba.common.dto.RegionDto","lat":37.857014},{"spell":"N","areaCode":150000,"level":0,"areaName":"内蒙古自治区","parentCode":0,"lon":111.670801,"class":"com.paoshanba.common.dto.RegionDto","lat":40.818311},{"spell":"L","areaCode":210000,"level":0,"areaName":"辽宁省","parentCode":0,"lon":123.429096,"class":"com.paoshanba.common.dto.RegionDto","lat":41.796767},{"spell":"J","areaCode":220000,"level":0,"areaName":"吉林省","parentCode":0,"lon":125.3245,"class":"com.paoshanba.common.dto.RegionDto","lat":43.886841},{"spell":"H","areaCode":230000,"level":0,"areaName":"黑龙江省","parentCode":0,"lon":126.642464,"class":"com.paoshanba.common.dto.RegionDto","lat":45.756967},{"spell":"S","areaCode":310000,"level":0,"areaName":"上海市","parentCode":0,"lon":121.472644,"class":"com.paoshanba.common.dto.RegionDto","lat":31.231706},{"spell":"J","areaCode":320000,"level":0,"areaName":"江苏省","parentCode":0,"lon":118.767413,"class":"com.paoshanba.common.dto.RegionDto","lat":32.041544},{"spell":"Z","areaCode":330000,"level":0,"areaName":"浙江省","parentCode":0,"lon":120.153576,"class":"com.paoshanba.common.dto.RegionDto","lat":30.287459},{"spell":"A","areaCode":340000,"level":0,"areaName":"安徽省","parentCode":0,"lon":117.283042,"class":"com.paoshanba.common.dto.RegionDto","lat":31.86119},{"spell":"F","areaCode":350000,"level":0,"areaName":"福建省","parentCode":0,"lon":119.306239,"class":"com.paoshanba.common.dto.RegionDto","lat":26.075302},{"spell":"J","areaCode":360000,"level":0,"areaName":"江西省","parentCode":0,"lon":115.892151,"class":"com.paoshanba.common.dto.RegionDto","lat":28.676493},{"spell":"S","areaCode":370000,"level":0,"areaName":"山东省","parentCode":0,"lon":117.000923,"class":"com.paoshanba.common.dto.RegionDto","lat":36.675807},{"spell":"H","areaCode":410000,"level":0,"areaName":"河南省","parentCode":0,"lon":113.665412,"class":"com.paoshanba.common.dto.RegionDto","lat":34.757975},{"spell":"H","areaCode":420000,"level":0,"areaName":"湖北省","parentCode":0,"lon":114.298572,"class":"com.paoshanba.common.dto.RegionDto","lat":30.584355},{"spell":"H","areaCode":430000,"level":0,"areaName":"湖南省","parentCode":0,"lon":112.982279,"class":"com.paoshanba.common.dto.RegionDto","lat":28.19409},{"spell":"G","areaCode":440000,"level":0,"areaName":"广东省","parentCode":0,"lon":113.280637,"class":"com.paoshanba.common.dto.RegionDto","lat":23.125178},{"spell":"G","areaCode":450000,"level":0,"areaName":"广西壮族自治区","parentCode":0,"lon":108.320004,"class":"com.paoshanba.common.dto.RegionDto","lat":22.82402}]
+     */
 
-    public DataBean getData() {
+    private int code;
+    private String message;
+    private List<DataBean> data;
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public List<DataBean> getData() {
         return data;
     }
 
-    public void setData(DataBean data) {
+    public void setData(List<DataBean> data) {
         this.data = data;
     }
 
     public static class DataBean {
         /**
-         * subPlanCommentList : [{"userInfo":{"motorcycle":null,"gender":2,"personalSignature":"不知道写啥了","avatarUrl":"https://thirdwx.qlogo.cn/mmopen/vi_32/YD1RqdHwfuMN748rATaDNnqVUIVONvWQJYicuGR0GxMNetr3SZ20kW3bU4CWjiaIbt00Ria1UYCZY6h27Tf7VQYibg/132","nickName":"we are going","class":"com.paoshanba.common.dto.UserAvatarInfoVo","userId":2},"starCount":0,"star":false,"createTime":1610638623000,"commentId":1610638623044,"parentCommentId":1610638564591,"canDelete":true,"follow":null,"class":"com.paoshanba.travelplan.dubbo.api.vo.dto.TravelPlanCommentDto","content":"1"},{"userInfo":{"motorcycle":"Kawasaki Ninja H2 Carbon","gender":1,"personalSignature":"操啊","avatarUrl":"https://thirdwx.qlogo.cn/mmopen/vi_32/YD1RqdHwfuMN748rATaDNnqVUIVONvWQJYicuGR0GxMNetr3SZ20kW3bU4CWjiaIbt00Ria1UYCZY6h27Tf7VQYibg/132","nickName":"机车","class":"com.paoshanba.common.dto.UserAvatarInfoVo","userId":1},"starCount":0,"star":false,"createTime":1610846365000,"commentId":1610846365266,"parentCommentId":1610638623044,"canDelete":false,"follow":null,"class":"com.paoshanba.travelplan.dubbo.api.vo.dto.TravelPlanCommentDto","content":""},{"userInfo":{"motorcycle":"Kawasaki Ninja H2 Carbon","gender":1,"personalSignature":"操啊","avatarUrl":"https://thirdwx.qlogo.cn/mmopen/vi_32/YD1RqdHwfuMN748rATaDNnqVUIVONvWQJYicuGR0GxMNetr3SZ20kW3bU4CWjiaIbt00Ria1UYCZY6h27Tf7VQYibg/132","nickName":"机车","class":"com.paoshanba.common.dto.UserAvatarInfoVo","userId":1},"starCount":0,"star":false,"createTime":1610846386000,"commentId":1610846385894,"parentCommentId":1610846365266,"canDelete":false,"follow":null,"class":"com.paoshanba.travelplan.dubbo.api.vo.dto.TravelPlanCommentDto","content":"3"}]
-         * topPlanComment : {"userInfo":{"motorcycle":null,"gender":2,"personalSignature":"不知道写啥了","avatarUrl":"https://thirdwx.qlogo.cn/mmopen/vi_32/YD1RqdHwfuMN748rATaDNnqVUIVONvWQJYicuGR0GxMNetr3SZ20kW3bU4CWjiaIbt00Ria1UYCZY6h27Tf7VQYibg/132","nickName":"we are going","class":"com.paoshanba.common.dto.UserAvatarInfoVo","userId":2},"starCount":1,"star":true,"createTime":1610638565000,"commentId":1610638564591,"parentCommentId":0,"canDelete":true,"follow":1,"class":"com.paoshanba.travelplan.dubbo.api.vo.dto.TravelPlanCommentDto","content":"怎么样？"}
+         * spell : B
+         * areaCode : 110000
+         * level : 0
+         * areaName : 北京市
+         * parentCode : 0
+         * lon : 116.4136103013
+         * class : com.paoshanba.common.dto.RegionDto
+         * lat : 39.9110666857
          */
 
-        private TopPlanCommentBean topPlanComment;
-        private List<SubPlanCommentListBean> subPlanCommentList;
+        private String spell;
+        private int areaCode;
+        private int level;
+        private String areaName;
+        private int parentCode;
+        private double lon;
+        @SerializedName("class")
+        private String classX;
+        private double lat;
 
-        public TopPlanCommentBean getTopPlanComment() {
-            return topPlanComment;
+        public String getSpell() {
+            return spell;
         }
 
-        public void setTopPlanComment(TopPlanCommentBean topPlanComment) {
-            this.topPlanComment = topPlanComment;
+        public void setSpell(String spell) {
+            this.spell = spell;
         }
 
-        public List<SubPlanCommentListBean> getSubPlanCommentList() {
-            return subPlanCommentList;
+        public int getAreaCode() {
+            return areaCode;
         }
 
-        public void setSubPlanCommentList(List<SubPlanCommentListBean> subPlanCommentList) {
-            this.subPlanCommentList = subPlanCommentList;
+        public void setAreaCode(int areaCode) {
+            this.areaCode = areaCode;
         }
 
-        public static class TopPlanCommentBean {
-            /**
-             * userInfo : {"motorcycle":null,"gender":2,"personalSignature":"不知道写啥了","avatarUrl":"https://thirdwx.qlogo.cn/mmopen/vi_32/YD1RqdHwfuMN748rATaDNnqVUIVONvWQJYicuGR0GxMNetr3SZ20kW3bU4CWjiaIbt00Ria1UYCZY6h27Tf7VQYibg/132","nickName":"we are going","class":"com.paoshanba.common.dto.UserAvatarInfoVo","userId":2}
-             * starCount : 1
-             * star : true
-             * createTime : 1610638565000
-             * commentId : 1610638564591
-             * parentCommentId : 0
-             * canDelete : true
-             * follow : 1
-             * class : com.paoshanba.travelplan.dubbo.api.vo.dto.TravelPlanCommentDto
-             * content : 怎么样？
-             */
-
-            private UserInfoBean userInfo;
-            private int starCount;
-            private boolean star;
-            private long createTime;
-            private long commentId;
-            private int parentCommentId;
-            private boolean canDelete;
-            private int follow;
-            @SerializedName("class")
-            private String classX;
-            private String content;
-
-            public UserInfoBean getUserInfo() {
-                return userInfo;
-            }
-
-            public void setUserInfo(UserInfoBean userInfo) {
-                this.userInfo = userInfo;
-            }
-
-            public int getStarCount() {
-                return starCount;
-            }
-
-            public void setStarCount(int starCount) {
-                this.starCount = starCount;
-            }
-
-            public boolean isStar() {
-                return star;
-            }
-
-            public void setStar(boolean star) {
-                this.star = star;
-            }
-
-            public long getCreateTime() {
-                return createTime;
-            }
-
-            public void setCreateTime(long createTime) {
-                this.createTime = createTime;
-            }
-
-            public long getCommentId() {
-                return commentId;
-            }
-
-            public void setCommentId(long commentId) {
-                this.commentId = commentId;
-            }
-
-            public int getParentCommentId() {
-                return parentCommentId;
-            }
-
-            public void setParentCommentId(int parentCommentId) {
-                this.parentCommentId = parentCommentId;
-            }
-
-            public boolean isCanDelete() {
-                return canDelete;
-            }
-
-            public void setCanDelete(boolean canDelete) {
-                this.canDelete = canDelete;
-            }
-
-            public int getFollow() {
-                return follow;
-            }
-
-            public void setFollow(int follow) {
-                this.follow = follow;
-            }
-
-            public String getClassX() {
-                return classX;
-            }
-
-            public void setClassX(String classX) {
-                this.classX = classX;
-            }
-
-            public String getContent() {
-                return content;
-            }
-
-            public void setContent(String content) {
-                this.content = content;
-            }
-
-            public static class UserInfoBean {
-                /**
-                 * motorcycle : null
-                 * gender : 2
-                 * personalSignature : 不知道写啥了
-                 * avatarUrl : https://thirdwx.qlogo.cn/mmopen/vi_32/YD1RqdHwfuMN748rATaDNnqVUIVONvWQJYicuGR0GxMNetr3SZ20kW3bU4CWjiaIbt00Ria1UYCZY6h27Tf7VQYibg/132
-                 * nickName : we are going
-                 * class : com.paoshanba.common.dto.UserAvatarInfoVo
-                 * userId : 2
-                 */
-
-                private Object motorcycle;
-                private int gender;
-                private String personalSignature;
-                private String avatarUrl;
-                private String nickName;
-                @SerializedName("class")
-                private String classX;
-                private int userId;
-
-                public Object getMotorcycle() {
-                    return motorcycle;
-                }
-
-                public void setMotorcycle(Object motorcycle) {
-                    this.motorcycle = motorcycle;
-                }
-
-                public int getGender() {
-                    return gender;
-                }
-
-                public void setGender(int gender) {
-                    this.gender = gender;
-                }
-
-                public String getPersonalSignature() {
-                    return personalSignature;
-                }
-
-                public void setPersonalSignature(String personalSignature) {
-                    this.personalSignature = personalSignature;
-                }
-
-                public String getAvatarUrl() {
-                    return avatarUrl;
-                }
-
-                public void setAvatarUrl(String avatarUrl) {
-                    this.avatarUrl = avatarUrl;
-                }
-
-                public String getNickName() {
-                    return nickName;
-                }
-
-                public void setNickName(String nickName) {
-                    this.nickName = nickName;
-                }
-
-                public String getClassX() {
-                    return classX;
-                }
-
-                public void setClassX(String classX) {
-                    this.classX = classX;
-                }
-
-                public int getUserId() {
-                    return userId;
-                }
-
-                public void setUserId(int userId) {
-                    this.userId = userId;
-                }
-            }
+        public int getLevel() {
+            return level;
         }
 
-        public static class SubPlanCommentListBean {
-            /**
-             * userInfo : {"motorcycle":null,"gender":2,"personalSignature":"不知道写啥了","avatarUrl":"https://thirdwx.qlogo.cn/mmopen/vi_32/YD1RqdHwfuMN748rATaDNnqVUIVONvWQJYicuGR0GxMNetr3SZ20kW3bU4CWjiaIbt00Ria1UYCZY6h27Tf7VQYibg/132","nickName":"we are going","class":"com.paoshanba.common.dto.UserAvatarInfoVo","userId":2}
-             * starCount : 0
-             * star : false
-             * createTime : 1610638623000
-             * commentId : 1610638623044
-             * parentCommentId : 1610638564591
-             * canDelete : true
-             * follow : null
-             * class : com.paoshanba.travelplan.dubbo.api.vo.dto.TravelPlanCommentDto
-             * content : 1
-             */
+        public void setLevel(int level) {
+            this.level = level;
+        }
 
-            private UserInfoBeanX userInfo;
-            private int starCount;
-            private boolean star;
-            private long createTime;
-            private long commentId;
-            private long parentCommentId;
-            private boolean canDelete;
-            private Object follow;
-            @SerializedName("class")
-            private String classX;
-            private String content;
+        public String getAreaName() {
+            return areaName;
+        }
 
-            public UserInfoBeanX getUserInfo() {
-                return userInfo;
-            }
+        public void setAreaName(String areaName) {
+            this.areaName = areaName;
+        }
 
-            public void setUserInfo(UserInfoBeanX userInfo) {
-                this.userInfo = userInfo;
-            }
+        public int getParentCode() {
+            return parentCode;
+        }
 
-            public int getStarCount() {
-                return starCount;
-            }
+        public void setParentCode(int parentCode) {
+            this.parentCode = parentCode;
+        }
 
-            public void setStarCount(int starCount) {
-                this.starCount = starCount;
-            }
+        public double getLon() {
+            return lon;
+        }
 
-            public boolean isStar() {
-                return star;
-            }
+        public void setLon(double lon) {
+            this.lon = lon;
+        }
 
-            public void setStar(boolean star) {
-                this.star = star;
-            }
+        public String getClassX() {
+            return classX;
+        }
 
-            public long getCreateTime() {
-                return createTime;
-            }
+        public void setClassX(String classX) {
+            this.classX = classX;
+        }
 
-            public void setCreateTime(long createTime) {
-                this.createTime = createTime;
-            }
+        public double getLat() {
+            return lat;
+        }
 
-            public long getCommentId() {
-                return commentId;
-            }
-
-            public void setCommentId(long commentId) {
-                this.commentId = commentId;
-            }
-
-            public long getParentCommentId() {
-                return parentCommentId;
-            }
-
-            public void setParentCommentId(long parentCommentId) {
-                this.parentCommentId = parentCommentId;
-            }
-
-            public boolean isCanDelete() {
-                return canDelete;
-            }
-
-            public void setCanDelete(boolean canDelete) {
-                this.canDelete = canDelete;
-            }
-
-            public Object getFollow() {
-                return follow;
-            }
-
-            public void setFollow(Object follow) {
-                this.follow = follow;
-            }
-
-            public String getClassX() {
-                return classX;
-            }
-
-            public void setClassX(String classX) {
-                this.classX = classX;
-            }
-
-            public String getContent() {
-                return content;
-            }
-
-            public void setContent(String content) {
-                this.content = content;
-            }
-
-            public static class UserInfoBeanX {
-                /**
-                 * motorcycle : null
-                 * gender : 2
-                 * personalSignature : 不知道写啥了
-                 * avatarUrl : https://thirdwx.qlogo.cn/mmopen/vi_32/YD1RqdHwfuMN748rATaDNnqVUIVONvWQJYicuGR0GxMNetr3SZ20kW3bU4CWjiaIbt00Ria1UYCZY6h27Tf7VQYibg/132
-                 * nickName : we are going
-                 * class : com.paoshanba.common.dto.UserAvatarInfoVo
-                 * userId : 2
-                 */
-
-                private Object motorcycle;
-                private int gender;
-                private String personalSignature;
-                private String avatarUrl;
-                private String nickName;
-                @SerializedName("class")
-                private String classX;
-                private int userId;
-
-                public Object getMotorcycle() {
-                    return motorcycle;
-                }
-
-                public void setMotorcycle(Object motorcycle) {
-                    this.motorcycle = motorcycle;
-                }
-
-                public int getGender() {
-                    return gender;
-                }
-
-                public void setGender(int gender) {
-                    this.gender = gender;
-                }
-
-                public String getPersonalSignature() {
-                    return personalSignature;
-                }
-
-                public void setPersonalSignature(String personalSignature) {
-                    this.personalSignature = personalSignature;
-                }
-
-                public String getAvatarUrl() {
-                    return avatarUrl;
-                }
-
-                public void setAvatarUrl(String avatarUrl) {
-                    this.avatarUrl = avatarUrl;
-                }
-
-                public String getNickName() {
-                    return nickName;
-                }
-
-                public void setNickName(String nickName) {
-                    this.nickName = nickName;
-                }
-
-                public String getClassX() {
-                    return classX;
-                }
-
-                public void setClassX(String classX) {
-                    this.classX = classX;
-                }
-
-                public int getUserId() {
-                    return userId;
-                }
-
-                public void setUserId(int userId) {
-                    this.userId = userId;
-                }
-            }
+        public void setLat(double lat) {
+            this.lat = lat;
         }
     }
 }

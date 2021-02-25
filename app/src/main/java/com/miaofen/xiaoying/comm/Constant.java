@@ -15,4 +15,5 @@ import mlxy.utils.S;
 public class Constant {
     public static final int REQ_PERM_EXTERNAL_STORAGE = 11004; // 读写文件
     public static final String JSON_ADDRESS = "address";//保存地址文件名
+    public static final String JSON_CHOOSELOCATION = "chooseLocation";//保存地址文件名
 }

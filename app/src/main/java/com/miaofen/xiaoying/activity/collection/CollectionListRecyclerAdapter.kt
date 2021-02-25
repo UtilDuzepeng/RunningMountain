@@ -34,6 +34,8 @@ class CollectionListRecyclerAdapter (
         //标准圆形图片。
         Glide.with(context!!).load(item?.publisherInfo?.avatarUrl)
             .apply(RequestOptions.bitmapTransform(CircleCrop()))
+            .fallback(R.drawable.zhanweitu)
+            .error(R.drawable.error_zhanweitu)
             .into(helper.getView(R.id.colleation_avatarUrl) as ImageView)
         //名称
         helper.setText(R.id.collection_nickName,item?.publisherInfo?.nickName)

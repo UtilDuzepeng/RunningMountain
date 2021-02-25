@@ -3,19 +3,26 @@ package com.miaofen.xiaoying.activity.signup;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.bumptech.glide.Glide;
 import com.miaofen.xiaoying.R;
 import com.miaofen.xiaoying.base.BaseActivity;
+
 import java.util.ArrayList;
+
 import uk.co.senab.photoview.PhotoView;
 
+/**
+ * 图片查看
+ */
 public class ImgZoomActivity extends BaseActivity implements ViewPager.OnPageChangeListener {
-    private TextView imageCount,title_bar_title;
+    private TextView imageCount, title_bar_title;
     private ViewPager imagePager;
     private ImageView title_bar_back;
 
@@ -47,10 +54,9 @@ public class ImgZoomActivity extends BaseActivity implements ViewPager.OnPageCha
     }
 
 
-
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        imageCount.setText(imgs.size()+"/"+(position+1));
+        imageCount.setText((position + 1) + "/" + imgs.size());
     }
 
     @Override
@@ -68,8 +74,9 @@ public class ImgZoomActivity extends BaseActivity implements ViewPager.OnPageCha
         return R.layout.activity_img_zoom;
     }
 
-    private  class ImgPagerAda extends PagerAdapter {
+    private class ImgPagerAda extends PagerAdapter {
         private ArrayList<String> imgs;
+
         public ImgPagerAda(ArrayList<String> imgs) {
             this.imgs = imgs;
         }

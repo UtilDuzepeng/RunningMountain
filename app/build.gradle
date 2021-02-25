@@ -128,5 +128,8 @@ dependencies {
     implementation 'com.amap.api:location:latest.integration'
     implementation 'com.github.chrisbanes.photoview:library:+'
     implementation 'androidx.viewpager:viewpager:1.0.0'
+    //时间选择器
+    implementation 'com.contrarywind:Android-PickerView:4.1.9'
+
 
 }

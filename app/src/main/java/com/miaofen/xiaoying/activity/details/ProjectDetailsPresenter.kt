@@ -4,10 +4,7 @@ package com.miaofen.xiaoying.activity.details
 import com.miaofen.xiaoying.R
 import com.miaofen.xiaoying.activity.details.adapter.JoinsRecyclerAdapter
 import com.miaofen.xiaoying.base.mvp.BasePresenter
-import com.miaofen.xiaoying.common.data.bean.request.DeleteCommentRequestData
-import com.miaofen.xiaoying.common.data.bean.request.DetailsRequestData
-import com.miaofen.xiaoying.common.data.bean.request.FabulousRequestData
-import com.miaofen.xiaoying.common.data.bean.request.OneCommentsData
+import com.miaofen.xiaoying.common.data.bean.request.*
 import com.miaofen.xiaoying.common.data.bean.response.DetailsResponse
 import com.miaofen.xiaoying.common.data.bean.response.ImagerDataBean
 import com.miaofen.xiaoying.common.data.bean.response.OneCommentsResponse
@@ -370,6 +367,28 @@ class ProjectDetailsPresenter(view: ProjectDetailsContract.View) :
                 }
             })
 
+    }
+
+    //解散小队
+    private val dissolutionRequestData = DissolutionRequestData()
+    override fun doDissolution(planId: Int) {
+        RemoteRepository
+            .onDissolution(dissolutionRequestData)
+            .applySchedulers()
+            .subscribe(object : CommonObserver<String>() {
+                override fun onSubscribe(d: Disposable?) {
+                    addDispose(d)
+                }
+
+                override fun success(data: String?) {
+                    mRootView.get()?.onDissolutionSuccess(data)
+                }
+
+                override fun failure(e: Throwable?, errMsg: String?) {
+                    super.failure(e, errMsg)
+                    mRootView.get()?.onDissolutionError()
+                }
+            })
     }
 
 

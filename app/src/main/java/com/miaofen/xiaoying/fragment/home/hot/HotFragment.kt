@@ -51,6 +51,16 @@ class HotFragment : BaseMvpFragment<HotContract.Presenter>(), HotContract.View,
         mAdapter?.setOnShareClick(this)
     }
 
+    override fun onResume() {
+        super.onResume()
+        val readJson = CacheUtils.readJson(context, Constant.JSON_CHOOSELOCATION)
+        if (readJson != null){
+            this.latitude  = readJson.getDouble("lat")
+            this.longitude  = readJson.getDouble("lon")
+            mPresenter?.doHot(1, 10, latitude!!, longitude!!)
+        }
+    }
+
     override fun loadMore(pager: Int, size: Int) {
         if (latitude != null && longitude != null) {
             mPresenter?.doHot(pager, size, latitude!!, longitude!!)

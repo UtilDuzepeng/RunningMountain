@@ -1,6 +1,5 @@
 package com.miaofen.xiaoying.common.data.bean.response
 
-import com.miaofen.xiaoying.common.data.bean.response.AAAA.DataBean
 
 /**
  * 项目名称：com.miaofen.xiaoying.common.data.bean.response

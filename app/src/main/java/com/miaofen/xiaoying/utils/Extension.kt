@@ -74,6 +74,25 @@ fun getCurrentTime(value: Long): String? {
     return time
 }
 
+fun getMinuteTime(value: Long): String? {
+    val format = SimpleDateFormat("HH:mm")
+    val time = format.format(Date(value * 1000L))
+//        Log.d("xxx-------->", "转换后时间: $time")
+    return time
+}
+
+fun getYearTime(value: Long): String?{
+    val format = SimpleDateFormat("yyyy-MM-dd")
+    val time = format.format(Date(value * 1000L))
+//        Log.d("xxx-------->", "转换后时间: $time")
+    return time
+}
+
+fun getStringDateShort(value: Long): String? {
+    val currentTime = Date(value)
+    val formatter = SimpleDateFormat("yyyy-MM-dd")
+    return formatter.format(currentTime)
+}
 
 inline fun <reified T : Activity> Activity.newIntent() {
     val intent = Intent(this, T::class.java)

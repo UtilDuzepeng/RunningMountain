@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    tools:context=".activity.travelplan.TravelPlanActivity">
+
+
+    <include layout="@layout/toobar_layout"/>
+
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/travel_plan_tablayout"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/dp_30"
+        android:layout_marginRight="@dimen/dp_30"
+        android:background="@color/white"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@color/A2A82FA"
+        app:tabIndicatorFullWidth="false"
+        app:tabIndicatorHeight="@dimen/dp_3"
+        app:tabMinWidth="@dimen/dp_53"
+        app:tabMode="fixed"
+        app:tabPaddingEnd="10dp"
+        app:tabPaddingStart="10dp"
+        app:tabTextColor="#000000" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:background="@color/D9D9D9" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/travel_plan_viewpager"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="wrap_content" />
+
+
+</LinearLayout>

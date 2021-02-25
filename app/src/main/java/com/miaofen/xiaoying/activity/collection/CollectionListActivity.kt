@@ -7,11 +7,9 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.miaofen.xiaoying.R
 import com.miaofen.xiaoying.base.mvp.BaseMvpActivity
 import com.miaofen.xiaoying.common.data.bean.response.CollectionListResponse
-import com.miaofen.xiaoying.utils.ToastUtils
 import com.miaofen.xiaoying.view.LoadingView
 import com.miaofen.xiaoying.view.RefreshLayout
 import kotlinx.android.synthetic.main.activity_collection_list.*
-import kotlinx.android.synthetic.main.fragment_hot.*
 import kotlinx.android.synthetic.main.toobar_layout.*
 
 /**
